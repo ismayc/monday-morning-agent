@@ -1,0 +1,92 @@
+{
+  "question": "Do teams that run on a larger share of their plays win more often?",
+  "definition": "rush share = rushes / (rushes + passes), per team per game, counting only the plays the filters keep",
+  "filters": [
+    {
+      "filter": "file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns",
+      "playsLeft": 255781
+    },
+    {
+      "filter": "seasons: 2021-2025",
+      "playsLeft": 247284
+    },
+    {
+      "filter": "season type: regular season and playoffs",
+      "playsLeft": 247284
+    },
+    {
+      "filter": "weeks: all",
+      "playsLeft": 247284
+    },
+    {
+      "filter": "a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)",
+      "playsLeft": 179045
+    },
+    {
+      "filter": "no kneel-downs and no spikes (clock plays, not play calls)",
+      "playsLeft": 176491
+    },
+    {
+      "filter": "half: first half only (overtime out)",
+      "playsLeft": 87209
+    },
+    {
+      "filter": "score margin: any",
+      "playsLeft": 87209
+    }
+  ],
+  "teamGames": {
+    "games": 1424,
+    "kept": 2840,
+    "tiesDropped": 4,
+    "unfinishedDropped": 0,
+    "droppedForTooFewPlays": 0,
+    "minPlays": 10,
+    "weeksBySeason": {
+      "2021": "1-22",
+      "2022": "1-22",
+      "2023": "1-22",
+      "2024": "1-22",
+      "2025": "1-22"
+    },
+    "latestGameDate": "2026-02-08"
+  },
+  "groups": 4,
+  "result": [
+    {
+      "group": "ran most",
+      "shareFrom": 0.4857142857142857,
+      "shareTo": 0.96,
+      "teamGames": 710,
+      "wins": 376,
+      "winRate": 0.5295774647887324
+    },
+    {
+      "group": "group 2",
+      "shareFrom": 0.4146341463414634,
+      "shareTo": 0.4857142857142857,
+      "teamGames": 710,
+      "wins": 368,
+      "winRate": 0.5183098591549296
+    },
+    {
+      "group": "group 3",
+      "shareFrom": 0.3448275862068966,
+      "shareTo": 0.4146341463414634,
+      "teamGames": 710,
+      "wins": 349,
+      "winRate": 0.4915492957746479
+    },
+    {
+      "group": "ran least",
+      "shareFrom": 0.10714285714285714,
+      "shareTo": 0.3448275862068966,
+      "teamGames": 710,
+      "wins": 327,
+      "winRate": 0.46056338028169014
+    }
+  ],
+  "gapTopMinusBottom": 0.06901408450704222,
+  "warnings": [],
+  "notInThisOutput": "Why. A gap is an association between running and winning in the plays kept. It does not say which one causes the other."
+}

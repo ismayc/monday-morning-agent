@@ -1,0 +1,30 @@
+QUESTION
+  Do teams that run on a larger share of their plays win more often?
+  rush share = rushes / (rushes + passes), per team per game, counting only the plays the filters keep
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    255,781
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)     179,045
+   5. no kneel-downs and no spikes (clock plays, not play calls)                               176,491
+   6. half: first half only (overtime out)                                                      87,209
+   7. score margin: any                                                                         87,209
+
+THEN, PER TEAM PER GAME
+  1,424 games in the plays kept (latest game 2026-02-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22)
+  4 tied games dropped, 0 games with no final result dropped
+  0 team-games dropped for fewer than 10 plays in the window
+  2,840 team-games kept, sorted by rush share, cut into 4 equal groups of 710
+
+RESULT
+  group        rush share          team-games   wins   win rate
+  ran most     48.6% to 96.0%             710    376      53.0%
+  group 2      41.5% to 48.6%             710    368      51.8%
+  group 3      34.5% to 41.5%             710    349      49.2%
+  ran least    10.7% to 34.5%             710    327      46.1%
+  gap, ran most minus ran least: 6.9 points
+
+NOT IN THIS OUTPUT
+  Why. A gap is an association between running and winning in the plays kept. It does not say which one causes the other.

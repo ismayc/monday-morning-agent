@@ -1,0 +1,16 @@
+<!doctype html><meta charset="utf-8"><title>Icon source</title>
+<!-- Source for apple-touch-icon.png and favicon-32.png. Square, no rounded corners and no
+     transparency: iOS rounds the corners itself and fills transparent ones black.
+     Re-render (from docs/, any Chrome; use a throwaway profile):
+       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --user-data-dir=/tmp/icon-profile \
+         --window-size=540,540 --screenshot=icon-540.png "file://$PWD/apple-touch-icon.html"
+       magick icon-540.png -resize 180x180 apple-touch-icon.png
+       magick icon-540.png -resize 32x32 favicon-32.png && rm icon-540.png -->
+<style>html,body{margin:0;background:#10141c}svg{display:block;width:540px;height:540px}</style>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <rect width="64" height="64" fill="#10141c"/>
+  <g transform="rotate(-32 32 32)">
+    <ellipse cx="32" cy="32" rx="24" ry="14.5" fill="#ffb648"/>
+    <path d="M21 32h22M26 27.5v9M32 27.5v9M38 27.5v9" stroke="#10141c" stroke-width="3" stroke-linecap="round" fill="none"/>
+  </g>
+</svg>

@@ -1,0 +1,127 @@
+run-analyst.sh: claim: You have to establish the run.
+run-analyst.sh: starting 2026-10-03T10:55:57-07:00
+
+==============================================================================
+[0:05] TOOL CALL 1
+  node ./query-plays.mjs --seasons 2021-2025 --half 1
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    255,781
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)     179,045
+   5. no kneel-downs and no spikes (clock plays, not play calls)                               176,491
+   6. half: first half only (overtime out)                                                      87,209
+   7. score margin: any                                                                         87,209
+
+RESULT
+  group        rush share          team-games   wins   win rate
+  ran most     48.6% to 96.0%             710    376      53.0%
+  group 2      41.5% to 48.6%             710    368      51.8%
+  group 3      34.5% to 41.5%             710    349      49.2%
+  ran least    10.7% to 34.5%             710    327      46.1%
+  gap, ran most minus ran least: 6.9 points
+
+==============================================================================
+[0:05] TOOL CALL 2
+  node ./query-plays.mjs --seasons 2021-2025 --half 2
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    255,781
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)     179,045
+   5. no kneel-downs and no spikes (clock plays, not play calls)                               176,491
+   6. half: second half only (overtime out)                                                     88,070
+   7. score margin: any                                                                         88,070
+
+RESULT
+  group        rush share          team-games   wins   win rate
+  ran most     55.0% to 97.1%             710    618      87.0%
+  group 2      42.9% to 55.0%             710    452      63.7%
+  group 3      31.3% to 42.9%             710    267      37.6%
+  ran least    2.8% to 31.3%              710     83      11.7%
+  gap, ran most minus ran least: 75.4 points
+
+==============================================================================
+[0:06] TOOL CALL 3
+  node ./query-plays.mjs --seasons 2026 --half 1
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    255,781
+   1. seasons: 2026                                                                              8,497
+   2. season type: regular season and playoffs                                                   8,497
+   3. weeks: all                                                                                 8,497
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)       6,044
+   5. no kneel-downs and no spikes (clock plays, not play calls)                                 5,955
+   6. half: first half only (overtime out)                                                       2,995
+   7. score margin: any                                                                          2,995
+
+RESULT
+  group        rush share          team-games   wins   win rate
+  ran most     50.0% to 67.9%              24     14      58.3%
+  group 2      43.8% to 50.0%              24     11      45.8%
+  group 3      34.5% to 42.9%              24     13      54.2%
+  ran least    20.6% to 34.5%              24      9      37.5%
+  gap, ran most minus ran least: 20.8 points
+
+  SMALL SAMPLE: 24 team-games per group. One game moves a win rate by 4.2 points.
+
+==============================================================================
+[0:06] TOOL CALL 4
+  node ./query-plays.mjs --seasons 2026 --half 2
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    255,781
+   1. seasons: 2026                                                                              8,497
+   2. season type: regular season and playoffs                                                   8,497
+   3. weeks: all                                                                                 8,497
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)       6,044
+   5. no kneel-downs and no spikes (clock plays, not play calls)                                 5,955
+   6. half: second half only (overtime out)                                                      2,912
+   7. score margin: any                                                                          2,912
+
+RESULT
+  group        rush share          team-games   wins   win rate
+  ran most     54.2% to 76.0%              24     22      91.7%
+  group 2      42.5% to 53.8%              24     16      66.7%
+  group 3      33.3% to 41.7%              24      6      25.0%
+  ran least    10.3% to 33.3%              24      5      20.8%
+  gap, ran most minus ran least: 70.8 points
+
+  SMALL SAMPLE: 24 team-games per group. One game moves a win rate by 4.2 points.
+
+==============================================================================
+RULING
+==============================================================================
+**The claim:** If establishing the run matters, teams that run on a larger share of first-half plays should win clearly more often, and that gap should not be dwarfed by the second-half gap.
+
+**Five seasons:** 2021-2025, regular season and playoffs, 710 team-games per group.
+- First half: ran most 53.0%, ran least 46.1%, gap 6.9 points.
+- Second half: ran most 87.0%, ran least 11.7%, gap 75.4 points.
+
+**This season:** 2026, weeks 1-4, 24 team-games per group.
+- First half: ran most 58.3%, ran least 37.5%, gap 20.8 points.
+- Second half: ran most 91.7%, ran least 20.8%, gap 70.8 points.
+- Sample warning: with 24 team-games per group, a single game moves a win rate by 4.2 points.
+
+**The gap between the two answers:** The 2026 first-half gap is 20.8 points against 6.9 for the baseline, but that is more than four weeks can support, and the middle groups are out of order (45.8%, then 54.2%). The second-half pattern matches in both.
+
+**Ruling:** Does not hold as stated, because the first-half association is small while the second-half one is enormous, which leans toward teams that are ahead running to use the clock, not early running producing wins.
+
+**What these plays cannot tell you:** Whether running causes winning or winning causes running, since the tool measures only an association.
+
+**Commands run:**
+```
+node ./query-plays.mjs --seasons 2021-2025 --half 1
+node ./query-plays.mjs --seasons 2021-2025 --half 2
+node ./query-plays.mjs --seasons 2026 --half 1
+node ./query-plays.mjs --seasons 2026 --half 2
+```
+==============================================================================
+4 tool calls, 0 refused or failed, 11 seconds
+run-analyst.sh: finished 2026-10-03T10:56:11-07:00 with status 0
+run-analyst.sh: event stream at rulings/run-2026-10-03-105557.jsonl
+run-analyst.sh: ruling at rulings/ruling-2026-10-03-105557.md (247 words)

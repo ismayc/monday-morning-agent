@@ -1,0 +1,25 @@
+{
+  "rawColumns": 372,
+  "keptColumns": [
+    "season",
+    "season_type",
+    "week",
+    "game_id",
+    "game_date",
+    "home_team",
+    "away_team",
+    "posteam",
+    "result",
+    "game_half",
+    "qtr",
+    "down",
+    "play_type",
+    "rush_attempt",
+    "pass_attempt",
+    "qb_kneel",
+    "qb_spike",
+    "score_differential"
+  ],
+  "plays": 255781,
+  "source": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
+}

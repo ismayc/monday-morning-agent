@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The Monday Morning Agent: how an agent that checks the tape is set up</title>
+<meta name="description" content="A beginner's walk through a small, real data agent: a football argument in, a ruling out, and every filter it applied on screen. What existed, what was written, what one run looks like.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="The Monday Morning Agent: an agent that checks the tape">
+<meta property="og:description" content="A football argument in, a ruling out, and every filter it applied on screen. How a small, real data agent is set up, for someone who has never built one. By Chester Ismay.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Monday Morning Agent. You have to establish the run. Whole game: 77.7% against 19.2%. First half: 53.0% against 46.1%. One filter changed the story.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The Monday Morning Agent: an agent that checks the tape">
+<meta name="twitter:description" content="A football argument in, a ruling out, and every filter it applied on screen. How a small, real data agent is set up.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/og-image.png">
+<style>
+  :root {
+    --bg: #10141c; --ink: #f4f6f8; --dim: #8b95a5; --dimmer: #6b7686;
+    --accent: #ffb648; --accent-soft: #ffcf87; --panel: #1a2130; --line: #2c3648;
+    --ink-panel: #232c40; --ink-line: #5b6b85; --amber-panel: #2a2415;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.55; padding: 0 20px;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding-block: 48px 80px; }
+  .kicker { color: var(--accent); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; font-weight: 700; margin-bottom: 14px; }
+  h1 { font-size: clamp(30px, 4.6vw, 54px); line-height: 1.12; font-weight: 700; max-width: 26ch; }
+  h1 .quiet { color: var(--dim); font-weight: 400; display: block; margin-top: 10px; font-size: .5em; line-height: 1.35; max-width: 46ch; }
+  h2 { font-size: clamp(22px, 3vw, 30px); font-weight: 700; margin: 0 0 14px; line-height: 1.2; }
+  h3 { font-size: 17px; font-weight: 700; margin-bottom: 6px; }
+  p { color: var(--dim); font-size: 17px; }
+  p strong, li strong { color: var(--ink); font-weight: 600; }
+  section { margin-top: 64px; }
+  .lead { font-size: 20px; margin-top: 22px; }
+  @media (max-width: 700px) { p { font-size: 16px; } .lead { font-size: 17px; } }
+  .note { border-left: 3px solid var(--accent); padding: 4px 0 4px 16px; margin-top: 18px; color: var(--dim); font-size: 17px; }
+  .cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; margin-top: 18px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px 18px 16px; }
+  .card p { font-size: 15.5px; }
+  .card.amber { background: var(--amber-panel); border-color: var(--accent); }
+  .card.amber h3 { color: var(--accent-soft); }
+  .card.ink { background: var(--ink-panel); border-color: var(--ink-line); }
+  .card .tag { display: inline-block; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 8px; }
+  code { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: .92em; color: var(--ink); background: rgba(255,255,255,.06); padding: 1px 5px; border-radius: 4px; }
+
+  .three { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-top: 18px; }
+  @media (max-width: 800px) { .three { grid-template-columns: 1fr; } }
+  .stat { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  .stat.amber { background: var(--amber-panel); border-color: var(--accent); }
+  .stat small { display: block; color: var(--dim); font-size: 12px; letter-spacing: .16em; text-transform: uppercase; font-weight: 700; }
+  .stat b { display: block; font-size: 34px; margin: 6px 0 2px; font-variant-numeric: tabular-nums; }
+  .stat b i { font-style: normal; color: var(--dim); font-size: 18px; font-weight: 400; padding: 0 8px; }
+  .stat.amber b { color: var(--accent); }
+  .stat span { color: var(--dim); font-size: 15px; }
+
+  .flow { margin-top: 20px; display: grid; gap: 0; justify-items: center; }
+  .node { width: min(640px, 100%); background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; text-align: center; }
+  .node b { display: block; font-size: 18px; }
+  .node span { color: var(--dim); font-size: 15px; }
+  .node.amber { background: var(--amber-panel); border: 2px solid var(--accent); }
+  .node.amber b { color: var(--accent-soft); }
+  .node.ink { background: var(--ink-panel); border: 2px solid var(--ink-line); }
+  .arrow { color: var(--dim); font-size: 22px; line-height: 1; padding: 6px 0; text-align: center; }
+  .arrow small { display: block; font-size: 12.5px; color: var(--dimmer); }
+  .pair { width: min(640px, 100%); display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+  .pair .node { width: 100%; }
+  @media (max-width: 560px) { .pair { grid-template-columns: 1fr; } }
+
+  .two { display: grid; grid-template-columns: 1fr 1fr; gap: 28px; align-items: start; margin-top: 18px; }
+  @media (max-width: 900px) { .two { grid-template-columns: 1fr; } }
+  .steps { list-style: none; counter-reset: s; display: grid; gap: 10px; }
+  .steps li { counter-increment: s; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px 14px 58px; position: relative; color: var(--dim); font-size: 16px; }
+  .steps li::before { content: counter(s); position: absolute; left: 16px; top: 12px; width: 28px; height: 28px; border-radius: 50%; background: var(--ink-panel); border: 1px solid var(--ink-line); color: var(--ink); font-weight: 700; font-size: 14px; display: grid; place-items: center; }
+  .steps li.amber { background: var(--amber-panel); border-color: var(--accent); }
+  .steps li.amber::before { background: var(--accent); color: #10141c; border-color: var(--accent); }
+  .ruling { background: #0b0e14; border: 1px solid var(--line); border-radius: 14px; padding: 18px 20px; font-size: 15px; color: #dde3ec; }
+  .ruling p { color: #dde3ec; font-size: 15px; margin-bottom: 10px; }
+  .ruling b { color: var(--accent); font-weight: 600; }
+  .ruling pre { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 12.5px; color: var(--dim); white-space: pre-wrap; }
+  .cap { font-size: 13px; margin-top: 10px; color: var(--dimmer); }
+
+  .sections { display: grid; gap: 8px; margin-top: 18px; }
+  .sec { display: grid; grid-template-columns: minmax(200px, 30%) 1fr; gap: 14px; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 12px 16px; font-size: 15.5px; }
+  .sec b { color: var(--accent-soft); font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-weight: 600; font-size: 14px; }
+  .sec span { color: var(--dim); }
+  @media (max-width: 560px) { .sec { grid-template-columns: 1fr; gap: 4px; } }
+  pre.cmd { background: #0b0e14; border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; overflow-x: auto; font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; font-size: 14px; line-height: 1.6; color: var(--ink); margin-top: 16px; }
+  pre.cmd .c { color: var(--dimmer); }
+  .links { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 12px; margin-top: 18px; }
+  .links a { display: block; background: var(--panel); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; color: var(--ink); text-decoration: none; font-size: 15px; }
+  .links a small { display: block; color: var(--dim); margin-top: 4px; font-size: 13px; }
+  .links a:hover { border-color: var(--accent); }
+  .links a.amber { background: var(--amber-panel); border-color: var(--accent); }
+  a { color: var(--accent-soft); }
+  table.eps { width: 100%; border-collapse: collapse; margin-top: 16px; font-size: 15.5px; }
+  table.eps th { text-align: left; color: var(--dim); font-size: 12px; letter-spacing: .12em; text-transform: uppercase; padding: 8px 10px 8px 0; border-bottom: 1px solid var(--ink-line); }
+  table.eps td { padding: 9px 10px 9px 0; border-bottom: 1px solid var(--line); color: var(--dim); vertical-align: top; }
+  table.eps td:nth-child(3) { color: var(--ink); }
+  table.eps tr.now td { color: var(--accent-soft); }
+  .scroll { overflow-x: auto; }
+  footer { margin-top: 70px; color: var(--dimmer); font-size: 13px; border-top: 1px solid var(--line); padding-top: 18px; }
+</style>
+</head>
+<body>
+<main>
+
+<header>
+  <div class="kicker">The Monday Morning Agent</div>
+  <h1>An agent that checks the tape.
+    <span class="quiet">A football argument goes in. A ruling comes out, with every filter it applied on screen. Here is how it is set up, for someone who has never built one.</span></h1>
+  <p class="lead">Everybody knows the Monday morning quarterback, the person who second-guesses every coaching decision after the fact. This is one that goes back and counts. It is the short version of episode 1 of an eight-episode O'Reilly live series. It skips the code and keeps the shape: what already existed, what had to be written, and what one run looks like. Every number on this page is real.</p>
+  <div class="note"><strong>In one minute.</strong> You hand the agent a claim, such as "you have to establish the run." It turns the claim into a question, asks one small tool to count plays under filters it chooses, and writes a short ruling: the answer from five complete NFL seasons, the answer from this season, and how far apart they are. The tool prints every filter it applied, so you can check the agent's work. The one thing written for this is a policy, a job description the agent follows. A run takes about fifteen seconds. You can <a href="explorer.html">change the filters yourself</a> without installing anything.</div>
+</header>
+
+<section id="argument">
+  <h2>The argument, and why one number is not enough</h2>
+  <p>"You have to establish the run" is the oldest argument in football. Here is the check: take every team in every game, work out what share of its plays were runs, sort them into four equal groups, and ask how often each group won. Five seasons, 2021 through 2025.</p>
+  <div class="three">
+    <div class="stat"><small>Whole game</small><b>77.7%<i>vs</i>19.2%</b><span>The teams that ran most against the teams that ran least. It looks like proof.</span></div>
+    <div class="stat amber"><small>First half only</small><b>53.0%<i>vs</i>46.1%</b><span>"Establish" means early. Early, the gap nearly disappears.</span></div>
+    <div class="stat"><small>Second half only</small><b>87.0%<i>vs</i>11.7%</b><span>Teams that are ahead run to use the clock. Winners run late.</span></div>
+  </div>
+  <p style="margin-top:16px">Same plays, same tool. One filter changed the story. An agent that reported only the first number would have been confident, well formatted, and wrong. That is why every filter has to be visible, to the person and to the agent. <a href="explorer.html">Try the three filters yourself.</a></p>
+</section>
+
+<section id="existed">
+  <h2>What already existed</h2>
+  <p>None of this was made by the agent, and most of it was not made for the agent.</p>
+  <div class="cards">
+    <div class="card"><span class="tag">Data</span><h3>Public play-by-play</h3><p>Every NFL play, published by the nflverse community under a CC BY 4.0 license: 372 columns per play, refreshed during the season.</p></div>
+    <div class="card"><span class="tag">The cut</span><h3>18 of 372 columns</h3><p>A small script keeps only the columns the question needs. The betting-line columns are not among them, so the agent cannot read one even by mistake.</p></div>
+    <div class="card"><span class="tag">The tool</span><h3>One read-only script</h3><p><code>query-plays.mjs</code> counts under the filters it is given and prints every filter in order. A third of a second. It changes nothing.</p></div>
+    <div class="card"><span class="tag">Runtime</span><h3>Claude Code CLI</h3><p>One command reads a prompt, calls only the tools it is allowed to call, and exits. There is no server to write.</p></div>
+  </div>
+</section>
+
+<section id="shape">
+  <h2>How it fits together</h2>
+  <p>Two halves. The grey half is deterministic: counting plays has one right answer, so a small tool does it the same way every time. The amber half is judgment: a written policy that says how to turn a claim into a question and what the agent may and may not say. Keeping the halves apart is the whole design.</p>
+  <div class="flow">
+    <div class="pair">
+      <div class="node"><b>A claim</b><span>"You have to establish the run."</span></div>
+      <div class="node amber"><b>The policy</b><span><code>analyst.md</code>, the part that was written</span></div>
+    </div>
+    <div class="arrow">↓</div>
+    <div class="node ink"><b>The agent</b><span>Claude Code, allowed to run exactly one script</span></div>
+    <div class="arrow">↓<small>chooses the filters, four calls for this claim</small></div>
+    <div class="node"><b>One read-only tool</b><span><code>query-plays.mjs</code>: prints every filter, then the result</span></div>
+    <div class="arrow">↓<small>reads</small></div>
+    <div class="node"><b>The plays</b><span>255,000 plays, 18 columns, no betting lines</span></div>
+    <div class="arrow">↓<small>and back up to the agent, which writes</small></div>
+    <div class="node ink"><b>One ruling</b><span>Five seasons, this season, the gap, and the exact commands it ran</span></div>
+  </div>
+</section>
+
+<section id="run">
+  <h2>What one run looks like</h2>
+  <div class="two">
+    <ol class="steps">
+      <li><strong>The claim goes in</strong> as one sentence, the way a fan would say it.</li>
+      <li class="amber"><strong>The agent restates it as a question.</strong> "Establish" means early, so it decides to compare the first half with the second half. Nobody told it that in the prompt. The policy did.</li>
+      <li><strong>Four tool calls.</strong> First half and second half for five seasons, then the same two for this season. Each call's filters appear on screen as it lands.</li>
+      <li class="amber"><strong>It compares the two answers</strong> and says whether the difference is more than a few weeks of games can support.</li>
+      <li><strong>One ruling</strong>, under 250 words, ending with the commands it ran so anyone can rerun them.</li>
+      <li><strong>The runner saves the ruling to a file.</strong> The agent itself cannot write anything.</li>
+    </ol>
+    <div>
+      <div class="ruling">
+        <p><b>The claim:</b> If establishing the run matters, teams that run on a larger share of first-half plays should win clearly more often, and that gap should not be dwarfed by the second-half gap.</p>
+        <p><b>Five seasons:</b> First half: ran most 53.0%, ran least 46.1%, gap 6.9 points. Second half: ran most 87.0%, ran least 11.7%, gap 75.4 points. 710 team-games per group.</p>
+        <p><b>This season:</b> First half: 58.3% against 37.5%, gap 20.8 points. Second half: 91.7% against 20.8%. With 24 team-games per group, a single game moves a win rate by 4.2 points.</p>
+        <p><b>Ruling:</b> Does not hold as stated, because the first-half association is small while the second-half one is enormous, which leans toward teams that are ahead running to use the clock, not early running producing wins.</p>
+        <p><b>What these plays cannot tell you:</b> Whether running causes winning or winning causes running, since the tool measures only an association.</p>
+        <pre>node ./query-plays.mjs --seasons 2021-2025 --half 1
+node ./query-plays.mjs --seasons 2021-2025 --half 2
+node ./query-plays.mjs --seasons 2026 --half 1
+node ./query-plays.mjs --seasons 2026 --half 2</pre>
+      </div>
+      <p class="cap">A real ruling from a real run on October 3, 2026 (11 seconds, four tool calls), abridged to fit. The 2026 season then ran through the October 1 game. The full one is in the repo.</p>
+    </div>
+  </div>
+</section>
+
+<section id="policy">
+  <h2>The policy, in eight sections</h2>
+  <p>The policy is a Markdown file of about 700 words, written like a job description. Its headings run in the order the agent has to work: who it is, how it looks, how it asks, what it shows, what it may not say, and last, what it may run.</p>
+  <div class="sections">
+    <div class="sec"><b>Job description</b><span>Not a pundit, no opinions about teams. The person in the room who went back and counted.</span></div>
+    <div class="sec"><b>Your one tool</b><span>The command and its filters. The filter list it prints is the truth about what was measured. Never open the data file directly.</span></div>
+    <div class="sec"><b>Turn the claim into a question</b><span>Say what would have to be true, including when in the game. Then run the comparison that could prove the claim wrong.</span></div>
+    <div class="sec"><b>Answer it twice</b><span>Five complete seasons, then this season, with the same filters. Repeat any small-sample warning.</span></div>
+    <div class="sec"><b>Show every filter</b><span>Each number comes with its filters. End with the exact commands. Never report a number the tool did not print.</span></div>
+    <div class="sec"><b>What you may not say</b><span>No predictions, no advice to bettors or fantasy players, no claim that running causes winning, and no betting lines.</span></div>
+    <div class="sec"><b>The output contract</b><span>One ruling, under 250 words, in the same seven parts every time.</span></div>
+    <div class="sec"><b>Tools you may use</b><span>One script. No writing, no network. If the tool fails, say so; never invent a number to cover it.</span></div>
+  </div>
+</section>
+
+<section id="lessons">
+  <h2>What carries to your own agent</h2>
+  <div class="cards">
+    <div class="card amber"><h3>Give the agent one door to the data</h3><p>It does not write queries. It picks filters for one fixed tool. So you check the filters it chose, not code it wrote.</p></div>
+    <div class="card amber"><h3>Make the tool show its work</h3><p>Every filter, in order, with the count left after each. A flag the agent forgot is a filter it did not apply, and the printout shows it.</p></div>
+    <div class="card amber"><h3>Scope the data, not only the instructions</h3><p>The policy says never use betting lines. The file has none. The second one is the guarantee.</p></div>
+    <div class="card amber"><h3>Ask for the comparison that could prove it wrong</h3><p>The whole-game number agrees with the claim. The first-half number tests it. The policy asks for the test.</p></div>
+    <div class="card ink"><h3>Keep the allowlist exact</h3><p>One script by name. Not "any Node command," which would allow arbitrary code. Asked to open the data file directly, the agent declined.</p></div>
+    <div class="card ink"><h3>The numbers are fixed; the sentence is not</h3><p>Across identical runs the numbers never changed, but the one-line ruling came back as "does not hold as stated" and as "holds only weakly." Read the numbers.</p></div>
+  </div>
+</section>
+
+<section id="try">
+  <h2>Try it yourself</h2>
+  <p>With no install at all: <a href="explorer.html">the explorer page</a> shows the tool's real output for every combination of its buttons.</p>
+  <p style="margin-top:10px">To run the agent, you need a Mac or Linux machine with Node, git, and the Claude Code CLI signed in. The data is already in the repo.</p>
+<pre class="cmd"><span class="c"># get the kit</span>
+git clone https://github.com/ismayc/monday-morning-agent.git
+cd monday-morning-agent/episode-1
+
+<span class="c"># the tool on its own: whole game, then first half</span>
+node ./query-plays.mjs --seasons 2021-2025
+node ./query-plays.mjs --seasons 2021-2025 --half 1
+
+<span class="c"># the whole agent, with any claim about running the ball</span>
+./run-analyst.sh "You have to establish the run."</pre>
+  <div class="links">
+    <a class="amber" href="explorer.html">Change one filter<small>Seasons, half, score, and games as buttons. The same filter list and result the agent reads.</small></a>
+    <a href="https://github.com/ismayc/monday-morning-agent">The repository<small>The kit for each episode, the data, and the examples from a real run.</small></a>
+    <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/analyst.md">The policy file<small>All eight sections, as the agent reads them.</small></a>
+    <a href="https://github.com/ismayc/monday-morning-agent/tree/main/episode-1/examples">One real run, file by file<small>A tool read, the policy, the run as it looked on screen, and three rulings.</small></a>
+    <a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">The live series<small>Eight episodes on O'Reilly, every other Monday.</small></a>
+  </div>
+</section>
+
+<section id="series">
+  <h2>The series</h2>
+  <p>Each episode takes away a piece of human oversight and replaces it with something written down. No predictions, no odds, and no betting content, by design.</p>
+  <div class="scroll"><table class="eps">
+    <thead><tr><th>#</th><th>Date</th><th>The argument</th><th>The agent skill underneath</th></tr></thead>
+    <tbody>
+      <tr class="now"><td>1</td><td>October 12, 2026</td><td>"You have to establish the run."</td><td>Transparent tool use: one agent, one read-only tool, every filter shown</td></tr>
+      <tr><td>2</td><td>October 26, 2026</td><td>"Ban the tush push."</td><td>Durable memory: a data dictionary it must cite from then on</td></tr>
+      <tr><td>3</td><td>November 9, 2026</td><td>"Kickers are too good now."</td><td>Visualization standards</td></tr>
+      <tr><td>4</td><td>November 23, 2026</td><td>The pundit audit, chosen by the audience</td><td>A second agent as a standing fact-checker</td></tr>
+      <tr><td>5</td><td>December 7, 2026</td><td>"Coaches are cowards on fourth down."</td><td>Operational boundaries: describe, never predict</td></tr>
+      <tr><td>6</td><td>January 11, 2027</td><td>The mailbag</td><td>Request triage</td></tr>
+      <tr><td>7</td><td>January 25, 2027</td><td>The agent writes its own column</td><td>Self-directed analysis</td></tr>
+      <tr><td>8</td><td>February 8, 2027</td><td>Two weeks unattended</td><td>Scheduled autonomy</td></tr>
+    </tbody>
+  </table></div>
+</section>
+
+<footer>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. Episode 1: October 12, 2026. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0. The numbers and the ruling on this page are real; the ruling is abridged to fit.</footer>
+
+</main>
+</body>
+</html>

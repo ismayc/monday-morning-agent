@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Change one filter: the Monday Morning Agent explorer</title>
+<meta name="description" content="Do teams that run more win more? Pick the seasons, the half, and the score, and see every filter the tool applied and the answer it gave. Nothing to install.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="Change one filter: do teams that run more win more?">
+<meta property="og:description" content="Pick the seasons, the half, and the score. See every filter the tool applied, in order, and the answer it gave. The same output the agent reads, with nothing to install.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/explorer.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The Monday Morning Agent. You have to establish the run. Whole game: 77.7% against 19.2%. First half: 53.0% against 46.1%. One filter changed the story.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Change one filter: do teams that run more win more?">
+<meta name="twitter:description" content="Pick the seasons, the half, and the score. See every filter the tool applied and the answer it gave.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/og-image.png">
+<style>
+  :root {
+    --bg: #10141c; --ink: #f4f6f8; --dim: #8b95a5; --dimmer: #6b7686;
+    --accent: #ffb648; --accent-soft: #ffcf87; --panel: #1a2130; --line: #2c3648;
+    --ink-panel: #232c40; --ink-line: #5b6b85; --amber-panel: #2a2415;
+    --top: #ffb648; --bottom: #6f8fc9;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--bg); color: var(--ink);
+    font-family: -apple-system, "SF Pro Text", "Segoe UI", Helvetica, Arial, sans-serif;
+    line-height: 1.5; padding: 0 20px;
+  }
+  main { max-width: 1180px; margin: 0 auto; padding-block: 36px 70px; }
+  .kicker { color: var(--accent); font-size: 13px; letter-spacing: .3em; text-transform: uppercase; font-weight: 700; margin-bottom: 10px; }
+  .kicker a { color: inherit; text-decoration: none; }
+  h1 { font-size: clamp(26px, 4vw, 42px); line-height: 1.15; font-weight: 700; }
+  h2 { font-size: 13px; letter-spacing: .2em; text-transform: uppercase; color: var(--accent); font-weight: 700; margin-bottom: 10px; }
+  p { color: var(--dim); font-size: 17px; }
+  p strong { color: var(--ink); font-weight: 600; }
+  .lead { margin-top: 12px; font-size: 18px; max-width: 78ch; }
+  a { color: var(--accent-soft); }
+  code, .mono { font-family: ui-monospace, "SF Mono", Menlo, Consolas, monospace; }
+
+  .steps3 { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; }
+  .steps3 button { text-align: left; background: var(--amber-panel); border: 1px solid var(--accent); color: var(--ink); border-radius: 12px; padding: 10px 14px; font: inherit; font-size: 15px; cursor: pointer; flex: 1 1 220px; }
+  .steps3 button small { display: block; color: var(--accent-soft); font-size: 12.5px; margin-top: 2px; }
+  .steps3 button:hover, .steps3 button:focus-visible { background: #3a3119; outline: none; }
+
+  .controls { display: grid; grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); gap: 14px; margin-top: 22px; background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 16px; }
+  fieldset { border: 0; min-width: 0; }
+  legend { font-size: 12px; letter-spacing: .16em; text-transform: uppercase; color: var(--dim); font-weight: 700; margin-bottom: 8px; }
+  .seg { display: flex; flex-wrap: wrap; gap: 6px; }
+  .seg button { background: var(--ink-panel); border: 1px solid var(--ink-line); color: var(--ink); border-radius: 9px; padding: 7px 11px; font: inherit; font-size: 14.5px; cursor: pointer; }
+  .seg button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #10141c; font-weight: 700; }
+  .seg button:focus-visible { outline: 2px solid var(--accent-soft); outline-offset: 2px; }
+
+  .cmd { display: flex; align-items: center; gap: 10px; margin-top: 16px; background: #0b0e14; border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+  .cmd code { flex: 1; font-size: 14.5px; color: var(--ink); overflow-x: auto; white-space: nowrap; }
+  .cmd button { background: transparent; border: 1px solid var(--ink-line); color: var(--dim); border-radius: 8px; padding: 4px 10px; font: inherit; font-size: 13px; cursor: pointer; }
+  .cmd button:hover { color: var(--ink); border-color: var(--accent); }
+
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 18px; align-items: start; }
+  @media (max-width: 900px) { .grid { grid-template-columns: 1fr; } }
+  .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 14px; padding: 18px; }
+  .panel.result { background: var(--ink-panel); border-color: var(--ink-line); }
+
+  ol.filters { list-style: none; display: grid; gap: 9px; }
+  ol.filters li { font-size: 14.5px; color: var(--dim); }
+  ol.filters .row { display: flex; justify-content: space-between; gap: 12px; align-items: baseline; }
+  ol.filters .n { color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  ol.filters .bar { height: 5px; background: #0b0e14; border-radius: 3px; margin-top: 4px; overflow: hidden; }
+  ol.filters .bar i { display: block; height: 100%; background: var(--dimmer); border-radius: 3px; }
+  ol.filters li.cut { color: var(--ink); }
+  ol.filters li.cut .bar i { background: var(--accent); }
+  ol.filters li.cut .n::after { content: "  cut"; color: var(--accent); font-size: 11px; letter-spacing: .1em; text-transform: uppercase; }
+  .then { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 14px; color: var(--dim); }
+
+  .headline { font-size: 15px; color: var(--dim); }
+  .big { display: flex; flex-wrap: wrap; gap: 8px 26px; margin: 8px 0 14px; align-items: baseline; }
+  .big div { font-size: 15px; color: var(--dim); }
+  .big b { display: block; font-size: clamp(34px, 5vw, 52px); line-height: 1.05; font-variant-numeric: tabular-nums; }
+  .big .t b { color: var(--top); } .big .b b { color: var(--bottom); } .big .g b { color: var(--ink); }
+  table { width: 100%; border-collapse: collapse; font-size: 14.5px; }
+  th { text-align: left; color: var(--dim); font-weight: 600; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; padding: 6px 8px 6px 0; border-bottom: 1px solid var(--ink-line); }
+  td { padding: 8px 8px 8px 0; border-bottom: 1px solid var(--line); font-variant-numeric: tabular-nums; vertical-align: middle; }
+  td.num, th.num { text-align: right; }
+  td .wbar { height: 12px; background: #0b0e14; border-radius: 3px; min-width: 90px; position: relative; overflow: hidden; }
+  td .wbar i { display: block; height: 100%; background: var(--dimmer); }
+  tr.top td .wbar i { background: var(--top); } tr.bot td .wbar i { background: var(--bottom); }
+  td .wbar::after { content: ""; position: absolute; left: 50%; top: 0; bottom: 0; width: 1px; background: var(--ink-line); }
+  .warn { margin-top: 14px; background: var(--amber-panel); border: 1px solid var(--accent); border-radius: 10px; padding: 10px 12px; font-size: 14.5px; color: var(--accent-soft); }
+  .not { margin-top: 14px; font-size: 14.5px; color: var(--dim); border-left: 3px solid var(--ink-line); padding-left: 12px; }
+  .not strong { color: var(--ink); }
+  .asof { margin-top: 18px; font-size: 13.5px; color: var(--dimmer); }
+  footer { margin-top: 50px; color: var(--dimmer); font-size: 13px; border-top: 1px solid var(--line); padding-top: 16px; }
+  .sr { position: absolute; left: -9999px; }
+</style>
+</head>
+<body>
+<main>
+  <div class="kicker"><a href="./">The Monday Morning Agent</a> · Episode 1</div>
+  <h1>"You have to establish the run." Change one filter and check.</h1>
+  <p class="lead">Take every team in every game, work out what share of its plays were runs, and sort them into four equal groups. How often did each group win? The answer depends on which plays you count, so every filter is listed, in order, with the plays left after it. This is the same output the agent reads. Nothing here is computed in your browser: a script asked the tool every question these buttons can ask and saved what it printed.</p>
+
+  <div class="steps3" aria-label="The episode in three clicks">
+    <button type="button" data-preset="2021-2025|ALL|all|any">1. The whole game<small>Looks like proof.</small></button>
+    <button type="button" data-preset="2021-2025|ALL|1|any">2. First half only<small>"Establish" means early.</small></button>
+    <button type="button" data-preset="2021-2025|ALL|2|any">3. Second half only<small>Who is running now?</small></button>
+    <button type="button" data-preset="2026|ALL|1|any">4. This season, first half<small>Same filters, a much smaller sample.</small></button>
+  </div>
+
+  <div class="controls">
+    <fieldset><legend>Seasons</legend><div class="seg" data-key="seasons"></div></fieldset>
+    <fieldset><legend>Part of the game</legend><div class="seg" data-key="half"></div></fieldset>
+    <fieldset><legend>Score at the snap</legend><div class="seg" data-key="margin"></div></fieldset>
+    <fieldset><legend>Games</legend><div class="seg" data-key="type"></div></fieldset>
+  </div>
+
+  <div class="cmd"><code id="command">loading</code><button type="button" id="copy">Copy</button></div>
+
+  <div class="grid" aria-live="polite">
+    <div class="panel">
+      <h2>Filters, in order</h2>
+      <ol class="filters" id="filters"></ol>
+      <p class="then" id="then"></p>
+    </div>
+    <div class="panel result">
+      <h2>Result</h2>
+      <p class="headline" id="headline"></p>
+      <div class="big" id="big"></div>
+      <table>
+        <thead><tr><th>Group</th><th>Share of plays that were runs</th><th class="num">Team-games</th><th class="num">Wins</th><th class="num">Win rate</th><th><span class="sr">Win rate bar</span></th></tr></thead>
+        <tbody id="rows"></tbody>
+      </table>
+      <div class="warn" id="warn" hidden></div>
+      <p class="not"><strong>Not in this output: why.</strong> A gap is an association between running and winning in the plays kept. It does not say which one causes the other. Teams that are ahead run to use the clock, so winning can cause running.</p>
+    </div>
+  </div>
+
+  <p class="asof" id="asof"></p>
+
+  <footer>Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0, cut to 18 of its 372 columns; no betting column is kept. Built for The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. <a href="./">How it is set up</a> · <a href="https://github.com/ismayc/monday-morning-agent">The repository</a></footer>
+</main>
+
+<script>
+(function () {
+  var LABELS = {
+    seasons: { '2021-2025': 'Five seasons, 2021 to 2025', '2026': 'This season, 2026', '2021': '2021', '2022': '2022', '2023': '2023', '2024': '2024', '2025': '2025' },
+    half: { all: 'Whole game', '1': 'First half', '2': 'Second half' },
+    margin: { any: 'Any score', '8': 'Within 8 points', '3': 'Within 3 points' },
+    type: { ALL: 'All games', REG: 'Regular season', POST: 'Playoffs' }
+  };
+  // Button order. Listed here because an object with number-like keys does not keep its order.
+  var SHOW = {
+    seasons: ['2021-2025', '2026', '2021', '2022', '2023', '2024', '2025'],
+    half: ['all', '1', '2'], margin: ['any', '8', '3'], type: ['ALL', 'REG', 'POST']
+  };
+  var ORDER = ['seasons', 'type', 'half', 'margin'];
+  var state = { seasons: '2021-2025', type: 'ALL', half: 'all', margin: 'any' };
+  var data = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var pct = function (x) { return (100 * x).toFixed(1) + '%'; };
+  var num = function (n) { return n.toLocaleString('en-US'); };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+
+  function readHash() {
+    var parts = decodeURIComponent(location.hash.slice(1)).split('|');
+    if (parts.length !== 4) return;
+    ORDER.forEach(function (k, i) { if (LABELS[k][parts[i]] !== undefined) state[k] = parts[i]; });
+  }
+  function key() { return ORDER.map(function (k) { return state[k]; }).join('|'); }
+
+  function buildControls() {
+    document.querySelectorAll('.seg').forEach(function (seg) {
+      var k = seg.getAttribute('data-key');
+      SHOW[k].forEach(function (v) {
+        var b = el('button', '', LABELS[k][v]);
+        b.type = 'button'; b.setAttribute('data-v', v);
+        b.addEventListener('click', function () { state[k] = v; render(true); });
+        seg.appendChild(b);
+      });
+    });
+    document.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var p = b.getAttribute('data-preset').split('|');
+        ORDER.forEach(function (k, i) { state[k] = p[i]; });
+        render(true);
+      });
+    });
+    $('copy').addEventListener('click', function () {
+      var t = $('command').textContent;
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { $('copy').textContent = 'Copied'; setTimeout(function () { $('copy').textContent = 'Copy'; }, 1200); });
+    });
+  }
+
+  function render(push) {
+    document.querySelectorAll('.seg').forEach(function (seg) {
+      var k = seg.getAttribute('data-key');
+      seg.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === state[k])); });
+    });
+    if (push) history.replaceState(null, '', '#' + key());
+    var a = data.answers[key()];
+    $('command').textContent = a.command;
+
+    var list = $('filters'); list.textContent = '';
+    var first = a.filters[0].playsLeft, prev = first;
+    a.filters.forEach(function (f, i) {
+      var li = el('li', i > 0 && f.playsLeft < prev ? 'cut' : '');
+      var row = el('div', 'row');
+      row.appendChild(el('span', '', i + '. ' + f.filter));
+      row.appendChild(el('span', 'n', num(f.playsLeft)));
+      var bar = el('div', 'bar'), fill = el('i');
+      fill.style.width = (100 * f.playsLeft / first).toFixed(1) + '%';
+      bar.appendChild(fill); li.appendChild(row); li.appendChild(bar); list.appendChild(li);
+      prev = f.playsLeft;
+    });
+    $('then').textContent = 'Then, per team per game: ' + num(a.games) + ' games in the plays kept; ' + a.ties + ' tied games dropped; ' +
+      a.thin + ' team-games dropped for fewer than 10 plays; ' + num(a.kept) + ' team-games kept, sorted by rush share, cut into 4 equal groups.';
+
+    var rows = $('rows'); rows.textContent = '';
+    var big = $('big'); big.textContent = '';
+    if (!a.result.length) {
+      $('headline').textContent = 'No result: these filters leave no games to group. That is an answer too.';
+    } else {
+      var top = a.result[0], bot = a.result[a.result.length - 1];
+      $('headline').textContent = LABELS.seasons[state.seasons] + ' · ' + LABELS.half[state.half].toLowerCase() + ' · ' + LABELS.margin[state.margin].toLowerCase() + ' · ' + LABELS.type[state.type].toLowerCase();
+      [['t', pct(top.wins / top.n), 'won by the teams that ran most'], ['b', pct(bot.wins / bot.n), 'won by the teams that ran least'], ['g', a.gap.toFixed(1), 'points between them']].forEach(function (x) {
+        var d = el('div', x[0]); d.appendChild(el('b', '', x[1])); d.appendChild(document.createTextNode(x[2])); big.appendChild(d);
+      });
+      a.result.forEach(function (r, i) {
+        var tr = el('tr', i === 0 ? 'top' : i === a.result.length - 1 ? 'bot' : '');
+        tr.appendChild(el('td', '', r.group === 'ran most' ? 'Ran most' : r.group === 'ran least' ? 'Ran least' : 'Group ' + (i + 1)));
+        tr.appendChild(el('td', '', pct(r.from) + ' to ' + pct(r.to)));
+        tr.appendChild(el('td', 'num', num(r.n)));
+        tr.appendChild(el('td', 'num', num(r.wins)));
+        tr.appendChild(el('td', 'num', pct(r.wins / r.n)));
+        var td = el('td'), wb = el('div', 'wbar'), fi = el('i');
+        fi.style.width = (100 * r.wins / r.n).toFixed(1) + '%'; wb.appendChild(fi); td.appendChild(wb); tr.appendChild(td);
+        rows.appendChild(tr);
+      });
+    }
+    var w = $('warn');
+    if (a.warnings.length) { w.hidden = false; w.textContent = a.warnings.join(' '); } else { w.hidden = true; }
+  }
+
+  buildControls();
+  fetch('explorer-data.json').then(function (r) { return r.json(); }).then(function (d) {
+    data = d; readHash(); render(false);
+    $('asof').textContent = 'The 2026 season here runs through the game of ' + d.season2026.latestGame + ' (weeks ' + d.season2026.weeks + '). 2021 to 2025 are complete seasons, regular season and playoffs. Refreshed daily by a GitHub Action that runs the same tool.';
+    window.addEventListener('hashchange', function () { readHash(); render(false); });
+  }).catch(function () { $('command').textContent = 'Could not load explorer-data.json'; });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,8 @@
+.DS_Store
+__pycache__/
+# the raw nflverse downloads (about 500 MB); ./fetch-data.sh re-creates them
+episode-*/data/pbp*.csv
+episode-*/data/*.gz
+# what your own runs produce
+episode-*/rulings/
+episode-*/rehearsal-runs/
