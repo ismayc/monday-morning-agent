@@ -10,6 +10,7 @@ episode.
 
 - **The short version, no code:** https://ismayc.github.io/monday-morning-agent/
 - **Change a filter yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/explorer.html
+- **How the one tool works, as a diagram:** https://ismayc.github.io/monday-morning-agent/tool.html
 
 ## Episode 1: "You have to establish the run."
 
@@ -42,6 +43,27 @@ flowchart TB
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
 | `examples/` | A tool read (text and JSON), the policy, one run as it looked on screen, and three rulings: the episode's claim, a bet it declined, and a claim the tool cannot answer |
 | `rehearse.sh` | `tool`, `claims`, `verify`, `freeze`: the rehearsal beats as subcommands |
+
+### How `query-plays.mjs` works
+
+It is 204 lines of JavaScript (an ES module, hence `.mjs`), run by Node.js. It imports
+only what ships with Node (`node:fs`, `node:path`, `node:url`), so there is nothing to
+install. It reads one file and prints; it never writes and never goes online.
+
+```mermaid
+flowchart TB
+    cmd["1. Read the command<br/>check every filter; an unknown one stops it with exit code 64"]
+    load["2. Load the plays<br/>data/plays-slim.csv: 255,781 plays, 18 columns"]
+    filt["3. Apply eight filters in order<br/>and record each one with the plays left after it"]
+    team["4. Add up per team per game<br/>rush share = rushes / (rushes + passes); did the team win?"]
+    grp["5. Sort by rush share, cut into equal groups<br/>wins per group, win rate, the gap, a small-sample warning"]
+    out["6. Print the filters first, then the result<br/>as text, or as JSON with --json"]
+    cmd --> load --> filt --> team --> grp --> out
+```
+
+For `--seasons 2021-2025 --half 1`, stage 3 goes from 255,781 plays to 87,209; stage 4
+finds 2,840 team-games; stage 5 cuts them into four groups of 710. The page linked above
+follows that command through every stage.
 
 ### Run it
 
@@ -95,5 +117,7 @@ Play-by-play data is from [nflverse](https://github.com/nflverse/nflverse-data),
 licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The file here is a
 cut of it: 18 of 372 columns, seasons 2021 through 2026.
 
-The link-preview image and the icons are rendered from `docs/og-image.html` and
-`docs/apple-touch-icon.html`; each file's first comment has the command.
+The three pages share `docs/sheet.css`. The link-preview image and the icons are
+rendered from `docs/og-image.html` and `docs/apple-touch-icon.html`; each file's first
+comment has the command (serve `docs/` locally first, since the preview source loads
+the stylesheet and fonts).

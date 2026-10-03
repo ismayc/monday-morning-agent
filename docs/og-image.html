@@ -2,32 +2,30 @@
 <!-- Source for og-image.png (1200x630). Re-render from docs/ (throwaway profile):
        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --user-data-dir=/tmp/og-profile \
          --window-size=1200,630 --hide-scrollbars --screenshot=og-image.png "file://$PWD/og-image.html"
-     The four numbers are the five-season results from episode-1/query-plays.mjs
+     Needs the network once, for the Barlow fonts. The four numbers are the five-season results from episode-1/query-plays.mjs
      (--seasons 2021-2025, then --half 1). Complete seasons, so they do not move. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="sheet.css">
 <style>
   html,body{margin:0}
-  body{width:1200px;height:630px;background:#10141c;color:#f4f6f8;overflow:hidden;
-    font-family:-apple-system,"SF Pro Display","Segoe UI",Helvetica,Arial,sans-serif;position:relative}
-  .pad{position:absolute;inset:54px 64px}
-  .k{color:#ffb648;font-size:22px;letter-spacing:.3em;text-transform:uppercase;font-weight:700}
-  h1{font-size:66px;line-height:1.08;margin:18px 0 0;font-weight:700}
-  .rows{position:absolute;left:0;right:0;bottom:64px;display:grid;grid-template-columns:1fr 1fr;gap:26px}
-  .box{background:#1a2130;border:1px solid #2c3648;border-radius:18px;padding:22px 26px}
-  .box.a{background:#2a2415;border-color:#ffb648}
-  .box small{display:block;color:#8b95a5;font-size:21px;letter-spacing:.14em;text-transform:uppercase;font-weight:700}
-  .box b{font-size:60px;font-variant-numeric:tabular-nums}
-  .box b i{font-style:normal;color:#8b95a5;font-size:30px;font-weight:400;padding:0 12px}
-  .box.a b{color:#ffb648}
-  .by{position:absolute;left:0;bottom:0;color:#8b95a5;font-size:23px}
-  svg{position:absolute;right:0;top:-6px;width:96px;height:96px}
+  body{width:1200px;height:630px;overflow:hidden;position:relative}
+  .pad{position:absolute;inset:0;padding:40px 60px}
+  .who{font-family:var(--display);font-weight:600;font-size:30px;border-bottom:4px solid var(--ink);padding-bottom:10px;display:flex;justify-content:space-between}
+  .who span:last-child{font-weight:500}
+  h1{margin-top:26px;font-size:97px;max-width:none;line-height:.9;white-space:nowrap}
+  .fields{margin-top:26px;gap:0}
+  .fieldrow{grid-template-columns:270px 1fr}
+  .fieldrow h3{font-size:44px}
+  .field{height:44px;margin:46px 0 44px}
+  .field .mk b{font-size:42px}
 </style>
 <div class="pad">
-  <svg viewBox="0 0 64 64"><g transform="rotate(-32 32 32)"><ellipse cx="32" cy="32" rx="24" ry="14.5" fill="#ffb648"/><path d="M21 32h22M26 27.5v9M32 27.5v9M38 27.5v9" stroke="#10141c" stroke-width="3" stroke-linecap="round" fill="none"/></g></svg>
-  <div class="k">The Monday Morning Agent</div>
-  <h1>"You have to<br>establish the run."</h1>
-  <div class="rows">
-    <div class="box"><small>Whole game</small><b>77.7%<i>vs</i>19.2%</b></div>
-    <div class="box a"><small>First half only</small><b>53.0%<i>vs</i>46.1%</b></div>
+  <div class="who"><span>The Monday Morning Agent</span><span>Share of games won, teams that ran most and least</span></div>
+  <h1>"You have to establish the run."</h1>
+  <div class="fields">
+    <div class="fieldrow"><div><h3>Whole game</h3></div>
+      <div class="field"><div class="gap" style="left:19.2%;width:58.5%"></div><div class="mk least" style="left:19.2%"><b>19.2%</b></div><div class="mk most" style="left:77.7%"><b>77.7%</b></div></div></div>
+    <div class="fieldrow"><div><h3>First half only</h3></div>
+      <div class="field"><div class="gap" style="left:46.1%;width:6.9%"></div><div class="mk least" style="left:46.1%"><b>46.1%</b></div><div class="mk most" style="left:53%"><b>53.0%</b></div></div></div>
   </div>
-  <div class="by">Win rate, teams that ran most vs. ran least. One filter changed the story. Chester Ismay, O'Reilly.</div>
 </div>

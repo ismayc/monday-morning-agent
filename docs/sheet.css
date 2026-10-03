@@ -1,0 +1,75 @@
+/* sheet.css: the shared look of both pages, modeled on a coach's laminated call sheet.
+   White sheet, heavy ink cell borders, and three highlighters that each mean one thing:
+   yellow = the teams that ran most (and whatever is selected), blue = the teams that ran
+   least, pink = plays a filter removed (and warnings). */
+:root {
+  --sheet: #fcfcfa; --ink: #14171a; --soft: #4a5058; --rule: #c9ccd1; --faint: #eef0f1;
+  --yellow: #ffe14d; --blue: #8ad4ff; --pink: #ff9db8;
+  --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
+  --text: "Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+  --code: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } * { transition: none !important; } }
+body { background: var(--sheet); color: var(--ink); font-family: var(--text); font-size: 18px; line-height: 1.55; }
+main { max-width: 1120px; margin: 0 auto; padding: 0 24px 80px; }
+a { color: var(--ink); text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--yellow); }
+a:hover { background: var(--yellow); }
+a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+p { max-width: 68ch; }
+code { font-family: var(--code); font-size: .88em; background: var(--faint); padding: 1px 5px; }
+
+/* The strip across the top of the sheet: whose sheet it is, and the two ways out. */
+.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; padding: 18px 0 14px; border-bottom: 4px solid var(--ink); font-family: var(--display); font-weight: 600; font-size: 22px; }
+.top a { text-decoration: none; }
+.top nav { display: flex; gap: 20px; font-weight: 500; font-size: 20px; }
+.top nav a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
+
+h1 { font-family: var(--display); font-weight: 700; font-size: clamp(52px, 9.5vw, 124px); line-height: .92; letter-spacing: -.01em; margin-top: 40px; max-width: 12ch; }
+h1.long { font-size: clamp(40px, 6.4vw, 78px); max-width: 20ch; line-height: .98; }
+.lead { font-size: clamp(19px, 2.2vw, 23px); line-height: 1.45; margin-top: 22px; max-width: 60ch; }
+h2 { font-family: var(--display); font-weight: 700; font-size: clamp(32px, 4.4vw, 46px); line-height: 1.02; margin-bottom: 14px; }
+section { margin-top: 72px; padding-top: 22px; border-top: 2px solid var(--ink); }
+section > p + p { margin-top: 12px; }
+
+/* The field: win rate from 0 to 100 with a line every ten, a marker per group, and the
+   distance between the top and bottom groups highlighted. The one loud thing on the page. */
+.fields { margin-top: 44px; display: grid; gap: 14px; }
+.fieldrow { display: grid; grid-template-columns: 210px 1fr; gap: 8px 26px; align-items: center; }
+.fieldrow h3 { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1; }
+.fieldrow p { font-size: 15.5px; line-height: 1.35; color: var(--soft); margin-top: 4px; }
+.field { position: relative; height: 46px; margin: 40px 0; border: 2px solid var(--ink); background:
+  linear-gradient(90deg, transparent calc(50% - 1.5px), var(--ink) calc(50% - 1.5px), var(--ink) calc(50% + 1.5px), transparent calc(50% + 1.5px)),
+  repeating-linear-gradient(90deg, transparent 0, transparent calc(10% - 1px), var(--rule) calc(10% - 1px), var(--rule) 10%), #fff; }
+.field .gap { position: absolute; top: 0; bottom: 0; background: var(--yellow); mix-blend-mode: multiply; transition: left .45s ease, width .45s ease; }
+.field .mk { position: absolute; top: -9px; bottom: -9px; width: 5px; margin-left: -2.5px; background: var(--ink); transition: left .45s ease; }
+.field .mk b { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; padding: 1px 6px; }
+.field .mk.most b { bottom: calc(100% + 3px); background: var(--yellow); }
+.field .mk.least b { top: calc(100% + 3px); background: var(--blue); }
+.field .mk.mid { top: 8px; bottom: 8px; width: 3px; margin-left: -1.5px; background: var(--soft); }
+.fieldkey { margin-top: 6px; font-size: 15.5px; color: var(--soft); max-width: none; }
+.fieldkey i { font-style: normal; padding: 0 5px; color: var(--ink); }
+.fieldkey .y { background: var(--yellow); } .fieldkey .b { background: var(--blue); }
+@media (max-width: 760px) { .fieldrow { grid-template-columns: 1fr; } .field { margin: 36px 0 40px; } .field .mk b { font-size: 24px; } }
+
+/* Ruled rows: a term on the left, what it means on the right. Used wherever the old page
+   had a grid of cards. */
+.rows { margin-top: 18px; border-top: 2px solid var(--ink); }
+.rows > div { display: grid; grid-template-columns: minmax(170px, 27%) 1fr; gap: 6px 26px; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+.rows > div > b { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.15; }
+.rows > div > span { font-size: 17px; max-width: 64ch; }
+.rows.marked > div.hl > b { background: var(--yellow); justify-self: start; padding: 0 6px; }
+@media (max-width: 640px) { .rows > div { grid-template-columns: 1fr; } }
+
+pre.cmd { margin-top: 18px; border: 2px solid var(--ink); background: #fff; padding: 16px 18px; overflow-x: auto; font-family: var(--code); font-size: 14.5px; line-height: 1.65; }
+pre.cmd .c { color: var(--soft); }
+
+table { border-collapse: collapse; width: 100%; font-size: 16.5px; }
+th { text-align: left; font-family: var(--display); font-weight: 600; font-size: 19px; padding: 8px 12px 8px 0; border-bottom: 2px solid var(--ink); vertical-align: bottom; }
+td { padding: 10px 12px 10px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-variant-numeric: tabular-nums; }
+.num { text-align: right; }
+.scroll { overflow-x: auto; }
+
+footer { margin-top: 80px; padding-top: 16px; border-top: 4px solid var(--ink); font-size: 15px; color: var(--soft); }
+footer p { max-width: 80ch; }

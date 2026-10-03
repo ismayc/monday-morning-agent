@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How query-plays.mjs works: the Monday Morning Agent's one tool</title>
+<meta name="description" content="A diagram of the one tool the agent may run: 204 lines of JavaScript, run by Node.js, that read one file, apply eight filters in order, and print every one of them.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="How query-plays.mjs works">
+<meta property="og:description" content="The one tool the agent may run, as a diagram: 204 lines of JavaScript that read one file, apply eight filters in order, and print every one of them.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/tool.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="You have to establish the run. Two bars from 0 to 100 percent of games won. Whole game: teams that ran most won 77.7 percent, teams that ran least 19.2. First half only: 53.0 against 46.1.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How query-plays.mjs works">
+<meta name="twitter:description" content="The one tool the agent may run, as a diagram: 204 lines of JavaScript that read one file, apply eight filters in order, and print every one of them.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="sheet.css">
+<style>
+  /* The diagram: six stages, top to bottom. Each stage is one row of the sheet: its
+     number, what the code does, and what that looks like for one real command. */
+  .flow { margin-top: 26px; border: 2px solid var(--ink); background: #fff; }
+  .stage { display: grid; grid-template-columns: 74px 1fr 1fr; border-bottom: 2px solid var(--ink); }
+  .stage:last-child { border-bottom: 0; }
+  .stage > i { font-style: normal; font-family: var(--display); font-weight: 700; font-size: 58px; line-height: 1; padding: 12px 0 0; text-align: center; border-right: 2px solid var(--ink); }
+  .stage > div { padding: 14px 18px 16px; min-width: 0; }
+  .stage > div + div { border-left: 1px solid var(--rule); background: var(--sheet); }
+  .stage h3 { font-family: var(--display); font-weight: 700; font-size: 27px; line-height: 1.08; margin-bottom: 4px; }
+  .stage p { font-size: 16.5px; line-height: 1.45; }
+  .stage p + p { margin-top: 8px; }
+  .stage .where { font-size: 14px; color: var(--soft); margin-top: 8px; }
+  .stage.loud > i, .stage.loud > div:first-of-type { background: var(--yellow); }
+  .eg { font-family: var(--display); font-weight: 600; font-size: 19px; margin-bottom: 6px; }
+  .stage pre { font-family: var(--code); font-size: 12.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
+  .down { display: block; padding: 4px 18px 4px 92px; background: var(--faint); border-bottom: 2px solid var(--ink); font-size: 14.5px; color: var(--soft); }
+  .stop { display: inline-block; background: var(--pink); padding: 0 6px; }
+  ol.funnel { list-style: none; font-size: 14.5px; }
+  ol.funnel li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 4px 0 6px; border-bottom: 1px solid var(--rule); }
+  ol.funnel li:last-child { border-bottom: 0; }
+  ol.funnel b { font-weight: 500; font-variant-numeric: tabular-nums; }
+  ol.funnel .bar { grid-column: 1 / -1; height: 6px; background: var(--faint); position: relative; }
+  ol.funnel .bar u { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); }
+  ol.funnel .bar s { position: absolute; top: 0; bottom: 0; background: var(--pink); }
+  @media (max-width: 820px) {
+    .stage { grid-template-columns: 54px 1fr; }
+    .stage > i { font-size: 44px; grid-row: span 2; }
+    .stage > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+    .down { padding-left: 72px; }
+  }
+  .never { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); border: 2px solid var(--ink); background: #fff; }
+  .never div { padding: 12px 16px 14px; border-right: 1px solid var(--rule); font-size: 16px; }
+  .never div:last-child { border-right: 0; }
+  .never b { display: block; font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.1; margin-bottom: 3px; }
+  @media (max-width: 820px) { .never { grid-template-columns: 1fr 1fr; } .never div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); } }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="./">The Monday Morning Agent</a>
+  <nav><a href="./">How it is set up</a><a href="explorer.html">Change a filter</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<h1 class="long">How query-plays.mjs works</h1>
+<p class="lead">This is the one program the agent is allowed to run. It reads one file, throws out the plays the filters exclude, counts what is left, and prints both the count and every filter it used. It is short enough to read in one sitting, and it was written before the agent existed.</p>
+
+<section id="language">
+  <h2>What it is written in</h2>
+  <div class="rows">
+    <div><b>JavaScript</b><span>One file, 204 lines. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
+    <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the filters. It was built and tested on Node 24, and the daily refresh on GitHub runs it on Node 20.</span></div>
+    <div><b>Nothing to install</b><span>It imports three things, and all three come with Node itself: <code>node:fs</code> to read a file, and <code>node:path</code> and <code>node:url</code> to find the data folder next to the script. There is no <code>package.json</code> and no <code>npm install</code>.</span></div>
+    <div><b>Not written by the agent</b><span>The agent does not write or change this code. It only chooses the filters. That is why checking the agent means checking a list of filters, not reading code it made up.</span></div>
+  </div>
+</section>
+
+<section id="diagram">
+  <h2>What happens when it runs</h2>
+  <p>Six stages, top to bottom, the same every time. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --seasons 2021-2025 --half 1</code>, on October 3, 2026.</p>
+
+  <div class="flow">
+    <div class="stage">
+      <i>1</i>
+      <div><h3>Read the command</h3><p>It reads the filters typed after its name and checks each one. A filter it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant.</p><p class="where">Lines 36 to 80</p></div>
+      <div><p class="eg">In the example</p><pre>--seasons 2021-2025   five seasons
+--half 1              first half only
+everything else       left at its default</pre></div>
+    </div>
+    <span class="down">If every filter is valid, it goes on.</span>
+
+    <div class="stage">
+      <i>2</i>
+      <div><h3>Load the plays</h3><p>It reads <code>data/plays-slim.csv</code> into memory, one row per play, and splits each row at the commas. This is the only file it opens, and it only reads it.</p><p class="where">Lines 82 to 89</p></div>
+      <div><p class="eg">In the example</p><pre>255,781 plays
+18 columns each, of the 372 in the raw data
+no betting column among them</pre></div>
+    </div>
+    <span class="down">Every play is now in memory. Nothing has been removed yet.</span>
+
+    <div class="stage loud">
+      <i>3</i>
+      <div><h3>Apply the filters, in order, and write each one down</h3><p>Eight filters, always in the same order. After each one it records the filter's name and how many plays are left, even when the filter removed nothing. That record is the list it prints at the end.</p><p>This is the stage the whole design rests on: a filter cannot be applied without also being written down, because one small function does both.</p><p class="where">Lines 91 to 123</p></div>
+      <div><p class="eg">In the example, plays left after each</p>
+        <ol class="funnel">
+          <li><span>0. The file</span><b>255,781</b><span class="bar"><u style="width:100%"></u></span></li>
+          <li><span>1. Seasons 2021 to 2025</span><b>247,284</b><span class="bar"><u style="width:96.68%"></u><s style="left:96.68%;width:3.32%"></s></span></li>
+          <li><span>2. Regular season and playoffs</span><b>247,284</b><span class="bar"><u style="width:96.68%"></u></span></li>
+          <li><span>3. All weeks</span><b>247,284</b><span class="bar"><u style="width:96.68%"></u></span></li>
+          <li><span>4. Only rushes and passes</span><b>179,045</b><span class="bar"><u style="width:70%"></u><s style="left:70%;width:26.68%"></s></span></li>
+          <li><span>5. No kneel-downs, no spikes</span><b>176,491</b><span class="bar"><u style="width:69%"></u><s style="left:69%;width:1%"></s></span></li>
+          <li><span>6. First half only</span><b>87,209</b><span class="bar"><u style="width:34.1%"></u><s style="left:34.1%;width:34.9%"></s></span></li>
+          <li><span>7. Any score</span><b>87,209</b><span class="bar"><u style="width:34.1%"></u></span></li>
+        </ol>
+      </div>
+    </div>
+    <span class="down">Only the plays that passed all eight filters go on. Pink is what a filter took out.</span>
+
+    <div class="stage">
+      <i>4</i>
+      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any team with fewer than 10 plays left.</p><p class="where">Lines 125 to 145</p></div>
+      <div><p class="eg">In the example</p><pre>1,424 games
+4 tied games dropped
+0 teams dropped for too few plays
+2,840 team-games kept</pre></div>
+    </div>
+    <span class="down">One row per team per game: its rush share, and whether it won.</span>
+
+    <div class="stage">
+      <i>5</i>
+      <div><h3>Sort, cut into equal groups, and count the wins</h3><p>It sorts the team-games from the highest rush share to the lowest and cuts them into four groups of the same size. For each group it counts the wins and divides. The gap is the top group's win rate minus the bottom group's. If a group has fewer than 30 team-games, it adds a small-sample warning.</p><p class="where">Lines 147 to 167</p></div>
+      <div><p class="eg">In the example</p><pre>4 groups of 710
+ran most    376 wins of 710    53.0%
+ran least   327 wins of 710    46.1%
+gap                            6.9 points</pre></div>
+    </div>
+    <span class="down">The numbers are done. All that is left is to print them.</span>
+
+    <div class="stage">
+      <i>6</i>
+      <div><h3>Print the filters first, then the result</h3><p>It prints the question, the filter list from stage 3, the team-game counts from stage 4, the table from stage 5, and one standing reminder: a gap is an association, not a cause. With <code>--json</code> it prints the same content as data, which is how <a href="explorer.html">the explorer page</a> gets its answers.</p><p class="where">Lines 169 to 204</p></div>
+      <div><p class="eg">In the example</p><pre>QUESTION
+FILTERS, IN ORDER (plays left after each)
+THEN, PER TEAM PER GAME
+RESULT
+NOT IN THIS OUTPUT</pre></div>
+    </div>
+  </div>
+  <p style="margin-top:16px">The agent reads that printout and nothing else. It never sees a play.</p>
+</section>
+
+<section id="never">
+  <h2>What it never does</h2>
+  <p>These are properties of the code, not promises in a prompt. You can confirm each one by reading the file.</p>
+  <div class="never">
+    <div><b>It never writes</b>No file is created, changed, or deleted. It reads one file and prints.</div>
+    <div><b>It never goes online</b>No network call of any kind. It works with Wi-Fi off.</div>
+    <div><b>It never sees a betting line</b>The file it reads has 18 columns, and none of them is one.</div>
+    <div><b>It never guesses</b>Give it the same filters and the same file, and it prints the same numbers, every time.</div>
+  </div>
+</section>
+
+<section id="see">
+  <h2>See it for yourself</h2>
+<pre class="cmd"><span class="c"># the example on this page</span>
+node ./query-plays.mjs --seasons 2021-2025 --half 1
+
+<span class="c"># every filter it accepts</span>
+node ./query-plays.mjs --help
+
+<span class="c"># a filter it does not know: it stops and says so</span>
+node ./query-plays.mjs --seasons 2026 --spread 3</pre>
+  <div class="rows">
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/query-plays.mjs">Read the code</a></b><span>All 204 lines, with the line numbers this page refers to.</span></div>
+    <div><b><a href="explorer.html">Change a filter</a></b><span>The same output for 189 combinations of filters, with nothing to install.</span></div>
+    <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written policy, behind a one-line allowlist.</span></div>
+  </div>
+</section>
+
+<footer><p>The line numbers and the example's numbers were read from the code and its output on October 3, 2026. The Monday Morning Agent is an O'Reilly live series hosted by Chester Ismay. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0.</p></footer>
+
+</main>
+</body>
+</html>
