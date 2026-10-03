@@ -8,9 +8,10 @@ an eight-episode O'Reilly live series hosted by Chester Ismay. Each episode sett
 argument NFL fans cannot stop having and adds one skill to the agent. One folder per
 episode.
 
-- **The short version, no code:** https://ismayc.github.io/monday-morning-agent/
-- **Change a filter yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/explorer.html
-- **How the one tool works, as a diagram:** https://ismayc.github.io/monday-morning-agent/tool.html
+- **The series, all eight arguments:** https://ismayc.github.io/monday-morning-agent/
+- **Episode 1, the short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-1/
+- **Change a filter yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-1/explorer.html
+- **How the one tool works, as a diagram:** https://ismayc.github.io/monday-morning-agent/episode-1/tool.html
 
 ## Episode 1: "You have to establish the run."
 
@@ -117,7 +118,9 @@ Play-by-play data is from [nflverse](https://github.com/nflverse/nflverse-data),
 licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The file here is a
 cut of it: 18 of 372 columns, seasons 2021 through 2026.
 
-The three pages share `docs/sheet.css`. The link-preview image and the icons are
-rendered from `docs/og-image.html` and `docs/apple-touch-icon.html`; each file's first
+The site is `docs/`: the series page at the root and one folder per episode
+(`docs/episode-1/`), all sharing `docs/sheet.css` and the icons. The link-preview images
+and the icons are rendered from the `og-image.html` beside each image and from
+`docs/apple-touch-icon.html`; each file's first
 comment has the command (serve `docs/` locally first, since the preview source loads
 the stylesheet and fonts).

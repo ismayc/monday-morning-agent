@@ -25,6 +25,7 @@ code { font-family: var(--code); font-size: .88em; background: var(--faint); pad
 .top a { text-decoration: none; }
 .top nav { display: flex; gap: 20px; font-weight: 500; font-size: 20px; }
 .top nav a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
+.top nav a[aria-current="page"] { background: var(--yellow); text-decoration: none; padding: 0 6px; }
 
 h1 { font-family: var(--display); font-weight: 700; font-size: clamp(52px, 9.5vw, 124px); line-height: .92; letter-spacing: -.01em; margin-top: 40px; max-width: 12ch; }
 h1.long { font-size: clamp(40px, 6.4vw, 78px); max-width: 20ch; line-height: .98; }

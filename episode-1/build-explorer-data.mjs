@@ -2,7 +2,7 @@
 // build-explorer-data.mjs: run the tool once for every combination of filters the
 // explorer page offers, and save the answers as one file the page can load.
 //
-//   node ./build-explorer-data.mjs        writes ../docs/explorer-data.json
+//   node ./build-explorer-data.mjs        writes ../docs/episode-1/explorer-data.json
 //
 // A web page cannot run a program, and nobody should have to install anything to change
 // a filter and see what happens. So this script asks query-plays.mjs every question the
@@ -44,6 +44,6 @@ for (const seasons of SEASONS) for (const type of TYPES) for (const half of HALV
     warnings: out.warnings,
   }
 }
-const file = join(DIR, '..', 'docs', 'explorer-data.json')
+const file = join(DIR, '..', 'docs', 'episode-1', 'explorer-data.json')
 writeFileSync(file, JSON.stringify({ season2026: { latestGame: latest, weeks: weeks2026 }, options: { SEASONS, TYPES, HALVES, MARGINS }, answers }) + '\n')
 console.log(`wrote ${file}: ${Object.keys(answers).length} answers, 2026 through ${latest} (weeks ${weeks2026})`)

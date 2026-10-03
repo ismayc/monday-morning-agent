@@ -1,9 +1,10 @@
-<!doctype html><meta charset="utf-8"><title>Link preview source</title>
-<!-- Source for og-image.png (1200x630). Re-render from docs/ (throwaway profile):
+<!doctype html><meta charset="utf-8"><title>Link preview source: the series</title>
+<!-- Source for og-image.png (1200x630), the series page's link preview. Each episode
+     folder has its own. Re-render: serve docs/ locally (python3 -m http.server 8791),
+     then with a throwaway profile:
        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --user-data-dir=/tmp/og-profile \
-         --window-size=1200,630 --hide-scrollbars --screenshot=og-image.png "file://$PWD/og-image.html"
-     Needs the network once, for the Barlow fonts. The four numbers are the five-season results from episode-1/query-plays.mjs
-     (--seasons 2021-2025, then --half 1). Complete seasons, so they do not move. -->
+         --window-size=1200,630 --hide-scrollbars --screenshot=og-image.png http://127.0.0.1:8791/og-image.html
+     Needs the network once, for the Barlow fonts. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="sheet.css">
 <style>
@@ -12,20 +13,21 @@
   .pad{position:absolute;inset:0;padding:40px 60px}
   .who{font-family:var(--display);font-weight:600;font-size:30px;border-bottom:4px solid var(--ink);padding-bottom:10px;display:flex;justify-content:space-between}
   .who span:last-child{font-weight:500}
-  h1{margin-top:26px;font-size:97px;max-width:none;line-height:.9;white-space:nowrap}
-  .fields{margin-top:26px;gap:0}
-  .fieldrow{grid-template-columns:270px 1fr}
-  .fieldrow h3{font-size:44px}
-  .field{height:44px;margin:46px 0 44px}
-  .field .mk b{font-size:42px}
+  h1{margin-top:24px;font-size:104px;max-width:none;line-height:.9;white-space:nowrap}
+  .args{margin-top:46px;border:2px solid var(--ink);background:#fff}
+  .args div{display:grid;grid-template-columns:76px 1fr;border-bottom:2px solid var(--ink);font-family:var(--display);font-weight:700;font-size:48px;line-height:1}
+  .args div:last-child{border-bottom:0}
+  .args i{font-style:normal;text-align:center;border-right:2px solid var(--ink);padding:13px 0 11px}
+  .args span{padding:13px 20px 11px}
+  .args div:first-child{background:var(--yellow)}
 </style>
 <div class="pad">
-  <div class="who"><span>The Monday Morning Agent</span><span>Share of games won, teams that ran most and least</span></div>
-  <h1>"You have to establish the run."</h1>
-  <div class="fields">
-    <div class="fieldrow"><div><h3>Whole game</h3></div>
-      <div class="field"><div class="gap" style="left:19.2%;width:58.5%"></div><div class="mk least" style="left:19.2%"><b>19.2%</b></div><div class="mk most" style="left:77.7%"><b>77.7%</b></div></div></div>
-    <div class="fieldrow"><div><h3>First half only</h3></div>
-      <div class="field"><div class="gap" style="left:46.1%;width:6.9%"></div><div class="mk least" style="left:46.1%"><b>46.1%</b></div><div class="mk most" style="left:53%"><b>53.0%</b></div></div></div>
+  <div class="who"><span>The Monday Morning Agent</span><span>Eight arguments, a quarter of a million NFL plays</span></div>
+  <h1>An agent that checks the tape.</h1>
+  <div class="args">
+    <div><i>1</i><span>"You have to establish the run."</span></div>
+    <div><i>2</i><span>"Ban the tush push."</span></div>
+    <div><i>3</i><span>"Kickers are too good now."</span></div>
+    <div><i>5</i><span>"Coaches are cowards on fourth down."</span></div>
   </div>
 </div>
