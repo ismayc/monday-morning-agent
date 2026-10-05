@@ -3,20 +3,27 @@
 // see while it works: each tool call as it is made, the filters and result the tool
 // returned, and the ruling at the end.
 //
-//   claude -p "..." --output-format stream-json --verbose | node ./show-run.mjs ruling.md
+//   claude -p "..." --output-format stream-json --verbose | node ./show-run.mjs ruling.md [run.html [claim]]
 //
 // `claude -p` prints nothing until it finishes unless it is asked for the event stream.
 // This is the piece that makes the run watchable: every filter, on screen, as it happens.
-// The one argument is where to save the ruling. The script writes that file; the agent
-// cannot write anything.
+// The first argument is where to save the ruling; the second, when given, is where to
+// write the same run as one page (render-run.mjs), with the claim as its title. The
+// script writes those files; the agent cannot write anything.
 import { createInterface } from 'node:readline'
 import { writeFileSync } from 'node:fs'
+import { renderRun } from './render-run.mjs'
 
 const rulingFile = process.argv[2]
-const t0 = Date.now()
+const htmlFile = process.argv[3]
+const claim = process.argv[4] || ''
+const started = new Date()
+const t0 = started.getTime()
 const at = () => { const s = Math.round((Date.now() - t0) / 1000); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` }
 const rule = (c) => c.repeat(78)
-let calls = 0, denied = 0, ruling = null, status = 1
+let calls = 0, denied = 0, ruling = null, status = 1, seconds = null
+// Everything shown, in order, for the page: notes from the agent and each call with its result.
+const items = []
 
 // Of a tool result, show the two blocks the room should read: the filters and the result.
 const excerpt = (text) => {
@@ -36,7 +43,10 @@ const excerpt = (text) => {
 const pending = new Map()
 // Text is held one event, so the final message is not printed twice (it is the ruling).
 let heldText = null
-const flushText = () => { if (heldText) console.log(`\n[${heldText.at}] AGENT\n${heldText.text}`); heldText = null }
+const flushText = () => {
+  if (heldText) { console.log(`\n[${heldText.at}] AGENT\n${heldText.text}`); items.push({ kind: 'note', at: heldText.at, text: heldText.text }) }
+  heldText = null
+}
 
 const rl = createInterface({ input: process.stdin })
 rl.on('line', (line) => {
@@ -58,18 +68,29 @@ rl.on('line', (line) => {
       pending.delete(part.tool_use_id)
       const text = Array.isArray(part.content) ? part.content.map(c => c.text || '').join('\n') : part.content
       if (part.is_error) denied++
+      items.push({ kind: 'call', n: call.n, at: call.at, command: call.command, text: String(text ?? ''), error: !!part.is_error })
       console.log(`\n${rule('=')}\n[${call.at}] TOOL CALL ${call.n}\n  ${call.command}\n${rule('-')}`)
       console.log(part.is_error ? `  REFUSED OR FAILED: ${String(text).split('\n')[0]}` : excerpt(text))
     }
   } else if (ev.type === 'result') {
     ruling = ev.result || ''
     status = ev.is_error ? 1 : 0
+    seconds = Math.round((ev.duration_ms || Date.now() - t0) / 1000)
     if (heldText && heldText.text !== ruling.trim()) flushText()
+    heldText = null
     console.log(`\n${rule('=')}\nRULING\n${rule('=')}\n${ruling}\n${rule('=')}`)
-    console.log(`${calls} tool calls, ${denied} refused or failed, ${Math.round((ev.duration_ms || Date.now() - t0) / 1000)} seconds`)
+    console.log(`${calls} tool calls, ${denied} refused or failed, ${seconds} seconds`)
   }
 })
 rl.on('close', () => {
+  // The page is written even when the run died early: what happened is still worth reading.
+  if (htmlFile) {
+    writeFileSync(htmlFile, renderRun({
+      claim, started: started.toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }),
+      items, ruling, seconds, calls, denied, status,
+      streamPath: htmlFile.replace(/\.html$/, '.jsonl'), rulingPath: rulingFile,
+    }))
+  }
   if (ruling === null) { console.error('show-run: the stream ended with no result'); process.exit(70) }
   if (rulingFile && ruling) writeFileSync(rulingFile, ruling + '\n')
   process.exit(status)

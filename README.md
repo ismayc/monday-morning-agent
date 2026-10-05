@@ -40,6 +40,7 @@ flowchart TB
 | `query-plays.mjs` | The one tool. Sorts every team's game by the share of its plays that were runs, cuts them into equal groups, and reports each group's win rate under the filters given. `node ./query-plays.mjs --help` lists the filters |
 | `run-analyst.sh` | The runner: `claude -p` with your claim as the prompt, the policy as the system prompt, and a one-line allowlist |
 | `show-run.mjs` | Turns the agent's event stream into what you see: each tool call with its filters and result as it lands, then the ruling |
+| `render-run.mjs` | Writes the same run as one page, `rulings/run-<stamp>.html`: the ruling first, then each call down a clock with its filters as a funnel and its result as a table and a bar. The runner opens it when the run ends; `node ./render-run.mjs rulings/run-<stamp>.jsonl` rebuilds it for an older run |
 | `data/plays-slim.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published |
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made: download the seasons from nflverse, keep 18 columns |
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
@@ -86,7 +87,9 @@ node ./query-plays.mjs --seasons 2021-2025 --half 1
 ```
 
 A run takes about 15 seconds and makes four tool calls for that claim. The ruling is
-saved under `rulings/`. To refresh this season yourself: `./fetch-data.sh 2026`.
+saved under `rulings/`, and the whole run opens in your browser as one page when it
+ends (`ANALYST_NO_OPEN=1` writes the page without opening it). To refresh this season
+yourself: `./fetch-data.sh 2026`.
 
 ### What the numbers say
 

@@ -7,9 +7,15 @@
 # The whole agent is: one policy file (analyst.md), one read-only data tool
 # (query-plays.mjs), and `claude -p` as the runtime. There is no server and no API client.
 #
+# When the run ends, the same run is written as one page (rulings/run-<stamp>.html: the
+# ruling at the top, each tool call with its filters and result, the full ruling at the
+# end) and opened in the browser. The terminal view stays as it is.
+#
 # Optional environment:
 #   ANALYST_LOG_DIR=/some/dir ./run-analyst.sh "..."
-#       Where the event stream and the ruling land. Default ./rulings
+#       Where the event stream, the ruling, and the page land. Default ./rulings
+#   ANALYST_NO_OPEN=1 ./run-analyst.sh "..."
+#       Write the page but do not open it (a rehearsal batch, a machine with no browser)
 
 set -uo pipefail
 
@@ -31,6 +37,7 @@ mkdir -p "$LOG_DIR"
 STAMP="$(date +%Y-%m-%d-%H%M%S)"
 STREAM="$LOG_DIR/run-$STAMP.jsonl"        # every event the agent produced
 RULING="$LOG_DIR/ruling-$STAMP.md"        # just the ruling, written by show-run.mjs
+PAGE="$LOG_DIR/run-$STAMP.html"           # the run as one page, written by show-run.mjs
 
 echo "run-analyst.sh: claim: $CLAIM"
 echo "run-analyst.sh: starting $(date -Iseconds)"
@@ -60,7 +67,7 @@ claude -p "$CLAIM" \
   --output-format stream-json --verbose \
   2>"$LOG_DIR/run-$STAMP.err" \
   | tee "$STREAM" \
-  | node ./show-run.mjs "$RULING"
+  | node ./show-run.mjs "$RULING" "$PAGE" "$CLAIM"
 STATUS="${PIPESTATUS[2]}"
 
 echo "run-analyst.sh: finished $(date -Iseconds) with status $STATUS"
@@ -73,5 +80,15 @@ if [ -s "$RULING" ]; then
 else
   echo "run-analyst.sh: WARNING, no ruling written to $RULING" >&2
   [ "$STATUS" -eq 0 ] && STATUS=65
+fi
+
+# The page: easier to read than the terminal. Opened with the system's opener, if there is one.
+if [ -s "$PAGE" ]; then
+  echo "run-analyst.sh: run page at $PAGE"
+  if [ -z "${ANALYST_NO_OPEN:-}" ]; then
+    if command -v open >/dev/null 2>&1; then open "$PAGE"
+    elif command -v xdg-open >/dev/null 2>&1; then xdg-open "$PAGE" >/dev/null 2>&1 || true
+    fi
+  fi
 fi
 exit "$STATUS"

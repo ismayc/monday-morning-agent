@@ -170,6 +170,19 @@ NOT IN THIS OUTPUT</pre></div>
   </div>
 </section>
 
+<section id="runner">
+  <h2>The runner: run-analyst.sh, in five beats</h2>
+  <p>The tool above is what the agent calls. The runner is what you call: a shell script of about eighty lines that hands the agent one claim and makes its work visible. Top to bottom, it does five things.</p>
+  <div class="rows">
+    <div><b>1. Takes the claim</b><span>From the command line, or from <code>claim.txt</code> when you give none. A claim with a quotation mark inside it goes in the file.</span></div>
+    <div><b>2. Hands over the policy</b><span>It reads <code>analyst.md</code> and passes it to <code>claude -p</code> as the system prompt. The policy is the only thing written for this show; the model is unchanged.</span></div>
+    <div><b>3. Sets the allowlist</b><span>One line: <code>Bash(node ./query-plays.mjs:*)</code>. This exact script, any arguments, and nothing else: no file reads, no writes, no network. The policy says it; this line enforces it.</span></div>
+    <div><b>4. Streams the run</b><span>It asks for the event stream instead of one answer at the end, and pipes it through <code>show-run.mjs</code>, which prints each tool call as it lands, with the filters and the result, and saves the ruling under <code>rulings/</code>.</span></div>
+    <div><b>5. Opens the run as a page</b><span>When the run ends, <code>render-run.mjs</code> writes the whole run as one page, the ruling first and every call down a clock, and the runner opens it. A terminal is a hard place to read eight tool calls.</span></div>
+  </div>
+  <p style="margin-top:16px">Nothing in the runner computes a number. It moves the claim, the policy, and the tool's printout between the pieces, and writes down what happened.</p>
+</section>
+
 <section id="see">
   <h2>See it for yourself</h2>
 <pre class="cmd"><span class="c"># the example on this page</span>
@@ -181,7 +194,7 @@ node ./query-plays.mjs --help
 <span class="c"># a filter it does not know: it stops and says so</span>
 node ./query-plays.mjs --seasons 2026 --spread 3</pre>
   <div class="rows">
-    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/query-plays.mjs">Read the code</a></b><span>All 204 lines, with the line numbers this page refers to.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/query-plays.mjs">Read the code</a></b><span>All 204 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
     <div><b><a href="explorer.html">Change a filter</a></b><span>The same output for 189 combinations of filters, with nothing to install.</span></div>
     <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written policy, behind a one-line allowlist.</span></div>
   </div>
