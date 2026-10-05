@@ -4,7 +4,8 @@
 # A page cannot run a program, and nothing should have to run on the viewer's computer to
 # change a filter, so this workflow runs the same tool the agent runs, query-plays.mjs,
 # once for every combination the buttons can ask for, and commits what it printed to
-# docs/episode-1/explorer-data.json. GitHub Pages serves that file.
+# docs/episode-1/explorer-data.json. GitHub Pages serves that file. The plays page
+# (docs/episode-1/plays.html) gets the same treatment from build-plays-data.mjs.
 #
 # It also re-downloads the play-by-play seasons from nflverse and rebuilds
 # episode-1/data/plays-slim.csv, so a fresh clone has this season as far as it has been
@@ -49,16 +50,19 @@ jobs:
       - name: Ask the tool every question the explorer page can ask
         run: cd episode-1 && node ./build-explorer-data.mjs
 
+      - name: Describe the plays file for the page that reads it
+        run: cd episode-1 && node ./build-plays-data.mjs
+
       - name: Commit if the plays changed
         run: |
-          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json; then
+          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json; then
             echo "Nothing new since the last commit; nothing to push."
             exit 0
           fi
           through="$(node -e 'const j=require("./docs/episode-1/explorer-data.json");console.log(j.season2026.latestGame+", weeks "+j.season2026.weeks)')"
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add episode-1/data/plays-slim.csv episode-1/data/plays-slim.meta.json docs/episode-1/explorer-data.json
+          git add episode-1/data/plays-slim.csv episode-1/data/plays-slim.meta.json docs/episode-1/explorer-data.json docs/episode-1/plays-data.json
           git commit -m "data: 2026 through $through"
           git pull --rebase origin main
           git push origin HEAD:main

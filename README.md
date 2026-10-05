@@ -10,6 +10,7 @@ episode.
 
 - **The series, all eight arguments:** https://ismayc.github.io/monday-morning-agent/
 - **Episode 1, the short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-1/
+- **The plays, row by row, and the cut from 372 columns to 18:** https://ismayc.github.io/monday-morning-agent/episode-1/plays.html
 - **Change a filter yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-1/explorer.html
 - **How the one tool works, as a diagram:** https://ismayc.github.io/monday-morning-agent/episode-1/tool.html
 
@@ -42,6 +43,7 @@ flowchart TB
 | `data/plays-slim.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published |
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made: download the seasons from nflverse, keep 18 columns |
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
+| `build-plays-data.mjs` | Describes the plays file for the page that reads it: every column in the download with the kept ones and the betting lines marked, the counts, and every play of the latest week's games |
 | `examples/` | A tool read (text and JSON), the policy, one run as it looked on screen, and three rulings: the episode's claim, a bet it declined, and a claim the tool cannot answer |
 | `rehearse.sh` | `tool`, `claims`, `verify`, `freeze`: the rehearsal beats as subcommands |
 
@@ -109,7 +111,8 @@ them, so the file the agent can reach has none.
 ## A scheduled workflow commits to `main`
 
 `.github/workflows/refresh-data.yml` runs daily, re-downloads the seasons, rebuilds the
-slim file and the explorer page's answers, and commits when the plays changed. Pull
+slim file, the explorer page's answers, and the plays page's data, and commits when the
+plays changed. Pull
 before you push.
 
 ## Data

@@ -13,7 +13,7 @@
 set -uo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$DIR"
-FROZEN=(analyst.md query-plays.mjs run-analyst.sh show-run.mjs slim-data.mjs build-explorer-data.mjs)
+FROZEN=(analyst.md query-plays.mjs run-analyst.sh show-run.mjs slim-data.mjs build-explorer-data.mjs build-plays-data.mjs)
 
 case "${1:-}" in
   tool)

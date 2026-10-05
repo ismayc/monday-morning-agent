@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The plays, row by row: what the agent can see</title>
+<meta name="description" content="A quarter of a million NFL plays, 372 columns each in the download and 18 after the cut. Read every column, every play of last week's games, and the counts, with nothing to install.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="The plays, row by row: what the agent can see">
+<meta property="og:description" content="A quarter of a million NFL plays, 372 columns each in the download and 18 after the cut. Read every column and every play of last week's games, with nothing to install.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-1/plays.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-1/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="You have to establish the run. Two win-rate bars: whole game, 77.7 percent against 19.2; first half only, 53.0 against 46.1.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The plays, row by row: what the agent can see">
+<meta name="twitter:description" content="372 columns in the download, 18 after the cut, and every play of last week's games.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-1/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<style>
+  button { font: inherit; color: inherit; cursor: pointer; }
+
+  /* The cut: every column name in the download, as one sheet of cells. The loud thing on
+     the page. Yellow cells survived; pink cells are the betting lines, cut on purpose. */
+  .tally { margin-top: 34px; display: flex; flex-wrap: wrap; gap: 10px 30px; align-items: baseline; font-family: var(--display); font-weight: 600; font-size: 22px; }
+  .tally b { font-weight: 700; font-size: 40px; line-height: 1; font-variant-numeric: tabular-nums; }
+  .tally .y b { background: var(--yellow); padding: 0 6px; } .tally .p b { background: var(--pink); padding: 0 6px; }
+  .grid { margin-top: 16px; border: 2px solid var(--ink); background: #fff; padding: 6px; display: flex; flex-wrap: wrap; gap: 3px; }
+  .grid span { font-family: var(--code); font-size: 11.5px; line-height: 1.2; padding: 2px 5px; border: 1px solid var(--rule); color: var(--soft); white-space: nowrap; }
+  .grid span.k { background: var(--yellow); color: var(--ink); border-color: var(--ink); font-weight: 600; }
+  .grid span.b { background: var(--pink); color: var(--ink); border-color: var(--ink); text-decoration: line-through; }
+  .gridnote { margin-top: 10px; font-size: 15.5px; color: var(--soft); max-width: none; }
+
+  /* The eighteen: name, meaning, and a real value from a real play. */
+  .rows > div > b code { background: var(--yellow); font-size: 20px; padding: 0 6px; }
+  .rows > div > span .ex { display: block; margin-top: 3px; font-family: var(--code); font-size: 14px; color: var(--soft); }
+
+  /* Read a game: one cell per game of the week, then its rows. */
+  .games { margin-top: 18px; border: 2px solid var(--ink); background: #fff; display: flex; flex-wrap: wrap; }
+  .games button { flex: 1 1 auto; background: none; border: 0; border-right: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 9px 14px; font-size: 16px; font-weight: 500; white-space: nowrap; }
+  .games button:hover { background: var(--faint); }
+  .games button[aria-pressed="true"] { background: var(--yellow); font-weight: 600; }
+  .score { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; border: 2px solid var(--ink); background: #fff; }
+  .score > div { padding: 12px 16px 14px; }
+  .score > div + div { border-left: 2px solid var(--ink); }
+  .score b { display: block; font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; }
+  .score b small { font-weight: 600; font-size: 20px; color: var(--soft); margin-left: 8px; }
+  .score p { margin-top: 4px; font-size: 16px; max-width: none; }
+  .score .share { background: var(--yellow); padding: 0 5px; font-weight: 600; }
+  .score .won { background: var(--ink); color: var(--sheet); padding: 0 6px; font-size: 16px; font-weight: 600; margin-left: 8px; font-family: var(--display); }
+  @media (max-width: 600px) { .score { grid-template-columns: 1fr; } .score > div + div { border-left: 0; border-top: 2px solid var(--ink); } }
+  .tablehead { margin-top: 22px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 8px 20px; }
+  .tablehead p { font-size: 15.5px; color: var(--soft); }
+  .tablehead button { background: none; border: 2px solid var(--ink); padding: 2px 12px; font-family: var(--display); font-weight: 600; font-size: 18px; }
+  .tablehead button[aria-pressed="true"] { background: var(--yellow); }
+  .plays { margin-top: 10px; border: 2px solid var(--ink); background: #fff; max-height: 70vh; overflow: auto; }
+  .plays table { font-size: 14px; font-family: var(--code); min-width: 1240px; }
+  .plays th { position: sticky; top: 0; background: #fff; font-family: var(--code); font-size: 13px; font-weight: 600; padding: 8px 10px; white-space: nowrap; }
+  .plays td { padding: 4px 10px; border-bottom: 1px solid var(--faint); white-space: nowrap; }
+  .plays td.run { background: var(--yellow); font-weight: 600; }
+  .plays tr.out td { color: var(--rule); }
+  .plays tr.out td.run { background: none; font-weight: 400; }
+  .plays td:first-child { color: var(--soft); border-right: 1px solid var(--rule); }
+
+  /* Counts: a short table and a list of play kinds with bars. */
+  .counts { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; margin-top: 26px; }
+  @media (max-width: 900px) { .counts { grid-template-columns: 1fr; } }
+  .counts h3 { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.05; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  tr.total td { border-top: 2px solid var(--ink); border-bottom: 0; font-weight: 600; }
+  ol.kinds { list-style: none; }
+  ol.kinds li { padding: 8px 0 9px; border-bottom: 1px solid var(--rule); font-size: 16px; }
+  ol.kinds .row { display: flex; justify-content: space-between; gap: 14px; align-items: baseline; }
+  ol.kinds code { background: none; padding: 0; font-size: 15px; }
+  ol.kinds .n { font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 500; }
+  ol.kinds .bar { height: 7px; background: var(--faint); margin-top: 6px; position: relative; }
+  ol.kinds .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); }
+  ol.kinds li.kept .bar i { background: var(--yellow); border: 1px solid var(--ink); }
+  .then { font-size: 15.5px; color: var(--soft); margin-top: 12px; }
+  .asof { margin-top: 40px; font-size: 15px; color: var(--soft); max-width: 80ch; }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 1</a><a href="plays.html" aria-current="page">The plays</a><a href="explorer.html">Change a filter</a><a href="tool.html">How the tool works</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<h1 class="long">Every play is one row. The agent reads eighteen columns of it.</h1>
+<p class="lead">Behind the scenes the plays are one CSV file: about a quarter of a million lines of plain text, downloaded from nflverse and cut down by a small script. Nobody should need a terminal command to look at a file like that, so this page reads it for you: which columns survived the cut, every play of last week's games, and how many plays there are.</p>
+
+<section id="cut">
+  <h2>The cut: 372 columns to 18</h2>
+  <p>Each play in the download has 372 columns: down, distance, the players, the weather, the play's description in words, and more. The agent's question needs 18 of them. Six of the others are betting lines. Those are not hidden from the agent, they are gone: the file it can reach does not have them.</p>
+  <div class="tally"><span>372 in the download</span><span class="y"><b id="nkept">18</b> kept</span><span class="p"><b id="nbet">6</b> betting lines, cut on purpose</span><span><b id="nleft">348</b> others left behind</span></div>
+  <div class="grid" id="grid" aria-label="Every column in the download"></div>
+  <p class="gridnote">Yellow is kept. Pink is a betting line, struck out. Everything else was left behind because the question never needs it, not because it is harmful.</p>
+</section>
+
+<section id="columns">
+  <h2>The eighteen, one by one</h2>
+  <p>What each column means, with its value on one real play from last week.</p>
+  <div class="rows" id="cols">
+    <div><b><code>season</code></b><span>The season the game belongs to, 2021 through this one.</span></div>
+    <div><b><code>season_type</code></b><span><code>REG</code> for the regular season, <code>POST</code> for the playoffs. The filter behind "regular season" and "playoffs".</span></div>
+    <div><b><code>week</code></b><span>The week of the season. The playoffs continue the count, up to 22.</span></div>
+    <div><b><code>game_id</code></b><span>One id per game: season, week, away team, home team.</span></div>
+    <div><b><code>game_date</code></b><span>The date the game was played.</span></div>
+    <div><b><code>home_team</code></b><span>The home team, by abbreviation.</span></div>
+    <div><b><code>away_team</code></b><span>The away team.</span></div>
+    <div><b><code>posteam</code></b><span>The team with the ball on this play. Empty on rows that are not a play, such as the end of a quarter or a timeout.</span></div>
+    <div><b><code>result</code></b><span>The home team's score minus the away team's at the end of the game. Positive means the home team won; 0 is a tie, which the tool drops. This is how the tool knows who won.</span></div>
+    <div><b><code>game_half</code></b><span><code>Half1</code>, <code>Half2</code>, or <code>Overtime</code>. The filter behind "first half only".</span></div>
+    <div><b><code>qtr</code></b><span>The quarter, 1 to 4, and 5 for overtime.</span></div>
+    <div><b><code>down</code></b><span>1 to 4. Empty on kickoffs, extra points, and rows that are not a play.</span></div>
+    <div><b><code>play_type</code></b><span>What kind of play it was: <code>run</code>, <code>pass</code>, <code>punt</code>, <code>kickoff</code>, <code>field_goal</code>, <code>extra_point</code>, <code>qb_kneel</code>, <code>qb_spike</code>, or <code>no_play</code> for a penalty that wiped the play out.</span></div>
+    <div><b><code>rush_attempt</code></b><span>1 if the play was a run, a quarterback scramble included. This is the column the tool counts.</span></div>
+    <div><b><code>pass_attempt</code></b><span>1 if the play was a pass, sacks included.</span></div>
+    <div><b><code>qb_kneel</code></b><span>1 when the quarterback knelt. A kneel counts as a run in the data, and it is not a decision to run, so the tool drops it.</span></div>
+    <div><b><code>qb_spike</code></b><span>1 when the quarterback spiked the ball. The same: it counts as a pass, and the tool drops it.</span></div>
+    <div><b><code>score_differential</code></b><span>The score of the team with the ball minus the other team's, as the play began. The filter behind "within 8 points".</span></div>
+  </div>
+</section>
+
+<section id="game">
+  <h2 id="weekhead">Read a game</h2>
+  <p id="weeklead">Every play of last week's games, in the order they happened, in the eighteen columns above. Pick a game.</p>
+  <div class="games" id="games"></div>
+  <div class="score" id="score"></div>
+  <div class="tablehead">
+    <p id="tablenote"></p>
+    <button type="button" id="only" aria-pressed="false">Show only the plays the tool counts</button>
+  </div>
+  <div class="plays scroll"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
+  <p class="then">Greyed rows are the ones the tool's first filter removes: kickoffs, punts, kicks, penalties that wiped the play out, kneels, spikes, and rows with no team in possession. Yellow marks a run. The two lines above are the count the tool makes for each team: runs, passes, and the share that were runs.</p>
+</section>
+
+<section id="counts">
+  <h2>How many plays</h2>
+  <div class="counts">
+    <div>
+      <h3>By season</h3>
+      <div class="scroll"><table>
+        <thead><tr><th>Season</th><th class="num">Games</th><th class="num">Weeks</th><th class="num">Plays</th></tr></thead>
+        <tbody id="seasons"></tbody>
+      </table></div>
+      <p class="then" id="seasonnote"></p>
+    </div>
+    <div>
+      <h3>By kind of play</h3>
+      <ol class="kinds" id="kinds"></ol>
+      <p class="then" id="kindnote"></p>
+    </div>
+  </div>
+</section>
+
+<section id="file">
+  <h2>If you want the file itself</h2>
+  <p>It is a CSV: plain text, one play per line, commas between the columns. Any spreadsheet opens it, and so does a terminal. These are the commands the show would otherwise have run on screen.</p>
+<pre class="cmd"><span class="c"># in episode-1/ of the repo</span>
+head -3 data/plays-slim.csv          <span class="c"># the header and two plays</span>
+wc -l data/plays-slim.csv            <span class="c"># how many lines</span>
+./fetch-data.sh                      <span class="c"># download the seasons again and redo the cut</span></pre>
+  <div class="rows">
+    <div><b>The file</b><span><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/data/plays-slim.csv">episode-1/data/plays-slim.csv</a> in the repo, about 20 MB. GitHub shows it as a table too.</span></div>
+    <div><b>The cut</b><span><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/slim-data.mjs">slim-data.mjs</a>: the list of 18 columns near the top is the complete answer to "what can the agent see?"</span></div>
+    <div><b>The source</b><span><a href="https://github.com/nflverse/nflverse-data/releases/tag/pbp">nflverse play-by-play</a>, one file per season, licensed CC BY 4.0.</span></div>
+  </div>
+</section>
+
+<p class="asof" id="asof"></p>
+
+<footer><p>Nothing here is computed in your browser. A script read the file once and saved what this page shows, and a GitHub Action reruns it every day. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0, cut to 18 of its 372 columns. Part of <a href="../">The Monday Morning Agent</a>.</p></footer>
+
+</main>
+<script>
+(function () {
+  'use strict';
+  var $ = function (id) { return document.getElementById(id); };
+  var fmt = function (n) { return n.toLocaleString('en-US'); };
+  var data, game, onlyCounted = false;
+
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
+
+  function buildGrid() {
+    var g = $('grid'), kept = {}, bet = {};
+    data.kept.forEach(function (c) { kept[c] = 1; });
+    data.betting.forEach(function (c) { bet[c] = 1; });
+    data.rawColumns.forEach(function (c) {
+      var s = el('span', kept[c] ? 'k' : bet[c] ? 'b' : '', c);
+      s.title = kept[c] ? c + ': kept' : bet[c] ? c + ': betting line, cut' : c + ': left behind';
+      g.appendChild(s);
+    });
+    $('nkept').textContent = data.kept.length;
+    $('nbet').textContent = data.betting.length;
+    $('nleft').textContent = data.rawColumns.length - data.kept.length - data.betting.length;
+  }
+
+  // One real play for the examples: the first snap with a down in the week's first game.
+  function buildExamples() {
+    var h = data.latestWeek.header, rows = data.latestWeek.games[0].rows, pick = rows[0];
+    for (var i = 0; i < rows.length; i++) { if (rows[i][h.indexOf('down')] && rows[i][h.indexOf('posteam')]) { pick = rows[i]; break; } }
+    var divs = $('cols').children;
+    for (var k = 0; k < divs.length; k++) {
+      var name = divs[k].querySelector('b code').textContent, v = pick[h.indexOf(name)];
+      divs[k].querySelector('span').appendChild(el('span', 'ex', 'On that play: ' + (v === '' ? '(empty)' : v)));
+    }
+  }
+
+  function gameLabel(g) {
+    var d = new Date(g.date + 'T12:00:00');
+    return g.away + ' at ' + g.home + ', ' + d.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+  }
+
+  function buildGames() {
+    var w = data.latestWeek, box = $('games');
+    $('weekhead').textContent = 'Read a game: week ' + w.week + ' of ' + w.season;
+    $('weeklead').textContent = 'Every play of the ' + w.games.length + ' games on file for week ' + w.week + ', in the order they happened, in the eighteen columns above. Pick a game.';
+    w.games.forEach(function (g) {
+      var b = el('button', '', gameLabel(g));
+      b.type = 'button'; b.dataset.id = g.id; b.setAttribute('aria-pressed', 'false');
+      b.addEventListener('click', function () { location.hash = 'game=' + g.id; });
+      box.appendChild(b);
+    });
+    $('only').addEventListener('click', function () {
+      onlyCounted = !onlyCounted;
+      this.setAttribute('aria-pressed', String(onlyCounted));
+      renderRows();
+    });
+  }
+
+  function counted(h, f) {
+    var team = f[h.indexOf('posteam')];
+    if (!team || team === 'NA') return false;
+    if (f[h.indexOf('rush_attempt')] !== '1' && f[h.indexOf('pass_attempt')] !== '1') return false;
+    if (f[h.indexOf('qb_kneel')] === '1' || f[h.indexOf('qb_spike')] === '1') return false;
+    return true;
+  }
+
+  function renderScore() {
+    var s = $('score'); s.innerHTML = '';
+    var homeWon = game.result > 0, tie = game.result === 0;
+    [game.away, game.home].forEach(function (team) {
+      var t = game.teams[team] || { runs: 0, passes: 0 }, n = t.runs + t.passes;
+      var d = el('div'), b = el('b', '', team);
+      b.appendChild(el('small', '', team === game.home ? 'home' : 'away'));
+      var won = tie ? 'tied' : ((team === game.home) === homeWon ? 'won by ' + Math.abs(game.result) : 'lost by ' + Math.abs(game.result));
+      b.appendChild(el('span', 'won', won));
+      d.appendChild(b);
+      var p = el('p');
+      p.appendChild(document.createTextNode(fmt(n) + ' plays counted: ' + t.runs + ' runs and ' + t.passes + ' passes, so '));
+      p.appendChild(el('span', 'share', n ? (100 * t.runs / n).toFixed(1) + '% runs' : 'no share'));
+      d.appendChild(p);
+      s.appendChild(d);
+    });
+  }
+
+  function renderRows() {
+    var h = data.latestWeek.header, thead = $('thead'), tbody = $('tbody');
+    thead.innerHTML = ''; tbody.innerHTML = '';
+    var tr = el('tr'); tr.appendChild(el('th', '', '#'));
+    h.forEach(function (c) { tr.appendChild(el('th', '', c)); });
+    thead.appendChild(tr);
+    var shown = 0, kept = 0, pt = h.indexOf('play_type');
+    game.rows.forEach(function (f, i) {
+      var inTool = counted(h, f);
+      if (inTool) kept++;
+      if (onlyCounted && !inTool) return;
+      shown++;
+      var r = el('tr', inTool ? '' : 'out');
+      r.appendChild(el('td', '', String(i + 1)));
+      f.forEach(function (v, k) { r.appendChild(el('td', k === pt && v === 'run' ? 'run' : '', v)); });
+      tbody.appendChild(r);
+    });
+    $('tablenote').textContent = fmt(game.rows.length) + ' rows in the file for this game, ' + fmt(kept) + ' of them plays the tool counts. Showing ' + fmt(shown) + '.';
+  }
+
+  function render() {
+    var want = (location.hash.match(/game=([\w]+)/) || [])[1];
+    game = null;
+    data.latestWeek.games.forEach(function (g) { if (g.id === want) game = g; });
+    if (!game) game = data.latestWeek.games[0];
+    var bs = $('games').children;
+    for (var i = 0; i < bs.length; i++) bs[i].setAttribute('aria-pressed', String(bs[i].dataset.id === game.id));
+    renderScore(); renderRows();
+  }
+
+  function buildCounts() {
+    var tb = $('seasons'), years = Object.keys(data.seasons).sort(), tg = 0, tp = 0;
+    years.forEach(function (y) {
+      var s = data.seasons[y], tr = el('tr');
+      tr.appendChild(el('td', '', y + (y === years[years.length - 1] ? ' so far' : '')));
+      tr.appendChild(el('td', 'num', fmt(s.games))); tr.appendChild(el('td', 'num', String(s.weeks))); tr.appendChild(el('td', 'num', fmt(s.plays)));
+      tb.appendChild(tr); tg += s.games; tp += s.plays;
+    });
+    var tot = el('tr', 'total'); tot.appendChild(el('td', '', 'All')); tot.appendChild(el('td', 'num', fmt(tg))); tot.appendChild(el('td', 'num', '')); tot.appendChild(el('td', 'num', fmt(tp)));
+    tb.appendChild(tot);
+    $('seasonnote').textContent = 'A full season is 285 games over 22 weeks: 272 in the regular season and 13 in the playoffs. The current season grows every week.';
+
+    var ol = $('kinds'), kinds = Object.keys(data.playTypes), max = data.playTypes[kinds[0]], runPass = 0;
+    kinds.forEach(function (k) {
+      var n = data.playTypes[k], li = el('li', k === 'run' || k === 'pass' ? 'kept' : '');
+      var row = el('div', 'row'); row.appendChild(el('code', '', k === '(blank)' ? '(no kind: end of a quarter, a timeout)' : k)); row.appendChild(el('span', 'n', fmt(n)));
+      var bar = el('div', 'bar'), fill = el('i'); fill.style.width = (100 * n / max).toFixed(1) + '%'; bar.appendChild(fill);
+      li.appendChild(row); li.appendChild(bar); ol.appendChild(li);
+      if (k === 'run' || k === 'pass') runPass += n;
+    });
+    $('kindnote').textContent = 'The tool counts runs and passes only: ' + fmt(runPass) + ' of the ' + fmt(data.plays) + ' rows, ' + (100 * runPass / data.plays).toFixed(0) + '%. Kneels and spikes are dropped on top of that.';
+  }
+
+  // When the daily refresh last ran. The data file changes only when new games are
+  // published, so its own date cannot show a refresh that has stopped; the workflow's
+  // last successful run can. If GitHub does not answer, the line stays as it is.
+  var RUNS = 'https://api.github.com/repos/ismayc/monday-morning-agent/actions/workflows/refresh-data.yml/runs?status=success&per_page=1';
+  var STALE_HOURS = 36;
+  function lastRefresh() {
+    fetch(RUNS).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      var run = j && j.workflow_runs && j.workflow_runs[0];
+      if (!run) return;
+      var ran = new Date(run.updated_at);
+      var when = ran.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      var hours = (Date.now() - ran.getTime()) / 36e5;
+      $('asof').textContent += hours > STALE_HOURS
+        ? ' The refresh last ran ' + when + ', ' + Math.round(hours) + ' hours ago, so newer games may be missing.'
+        : ' It last checked for new games on ' + when + '.';
+    }).catch(function () {});
+  }
+
+  fetch('plays-data.json').then(function (r) { return r.json(); }).then(function (d) {
+    data = d;
+    buildGrid(); buildExamples(); buildGames(); buildCounts(); render();
+    $('asof').textContent = 'The file holds ' + fmt(d.plays) + ' plays in ' + fmt(d.games) + ' games, through the game of ' + d.latestGame + '. A GitHub Action downloads the seasons again every day and redoes the cut when new games are published.';
+    window.addEventListener('hashchange', render);
+    lastRefresh();
+  }).catch(function () {
+    $('weeklead').textContent = 'The plays did not load. Reload the page; if it still fails, the commands at the bottom read the file from the repo.';
+  });
+})();
+</script>
+</body>
+</html>

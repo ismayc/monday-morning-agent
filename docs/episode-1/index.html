@@ -65,7 +65,7 @@
 
 <div class="top">
   <a href="../">The Monday Morning Agent</a>
-  <nav><a href="./" aria-current="page">Episode 1</a><a href="explorer.html">Change a filter</a><a href="tool.html">How the tool works</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+  <nav><a href="./" aria-current="page">Episode 1</a><a href="plays.html">The plays</a><a href="explorer.html">Change a filter</a><a href="tool.html">How the tool works</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
 </div>
 
 <header>
@@ -111,7 +111,7 @@
   <p>None of this was made by the agent, and most of it was not made for the agent.</p>
   <div class="rows">
     <div><b>Public play-by-play</b><span>Every NFL play, published by the nflverse community under a CC BY 4.0 license. 372 columns per play, refreshed during the season.</span></div>
-    <div><b>A cut to 18 columns</b><span>A small script keeps only the columns the question needs. The betting-line columns are not among them, so the agent cannot read one even by mistake.</span></div>
+    <div><b>A cut to 18 columns</b><span>A small script keeps only the columns the question needs. The betting-line columns are not among them, so the agent cannot read one even by mistake. <a href="plays.html">See the cut</a>, column by column.</span></div>
     <div><b>One read-only tool</b><span><code>query-plays.mjs</code> counts under the filters it is given and prints every filter in order. It answers in a third of a second and changes nothing. It is 204 lines of JavaScript, and <a href="tool.html">this diagram shows how it works</a>.</span></div>
     <div><b>Claude Code</b><span>One command reads a prompt, calls only the tools it is allowed to call, and exits. There is no server to write.</span></div>
   </div>
@@ -127,7 +127,7 @@
     <span class="via">It chooses the filters. Four calls for this claim.</span>
     <div><b>The tool</b><span><code>query-plays.mjs</code> prints every filter, then the result</span></div>
     <span class="via">It reads, and only reads.</span>
-    <div><b>The plays</b><span>255,000 plays, 18 columns, no betting lines</span></div>
+    <div><b><a href="plays.html">The plays</a></b><span>A quarter of a million plays, 18 columns, no betting lines. Read them row by row on their own page.</span></div>
     <span class="via">The filters and results go back up to the agent.</span>
     <div><b>One ruling</b><span>Five seasons, this season, the gap between them, and the exact commands it ran</span></div>
   </div>
