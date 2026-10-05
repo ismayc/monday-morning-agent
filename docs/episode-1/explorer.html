@@ -273,11 +273,30 @@
     if (small.length) { w.hidden = false; w.textContent = small[0].replace('SMALL SAMPLE: ', 'Small sample: '); } else { w.hidden = true; }
   }
 
+  // When the daily refresh last ran. The answers file changes only when new games are
+  // published, so its own date cannot show a refresh that has stopped; the workflow's
+  // last successful run can. If GitHub does not answer, the line stays as it is.
+  var RUNS = 'https://api.github.com/repos/ismayc/monday-morning-agent/actions/workflows/refresh-data.yml/runs?status=success&per_page=1';
+  var STALE_HOURS = 36;
+  function lastRefresh() {
+    fetch(RUNS).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      var run = j && j.workflow_runs && j.workflow_runs[0];
+      if (!run) return;
+      var ran = new Date(run.updated_at);
+      var when = ran.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      var hours = (Date.now() - ran.getTime()) / 36e5;
+      $('asof').textContent += hours > STALE_HOURS
+        ? ' The refresh last ran ' + when + ', ' + Math.round(hours) + ' hours ago, so newer games may be missing.'
+        : ' It last checked for new games on ' + when + '.';
+    }).catch(function () {});
+  }
+
   buildControls();
   fetch('explorer-data.json').then(function (r) { return r.json(); }).then(function (d) {
     data = d; readHash(); render(false);
     $('asof').textContent = 'The 2026 season here runs through the game of ' + d.season2026.latestGame + ' (weeks ' + d.season2026.weeks + '). 2021 to 2025 are complete seasons. A GitHub Action reruns the same tool every day and updates these answers when new games are published.';
     window.addEventListener('hashchange', function () { readHash(); render(false); });
+    lastRefresh();
   }).catch(function () { $('command').textContent = 'The saved answers did not load. Reload the page; if it still fails, run the command from the repo instead.'; });
 })();
 </script>
