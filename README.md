@@ -41,6 +41,7 @@ flowchart TB
 | `run-analyst.sh` | The runner: `claude -p` with your claim as the prompt, the policy as the system prompt, and a one-line allowlist |
 | `show-run.mjs` | Turns the agent's event stream into what you see: each tool call with its filters and result as it lands, then the ruling |
 | `render-run.mjs` | Writes the same run as one page, `rulings/run-<stamp>.html`: the ruling first, then each call down a clock with its filters as a funnel and its result as a table and a bar. The runner opens it when the run ends; `node ./render-run.mjs rulings/run-<stamp>.jsonl` rebuilds it for an older run |
+| `season-sheet.mjs` | The answer on one page: asks the tool eight questions for a set of seasons (whole game, each half, close games, the regular season, the playoffs) and writes them as one sheet with a verdict on the claim, by a rule printed on the page. `--seasons 2026` for this season, `--open` to open it, `--out` to put it anywhere. Written to `rulings/` by default, so a sheet is not public until it is published on purpose |
 | `data/plays-slim.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published |
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made: download the seasons from nflverse, keep 18 columns |
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
