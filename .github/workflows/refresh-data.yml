@@ -14,15 +14,21 @@
 # This is the deterministic half only. No Claude call, no API key, no secret: the agent
 # itself runs on your own machine from run-analyst.sh.
 #
-# Runs daily at 12:30 UTC (5:30 a.m. Pacific, so a Monday morning read is that
-# morning's), and by hand from the Actions tab. It commits only when the plays changed.
-# Because it commits to main, pull before you push.
+# Scheduled three times a night, at 02:15, 05:15, and 08:15 UTC, and runnable by hand
+# from the Actions tab. Three slots because GitHub starts scheduled workflows late: in
+# the first week of October 2026 every scheduled run on this account began 4 to 9 hours
+# after its cron time. nflverse publishes the Sunday night game by about 04:40 UTC on
+# Monday. With that delay the 02:15 slot starts between 06:15 and 11:15 UTC, and if
+# the delay goes away the 05:15 and 08:15 slots start on time; either way a read on
+# Monday morning, Pacific time, includes Sunday's games. It commits only when the plays
+# changed, so a repeat run changes nothing. Because it commits to main, pull before
+# you push.
 
 name: Refresh data
 
 on:
   schedule:
-    - cron: '30 12 * * *'
+    - cron: '15 2,5,8 * * *'
   workflow_dispatch:
 
 permissions:

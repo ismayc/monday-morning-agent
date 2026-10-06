@@ -117,10 +117,10 @@ them, so the file the agent can reach has none.
 
 ## A scheduled workflow commits to `main`
 
-`.github/workflows/refresh-data.yml` runs daily, re-downloads the seasons, rebuilds the
-slim file, the explorer page's answers, and the plays page's data, and commits when the
-plays changed. Pull
-before you push.
+`.github/workflows/refresh-data.yml` is scheduled three times a night (GitHub starts
+scheduled workflows hours late, so one slot is not enough; the file says why). It
+re-downloads the seasons, rebuilds the slim file, the explorer page's answers, and the
+plays page's data, and commits when the plays changed. Pull before you push.
 
 ## Data
 
