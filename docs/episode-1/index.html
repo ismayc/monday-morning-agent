@@ -81,14 +81,14 @@
       </div>
     </div>
     <div class="fieldrow">
-      <div><h3>First half only</h3><p>"Establish" means early. Early, the gap nearly closes.</p></div>
+      <div><h3>First half only</h3><p>"Establish" means early, so count only the first half.</p></div>
       <div class="field" role="img" aria-label="First half only: teams that ran most won 53.0 percent, teams that ran least won 46.1 percent">
         <div class="gap" style="left:46.1%;width:6.9%"></div>
         <div class="mk least" style="left:46.1%"><b>46.1%</b></div><div class="mk most" style="left:53%"><b>53.0%</b></div>
       </div>
     </div>
     <div class="fieldrow">
-      <div><h3>Second half only</h3><p>Teams that are ahead run to use the clock.</p></div>
+      <div><h3>Second half only</h3><p>The same teams, counting only the second half.</p></div>
       <div class="field" role="img" aria-label="Second half only: teams that ran most won 87.0 percent, teams that ran least won 11.7 percent">
         <div class="gap" style="left:11.7%;width:75.3%"></div>
         <div class="mk least" style="left:11.7%"><b>11.7%</b></div><div class="mk most" style="left:87%"><b>87.0%</b></div>
@@ -149,14 +149,14 @@
         <p><b>The claim.</b> If establishing the run matters, teams that run on a larger share of first-half plays should win clearly more often, and that gap should not be dwarfed by the second-half gap.</p>
         <p><b>Five seasons.</b> First half: ran most 53.0%, ran least 46.1%, gap 6.9 points. Second half: ran most 87.0%, ran least 11.7%, gap 75.4 points. 710 team-games per group.</p>
         <p><b>This season.</b> First half: 58.3% against 37.5%, gap 20.8 points. Second half: 91.7% against 20.8%. With 24 team-games per group, a single game moves a win rate by 4.2 points.</p>
-        <p class="call"><b>Ruling.</b> Does not hold as stated, because the first-half association is small while the second-half one is enormous, which leans toward teams that are ahead running to use the clock, not early running producing wins.</p>
+        <p class="call"><b>Ruling.</b> Held back until the episode airs on October 12, 2026. The numbers above are the agent's; the call it made from them is given live, with the evidence, and goes up here afterward.</p>
         <p><b>What these plays cannot tell you.</b> Whether running causes winning or winning causes running, since the tool measures only an association.</p>
         <pre>node ./query-plays.mjs --seasons 2021-2025 --half 1
 node ./query-plays.mjs --seasons 2021-2025 --half 2
 node ./query-plays.mjs --seasons 2026 --half 1
 node ./query-plays.mjs --seasons 2026 --half 2</pre>
       </div>
-      <p class="cap">A real ruling from a run on October 3, 2026: 11 seconds, four tool calls, abridged to fit. The 2026 season then ran through the October 1 game. The full one is in the repo. In steps 2 and 4, marked yellow, the agent is using judgment; the rest is mechanical.</p>
+      <p class="cap">A real ruling from a run on October 3, 2026: 11 seconds, four tool calls, abridged to fit. The 2026 season then ran through the October 1 game. In steps 2 and 4, marked yellow, the agent is using judgment; the rest is mechanical.</p>
     </div>
   </div>
 </section>
@@ -184,7 +184,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
     <div><b>Scope the data, not only the instructions</b><span>The policy says never use betting lines. The file has none. The second one is the guarantee.</span></div>
     <div><b>Ask for the comparison that could prove it wrong</b><span>The whole-game number agrees with the claim. The first-half number tests it. The policy asks for the test.</span></div>
     <div><b>Keep the allowlist exact</b><span>One script by name. Not "any Node command," which would allow arbitrary code. Asked to open the data file directly, the agent declined.</span></div>
-    <div><b>The numbers are fixed; the sentence is not</b><span>Across identical runs the numbers never changed, but the one-line ruling came back as "does not hold as stated" and as "holds only weakly." Read the numbers.</span></div>
+    <div><b>The numbers are fixed; the sentence is not</b><span>Across identical runs the numbers never changed, but the one-line ruling came back worded two different ways, one firmer than the other. Read the numbers.</span></div>
   </div>
 </section>
 

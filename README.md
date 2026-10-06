@@ -46,7 +46,7 @@ flowchart TB
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made: download the seasons from nflverse, keep 18 columns |
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
 | `build-plays-data.mjs` | Describes the plays file for the page that reads it: every column in the download with the kept ones and the betting lines marked, the counts, and every play of the latest week's games |
-| `examples/` | A tool read (text and JSON), the policy, one run as it looked on screen, and three rulings: the episode's claim, a bet it declined, and a claim the tool cannot answer |
+| `examples/` | A tool read (text and JSON), the policy, and a ruling on a claim the tool cannot answer. The rulings on the episode's claim, with one run as it looked on screen and a bet the agent declined, go up here after the episode airs on October 12, 2026 |
 | `rehearse.sh` | `tool`, `claims`, `verify`, `freeze`: the rehearsal beats as subcommands |
 
 ### How `query-plays.mjs` works
@@ -102,9 +102,10 @@ Five seasons, the teams that ran most against the teams that ran least:
 | First half only | 53.0% | 46.1% | 6.9 points |
 | Second half only | 87.0% | 11.7% | 75.4 points |
 
-Running early goes with a small edge. Running late goes with an enormous one, because
-teams that are ahead run to use the clock. One filter changes the story, which is why
-the tool prints every filter and the policy makes the agent read them.
+Running early and running late tell two different stories. Which one the agent ruled
+on, and why, is given on the episode on October 12, 2026, and goes up here afterward.
+One filter changes the story, which is why the tool prints every filter and the policy
+makes the agent read them.
 
 ## What this agent does not do
 

@@ -6,3 +6,7 @@ episode-*/data/*.gz
 # what your own runs produce
 episode-*/rulings/
 episode-*/rehearsal-runs/
+# the rulings on episode 1's claim, published after the episode airs on October 12, 2026
+episode-1/examples/04-run-on-screen.txt
+episode-1/examples/05-ruling.md
+episode-1/examples/06-ruling-declined-bet.md
