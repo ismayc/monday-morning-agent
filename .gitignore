@@ -3,6 +3,8 @@ __pycache__/
 # the raw nflverse downloads (about 500 MB); ./fetch-data.sh re-creates them
 episode-*/data/pbp*.csv
 episode-*/data/*.gz
+# the ESPN fill for games nflverse has not published yet (fetch-espn.mjs); local only
+episode-*/data/espn*-slim.csv
 # what your own runs produce
 episode-*/rulings/
 episode-*/rehearsal-runs/

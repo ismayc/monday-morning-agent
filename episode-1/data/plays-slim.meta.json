@@ -21,5 +21,6 @@
     "score_differential"
   ],
   "plays": 258439,
-  "source": "https://github.com/nflverse/nflverse-data/releases/tag/pbp"
+  "source": "https://github.com/nflverse/nflverse-data/releases/tag/pbp",
+  "espnGames": []
 }

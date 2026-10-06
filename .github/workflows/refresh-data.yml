@@ -45,7 +45,9 @@ jobs:
           node-version: '22'
 
       - name: Download the seasons and rebuild the slim file
-        run: cd episode-1 && ./fetch-data.sh
+        # nflverse only: the ESPN fill (fetch-espn.mjs) is for the machine that runs the
+        # show, so what is committed here stays one source, licensed CC BY 4.0.
+        run: cd episode-1 && NO_ESPN_FILL=1 ./fetch-data.sh
 
       - name: Ask the tool every question the explorer page can ask
         run: cd episode-1 && node ./build-explorer-data.mjs

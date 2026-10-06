@@ -44,6 +44,7 @@ flowchart TB
 | `season-sheet.mjs` | The answer on one page: asks the tool eight questions for a set of seasons (whole game, each half, close games, the regular season, the playoffs) and writes them as one sheet with a verdict on the claim, by a rule printed on the page. `--seasons 2026` for this season, `--open` to open it, `--out` to put it anywhere. Written to `rulings/` by default, so a sheet is not public until it is published on purpose |
 | `data/plays-slim.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published |
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made: download the seasons from nflverse, keep 18 columns |
+| `fetch-espn.mjs` | The fallback for this season: when nflverse has not yet published a game that has been played, fills it from ESPN's game summaries in the same 18 columns, and only until nflverse has it. `fetch-data.sh` runs it; `--check` only reports |
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
 | `build-plays-data.mjs` | Describes the plays file for the page that reads it: every column in the download with the kept ones and the betting lines marked, the counts, and every play of the latest week's games |
 | `examples/` | A tool read (text and JSON), the policy, and a ruling on a claim the tool cannot answer. The rulings on the episode's claim, with one run as it looked on screen and a bet the agent declined, go up here after the episode airs on October 12, 2026 |
@@ -124,7 +125,12 @@ before you push.
 
 Play-by-play data is from [nflverse](https://github.com/nflverse/nflverse-data),
 licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The file here is a
-cut of it: 18 of 372 columns, seasons 2021 through 2026.
+cut of it: 18 of 372 columns, seasons 2021 through 2026. nflverse rebuilds its file
+several times a day in season, so a Sunday game is normally there by Monday morning; for
+the morning it is not, `fetch-espn.mjs` fills the missing games from ESPN's public game
+summaries on your own machine (the committed file is nflverse only). Measured on all 16
+Week 4 games of 2026: the two sources agree on a team's runs and passes within three
+plays, and on rush share within 1.15 points.
 
 The site is `docs/`: the series page at the root and one folder per episode
 (`docs/episode-1/`), all sharing `docs/sheet.css` and the icons. The link-preview images
