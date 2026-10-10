@@ -58,14 +58,30 @@ only what ships with Node (`node:fs`, `node:path`, `node:url`), so there is noth
 install. It reads one file and prints; it never writes and never goes online.
 
 ```mermaid
+%%{init: {"flowchart": {"nodeSpacing": 28, "rankSpacing": 22, "padding": 4, "wrappingWidth": 240}}}%%
 flowchart TB
-    cmd["1. Read the command<br/>check every filter; an unknown one stops it with exit code 64"]
-    load["2. Load the plays<br/>data/plays-slim.csv: 255,781 plays, 18 columns"]
-    filt["3. Apply eight filters in order<br/>and record each one with the plays left after it"]
-    team["4. Add up per team per game<br/>rush share = rushes / (rushes + passes); did the team win?"]
-    grp["5. Sort by rush share, cut into equal groups<br/>wins per group, win rate, the gap, a small-sample warning"]
-    out["6. Print the filters first, then the result<br/>as text, or as JSON with --json"]
-    cmd --> load --> filt --> team --> grp --> out
+    subgraph r1 [" "]
+        direction LR
+        cmd["1. Read the command<br/>check every filter;<br/>an unknown one stops it<br/>with exit code 64"]
+        load["2. Load the plays<br/>data/plays-slim.csv:<br/>255,781 plays, 18 columns"]
+        cmd --> load
+    end
+    subgraph r2 [" "]
+        direction LR
+        filt["3. Apply the eight filters<br/>in order, recording each<br/>with the plays left after it"]
+        team["4. Add up per team per game<br/>rush share =<br/>rushes / (rushes + passes);<br/>did the team win?"]
+        filt --> team
+    end
+    subgraph r3 [" "]
+        direction LR
+        grp["5. Sort by rush share, cut<br/>into equal groups: wins per<br/>group, win rate, the gap,<br/>a small-sample warning"]
+        out["6. Print the filters first,<br/>then the result, as text<br/>or as JSON with --json"]
+        grp --> out
+    end
+    r1 --> r2 --> r3
+    style r1 fill:none,stroke:none
+    style r2 fill:none,stroke:none
+    style r3 fill:none,stroke:none
 ```
 
 For `--seasons 2021-2025 --half 1`, stage 3 goes from 255,781 plays to 87,209; stage 4
