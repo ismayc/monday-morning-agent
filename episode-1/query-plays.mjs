@@ -6,6 +6,8 @@
 // it applied, in order, with the number of plays left after each one, and then the
 // result. Nothing is filtered that is not printed.
 //
+//   node ./query-plays.mjs --seasons 2021-2025 --half 1 --halftime-margin 3
+//   node ./query-plays.mjs --seasons 2021-2025 --half 1 --halftime-margin 3
 //   node ./query-plays.mjs --seasons 2021-2025 --half 1
 //   node ./query-plays.mjs --seasons 2026 --half 2 --margin 8
 //   node ./query-plays.mjs --seasons 2021-2025 --json
@@ -17,11 +19,12 @@
 //   --half 1 | 2 | all                       which half of the game (default all; overtime
 //                                            counts only under "all")
 //   --quarter 1 | 2 | 3 | 4                  one quarter (cannot be combined with --half)
-//   --margin N                               keep plays snapped with the score within N points
-//   --halftime-margin N                      keep whole games within N points at halftime
-//                                            (0 = tied at the half)
-//   --groups 4                               how many equal groups to cut team-games into
-//   --min-plays 10                           drop a team-game with fewer plays than this
+//   --margin N                               keep only plays run with the score within N points
+//                                            (drops plays)
+//   --halftime-margin N                      keep only games within N points at halftime
+//                                            (drops whole games; 0 = tied at the half)
+//   --groups N                               how many equal groups to cut team-games into (default 4)
+//   --min-plays N                            drop a team-game with fewer plays than this (default 10)
 //   --json                                   the same content as JSON
 //
 // It reads data/plays-slim.csv and nothing else. No network, no writes, no dependencies.
@@ -48,7 +51,7 @@ if (argv.includes('--help') || argv.includes('-h')) {
 for (let i = 0; i < argv.length; i++) {
   if (!argv[i].startsWith('--')) fail(`unexpected argument "${argv[i]}"`)
   const k = argv[i].slice(2)
-  if (!KNOWN.has(k)) fail(`unknown flag --${k}. Known flags: ${[...KNOWN].map(x => '--' + x).join(' ')}`)
+  if (!KNOWN.has(k)) fail(`unknown flag --${k}. Known flags: ${[...KNOWN].map(x => '--' + x).join(' ')}. Run with --help for what each one does.`)
   if (k === 'json') { args.json = true; continue }
   if (argv[i + 1] === undefined) fail(`--${k} needs a value`)
   args[k] = argv[++i]
@@ -126,7 +129,7 @@ if (halftimeMargin !== null) {
     if (!team || team === 'NA' || d === '' || d === 'NA') continue
     atHalf.set(p[col.game_id], Math.abs(+d))
   }
-  step(`halftime score: games within ${halftimeMargin} points at halftime (games with no second half out)`,
+  step(`halftime margin: whole games within ${halftimeMargin} points at halftime (a game with no second-half play on file is dropped)`,
     p => atHalf.has(p[col.game_id]) && atHalf.get(p[col.game_id]) <= halftimeMargin)
 }
 step('a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)',
@@ -194,7 +197,7 @@ const out = {
     latestGameDate: lastDate || null,
   },
   groups, result: table, gapTopMinusBottom: gap, warnings,
-  notInThisOutput: 'Why. A gap is an association between running and winning in the plays kept. It does not say which one causes the other.',
+  notInThisOutput: 'Why it happens. A gap is an association between running and winning in the plays kept. It does not say which one causes the other.',
 }
 
 if (args.json) { console.log(JSON.stringify(out, null, 2)); process.exit(0) }

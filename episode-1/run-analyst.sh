@@ -76,7 +76,7 @@ echo "run-analyst.sh: event stream at $STREAM"
 # Verify the EFFECT, not the report of the effect: the ruling file exists only if the
 # stream ended with a result.
 if [ -s "$RULING" ]; then
-  echo "run-analyst.sh: ruling at $RULING ($(wc -w <"$RULING" | tr -d ' ') words)"
+  echo "run-analyst.sh: ruling at $RULING ($(sed '/\*\*Commands run/,$d' "$RULING" | wc -w | tr -d ' ') words above the commands)"
 else
   echo "run-analyst.sh: WARNING, no ruling written to $RULING" >&2
   [ "$STATUS" -eq 0 ] && STATUS=65

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # rehearse.sh: one subcommand per rehearsal beat, so no command travels by clipboard.
 #
-#   ./rehearse.sh tool      the six hand-run tool reads from the run-sheet, results only
-#   ./rehearse.sh claims    seven agent runs: the episode claim three times, two audience
+#   ./rehearse.sh tool      the eight hand-run tool reads from the run-sheet, results only
+#   ./rehearse.sh claims    eight agent runs: the episode claim three times, two audience
 #                           claims, and three the agent should decline or cannot answer.
 #                           Runs them in parallel into rehearsal-runs/<date>/ and prints
 #                           each run's time, tool calls, and refusals.

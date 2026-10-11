@@ -24,7 +24,7 @@ flowchart TB
     policy["analyst.md<br/>the policy: the one thing written for this"]
     agent["The agent<br/>claude -p, allowed to run exactly one script"]
     tool["query-plays.mjs<br/>read-only: prints every filter, then the result"]
-    data["data/plays-slim.csv<br/>255,000 plays, 18 of 372 columns, no betting lines"]
+    data["data/plays-slim.csv<br/>258,000 plays, 18 of 372 columns, no betting lines"]
     ruling["One ruling<br/>five seasons, this season, the gap, the commands it ran"]
     claim --> agent
     policy --> agent
@@ -36,7 +36,7 @@ flowchart TB
 
 | File | What it is |
 |---|---|
-| `analyst.md` | The policy: eight sections, about 700 words. Who the agent is, its one tool, how to turn a claim into a question, answer it twice, show every filter, what it may not say, the shape of the ruling, the allowlist |
+| `analyst.md` | The policy: eight sections, about 1,000 words. Who the agent is, its one tool, how to turn a claim into a question, answer it twice, show every filter, what it may not say, the shape of the ruling, the allowlist |
 | `analyst-outline.md` | The same file with only its eight headings: what the episode starts from and fills in on air, and the place to start your own |
 | `query-plays.mjs` | The one tool. Sorts every team's game by the share of its plays that were runs, cuts them into equal groups, and reports each group's win rate under the filters given. `node ./query-plays.mjs --help` lists the filters |
 | `run-analyst.sh` | The runner: `claude -p` with your claim as the prompt, the policy as the system prompt, and a one-line allowlist |
@@ -63,12 +63,12 @@ flowchart TB
     subgraph r1 [" "]
         direction LR
         cmd["1. Read the command<br/>check every filter;<br/>an unknown one stops it<br/>with exit code 64"]
-        load["2. Load the plays<br/>data/plays-slim.csv:<br/>255,781 plays, 18 columns"]
+        load["2. Load the plays<br/>data/plays-slim.csv:<br/>258,611 plays, 18 columns"]
         cmd --> load
     end
     subgraph r2 [" "]
         direction LR
-        filt["3. Apply the eight filters<br/>in order, recording each<br/>with the plays left after it"]
+        filt["3. Apply the filters in order<br/>(eight, or nine with the halftime score),<br/>recording each with the plays left after it"]
         team["4. Add up per team per game<br/>rush share =<br/>rushes / (rushes + passes);<br/>did the team win?"]
         filt --> team
     end
@@ -84,7 +84,7 @@ flowchart TB
     style r3 fill:none,stroke:none
 ```
 
-For `--seasons 2021-2025 --half 1`, stage 3 goes from 255,781 plays to 87,209; stage 4
+For `--seasons 2021-2025 --half 1`, stage 3 goes from 258,611 plays to 87,209; stage 4
 finds 2,840 team-games; stage 5 cuts them into four groups of 710. The page linked above
 follows that command through every stage.
 

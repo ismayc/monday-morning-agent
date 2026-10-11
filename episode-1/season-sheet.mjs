@@ -10,7 +10,8 @@
 // The page asks query-plays.mjs the same nine questions every time (whole game, each
 // half, games close at halftime, close games, the regular season, the playoffs) and shows each answer as the
 // win-rate bar from the episode pages, with the tool's own numbers and warnings under it.
-// Nothing is computed here except one sentence that compares two gaps the tool printed.
+// Nothing is computed here except the verdict, which compares three gaps the tool printed
+// and repeats the tool's one-game-moves-a-rate arithmetic.
 // The default output is rulings/season-sheet-<seasons>.html, beside the runs; --out
 // puts it anywhere, which is how it gets published to the site after the show.
 import { execFileSync } from 'node:child_process'
@@ -31,7 +32,7 @@ const OUT = resolve(flag('--out', join(DIR, 'rulings', `season-sheet-${SEASONS}.
 // The rest are the filters the room asks about first: close games, the regular season
 // alone, the playoffs alone.
 const QUESTIONS = [
-  { key: 'whole', title: 'The whole game', sub: 'Every play, kickoff to the end.', args: [] },
+  { key: 'whole', title: 'The whole game', sub: 'Every rush and pass, start to finish, overtime included.', args: [] },
   { key: 'h1', title: 'First half only', sub: '"Establish" means early.', args: ['--half', '1'] },
   { key: 'h2', title: 'Second half only', sub: 'Who is running now?', args: ['--half', '2'] },
   { key: 'ht1', title: 'First half, games within 3 points at halftime', sub: 'Take away who was ahead at the break.', args: ['--half', '1', '--halftime-margin', '3'] },
@@ -39,7 +40,7 @@ const QUESTIONS = [
   { key: 'close2', title: 'Second half, score within 8 points', sub: 'Late, but still a game.', args: ['--half', '2', '--margin', '8'] },
   { key: 'tight2', title: 'Second half, score within 3 points', sub: 'Late, and a field goal apart.', args: ['--half', '2', '--margin', '3'] },
   { key: 'reg1', title: 'Regular season only, first half', sub: 'Leave the playoffs out.', args: ['--type', 'REG', '--half', '1'] },
-  { key: 'post', title: 'Playoffs only, the whole game', sub: 'A few dozen games a season.', args: ['--type', 'POST'] },
+  { key: 'post', title: 'Playoffs only, the whole game', sub: 'Thirteen games a season, 65 in five.', args: ['--type', 'POST'] },
 ]
 
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
@@ -75,7 +76,7 @@ const htMost = ht1.result.length ? pct(ht1.result[0].winRate) : '', htLeast = ht
 function verdict() {
   if (!gaps) return { word: 'No ruling yet', text: 'One of the questions the ruling needs has no result, so there is no gap to compare. The bars below say what there is.' }
   if (perGroup < 100) return { word: 'Too few games to rule', text: `${fmt(perGroup)} team-games in each group of games close at halftime so far; one game moves a win rate by ${(100 / perGroup).toFixed(1)} points. In those games the early gap is ${gaps.half.toFixed(1)} points; across all games it is ${gaps.early.toFixed(1)} early and ${gaps.late.toFixed(1)} late. The sample cannot carry a ruling yet. Ask again in a few weeks.` }
-  if (gaps.half < 5) return { word: 'Does not hold as stated', text: `Across all games, running early goes with an edge of ${gaps.early.toFixed(1)} points. But a team that was ahead at halftime ran more in the first half too. Hold the halftime score within 3 points and the edge is ${gaps.half.toFixed(1)}: the teams that ran most early won ${htMost}, the teams that ran least ${htLeast}. Running late goes with a gap of ${gaps.late.toFixed(1)} points, and teams that are ahead run to use the clock. Establishing the run is not what these plays reward; being ahead is.` }
+  if (gaps.half < 5) return { word: 'Does not hold as stated', text: `Across all games, running early goes with an edge of ${gaps.early.toFixed(1)} points. But a team that was ahead at halftime ran more in the first half too. Hold the halftime score within 3 points and the edge is ${gaps.half.toFixed(1)}: the teams that ran most early won ${htMost}, the teams that ran least ${htLeast}. Running late goes with a gap of ${gaps.late.toFixed(1)} points, and teams that are ahead run to use the clock. These plays show no edge for establishing the run; they show one for being ahead.` }
   if (gaps.half >= 10) return { word: 'Holds in part', text: `In games within 3 points at halftime, the teams that ran most early won ${htMost} and the teams that ran least ${htLeast}, a gap of ${gaps.half.toFixed(1)} points. Late, the gap is ${gaps.late.toFixed(1)}. Read the other bars before saying more.` }
   return { word: 'Mixed', text: `In games within 3 points at halftime the early gap is ${gaps.half.toFixed(1)} points; across all games it is ${gaps.early.toFixed(1)} early and ${gaps.late.toFixed(1)} late. Neither reading is clean; the bars are the evidence.` }
 }
@@ -116,11 +117,11 @@ const title = thisSeason
   : `"You have to establish the run." Five seasons, ${SEASONS.replace('-', ' to ')}.`
 const lead = thisSeason
   ? `The same nine questions as the five-season sheet, asked of this season alone: weeks ${esc(weeks.replace(/^\d+: /, ''))}, through the games of ${esc(longDate(latest))}. The groups are small and the tool says so wherever it matters.`
-  : `Nine questions about establishing the run, each answered by the one tool from every play of ${SEASONS.replace('-', ' through ')}. Yellow is the quarter of teams that ran most, blue the quarter that ran least, and the yellow stretch between them is the gap in games won.`
+  : `Nine questions about establishing the run, each answered by the one tool from every play of ${SEASONS.replace('-', ' through ')}. Yellow is the fourth of team-games that ran most, blue the fourth that ran least, and the yellow stretch between them is the gap in games won.`
 const headline = `<div class="verdict"><b>${esc(V.word)}</b><div>
 <p class="vtext">${esc(V.text)}</p>
 ${gaps ? `<div class="evidence"><div><b>${gaps.early.toFixed(1)}</b><span>points early: the first-half gap</span></div><div><b>${gaps.half.toFixed(1)}</b><span>points early, games within 3 at halftime</span></div><div><b>${gaps.late.toFixed(1)}</b><span>points late: the second-half gap</span></div></div>` : ''}
-<p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it. It reads the first half of games within 3 points at halftime: under 100 team-games per group is too few to rule; a gap under 5 points does not hold as stated; a gap of 10 or more holds in part. Every number is the tool's.</p>
+<p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it. It reads the first half of games within 3 points at halftime: under 100 team-games per group is too few to rule; a gap under 5 points does not hold as stated; a gap of 10 or more holds in part; between the two is mixed. This is the page's rule, not the agent's. Every number is the tool's.</p>
 </div></div>`
 
 const html = `<!DOCTYPE html>

@@ -25,7 +25,8 @@ let calls = 0, denied = 0, ruling = null, status = 1, seconds = null
 // Everything shown, in order, for the page: notes from the agent and each call with its result.
 const items = []
 
-// Of a tool result, show the two blocks the room should read: the filters and the result.
+// Of a tool result, show the two blocks the room should read, the filters and the result,
+// plus the one line that says how many games and which weeks the plays kept cover.
 const excerpt = (text) => {
   const lines = String(text).split('\n')
   const keep = []
@@ -33,7 +34,7 @@ const excerpt = (text) => {
   for (const l of lines) {
     if (/^(FILTERS|RESULT)/.test(l)) on = true
     else if (/^(THEN|NOT IN THIS OUTPUT|QUESTION)/.test(l)) on = false
-    if (on || /SMALL SAMPLE|NO RESULT|^query-plays:/.test(l)) keep.push(l)
+    if (on || /SMALL SAMPLE|NO RESULT|^query-plays:|games in the plays kept/.test(l)) keep.push(l)
   }
   return (keep.length ? keep : lines.slice(0, 12)).join('\n').trimEnd()
 }

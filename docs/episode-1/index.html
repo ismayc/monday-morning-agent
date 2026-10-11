@@ -95,14 +95,14 @@
       </div>
     </div>
     <div class="fieldrow">
-      <div><h3>Close at halftime</h3><p>A team ahead at the break ran a lot early too. So count the first half only, in games within 3 points at halftime.</p></div>
+      <div><h3>Close at halftime</h3><p>Teams that are ahead run to use the clock, so a lead can make running look like the cause. Count only the first half, in games within 3 points at halftime.</p></div>
       <div class="field" role="img" aria-label="First half, games within 3 points at halftime: teams that ran most won 46.3 percent, teams that ran least won 55.3 percent">
         <div class="gap" style="left:46.3%;width:9%"></div>
         <div class="mk least" style="left:55.3%"><b>55.3%</b></div><div class="mk most" style="left:46.3%"><b>46.3%</b></div>
       </div>
     </div>
   </div>
-  <p class="fieldkey">Each bar runs from 0% to 100% of games won, with a line every ten and a heavy line at 50%. The colors are the two lines a TV broadcast paints on the field: <i class="b">blue</i> for the line of scrimmage, where the play starts, and <i class="y">yellow</i> for the line to gain. Here blue is the quarter of teams that ran least, yellow is the quarter that ran most, and the yellow stretch between them is the gap in games won. Seasons 2021 through 2025, 710 team-games in each group (188 in the halftime bar).</p>
+  <p class="fieldkey">Each bar runs from 0% to 100% of games won, with a line every ten and a heavy line at 50%. The colors are the two lines a TV broadcast paints on the field: <i class="b">blue</i> for the line of scrimmage, where the play starts, and <i class="y">yellow</i> for the line to gain. Here blue is the fourth of team-games that ran least, yellow the fourth that ran most, and the yellow stretch between them is the gap in games won. In the halftime bar the order flips: the teams that ran least won more, so the gap is negative. Seasons 2021 through 2025, 710 team-games in each group (188 in the halftime bar).</p>
   <p style="margin-top:22px">Same plays, same tool. Each filter changed the story. An agent that reported only the first bar would have been confident, well formatted, and wrong. So this agent is built to show every filter it applies, and this page is how it is set up, for someone who has never built one.</p>
   <a class="go" href="explorer.html">Change the filters yourself</a>
 </header>
@@ -145,10 +145,10 @@
   <div class="run">
     <ol>
       <li><strong>The claim goes in</strong> as one sentence, the way a fan would say it.</li>
-      <li class="judge"><strong>The agent restates it as a question.</strong> "Establish" means early, so it counts the first half, and it holds the halftime score close so that a team already ahead cannot explain the running. Nobody told it that in the prompt. The policy did.</li>
+      <li class="judge"><strong>The agent restates it as a question.</strong> "Establish" means early, so it counts the first half, and it holds the halftime score close so that a team already ahead cannot explain the running. Nobody told it that in the claim. The policy did.</li>
       <li><strong>Five tool calls.</strong> For five seasons: the first half of games close at halftime, the first half of all games, and the second half. Then the first and last of those for this season. Each call's filters appear on screen as it lands.</li>
       <li class="judge"><strong>It compares the two answers</strong> and says whether the difference is more than a few weeks of games can support.</li>
-      <li><strong>One ruling</strong>, under 300 words, ending with the commands it ran so anyone can rerun them.</li>
+      <li><strong>One ruling</strong>, under 350 words, ending with the commands it ran so anyone can rerun them.</li>
       <li><strong>The runner saves the ruling to a file.</strong> The agent itself cannot write anything.</li>
     </ol>
     <div>
@@ -171,7 +171,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
 
 <section id="policy">
   <h2>The policy, in eight sections</h2>
-  <p>The policy is a Markdown file of about 700 words, written like a job description. Its headings run in the order the agent has to work: who it is, how it looks, how it asks, what it shows, what it may not say, and last, what it may run.</p>
+  <p>The policy is a Markdown file of about 1,000 words, written like a job description. Its headings run in the order the agent has to work: who it is, how it looks, how it asks, what it shows, what it may not say, and last, what it may run.</p>
   <div class="rows">
     <div><b>Job description</b><span>Not a pundit, no opinions about teams. The person in the room who went back and counted.</span></div>
     <div><b>Your one tool</b><span>The command and its filters. The filter list it prints is the truth about what was measured. Never open the data file directly.</span></div>
@@ -179,7 +179,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
     <div><b>Answer it twice</b><span>Five complete seasons, then this season, with the same filters. Repeat any small-sample warning.</span></div>
     <div><b>Show every filter</b><span>Each number comes with its filters. End with the exact commands. Never report a number the tool did not print.</span></div>
     <div><b>What you may not say</b><span>No predictions, no advice to bettors or fantasy players, no claim that running causes winning, and no betting lines.</span></div>
-    <div><b>The output contract</b><span>One ruling, under 300 words, in the same seven parts every time.</span></div>
+    <div><b>The output contract</b><span>One ruling, under 350 words, in the same seven parts every time.</span></div>
     <div><b>Tools you may use</b><span>One script. No writing, no network. If the tool fails, say so; never invent a number to cover it.</span></div>
   </div>
 </section>
@@ -190,7 +190,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
     <div><b>Give the agent one door to the data</b><span>It does not write queries. It picks filters for one fixed tool. So you check the filters it chose, not code it wrote.</span></div>
     <div><b>Make the tool show its work</b><span>Every filter, in order, with the count left after each. A flag the agent forgot is a filter it did not apply, and the printout shows it.</span></div>
     <div><b>Scope the data, not only the instructions</b><span>The policy says never use betting lines. The file has none. The second one is the guarantee.</span></div>
-    <div><b>Ask for the comparison that could prove it wrong</b><span>The whole-game number agrees with the claim. The first-half number tests it. The policy asks for the test.</span></div>
+    <div><b>Ask for the comparison that could prove it wrong</b><span>The whole-game number agrees with the claim. The first-half number in games close at halftime tests it. The policy asks for the test.</span></div>
     <div><b>Keep the allowlist exact</b><span>One script by name. Not "any Node command," which would allow arbitrary code. Asked to open the data file directly, the agent declined.</span></div>
     <div><b>The numbers are fixed; the sentence is not</b><span>Across identical runs the numbers never changed, but the one-line ruling came back worded two different ways, one firmer than the other. Read the numbers.</span></div>
   </div>
@@ -214,7 +214,7 @@ node ./query-plays.mjs --seasons 2021-2025 --half 1
     <div><b><a href="https://github.com/ismayc/monday-morning-agent">The repository</a></b><span>The kit for each episode, the data, and the examples from a real run.</span></div>
     <div><b><a href="tool.html">How the tool works</a></b><span>A diagram of <code>query-plays.mjs</code>: what it is written in and its six stages, with one real command followed through.</span></div>
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/analyst.md">The policy file</a></b><span>All eight sections, as the agent reads them.</span></div>
-    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/episode-1/examples">One real run, file by file</a></b><span>A tool read, the policy, the run as it looked on screen, and three rulings.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/episode-1/examples">One real run, file by file</a></b><span>A tool read, the policy, and a ruling on a claim the tool cannot answer. The rulings on the episode's claim go up after October 12, 2026.</span></div>
     <div><b><a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">The live series</a></b><span>Eight episodes on O'Reilly, every other Monday.</span></div>
   </div>
 </section>

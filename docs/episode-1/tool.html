@@ -79,7 +79,7 @@
   <h2>What it is written in</h2>
   <div class="rows">
     <div><b>JavaScript</b><span>One file, 221 lines. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
-    <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the filters. It was built and tested on Node 24, and the daily refresh on GitHub runs it on Node 20.</span></div>
+    <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the filters. It was built and tested on Node 24, and the daily refresh on GitHub runs it on Node 22.</span></div>
     <div><b>Nothing to install</b><span>It imports three things, and all three come with Node itself: <code>node:fs</code> to read a file, and <code>node:path</code> and <code>node:url</code> to find the data folder next to the script. There is no <code>package.json</code> and no <code>npm install</code>.</span></div>
     <div><b>Not written by the agent</b><span>The agent does not write or change this code. It only chooses the filters. That is why checking the agent means checking a list of filters, not reading code it made up.</span></div>
   </div>
@@ -87,7 +87,7 @@
 
 <section id="diagram">
   <h2>What happens when it runs</h2>
-  <p>Six stages, top to bottom, the same every time. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --seasons 2021-2025 --half 1</code>, on October 3, 2026.</p>
+  <p>Six stages, top to bottom, the same every time. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --seasons 2021-2025 --half 1</code>, on October 11, 2026.</p>
 
   <div class="flow">
     <div class="stage">
@@ -102,7 +102,7 @@ everything else       left at its default</pre></div>
     <div class="stage">
       <i>2</i>
       <div><h3>Load the plays</h3><p>It reads <code>data/plays-slim.csv</code> into memory, one row per play, and splits each row at the commas. This is the only file it opens, and it only reads it.</p><p class="where">Lines 86 to 93</p></div>
-      <div><p class="eg">In the example</p><pre>255,781 plays
+      <div><p class="eg">In the example</p><pre>258,611 plays
 18 columns each, of the 372 in the raw data
 no betting column among them</pre></div>
     </div>
@@ -110,28 +110,28 @@ no betting column among them</pre></div>
 
     <div class="stage loud">
       <i>3</i>
-      <div><h3>Apply the filters, in order, and write each one down</h3><p>Eight filters, always in the same order, and a ninth (the halftime score) only when asked for. After each one it records the filter's name and how many plays are left, even when the filter removed nothing. That record is the list it prints at the end.</p><p>This is the stage the whole design rests on: a filter cannot be applied without also being written down, because one small function does both.</p><p class="where">Lines 95 to 140</p></div>
+      <div><h3>Apply the filters, in order, and write each one down</h3><p>Eight filters, always in the same order, and a ninth (the halftime score) only when asked for; it goes in after the weeks, and the later ones renumber. After each one it records the filter's name and how many plays are left, even when the filter removed nothing. That record is the list it prints at the end.</p><p>This is the stage the whole design rests on: a filter cannot be applied without also being written down, because one small function does both.</p><p class="where">Lines 95 to 140</p></div>
       <div><p class="eg">In the example, plays left after each</p>
         <ol class="funnel">
-          <li><span>0. The file</span><b>255,781</b><span class="bar"><u style="width:100%"></u></span></li>
-          <li><span>1. Seasons 2021 to 2025</span><b>247,284</b><span class="bar"><u style="width:96.68%"></u><s style="left:96.68%;width:3.32%"></s></span></li>
-          <li><span>2. Regular season and playoffs</span><b>247,284</b><span class="bar"><u style="width:96.68%"></u></span></li>
-          <li><span>3. All weeks</span><b>247,284</b><span class="bar"><u style="width:96.68%"></u></span></li>
-          <li><span>4. Only rushes and passes</span><b>179,045</b><span class="bar"><u style="width:70%"></u><s style="left:70%;width:26.68%"></s></span></li>
-          <li><span>5. No kneel-downs, no spikes</span><b>176,491</b><span class="bar"><u style="width:69%"></u><s style="left:69%;width:1%"></s></span></li>
-          <li><span>6. First half only</span><b>87,209</b><span class="bar"><u style="width:34.1%"></u><s style="left:34.1%;width:34.9%"></s></span></li>
-          <li><span>7. Any score</span><b>87,209</b><span class="bar"><u style="width:34.1%"></u></span></li>
+          <li><span>0. The file</span><b>258,611</b><span class="bar"><u style="width:100%"></u></span></li>
+          <li><span>1. Seasons 2021 to 2025</span><b>247,284</b><span class="bar"><u style="width:95.62%"></u><s style="left:95.62%;width:4.38%"></s></span></li>
+          <li><span>2. Regular season and playoffs</span><b>247,284</b><span class="bar"><u style="width:95.62%"></u></span></li>
+          <li><span>3. All weeks</span><b>247,284</b><span class="bar"><u style="width:95.62%"></u></span></li>
+          <li><span>4. Only rushes and passes</span><b>179,045</b><span class="bar"><u style="width:69.23%"></u><s style="left:69.23%;width:26.39%"></s></span></li>
+          <li><span>5. No kneel-downs, no spikes</span><b>176,491</b><span class="bar"><u style="width:68.25%"></u><s style="left:68.25%;width:0.98%"></s></span></li>
+          <li><span>6. First half only</span><b>87,209</b><span class="bar"><u style="width:33.72%"></u><s style="left:33.72%;width:34.53%"></s></span></li>
+          <li><span>7. Any score</span><b>87,209</b><span class="bar"><u style="width:33.72%"></u></span></li>
         </ol>
       </div>
     </div>
-    <span class="down">Only the plays that passed all eight filters go on. Pink is what a filter took out.</span>
+    <span class="down">Only the plays that passed every filter go on. Pink is what a filter took out.</span>
 
     <div class="stage">
       <i>4</i>
-      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any team with fewer than 10 plays left.</p><p class="where">Lines 142 to 162</p></div>
+      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any team-game with fewer than 10 plays left.</p><p class="where">Lines 142 to 162</p></div>
       <div><p class="eg">In the example</p><pre>1,424 games
 4 tied games dropped
-0 teams dropped for too few plays
+0 team-games dropped for too few plays
 2,840 team-games kept</pre></div>
     </div>
     <span class="down">One row per team per game: its rush share, and whether it won.</span>
@@ -172,13 +172,13 @@ NOT IN THIS OUTPUT</pre></div>
 
 <section id="runner">
   <h2>The runner: run-analyst.sh, in five beats</h2>
-  <p>The tool above is what the agent calls. The runner is what you call: a shell script of about eighty lines that hands the agent one claim and makes its work visible. Top to bottom, it does five things.</p>
+  <p>The tool above is what the agent calls. The runner is what you call: a shell script of about ninety lines that hands the agent one claim and makes its work visible. Top to bottom, it does five things.</p>
   <div class="rows">
     <div><b>1. Takes the claim</b><span>From the command line, or from <code>claim.txt</code> when you give none. A claim with a quotation mark inside it goes in the file.</span></div>
     <div><b>2. Hands over the policy</b><span>It reads <code>analyst.md</code> and passes it to <code>claude -p</code> as the system prompt. The policy is the only thing written for this show; the model is unchanged.</span></div>
     <div><b>3. Sets the allowlist</b><span>One line: <code>Bash(node ./query-plays.mjs:*)</code>. This exact script, any arguments, and nothing else: no file reads, no writes, no network. The policy says it; this line enforces it.</span></div>
     <div><b>4. Streams the run</b><span>It asks for the event stream instead of one answer at the end, and pipes it through <code>show-run.mjs</code>, which prints each tool call as it lands, with the filters and the result, and saves the ruling under <code>rulings/</code>.</span></div>
-    <div><b>5. Opens the run as a page</b><span>When the run ends, <code>render-run.mjs</code> writes the whole run as one page, the ruling first and every call down a clock, and the runner opens it. A terminal is a hard place to read eight tool calls.</span></div>
+    <div><b>5. Opens the run as a page</b><span>When the run ends, <code>render-run.mjs</code> writes the whole run as one page, the ruling first and every call down a clock, and the runner opens it. A terminal is a hard place to read five tool calls.</span></div>
   </div>
   <p style="margin-top:16px">Nothing in the runner computes a number. It moves the claim, the policy, and the tool's printout between the pieces, and writes down what happened.</p>
 </section>

@@ -96,14 +96,14 @@
 </div>
 
 <h1 class="long">"You have to establish the run." Change one filter and check.</h1>
-<p class="lead">Take every team in every NFL game, work out what share of its plays were runs, and sort the teams into four equal groups. How often did each group win? The answer depends on which plays you count, so every filter is listed with the plays left after it. This is the same output the agent reads.</p>
+<p class="lead">Take every team in every NFL game, work out what share of its plays were runs, and sort those team-games into four equal groups. How often did each group win? The answer depends on which plays you count, so every filter is listed with the plays left after it. This is the same output the agent reads.</p>
 
 <div class="drive" aria-label="The episode in five clicks">
   <button type="button" data-preset="2021-2025|ALL|all|any"><i>1</i><b>The whole game</b><span>It looks like proof.</span></button>
   <button type="button" data-preset="2021-2025|ALL|1|any"><i>2</i><b>First half only</b><span>"Establish" means early.</span></button>
   <button type="button" data-preset="2021-2025|ALL|2|any"><i>3</i><b>Second half only</b><span>Who is running now?</span></button>
   <button type="button" data-preset="2021-2025|ALL|1|any|3"><i>4</i><b>Close at halftime</b><span>Take away who was ahead.</span></button>
-  <button type="button" data-preset="2026|ALL|1|any"><i>5</i><b>This season, first half</b><span>Same filters, far fewer games.</span></button>
+  <button type="button" data-preset="2026|ALL|1|any|3"><i>5</i><b>This season, close at halftime</b><span>Preset 4's filters, far fewer games.</span></button>
 </div>
 
 <div class="sheet">
@@ -121,7 +121,7 @@
   <div id="empty" hidden>These filters leave no games to group, so the tool gives no result. That is an answer too: the agent has to say it has nothing, not invent a number.</div>
   <div class="field" id="field"><div class="gap" id="gap"></div><div class="mk mid" id="m2"></div><div class="mk mid" id="m3"></div><div class="mk least" id="mb"><b></b></div><div class="mk most" id="mt"><b></b></div></div>
   <p id="warn" hidden></p>
-  <p class="fieldkey">The bar runs from 0% to 100% of games won, with a line every ten and a heavy line at 50%. The colors are a TV broadcast's two field lines: <i class="b">blue</i>, the line of scrimmage, marks the teams that ran least, and <i class="y">yellow</i>, the line to gain, marks the teams that ran most. The two short grey marks are the middle groups.</p>
+  <p class="fieldkey">The bar runs from 0% to 100% of games won, with a line every ten and a heavy line at 50%. The colors are a TV broadcast's two field lines: <i class="b">blue</i>, the line of scrimmage, marks the teams that ran least, and <i class="y">yellow</i>, the line to gain, marks the teams that ran most. The two short gray marks are the middle groups.</p>
 </div>
 
 <div class="work">

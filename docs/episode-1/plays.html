@@ -101,7 +101,7 @@
 
 <section id="cut">
   <h2>The cut: 372 columns to 18</h2>
-  <p>Each play in the download has 372 columns: down, distance, the players, the weather, the play's description in words, and more. The agent's question needs 18 of them. Six of the others are betting lines. Those are not hidden from the agent, they are gone: the file it can reach does not have them.</p>
+  <p>Each play in the download has 372 columns: down, distance, the players, the weather, the play's description in words, and more. The agent's question needs 18 of them. Six of the others are betting lines. Those are not hidden from the agent; they are gone: the file it can reach does not have them.</p>
   <div class="tally"><span>372 in the download</span><span class="y"><b id="nkept">18</b> kept</span><span class="p"><b id="nbet">6</b> betting lines, cut on purpose</span><span><b id="nleft">348</b> others left behind</span></div>
   <div class="grid" id="grid" aria-label="Every column in the download"></div>
   <p class="gridnote">Yellow is kept. Pink is a betting line, struck out. Everything else was left behind because the question never needs it, not because it is harmful.</p>
@@ -128,7 +128,7 @@
     <div><b><code>pass_attempt</code></b><span>1 if the play was a pass, sacks included.</span></div>
     <div><b><code>qb_kneel</code></b><span>1 when the quarterback knelt. A kneel counts as a run in the data, and it is not a decision to run, so the tool drops it.</span></div>
     <div><b><code>qb_spike</code></b><span>1 when the quarterback spiked the ball. The same: it counts as a pass, and the tool drops it.</span></div>
-    <div><b><code>score_differential</code></b><span>The score of the team with the ball minus the other team's, as the play began. The filter behind "within 8 points".</span></div>
+    <div><b><code>score_differential</code></b><span>The score of the team with the ball minus the other team's, as the play began. The filter behind "within 8 points" at the snap, and behind the halftime score, which the tool reads from the first play of the second half.</span></div>
   </div>
 </section>
 
@@ -142,7 +142,7 @@
     <button type="button" id="only" aria-pressed="false">Show only the plays the tool counts</button>
   </div>
   <div class="plays scroll"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
-  <p class="then">Greyed rows are the ones the tool's first filter removes: kickoffs, punts, kicks, penalties that wiped the play out, kneels, spikes, and rows with no team in possession. Yellow marks a run. The two lines above are the count the tool makes for each team: runs, passes, and the share that were runs.</p>
+  <p class="then">Gray rows are the ones the tool's play filters remove (filters 4 and 5 in its list): kickoffs, punts, kicks, penalties that wiped the play out, kneels, spikes, and rows with no team in possession. Yellow marks a run. The two lines above are the count the tool makes for each team: runs, passes, and the share that were runs.</p>
 </section>
 
 <section id="counts">

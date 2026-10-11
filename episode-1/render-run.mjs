@@ -92,12 +92,19 @@ export function parseTool(text) {
 }
 
 // ------------------------------------------------- the ruling, from markdown
-// The policy allows bold labels, plain lines, and one fenced block of commands.
+// The policy allows bold labels and plain lines; the commands come one per line at the end,
+// fenced or not, and are shown as one block either way.
 function rulingHtml(md) {
   const out = []
   let inCode = false, code = []
-  const para = []
+  const para = [], cmds = []
+  const flushCmds = () => {
+    if (!cmds.length) return
+    out.push(`<pre>${esc(cmds.join('\n'))}</pre>`)
+    cmds.length = 0
+  }
   const flush = () => {
+    flushCmds()
     if (!para.length) return
     const p = para.join(' ')
     const cls = /^\*\*Ruling:?\*\*/.test(p) ? ' class="call"' : ''
@@ -111,6 +118,7 @@ function rulingHtml(md) {
       inCode = !inCode; continue
     }
     if (inCode) { code.push(line); continue }
+    if (/^\s*`?node \.\/query-plays\.mjs/.test(line)) { if (para.length) flush(); cmds.push(line.trim().replace(/^`|`$/g, '')); continue }
     const item = line.match(/^\s*[-*]\s+(.*)$/)
     if (item) { flush(); para.push(item[1]); flush(); continue }
     if (!line.trim()) { flush(); continue }
@@ -122,8 +130,9 @@ function rulingHtml(md) {
 }
 
 const labeledLine = (md, label) => {
-  const m = String(md || '').match(new RegExp(`\\*\\*${label}:?\\*\\*\\s*(.+)`))
-  return m ? m[1].replace(/\*\*/g, '').trim() : ''
+  const m = String(md || '').match(new RegExp(`\\*\\*${label}:?\\*\\*,?\\s*(.+)`))
+  // "**The claim**, as the question I tested: ..." loses its lead-in; the contract form is "**The claim:** ...".
+  return m ? m[1].replace(/^(?:as|restated as)[^:]{0,60}:\s*/i, '').replace(/\*\*/g, '').trim() : ''
 }
 
 // ------------------------------------------------- the page
