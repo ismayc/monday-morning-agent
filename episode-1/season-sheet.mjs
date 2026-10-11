@@ -142,8 +142,10 @@ const html = `<!DOCTYPE html>
   main { max-width: 1120px; margin: 0 auto; padding: 0 24px 80px; }
   a { color: var(--ink); text-decoration-color: var(--yellow); text-decoration-thickness: 2px; text-underline-offset: 3px; }
   code { font-family: var(--code); font-size: .85em; background: var(--faint); padding: 1px 5px; }
-  .top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; padding: 18px 0 14px; border-bottom: 4px solid var(--ink); font-family: var(--display); font-weight: 600; font-size: 22px; }
-  .top span + span { font-weight: 500; font-size: 19px; color: var(--soft); }
+  .top { position: sticky; top: 0; z-index: 20; background: var(--sheet); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 20px; padding: 14px 0 10px; border-bottom: 4px solid var(--ink); font-family: var(--display); font-weight: 600; font-size: 22px; }
+  .top a { text-decoration: none; }
+  .top nav { display: flex; flex-wrap: wrap; gap: 4px 16px; font-weight: 500; font-size: 18px; }
+  .top nav a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
   h1 { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 6.4vw, 78px); line-height: .98; margin-top: 36px; max-width: 20ch; }
   .lead { font-size: clamp(18px, 2vw, 21px); line-height: 1.45; margin-top: 18px; max-width: 64ch; }
   /* The verdict, read first: the word in the yellow cell, the evidence beside it. */
@@ -170,7 +172,7 @@ const html = `<!DOCTYPE html>
   .field { position: relative; height: 44px; margin: 40px 0 44px; border: 2px solid var(--ink); background:
     linear-gradient(90deg, transparent calc(50% - 1.5px), var(--ink) calc(50% - 1.5px), var(--ink) calc(50% + 1.5px), transparent calc(50% + 1.5px)),
     repeating-linear-gradient(90deg, transparent 0, transparent calc(10% - 1px), var(--rule) calc(10% - 1px), var(--rule) 10%), #fff; }
-  .field .gap { position: absolute; top: 0; bottom: 0; background: var(--yellow); mix-blend-mode: multiply; }
+  .field .gap { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--yellow) 0 5px, transparent 5px 11px); mix-blend-mode: multiply; }
   .field .mk { position: absolute; top: -9px; bottom: -9px; width: 5px; margin-left: -2.5px; background: var(--ink); }
   .field .mk b { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; font-variant-numeric: tabular-nums; padding: 1px 6px; }
   .field .mk.most b { bottom: calc(100% + 3px); background: var(--yellow); }
@@ -188,7 +190,7 @@ const html = `<!DOCTYPE html>
 </head>
 <body>
 <main>
-<div class="top"><span>The Monday Morning Agent</span><span>Episode 1: the season sheet</span></div>
+<div class="top"><a href="https://ismayc.github.io/monday-morning-agent/">The Monday Morning Agent</a><nav><a href="https://ismayc.github.io/monday-morning-agent/episode-1/">Episode 1</a><a href="https://ismayc.github.io/monday-morning-agent/episode-1/map.html">Where we are</a><a href="https://ismayc.github.io/monday-morning-agent/episode-1/meanings.html">Five meanings</a><a href="https://ismayc.github.io/monday-morning-agent/episode-1/#terms">Terms</a><a href="https://ismayc.github.io/monday-morning-agent/episode-1/plays.html">The plays</a><a href="https://ismayc.github.io/monday-morning-agent/episode-1/explorer.html">Change a filter</a><a href="https://ismayc.github.io/monday-morning-agent/episode-1/tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav></div>
 <h1>${esc(title)}</h1>
 <p class="lead">${lead}</p>
 ${headline}

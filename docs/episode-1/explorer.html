@@ -92,11 +92,11 @@
 
 <div class="top">
   <a href="../">The Monday Morning Agent</a>
-  <nav><a href="./">Episode 1</a><a href="plays.html">The plays</a><a href="explorer.html" aria-current="page">Change a filter</a><a href="tool.html">How the tool works</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+  <nav><a href="./">Episode 1</a><a href="map.html">Where we are</a><a href="meanings.html">Five meanings</a><a href="./#terms">Terms</a><a href="plays.html">The plays</a><a href="explorer.html" aria-current="page">Change a filter</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
 </div>
 
 <h1 class="long">"You have to establish the run." Change one filter and check.</h1>
-<p class="lead">Take every team in every NFL game, work out what share of its plays were runs, and sort those team-games into four equal groups. How often did each group win? The answer depends on which plays you count, so every filter is listed with the plays left after it. This is the same output the agent reads.</p>
+<p class="lead">Take every team in every NFL game, work out what share of its plays were runs, and sort those <a class="term" href="./#term-team-game" data-def="One team's side of one game. Every game gives two, one per team.">team-games</a> into four equal groups. How often did each group win? The answer depends on which plays you count, so every <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filter</a> is listed with the plays left after it. This is the same output the agent reads.</p>
 
 <div class="drive" aria-label="The episode in five clicks">
   <button type="button" data-preset="2021-2025|ALL|all|any"><i>1</i><b>The whole game</b><span>It looks like proof.</span></button>
@@ -121,7 +121,7 @@
   <div id="empty" hidden>These filters leave no games to group, so the tool gives no result. That is an answer too: the agent has to say it has nothing, not invent a number.</div>
   <div class="field" id="field"><div class="gap" id="gap"></div><div class="mk mid" id="m2"></div><div class="mk mid" id="m3"></div><div class="mk least" id="mb"><b></b></div><div class="mk most" id="mt"><b></b></div></div>
   <p id="warn" hidden></p>
-  <p class="fieldkey">The bar runs from 0% to 100% of games won, with a line every ten and a heavy line at 50%. The colors are a TV broadcast's two field lines: <i class="b">blue</i>, the line of scrimmage, marks the teams that ran least, and <i class="y">yellow</i>, the line to gain, marks the teams that ran most. The two short gray marks are the middle groups.</p>
+  <p class="fieldkey">The bar is a scale of games won, from 0% at the left to 100% at the right, with a line every ten and a heavy line at 50%. The <i class="b">blue</i> marker is the <a class="term" href="./#term-win-rate" data-def="The share of a group's team-games in which the team went on to win the game.">win rate</a> of the teams that <a class="term" href="./#term-ran-most" data-def="The fourth of team-games with the lowest rush share.">ran least</a>, the <i class="y">yellow</i> marker the win rate of the teams that <a class="term" href="./#term-ran-most" data-def="The fourth of team-games with the highest rush share.">ran most</a>, and the hatched stretch between them is the <a class="term" href="./#term-gap" data-def="Win rate of the teams that ran most minus win rate of the teams that ran least, in points.">gap</a>. The two short gray marks are the middle groups. The two colors are the lines a TV broadcast paints on the field, the line of scrimmage and the line to gain.</p>
 </div>
 
 <div class="work">

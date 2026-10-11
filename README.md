@@ -15,6 +15,9 @@ episode.
 - **How the one tool works, as a diagram:** https://ismayc.github.io/monday-morning-agent/episode-1/tool.html
 - **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-1/map.html
 - **Five meanings of the claim, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-1/meanings.html
+- **The words the count uses (team-game, rush share, gap, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-1/#terms
+
+Every page has the same strip across the top, which stays put as you scroll, and a term with a dotted underline shows its definition on hover and links to the glossary.
 
 ## Episode 1: "You have to establish the run."
 

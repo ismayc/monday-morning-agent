@@ -20,12 +20,24 @@ a:focus-visible, button:focus-visible { outline: 3px solid var(--ink); outline-o
 p { max-width: 68ch; }
 code { font-family: var(--code); font-size: .88em; background: var(--faint); padding: 1px 5px; }
 
-/* The strip across the top of the sheet: whose sheet it is, and the two ways out. */
-.top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 6px 20px; padding: 18px 0 14px; border-bottom: 4px solid var(--ink); font-family: var(--display); font-weight: 600; font-size: 22px; }
+/* The strip across the top of the sheet: whose sheet it is, and every page of the site.
+   It stays put while the page scrolls, so any page is one click from any other. */
+.top { position: sticky; top: 0; z-index: 20; background: var(--sheet); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: baseline; gap: 4px 20px; padding: 14px 0 10px; border-bottom: 4px solid var(--ink); font-family: var(--display); font-weight: 600; font-size: 22px; }
 .top a { text-decoration: none; }
-.top nav { display: flex; gap: 20px; font-weight: 500; font-size: 20px; }
+.top nav { display: flex; flex-wrap: wrap; gap: 4px 16px; font-weight: 500; font-size: 18px; }
 .top nav a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
 .top nav a[aria-current="page"] { background: var(--yellow); text-decoration: none; padding: 0 6px; }
+/* Anchors land below the strip, not under it. */
+section, header, [id] { scroll-margin-top: 90px; }
+
+/* A term from the glossary: dotted underline, its definition on hover or focus, and a
+   click takes you to the full entry. On touch screens there is no hover, so the tap goes
+   straight to the glossary. */
+.term { position: relative; text-decoration: underline; text-decoration-style: dotted; text-decoration-color: var(--ink); text-decoration-thickness: 2px; cursor: help; }
+.term:hover, .term:focus-visible { background: var(--yellow); }
+.term::after { content: attr(data-def) " Click for the glossary."; position: absolute; left: 0; top: calc(100% + 6px); z-index: 30; width: max-content; max-width: min(340px, 80vw); background: var(--ink); color: var(--sheet); font-family: var(--text); font-weight: 500; font-size: 15px; line-height: 1.4; padding: 8px 11px; text-align: left; white-space: normal; opacity: 0; pointer-events: none; transition: opacity .12s; }
+.term:hover::after, .term:focus-visible::after { opacity: 1; }
+@media (hover: none) { .term::after { display: none; } }
 
 h1 { font-family: var(--display); font-weight: 700; font-size: clamp(52px, 9.5vw, 124px); line-height: .92; letter-spacing: -.01em; margin-top: 40px; max-width: 12ch; }
 h1.long { font-size: clamp(40px, 6.4vw, 78px); max-width: 20ch; line-height: .98; }
@@ -43,7 +55,9 @@ section > p + p { margin-top: 12px; }
 .field { position: relative; height: 46px; margin: 40px 0; border: 2px solid var(--ink); background:
   linear-gradient(90deg, transparent calc(50% - 1.5px), var(--ink) calc(50% - 1.5px), var(--ink) calc(50% + 1.5px), transparent calc(50% + 1.5px)),
   repeating-linear-gradient(90deg, transparent 0, transparent calc(10% - 1px), var(--rule) calc(10% - 1px), var(--rule) 10%), #fff; }
-.field .gap { position: absolute; top: 0; bottom: 0; background: var(--yellow); mix-blend-mode: multiply; transition: left .45s ease, width .45s ease; }
+/* The gap between the two markers: a hatched band, so it reads as a distance and not as a
+   third marker in the yellow of the "ran most" group. */
+.field .gap { position: absolute; top: 0; bottom: 0; background: repeating-linear-gradient(135deg, var(--yellow) 0 5px, transparent 5px 11px); mix-blend-mode: multiply; transition: left .45s ease, width .45s ease; }
 .field .mk { position: absolute; top: -9px; bottom: -9px; width: 5px; margin-left: -2.5px; background: var(--ink); transition: left .45s ease; }
 .field .mk b { position: absolute; left: 50%; transform: translateX(-50%); white-space: nowrap; font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; font-variant-numeric: tabular-nums; padding: 1px 6px; }
 .field .mk.most b { bottom: calc(100% + 3px); background: var(--yellow); }

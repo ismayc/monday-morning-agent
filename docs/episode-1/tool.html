@@ -69,17 +69,17 @@
 
 <div class="top">
   <a href="../">The Monday Morning Agent</a>
-  <nav><a href="./">Episode 1</a><a href="plays.html">The plays</a><a href="explorer.html">Change a filter</a><a href="tool.html" aria-current="page">How the tool works</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+  <nav><a href="./">Episode 1</a><a href="map.html">Where we are</a><a href="meanings.html">Five meanings</a><a href="./#terms">Terms</a><a href="plays.html">The plays</a><a href="explorer.html">Change a filter</a><a href="tool.html" aria-current="page">The tool</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
 </div>
 
 <h1 class="long">How query-plays.mjs works</h1>
-<p class="lead">This is the one program the agent is allowed to run. It reads one file, throws out the plays the filters exclude, counts what is left, and prints both the count and every filter it used. It is short enough to read in one sitting, and it was written before the agent existed.</p>
+<p class="lead">This is the one program the agent is allowed to run. It reads one file, throws out the plays the <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> exclude, counts what is left, and prints both the count and every filter it used. It is short enough to read in one sitting, and it was written before the agent existed.</p>
 
 <section id="language">
   <h2>What it is written in</h2>
   <div class="rows">
     <div><b>JavaScript</b><span>One file, 224 lines. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
-    <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the filters. It was built and tested on Node 24, and the daily refresh on GitHub runs it on Node 22.</span></div>
+    <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a>. It was built and tested on Node 24, and the daily refresh on GitHub runs it on Node 22.</span></div>
     <div><b>Nothing to install</b><span>It imports three things, and all three come with Node itself: <code>node:fs</code> to read a file, and <code>node:path</code> and <code>node:url</code> to find the data folder next to the script. There is no <code>package.json</code> and no <code>npm install</code>.</span></div>
     <div><b>Not written by the agent</b><span>The agent does not write or change this code. It only chooses the filters. That is why checking the agent means checking a list of filters, not reading code it made up.</span></div>
   </div>
@@ -92,7 +92,7 @@
   <div class="flow">
     <div class="stage">
       <i>1</i>
-      <div><h3>Read the command</h3><p>It reads the filters typed after its name and checks each one. A filter it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant.</p><p class="where">Lines 41 to 87</p></div>
+      <div><h3>Read the command</h3><p>It reads the <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> typed after its name and checks each one. A filter it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant.</p><p class="where">Lines 41 to 87</p></div>
       <div><p class="eg">In the example</p><pre>--seasons 2021-2025   five seasons
 --half 1              first half only
 everything else       left at its default</pre></div>
@@ -129,17 +129,17 @@ no betting column among them</pre></div>
 
     <div class="stage">
       <i>4</i>
-      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any team-game with fewer than 10 plays left.</p><p class="where">Lines 145 to 165</p></div>
+      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any <a class="term" href="./#term-team-game" data-def="One team's side of one game. Every game gives two, one per team.">team-game</a> with fewer than 10 plays left.</p><p class="where">Lines 145 to 165</p></div>
       <div><p class="eg">In the example</p><pre>1,424 games
 4 tied games dropped
 0 team-games dropped for too few plays
 2,840 team-games kept</pre></div>
     </div>
-    <span class="down">One row per team per game: its rush share, and whether it won.</span>
+    <span class="down">One row per team per game: its <a class="term" href="./#term-rush-share" data-def="Runs divided by runs plus passes, for one team-game, in the plays the filters kept.">rush share</a>, and whether it won.</span>
 
     <div class="stage">
       <i>5</i>
-      <div><h3>Sort, cut into equal groups, and count the wins</h3><p>It sorts the team-games from the highest rush share to the lowest and cuts them into four groups of the same size. For each group it counts the wins and divides. The gap is the top group's win rate minus the bottom group's. If a group has fewer than 30 team-games, it adds a small-sample warning.</p><p class="where">Lines 167 to 187</p></div>
+      <div><h3>Sort, cut into equal groups, and count the wins</h3><p>It sorts the team-games from the highest rush share to the lowest and cuts them into four groups of the same size. For each group it counts the wins and divides. The <a class="term" href="./#term-gap" data-def="Win rate of the teams that ran most minus win rate of the teams that ran least, in points.">gap</a> is the top group's <a class="term" href="./#term-win-rate" data-def="The share of a group's team-games in which the team went on to win the game.">win rate</a> minus the bottom group's. If a group has fewer than 30 team-games, it adds a small-sample warning.</p><p class="where">Lines 167 to 187</p></div>
       <div><p class="eg">In the example</p><pre>4 groups of 710
 ran most    376 wins of 710    53.0%
 ran least   327 wins of 710    46.1%
@@ -167,7 +167,7 @@ NOT IN THIS OUTPUT</pre></div>
     <div><b>It never writes</b>No file is created, changed, or deleted. It reads one file and prints.</div>
     <div><b>It never goes online</b>No network call of any kind. It works with Wi-Fi off.</div>
     <div><b>It never sees a betting line</b>The file it reads has 18 columns, and none of them is one.</div>
-    <div><b>It never guesses</b>Give it the same filters and the same file, and it prints the same numbers, every time.</div>
+    <div><b>It never guesses</b>Give it the same <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> and the same file, and it prints the same numbers, every time.</div>
   </div>
 </section>
 
@@ -176,9 +176,9 @@ NOT IN THIS OUTPUT</pre></div>
   <p>The tool above is what the agent calls. The runner is what you call: a shell script of about ninety lines that hands the agent one claim and makes its work visible. Top to bottom, it does five things.</p>
   <div class="rows">
     <div><b>1. Takes the claim</b><span>From the command line, or from <code>claim.txt</code> when you give none. A claim with a quotation mark inside it goes in the file.</span></div>
-    <div><b>2. Hands over the policy</b><span>It reads <code>analyst.md</code> and passes it to <code>claude -p</code> as the system prompt. The policy is the only thing written for this show; the model is unchanged.</span></div>
+    <div><b>2. Hands over the policy</b><span>It reads <code>analyst.md</code> and passes it to <code>claude -p</code> as the system prompt. The <a class="term" href="./#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> is the only thing written for this show; the model is unchanged.</span></div>
     <div><b>3. Sets the allowlist</b><span>One line: <code>Bash(node ./query-plays.mjs:*)</code>. This exact script, any arguments, and nothing else: no file reads, no writes, no network. The policy says it; this line enforces it.</span></div>
-    <div><b>4. Streams the run</b><span>It asks for the event stream instead of one answer at the end, and pipes it through <code>show-run.mjs</code>, which prints each tool call as it lands, with the filters and the result, and saves the ruling under <code>rulings/</code>.</span></div>
+    <div><b>4. Streams the run</b><span>It asks for the event stream instead of one answer at the end, and pipes it through <code>show-run.mjs</code>, which prints each tool call as it lands, with the <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> and the result, and saves the <a class="term" href="./#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> under <code>rulings/</code>.</span></div>
     <div><b>5. Opens the run as a page</b><span>When the run ends, <code>render-run.mjs</code> writes the whole run as one page, the ruling first and every call down a clock, and the runner opens it. A terminal is a hard place to read five tool calls.</span></div>
   </div>
   <p style="margin-top:16px">Nothing in the runner computes a number. It moves the claim, the policy, and the tool's printout between the pieces, and writes down what happened.</p>
@@ -196,8 +196,8 @@ node ./query-plays.mjs --help
 node ./query-plays.mjs --seasons 2026 --spread 3</pre>
   <div class="rows">
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/query-plays.mjs">Read the code</a></b><span>All 224 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
-    <div><b><a href="explorer.html">Change a filter</a></b><span>The same output for 378 combinations of filters, with nothing to install.</span></div>
-    <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written policy, behind a one-line allowlist.</span></div>
+    <div><b><a href="explorer.html">Change a filter</a></b><span>The same output for 378 combinations of <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a>, with nothing to install.</span></div>
+    <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written <a class="term" href="./#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, behind a one-line allowlist.</span></div>
   </div>
 </section>
 

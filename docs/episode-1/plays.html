@@ -93,7 +93,7 @@
 
 <div class="top">
   <a href="../">The Monday Morning Agent</a>
-  <nav><a href="./">Episode 1</a><a href="plays.html" aria-current="page">The plays</a><a href="explorer.html">Change a filter</a><a href="tool.html">How the tool works</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+  <nav><a href="./">Episode 1</a><a href="map.html">Where we are</a><a href="meanings.html">Five meanings</a><a href="./#terms">Terms</a><a href="plays.html" aria-current="page">The plays</a><a href="explorer.html">Change a filter</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
 </div>
 
 <h1 class="long">Every play is one row. The agent reads eighteen columns of it.</h1>
@@ -112,7 +112,7 @@
   <p>What each column means, with its value on one real play from last week.</p>
   <div class="rows" id="cols">
     <div><b><code>season</code></b><span>The season the game belongs to, 2021 through this one.</span></div>
-    <div><b><code>season_type</code></b><span><code>REG</code> for the regular season, <code>POST</code> for the playoffs. The filter behind "regular season" and "playoffs".</span></div>
+    <div><b><code>season_type</code></b><span><code>REG</code> for the regular season, <code>POST</code> for the playoffs. The <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filter</a> behind "regular season" and "playoffs".</span></div>
     <div><b><code>week</code></b><span>The week of the season. The playoffs continue the count, up to 22.</span></div>
     <div><b><code>game_id</code></b><span>One id per game: season, week, away team, home team.</span></div>
     <div><b><code>game_date</code></b><span>The date the game was played.</span></div>
@@ -142,7 +142,7 @@
     <button type="button" id="only" aria-pressed="false">Show only the plays the tool counts</button>
   </div>
   <div class="plays scroll"><table><thead id="thead"></thead><tbody id="tbody"></tbody></table></div>
-  <p class="then">Gray rows are the ones the tool's play filters remove (filters 4 and 5 in its list): kickoffs, punts, kicks, penalties that wiped the play out, kneels, spikes, and rows with no team in possession. Yellow marks a run. The two lines above are the count the tool makes for each team: runs, passes, and the share that were runs.</p>
+  <p class="then">Gray rows are the ones the tool's play <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> remove (filters 4 and 5 in its list): kickoffs, punts, kicks, penalties that wiped the play out, kneels, spikes, and rows with no team in possession. Yellow marks a run. The two lines above are the count the tool makes for each team: runs, passes, and the share that were runs.</p>
 </section>
 
 <section id="counts">
@@ -225,7 +225,7 @@ wc -l data/plays-slim.csv            <span class="c"># how many lines</span>
   function buildGames() {
     var w = data.latestWeek, box = $('games');
     $('weekhead').textContent = 'Read a game: week ' + w.week + ' of ' + w.season;
-    $('weeklead').textContent = 'Every play of the ' + w.games.length + ' games on file for week ' + w.week + ', in the order they happened, in the eighteen columns above. Pick a game.';
+    $('weeklead').textContent = 'Every play of the ' + w.games.length + (w.games.length === 1 ? ' game' : ' games') + ' on file for week ' + w.week + ', in the order they happened, in the eighteen columns above. ' + (w.games.length === 1 ? 'It is the only one.' : 'Pick a game.');
     w.games.forEach(function (g) {
       var b = el('button', '', gameLabel(g));
       b.type = 'button'; b.dataset.id = g.id; b.setAttribute('aria-pressed', 'false');
