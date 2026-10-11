@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>How query-plays.mjs works: the Monday Morning Agent's one tool</title>
-<meta name="description" content="A diagram of the one tool the agent may run: 221 lines of JavaScript, run by Node.js, that read one file, apply eight filters in order, and print every one of them.">
+<meta name="description" content="A diagram of the one tool the agent may run: 224 lines of JavaScript, run by Node.js, that read one file, apply nine filters in order, and print every one of them.">
 <meta name="author" content="Chester Ismay">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
@@ -12,7 +12,7 @@
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="The Monday Morning Agent">
 <meta property="og:title" content="How query-plays.mjs works">
-<meta property="og:description" content="The one tool the agent may run, as a diagram: 221 lines of JavaScript that read one file, apply eight filters in order, and print every one of them.">
+<meta property="og:description" content="The one tool the agent may run, as a diagram: 224 lines of JavaScript that read one file, apply nine filters in order, and print every one of them.">
 <meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-1/tool.html">
 <meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-1/og-image.png">
 <meta property="og:image:width" content="1200">
@@ -20,7 +20,7 @@
 <meta property="og:image:alt" content="You have to establish the run. Two bars from 0 to 100 percent of games won. Whole game: teams that ran most won 77.7 percent, teams that ran least 19.2. First half only: 53.0 against 46.1.">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="How query-plays.mjs works">
-<meta name="twitter:description" content="The one tool the agent may run, as a diagram: 221 lines of JavaScript that read one file, apply eight filters in order, and print every one of them.">
+<meta name="twitter:description" content="The one tool the agent may run, as a diagram: 224 lines of JavaScript that read one file, apply nine filters in order, and print every one of them.">
 <meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-1/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -78,7 +78,7 @@
 <section id="language">
   <h2>What it is written in</h2>
   <div class="rows">
-    <div><b>JavaScript</b><span>One file, 221 lines. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
+    <div><b>JavaScript</b><span>One file, 224 lines. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
     <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the filters. It was built and tested on Node 24, and the daily refresh on GitHub runs it on Node 22.</span></div>
     <div><b>Nothing to install</b><span>It imports three things, and all three come with Node itself: <code>node:fs</code> to read a file, and <code>node:path</code> and <code>node:url</code> to find the data folder next to the script. There is no <code>package.json</code> and no <code>npm install</code>.</span></div>
     <div><b>Not written by the agent</b><span>The agent does not write or change this code. It only chooses the filters. That is why checking the agent means checking a list of filters, not reading code it made up.</span></div>
@@ -92,7 +92,7 @@
   <div class="flow">
     <div class="stage">
       <i>1</i>
-      <div><h3>Read the command</h3><p>It reads the filters typed after its name and checks each one. A filter it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant.</p><p class="where">Lines 38 to 84</p></div>
+      <div><h3>Read the command</h3><p>It reads the filters typed after its name and checks each one. A filter it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant.</p><p class="where">Lines 41 to 87</p></div>
       <div><p class="eg">In the example</p><pre>--seasons 2021-2025   five seasons
 --half 1              first half only
 everything else       left at its default</pre></div>
@@ -101,7 +101,7 @@ everything else       left at its default</pre></div>
 
     <div class="stage">
       <i>2</i>
-      <div><h3>Load the plays</h3><p>It reads <code>data/plays-slim.csv</code> into memory, one row per play, and splits each row at the commas. This is the only file it opens, and it only reads it.</p><p class="where">Lines 86 to 93</p></div>
+      <div><h3>Load the plays</h3><p>It reads <code>data/plays-slim.csv</code> into memory, one row per play, and splits each row at the commas. This is the only file it opens, and it only reads it.</p><p class="where">Lines 89 to 96</p></div>
       <div><p class="eg">In the example</p><pre>258,611 plays
 18 columns each, of the 372 in the raw data
 no betting column among them</pre></div>
@@ -110,7 +110,7 @@ no betting column among them</pre></div>
 
     <div class="stage loud">
       <i>3</i>
-      <div><h3>Apply the filters, in order, and write each one down</h3><p>Eight filters, always in the same order, and a ninth (the halftime score) only when asked for; it goes in after the weeks, and the later ones renumber. After each one it records the filter's name and how many plays are left, even when the filter removed nothing. That record is the list it prints at the end.</p><p>This is the stage the whole design rests on: a filter cannot be applied without also being written down, because one small function does both.</p><p class="where">Lines 95 to 140</p></div>
+      <div><h3>Apply the filters, in order, and write each one down</h3><p>Nine filters, always in the same order. After each one it records the filter's name and how many plays are left, even when the filter removed nothing. That record is the list it prints at the end.</p><p>This is the stage the whole design rests on: a filter cannot be applied without also being written down, because one small function does both.</p><p class="where">Lines 98 to 143</p></div>
       <div><p class="eg">In the example, plays left after each</p>
         <ol class="funnel">
           <li><span>0. The file</span><b>258,611</b><span class="bar"><u style="width:100%"></u></span></li>
@@ -121,6 +121,7 @@ no betting column among them</pre></div>
           <li><span>5. No kneel-downs, no spikes</span><b>176,491</b><span class="bar"><u style="width:68.25%"></u><s style="left:68.25%;width:0.98%"></s></span></li>
           <li><span>6. First half only</span><b>87,209</b><span class="bar"><u style="width:33.72%"></u><s style="left:33.72%;width:34.53%"></s></span></li>
           <li><span>7. Any score</span><b>87,209</b><span class="bar"><u style="width:33.72%"></u></span></li>
+          <li><span>8. Any score at halftime</span><b>87,209</b><span class="bar"><u style="width:33.72%"></u></span></li>
         </ol>
       </div>
     </div>
@@ -128,7 +129,7 @@ no betting column among them</pre></div>
 
     <div class="stage">
       <i>4</i>
-      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any team-game with fewer than 10 plays left.</p><p class="where">Lines 142 to 162</p></div>
+      <div><h3>Add the plays up, one team in one game at a time</h3><p>For each team in each game it counts rushes and passes. Rush share is rushes divided by rushes plus passes. It notes whether that team won, using the final score. Tied games are dropped, and so is any team-game with fewer than 10 plays left.</p><p class="where">Lines 145 to 165</p></div>
       <div><p class="eg">In the example</p><pre>1,424 games
 4 tied games dropped
 0 team-games dropped for too few plays
@@ -138,7 +139,7 @@ no betting column among them</pre></div>
 
     <div class="stage">
       <i>5</i>
-      <div><h3>Sort, cut into equal groups, and count the wins</h3><p>It sorts the team-games from the highest rush share to the lowest and cuts them into four groups of the same size. For each group it counts the wins and divides. The gap is the top group's win rate minus the bottom group's. If a group has fewer than 30 team-games, it adds a small-sample warning.</p><p class="where">Lines 164 to 184</p></div>
+      <div><h3>Sort, cut into equal groups, and count the wins</h3><p>It sorts the team-games from the highest rush share to the lowest and cuts them into four groups of the same size. For each group it counts the wins and divides. The gap is the top group's win rate minus the bottom group's. If a group has fewer than 30 team-games, it adds a small-sample warning.</p><p class="where">Lines 167 to 187</p></div>
       <div><p class="eg">In the example</p><pre>4 groups of 710
 ran most    376 wins of 710    53.0%
 ran least   327 wins of 710    46.1%
@@ -148,7 +149,7 @@ gap                            6.9 points</pre></div>
 
     <div class="stage">
       <i>6</i>
-      <div><h3>Print the filters first, then the result</h3><p>It prints the question, the filter list from stage 3, the team-game counts from stage 4, the table from stage 5, and one standing reminder: a gap is an association, not a cause. With <code>--json</code> it prints the same content as data, which is how <a href="explorer.html">the explorer page</a> gets its answers.</p><p class="where">Lines 186 to 221</p></div>
+      <div><h3>Print the filters first, then the result</h3><p>It prints the question, the filter list from stage 3, the team-game counts from stage 4, the table from stage 5, and one standing reminder: a gap is an association, not a cause. With <code>--json</code> it prints the same content as data, which is how <a href="explorer.html">the explorer page</a> gets its answers.</p><p class="where">Lines 189 to 224</p></div>
       <div><p class="eg">In the example</p><pre>QUESTION
 FILTERS, IN ORDER (plays left after each)
 THEN, PER TEAM PER GAME
@@ -194,7 +195,7 @@ node ./query-plays.mjs --help
 <span class="c"># a filter it does not know: it stops and says so</span>
 node ./query-plays.mjs --seasons 2026 --spread 3</pre>
   <div class="rows">
-    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/query-plays.mjs">Read the code</a></b><span>All 221 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/query-plays.mjs">Read the code</a></b><span>All 224 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
     <div><b><a href="explorer.html">Change a filter</a></b><span>The same output for 378 combinations of filters, with nothing to install.</span></div>
     <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written policy, behind a one-line allowlist.</span></div>
   </div>

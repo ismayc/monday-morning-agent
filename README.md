@@ -53,7 +53,7 @@ flowchart TB
 
 ### How `query-plays.mjs` works
 
-It is 221 lines of JavaScript (an ES module, hence `.mjs`), run by Node.js. It imports
+It is 224 lines of JavaScript (an ES module, hence `.mjs`), run by Node.js. It imports
 only what ships with Node (`node:fs`, `node:path`, `node:url`), so there is nothing to
 install. It reads one file and prints; it never writes and never goes online.
 
@@ -68,7 +68,7 @@ flowchart TB
     end
     subgraph r2 [" "]
         direction LR
-        filt["3. Apply the filters in order<br/>(eight, or nine with the halftime score),<br/>recording each with the plays left after it"]
+        filt["3. Apply the nine filters<br/>in order, recording each<br/>with the plays left after it"]
         team["4. Add up per team per game<br/>rush share =<br/>rushes / (rushes + passes);<br/>did the team win?"]
         filt --> team
     end

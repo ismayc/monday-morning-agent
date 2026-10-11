@@ -4,7 +4,7 @@
   "filters": [
     {
       "filter": "file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns",
-      "playsLeft": 255781
+      "playsLeft": 258611
     },
     {
       "filter": "seasons: 2021-2025",
@@ -32,6 +32,10 @@
     },
     {
       "filter": "score margin: any",
+      "playsLeft": 87209
+    },
+    {
+      "filter": "halftime margin: any",
       "playsLeft": 87209
     }
   ],
@@ -88,5 +92,5 @@
   ],
   "gapTopMinusBottom": 0.06901408450704222,
   "warnings": [],
-  "notInThisOutput": "Why. A gap is an association between running and winning in the plays kept. It does not say which one causes the other."
+  "notInThisOutput": "Why it happens. A gap is an association between running and winning in the plays kept. It does not say which one causes the other."
 }

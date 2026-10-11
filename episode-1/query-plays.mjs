@@ -119,18 +119,16 @@ if (plays.length === 0) fail(`no plays for seasons ${compact(seasons)}. The file
 step(type === 'ALL' ? 'season type: regular season and playoffs' : `season type: ${type} only`,
   type === 'ALL' ? null : p => p[col.season_type] === type)
 step(weeks ? `weeks: ${compact(weeks)}` : 'weeks: all', weeks ? p => weeks.has(+p[col.week]) : null)
-if (halftimeMargin !== null) {
-  // The halftime score is the score at the snap of a game's first second-half play, read
-  // before any play is dropped, so the kickoff that opens the half still counts.
-  const atHalf = new Map()
-  for (const p of plays) {
-    if (atHalf.has(p[col.game_id]) || p[col.game_half] !== 'Half2') continue
-    const d = p[col.score_differential], team = p[col.posteam]
-    if (!team || team === 'NA' || d === '' || d === 'NA') continue
-    atHalf.set(p[col.game_id], Math.abs(+d))
-  }
-  step(`halftime margin: whole games within ${halftimeMargin} points at halftime (a game with no second-half play on file is dropped)`,
-    p => atHalf.has(p[col.game_id]) && atHalf.get(p[col.game_id]) <= halftimeMargin)
+// The halftime score is the score at the snap of a game's first second-half play, read
+// here, before any play is dropped, so the kickoff that opens the half still counts. The
+// filter itself is applied last, so the eight lines above it read the same with or
+// without --halftime-margin.
+const atHalf = new Map()
+if (halftimeMargin !== null) for (const p of plays) {
+  if (atHalf.has(p[col.game_id]) || p[col.game_half] !== 'Half2') continue
+  const d = p[col.score_differential], team = p[col.posteam]
+  if (!team || team === 'NA' || d === '' || d === 'NA') continue
+  atHalf.set(p[col.game_id], Math.abs(+d))
 }
 step('a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)',
   p => p[col.posteam] && p[col.posteam] !== 'NA' && (p[col.rush_attempt] === '1' || p[col.pass_attempt] === '1'))
@@ -141,6 +139,8 @@ else step(half === 'all' ? 'half: whole game, overtime included' : `half: ${half
   half === 'all' ? null : p => p[col.game_half] === (half === '1' ? 'Half1' : 'Half2'))
 step(margin === null ? 'score margin: any' : `score margin: within ${margin} points at the snap`,
   margin === null ? null : p => p[col.score_differential] !== 'NA' && p[col.score_differential] !== '' && Math.abs(+p[col.score_differential]) <= margin)
+step(halftimeMargin === null ? 'halftime margin: any' : `halftime margin: whole games within ${halftimeMargin} points at halftime (a game with no second-half play on file is dropped)`,
+  halftimeMargin === null ? null : p => atHalf.has(p[col.game_id]) && atHalf.get(p[col.game_id]) <= halftimeMargin)
 
 // ---------------------------------------------------------------- team-games
 const games = new Map()
