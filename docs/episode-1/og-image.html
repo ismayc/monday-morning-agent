@@ -3,23 +3,24 @@
      locally (python3 -m http.server 8791), then with a throwaway profile:
        "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --user-data-dir=/tmp/og-profile \
          --window-size=1200,630 --hide-scrollbars --screenshot=og-image.png http://127.0.0.1:8791/episode-1/og-image.html
-     Needs the network once, for the Barlow fonts. The four numbers are the five-season
-     results from episode-1/query-plays.mjs (--seasons 2021-2025, then --half 1). Complete
-     seasons, so they do not move. -->
+     Needs the network once, for the Barlow fonts. The six numbers are the five-season
+     results from episode-1/query-plays.mjs (--seasons 2021-2025; then --half 1; then
+     --half 1 --halftime-margin 3). Complete seasons, so they do not move. -->
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../sheet.css">
 <style>
   html,body{margin:0}
   body{width:1200px;height:630px;overflow:hidden;position:relative}
-  .pad{position:absolute;inset:0;padding:40px 60px}
-  .who{font-family:var(--display);font-weight:600;font-size:30px;border-bottom:4px solid var(--ink);padding-bottom:10px;display:flex;justify-content:space-between}
+  .pad{position:absolute;inset:0;padding:34px 60px}
+  .who{font-family:var(--display);font-weight:600;font-size:30px;border-bottom:4px solid var(--ink);padding-bottom:8px;display:flex;justify-content:space-between}
   .who span:last-child{font-weight:500}
-  h1{margin-top:26px;font-size:97px;max-width:none;line-height:.9;white-space:nowrap}
-  .fields{margin-top:26px;gap:0}
-  .fieldrow{grid-template-columns:270px 1fr}
-  .fieldrow h3{font-size:44px}
-  .field{height:44px;margin:46px 0 44px}
-  .field .mk b{font-size:42px}
+  h1{margin-top:14px;font-size:82px;max-width:none;line-height:.9;white-space:nowrap}
+  .fields{margin-top:4px;gap:0}
+  .fieldrow{grid-template-columns:300px 1fr}
+  .fieldrow h3{font-size:38px;line-height:.95}
+  .fieldrow p{font-size:19px;margin-top:4px}
+  .field{height:32px;margin:50px 0 50px}
+  .field .mk b{font-size:34px}
 </style>
 <div class="pad">
   <div class="who"><span>The Monday Morning Agent</span><span>Share of games won, teams that ran most and least</span></div>
@@ -29,5 +30,7 @@
       <div class="field"><div class="gap" style="left:19.2%;width:58.5%"></div><div class="mk least" style="left:19.2%"><b>19.2%</b></div><div class="mk most" style="left:77.7%"><b>77.7%</b></div></div></div>
     <div class="fieldrow"><div><h3>First half only</h3></div>
       <div class="field"><div class="gap" style="left:46.1%;width:6.9%"></div><div class="mk least" style="left:46.1%"><b>46.1%</b></div><div class="mk most" style="left:53%"><b>53.0%</b></div></div></div>
+    <div class="fieldrow"><div><h3>Close at halftime</h3><p>First half, within 3 at the half</p></div>
+      <div class="field"><div class="gap" style="left:46.3%;width:9%"></div><div class="mk least" style="left:55.3%"><b>55.3%</b></div><div class="mk most" style="left:46.3%"><b>46.3%</b></div></div></div>
   </div>
 </div>
