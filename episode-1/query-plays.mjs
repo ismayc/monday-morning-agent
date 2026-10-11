@@ -18,6 +18,8 @@
 //                                            counts only under "all")
 //   --quarter 1 | 2 | 3 | 4                  one quarter (cannot be combined with --half)
 //   --margin N                               keep plays snapped with the score within N points
+//   --halftime-margin N                      keep whole games within N points at halftime
+//                                            (0 = tied at the half)
 //   --groups 4                               how many equal groups to cut team-games into
 //   --min-plays 10                           drop a team-game with fewer plays than this
 //   --json                                   the same content as JSON
@@ -34,7 +36,7 @@ const META = join(DIR, 'data', 'plays-slim.meta.json')
 const fail = (msg) => { console.error(`query-plays: ${msg}`); process.exit(64) }
 
 // ---------------------------------------------------------------- arguments
-const KNOWN = new Set(['seasons', 'type', 'weeks', 'half', 'quarter', 'margin', 'groups', 'min-plays', 'json'])
+const KNOWN = new Set(['seasons', 'type', 'weeks', 'half', 'quarter', 'margin', 'halftime-margin', 'groups', 'min-plays', 'json'])
 const args = {}
 const argv = process.argv.slice(2)
 if (argv.includes('--help') || argv.includes('-h')) {
@@ -74,6 +76,8 @@ if (quarter && !['1', '2', '3', '4'].includes(quarter)) fail('--quarter must be 
 if (quarter && half !== 'all') fail('use --half or --quarter, not both')
 const margin = args.margin === undefined ? null : +args.margin
 if (margin !== null && !(Number.isInteger(margin) && margin >= 0)) fail('--margin must be a whole number of points, 0 or more')
+const halftimeMargin = args['halftime-margin'] === undefined ? null : +args['halftime-margin']
+if (halftimeMargin !== null && !(Number.isInteger(halftimeMargin) && halftimeMargin >= 0)) fail('--halftime-margin must be a whole number of points, 0 or more')
 const groups = +(args.groups || 4)
 if (!(Number.isInteger(groups) && groups >= 2 && groups <= 10)) fail('--groups must be a whole number from 2 to 10')
 const minPlays = +(args['min-plays'] || 10)
@@ -112,6 +116,19 @@ if (plays.length === 0) fail(`no plays for seasons ${compact(seasons)}. The file
 step(type === 'ALL' ? 'season type: regular season and playoffs' : `season type: ${type} only`,
   type === 'ALL' ? null : p => p[col.season_type] === type)
 step(weeks ? `weeks: ${compact(weeks)}` : 'weeks: all', weeks ? p => weeks.has(+p[col.week]) : null)
+if (halftimeMargin !== null) {
+  // The halftime score is the score at the snap of a game's first second-half play, read
+  // before any play is dropped, so the kickoff that opens the half still counts.
+  const atHalf = new Map()
+  for (const p of plays) {
+    if (atHalf.has(p[col.game_id]) || p[col.game_half] !== 'Half2') continue
+    const d = p[col.score_differential], team = p[col.posteam]
+    if (!team || team === 'NA' || d === '' || d === 'NA') continue
+    atHalf.set(p[col.game_id], Math.abs(+d))
+  }
+  step(`halftime score: games within ${halftimeMargin} points at halftime (games with no second half out)`,
+    p => atHalf.has(p[col.game_id]) && atHalf.get(p[col.game_id]) <= halftimeMargin)
+}
 step('a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)',
   p => p[col.posteam] && p[col.posteam] !== 'NA' && (p[col.rush_attempt] === '1' || p[col.pass_attempt] === '1'))
 step('no kneel-downs and no spikes (clock plays, not play calls)',

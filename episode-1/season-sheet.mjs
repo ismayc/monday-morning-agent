@@ -7,8 +7,8 @@
 //   node ./season-sheet.mjs --seasons 2026 --open    and open it in the browser
 //   node ./season-sheet.mjs --seasons 2026 --out ../docs/episode-1/season-sheet-2026.html
 //
-// The page asks query-plays.mjs the same eight questions every time (whole game, each
-// half, close games, the regular season, the playoffs) and shows each answer as the
+// The page asks query-plays.mjs the same nine questions every time (whole game, each
+// half, games close at halftime, close games, the regular season, the playoffs) and shows each answer as the
 // win-rate bar from the episode pages, with the tool's own numbers and warnings under it.
 // Nothing is computed here except one sentence that compares two gaps the tool printed.
 // The default output is rulings/season-sheet-<seasons>.html, beside the runs; --out
@@ -26,12 +26,15 @@ const OPEN = args.includes('--open')
 const RULING = flag('--ruling', '')   // a rulings/ruling-<stamp>.md to quote at the end: what the agent ruled on air
 const OUT = resolve(flag('--out', join(DIR, 'rulings', `season-sheet-${SEASONS}.html`)))
 
-// The eight questions. The first three are the episode's spine; the rest are the filters
-// the room asks about first: close games, the regular season alone, the playoffs alone.
+// The nine questions. The first four are the episode's spine: the whole game, each half,
+// and the first half in games close at halftime, which takes away who was already ahead.
+// The rest are the filters the room asks about first: close games, the regular season
+// alone, the playoffs alone.
 const QUESTIONS = [
   { key: 'whole', title: 'The whole game', sub: 'Every play, kickoff to the end.', args: [] },
   { key: 'h1', title: 'First half only', sub: '"Establish" means early.', args: ['--half', '1'] },
   { key: 'h2', title: 'Second half only', sub: 'Who is running now?', args: ['--half', '2'] },
+  { key: 'ht1', title: 'First half, games within 3 points at halftime', sub: 'Take away who was ahead at the break.', args: ['--half', '1', '--halftime-margin', '3'] },
   { key: 'close1', title: 'First half, score within 8 points', sub: 'Early, and one score apart.', args: ['--half', '1', '--margin', '8'] },
   { key: 'close2', title: 'Second half, score within 8 points', sub: 'Late, but still a game.', args: ['--half', '2', '--margin', '8'] },
   { key: 'tight2', title: 'Second half, score within 3 points', sub: 'Late, and a field goal apart.', args: ['--half', '2', '--margin', '3'] },
@@ -55,23 +58,26 @@ const longDate = (iso) => iso ? new Date(iso + 'T12:00:00').toLocaleDateString('
 const weeks = Object.entries(first.teamGames.weeksBySeason).map(([s, w]) => `${s}: ${w}`).join('; ')
 const thisSeason = !SEASONS.includes('-') && Number(SEASONS) >= 2026
 const h1 = answers.find(a => a.key === 'h1').out, h2 = answers.find(a => a.key === 'h2').out
-const close1 = answers.find(a => a.key === 'close1').out
-const gaps = h1.gapTopMinusBottom !== null && h2.gapTopMinusBottom !== null
-  ? { early: 100 * h1.gapTopMinusBottom, late: 100 * h2.gapTopMinusBottom, close: close1.gapTopMinusBottom === null ? null : 100 * close1.gapTopMinusBottom } : null
-const perGroup = h1.result.length ? h1.result[0].teamGames : 0
+const ht1 = answers.find(a => a.key === 'ht1').out
+const gaps = h1.gapTopMinusBottom !== null && h2.gapTopMinusBottom !== null && ht1.gapTopMinusBottom !== null
+  ? { early: 100 * h1.gapTopMinusBottom, late: 100 * h2.gapTopMinusBottom, half: 100 * ht1.gapTopMinusBottom } : null
+// The ruling rests on the games close at halftime, so their group size is the one that counts.
+const perGroup = ht1.result.length ? ht1.result[0].teamGames : 0
+const htMost = ht1.result.length ? pct(ht1.result[0].winRate) : '', htLeast = ht1.result.length ? pct(ht1.result.at(-1).winRate) : ''
 
-// The verdict on the claim, by a rule written here so anyone can disagree with it:
-//   - fewer than 100 team-games per group: too few games to rule;
-//   - an early gap under 10 points and a late gap at least twice it: does not hold as
-//     stated (the edge is late, where teams that are ahead run the clock);
-//   - an early gap of 10 or more: holds in part, with the late gap for comparison;
-//   - anything else: mixed, read the bars.
+// The verdict on the claim, by a rule written here so anyone can disagree with it. The
+// claim is that running early pays off later, so the test is the first half of games
+// within 3 points at halftime, where being ahead at the break cannot explain the running:
+//   - fewer than 100 team-games per group in those games: too few games to rule;
+//   - a gap under 5 points there (or below zero): does not hold as stated;
+//   - a gap of 10 or more there: holds in part;
+//   - anything between: mixed, read the bars.
 function verdict() {
-  if (!gaps) return { word: 'No ruling yet', text: 'One of the two halves has no result, so there is no gap to compare. The bars below say what there is.' }
-  if (perGroup < 100) return { word: 'Too few games to rule', text: `${fmt(perGroup)} team-games in each group so far; one game moves a win rate by ${(100 / perGroup).toFixed(1)} points. The early gap is ${gaps.early.toFixed(1)} points and the late gap ${gaps.late.toFixed(1)}, which is the five-season shape, but the sample cannot carry a ruling yet. Ask again in a few weeks.` }
-  if (gaps.early < 10 && gaps.late >= 2 * gaps.early) return { word: 'Does not hold as stated', text: `Running early goes with a small edge: ${gaps.early.toFixed(1)} points between the teams that ran most and the teams that ran least in the first half${gaps.close !== null ? `, and ${gaps.close.toFixed(1)} points when the score was within eight` : ''}. Running late goes with a large one: ${gaps.late.toFixed(1)} points. Teams that are ahead run to use the clock, so the order runs the other way from the claim. Establishing the run is not what these plays reward; being ahead is.` }
-  if (gaps.early >= 10) return { word: 'Holds in part', text: `Running early goes with a gap of ${gaps.early.toFixed(1)} points in these plays, against ${gaps.late.toFixed(1)} late. Read the close-game bar before saying more.` }
-  return { word: 'Mixed', text: `The early gap is ${gaps.early.toFixed(1)} points and the late gap ${gaps.late.toFixed(1)}. Neither reading is clean; the bars are the evidence.` }
+  if (!gaps) return { word: 'No ruling yet', text: 'One of the questions the ruling needs has no result, so there is no gap to compare. The bars below say what there is.' }
+  if (perGroup < 100) return { word: 'Too few games to rule', text: `${fmt(perGroup)} team-games in each group of games close at halftime so far; one game moves a win rate by ${(100 / perGroup).toFixed(1)} points. In those games the early gap is ${gaps.half.toFixed(1)} points; across all games it is ${gaps.early.toFixed(1)} early and ${gaps.late.toFixed(1)} late. The sample cannot carry a ruling yet. Ask again in a few weeks.` }
+  if (gaps.half < 5) return { word: 'Does not hold as stated', text: `Across all games, running early goes with an edge of ${gaps.early.toFixed(1)} points. But a team that was ahead at halftime ran more in the first half too. Hold the halftime score within 3 points and the edge is ${gaps.half.toFixed(1)}: the teams that ran most early won ${htMost}, the teams that ran least ${htLeast}. Running late goes with a gap of ${gaps.late.toFixed(1)} points, and teams that are ahead run to use the clock. Establishing the run is not what these plays reward; being ahead is.` }
+  if (gaps.half >= 10) return { word: 'Holds in part', text: `In games within 3 points at halftime, the teams that ran most early won ${htMost} and the teams that ran least ${htLeast}, a gap of ${gaps.half.toFixed(1)} points. Late, the gap is ${gaps.late.toFixed(1)}. Read the other bars before saying more.` }
+  return { word: 'Mixed', text: `In games within 3 points at halftime the early gap is ${gaps.half.toFixed(1)} points; across all games it is ${gaps.early.toFixed(1)} early and ${gaps.late.toFixed(1)} late. Neither reading is clean; the bars are the evidence.` }
 }
 const V = verdict()
 
@@ -109,12 +115,12 @@ const title = thisSeason
   ? `This season so far: ${SEASONS}, through ${longDate(latest) || 'no games yet'}`
   : `"You have to establish the run." Five seasons, ${SEASONS.replace('-', ' to ')}.`
 const lead = thisSeason
-  ? `The same eight questions as the five-season sheet, asked of this season alone: weeks ${esc(weeks.replace(/^\d+: /, ''))}, through the games of ${esc(longDate(latest))}. The groups are small and the tool says so wherever it matters.`
-  : `Eight questions about establishing the run, each answered by the one tool from every play of ${SEASONS.replace('-', ' through ')}. Yellow is the quarter of teams that ran most, blue the quarter that ran least, and the yellow stretch between them is the gap in games won.`
+  ? `The same nine questions as the five-season sheet, asked of this season alone: weeks ${esc(weeks.replace(/^\d+: /, ''))}, through the games of ${esc(longDate(latest))}. The groups are small and the tool says so wherever it matters.`
+  : `Nine questions about establishing the run, each answered by the one tool from every play of ${SEASONS.replace('-', ' through ')}. Yellow is the quarter of teams that ran most, blue the quarter that ran least, and the yellow stretch between them is the gap in games won.`
 const headline = `<div class="verdict"><b>${esc(V.word)}</b><div>
 <p class="vtext">${esc(V.text)}</p>
-${gaps ? `<div class="evidence"><div><b>${gaps.early.toFixed(1)}</b><span>points early: the first-half gap</span></div><div><b>${gaps.late.toFixed(1)}</b><span>points late: the second-half gap</span></div>${gaps.close !== null ? `<div><b>${gaps.close.toFixed(1)}</b><span>points early, score within 8</span></div>` : ''}</div>` : ''}
-<p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it: under 100 team-games per group is too few to rule; an early gap under 10 points with a late gap at least twice it does not hold as stated; an early gap of 10 or more holds in part. Every number is the tool's.</p>
+${gaps ? `<div class="evidence"><div><b>${gaps.early.toFixed(1)}</b><span>points early: the first-half gap</span></div><div><b>${gaps.half.toFixed(1)}</b><span>points early, games within 3 at halftime</span></div><div><b>${gaps.late.toFixed(1)}</b><span>points late: the second-half gap</span></div></div>` : ''}
+<p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it. It reads the first half of games within 3 points at halftime: under 100 team-games per group is too few to rule; a gap under 5 points does not hold as stated; a gap of 10 or more holds in part. Every number is the tool's.</p>
 </div></div>`
 
 const html = `<!DOCTYPE html>
@@ -190,7 +196,7 @@ ${answers.map(rowHtml).join('\n')}
 </div>
 <p class="not"><strong>Not on this sheet: why.</strong> Every gap here is an association between running and winning in the plays kept. It does not say which one causes the other. Teams that are ahead run to use the clock, so winning can cause running.</p>
 ${rulingBlock}
-<footer><p>Made ${esc(new Date().toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }))} by season-sheet.mjs, which ran query-plays.mjs eight times (the command under each question) and wrote down what it printed. Seasons on file: ${esc(weeks)}. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
+<footer><p>Made ${esc(new Date().toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }))} by season-sheet.mjs, which ran query-plays.mjs nine times (the command under each question) and wrote down what it printed. Seasons on file: ${esc(weeks)}. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
 </main>
 </body>
 </html>

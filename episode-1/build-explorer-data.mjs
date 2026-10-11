@@ -6,7 +6,7 @@
 //
 // A web page cannot run a program, and nobody should have to install anything to change
 // a filter and see what happens. So this script asks query-plays.mjs every question the
-// page's dropdowns can ask (189 of them, about a minute) and keeps what it printed:
+// page's dropdowns can ask (378 of them, about two minutes) and keeps what it printed:
 // the filters in order with the plays left after each, and the result. The page shows
 // exactly what the tool said; it computes nothing itself. No Claude call, no key.
 import { execFileSync } from 'node:child_process'
@@ -19,20 +19,24 @@ const SEASONS = ['2021-2025', '2026', '2021', '2022', '2023', '2024', '2025']
 const TYPES = ['ALL', 'REG', 'POST']
 const HALVES = ['all', '1', '2']
 const MARGINS = ['any', '8', '3']
+// The halftime score is a separate row on the page. An answer with no halftime filter keeps
+// its four-part key, so links made before the row existed still open the same answer.
+const HALFTIMES = ['any', '3']
 
 const answers = {}
 let latest = '', weeks2026 = ''
-for (const seasons of SEASONS) for (const type of TYPES) for (const half of HALVES) for (const margin of MARGINS) {
+for (const seasons of SEASONS) for (const type of TYPES) for (const half of HALVES) for (const margin of MARGINS) for (const halftime of HALFTIMES) {
   const args = ['--seasons', seasons]
   if (type !== 'ALL') args.push('--type', type)
   if (half !== 'all') args.push('--half', half)
   if (margin !== 'any') args.push('--margin', margin)
+  if (halftime !== 'any') args.push('--halftime-margin', halftime)
   const out = JSON.parse(execFileSync('node', [join(DIR, 'query-plays.mjs'), ...args, '--json'], { encoding: 'utf8' }))
-  if (seasons === '2026' && type === 'ALL' && half === 'all' && margin === 'any') {
+  if (seasons === '2026' && type === 'ALL' && half === 'all' && margin === 'any' && halftime === 'any') {
     latest = out.teamGames.latestGameDate || ''
     weeks2026 = out.teamGames.weeksBySeason['2026'] || ''
   }
-  answers[[seasons, type, half, margin].join('|')] = {
+  answers[[seasons, type, half, margin, ...(halftime === 'any' ? [] : [halftime])].join('|')] = {
     command: 'node ./query-plays.mjs ' + args.join(' '),
     filters: out.filters,
     games: out.teamGames.games, kept: out.teamGames.kept, ties: out.teamGames.tiesDropped,
@@ -45,5 +49,5 @@ for (const seasons of SEASONS) for (const type of TYPES) for (const half of HALV
   }
 }
 const file = join(DIR, '..', 'docs', 'episode-1', 'explorer-data.json')
-writeFileSync(file, JSON.stringify({ season2026: { latestGame: latest, weeks: weeks2026 }, options: { SEASONS, TYPES, HALVES, MARGINS }, answers }) + '\n')
+writeFileSync(file, JSON.stringify({ season2026: { latestGame: latest, weeks: weeks2026 }, options: { SEASONS, TYPES, HALVES, MARGINS, HALFTIMES }, answers }) + '\n')
 console.log(`wrote ${file}: ${Object.keys(answers).length} answers, 2026 through ${latest} (weeks ${weeks2026})`)

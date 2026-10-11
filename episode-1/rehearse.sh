@@ -18,7 +18,9 @@ FROZEN=(analyst.md analyst-outline.md query-plays.mjs run-analyst.sh show-run.mj
 case "${1:-}" in
   tool)
     for a in "--seasons 2021-2025" "--seasons 2021-2025 --half 1" "--seasons 2021-2025 --half 2" \
-             "--seasons 2026" "--seasons 2026 --half 1" "--seasons 2026 --half 2"; do
+             "--seasons 2021-2025 --half 1 --halftime-margin 3" \
+             "--seasons 2026" "--seasons 2026 --half 1" "--seasons 2026 --half 2" \
+             "--seasons 2026 --half 1 --halftime-margin 3"; do
       echo "=== node ./query-plays.mjs $a"
       # shellcheck disable=SC2086
       node ./query-plays.mjs $a | sed -n '/^RESULT/,/^NOT IN/p' | grep -v '^NOT IN'

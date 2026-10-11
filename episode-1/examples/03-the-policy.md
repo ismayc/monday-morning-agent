@@ -10,7 +10,7 @@ Everything you need is on this machine already: every play from five complete se
 node ./query-plays.mjs --seasons 2021-2025
 ```
 
-It answers one shape of question: do teams that run on a larger share of their plays win more often? It sorts every team's game by rush share, cuts them into equal groups, and reports each group's win rate. You choose the filters: `--seasons`, `--type REG|POST|ALL`, `--weeks`, `--half 1|2|all`, `--quarter`, `--margin N` (score within N points at the snap), `--groups`, and `--min-plays`.
+It answers one shape of question: do teams that run on a larger share of their plays win more often? It sorts every team's game by rush share, cuts them into equal groups, and reports each group's win rate. You choose the filters: `--seasons`, `--type REG|POST|ALL`, `--weeks`, `--half 1|2|all`, `--quarter`, `--margin N` (score within N points at the snap), `--halftime-margin N` (whole games within N points at halftime), `--groups`, and `--min-plays`.
 
 The tool prints every filter it applied, in order, with the plays left after each one. That list is the truth about what you measured. Read it every time, because a flag you forgot is a filter you did not apply.
 
@@ -20,7 +20,9 @@ Do NOT try to open the data files yourself. The file is 20 MB and the tool alrea
 
 A claim like "you have to establish the run" is not yet a question. Before you run anything, say in one sentence what would have to be true in the data for the claim to hold, including WHEN in the game it applies. "Establish" means early, so a whole-game number does not test it.
 
-Then run the comparison that could prove the claim wrong, not only the one that agrees with it. If running early matters, the first-half gap should be large. Check the second half too, and say what the difference between the two tells you.
+The phrase carries several claims, and these plays can test one of them: running a lot early pays off later in the game, even when the early runs are not working. Two others, that running sets up play-action and that it wears down the defense, need data this file does not carry. Name them as untested and do not guess.
+
+Then run the comparison that could prove the claim wrong, not only the one that agrees with it. Teams that are ahead run, so a team that ran a lot in the first half may simply have been winning at halftime. Take that away: keep only games within 3 points at halftime (`--halftime-margin 3`) and compare first-half rush share with the result. If establishing the run matters, the teams that ran most early should win clearly more of those games. Then check the first half across all games and the second half, and say what the differences tell you.
 
 ## Answer it twice
 
@@ -47,11 +49,11 @@ The public data this show reads carries betting lines. The file you can reach do
 
 ## The output contract
 
-ONE ruling, under 250 words, in this shape:
+ONE ruling, under 300 words, in this shape:
 
-- **The claim**, restated as the question you tested.
-- **Five seasons:** the first-half result and the second-half result, each with its two win rates, the gap, and the number of team-games per group.
-- **This season:** the same two results, with the sample warning if the tool gave one.
+- **The claim**, restated in one sentence as the question you tested.
+- **Five seasons:** three short lines, one per result, each as "ran most X% vs ran least Y%, gap Z points, N team-games per group": the first half in games close at halftime, the first half in all games, and the second half.
+- **This season:** two of those lines, the first half in games close at halftime and the second half, with the sample warning if the tool gave one.
 - **The gap between the two answers:** one or two sentences.
 - **Ruling:** one sentence. Holds, does not hold, or cannot be settled from these plays, and why.
 - **What these plays cannot tell you:** one sentence.
