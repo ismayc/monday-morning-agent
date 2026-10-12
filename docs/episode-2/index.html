@@ -83,7 +83,7 @@
 
 <div class="top">
   <a href="../">The Monday Morning Agent</a>
-  <nav><a href="./" aria-current="page">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="#terms">Terms</a><a href="explorer.html">Change the definition</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+  <nav><a href="./" aria-current="page">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="#terms">Terms</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
 </div>
 
 <header>
@@ -103,7 +103,7 @@
 
   <p class="lead">Every NFL play from 2021 through the 2026 games of October 11 comes with a one-line description, and not one of them names the most argued-about play in the league. So an AI agent cannot find the play, let alone judge it, until it says what it will count as one. It has to define the play before it can judge it, write that definition down, and use it every time after.</p>
   <p style="margin-top:22px">This episode is about that written definition. The agent keeps it in a <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>, a folder of files it writes and the tool reads. The tool will not measure a play that is not in it, every <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> has to name the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> it used, and every later episode inherits the folder. This page is how that is set up, for someone who has never built an agent.</p>
-  <a class="go" href="explorer.html">Change the definition yourself</a>
+  <p style="margin-top:18px"><em>Change the definition yourself: the explorer page, the tool's real output for 54 definitions of the play, goes up after the episode airs on October 26, 2026.</em></p>
 </header>
 
 <section id="minute" data-nav="The setup">
@@ -180,7 +180,7 @@
         <p>Whether the tush push should be legal is a judgment about safety and the game people want, and the plays cannot settle it.</p>
         <p><b>The claim.</b> The quarterback sneak from <a class="term" href="#term-under-center" data-def="The shotgun column is 0. Shotgun or not is the only formation detail the data carries.">under center</a> with two or fewer yards to go converts far more often than every other rush at the same distance, enough to be a different kind of play.</p>
         <p><b>Definition used.</b> tush-push, dictionary/tush-push.json, written 2026-10-12 by the analyst, episode 2, written in this run because the dictionary was empty. Plain words: a quarterback run with two or fewer yards to go, taken from under center rather than shotgun, on any down. The entry cannot see who pushed, whether anyone pushed, or how the line blocked. The search by name found no match: not one of the 260,927 descriptions from 2021 through 2026 contains "tush push".</p>
-        <p class="held"><b>Five seasons. This season. The gap between the two answers.</b> Left off this page until the episode airs. The tool's numbers for the same definition are on <a href="explorer.html">the explorer</a>.</p>
+        <p class="held"><b>Five seasons. This season. The gap between the two answers.</b> Left off this page until the episode airs, with the explorer page that holds the tool's numbers for this definition and 53 others.</p>
         <p class="call"><b>Ruling.</b> Held back until the episode airs on October 26, 2026.</p>
         <p><b>What these plays cannot tell you.</b> Whether anyone pushed the runner, how the line was blocked, whether anyone was hurt, or what the rule should be.</p>
         <pre>node ./query-plays.mjs --search "tush push" --seasons 2021-2026
@@ -222,7 +222,7 @@ node ./query-plays.mjs --play tush-push --seasons 2026</pre>
 
 <section id="try" data-nav="Try it">
   <h2>Try it yourself</h2>
-  <p>With nothing installed, <a href="explorer.html">the explorer page</a> shows the tool's real output for 54 definitions of the play, across seven sets of seasons.</p>
+  <p>After the episode airs on October 26, 2026, the explorer page shows, with nothing installed, the tool's real output for 54 definitions of the play, across seven sets of seasons. Until then it is held back with the answer.</p>
   <p>To run the agent, you need a Mac or Linux machine with Node, git, and the Claude Code CLI signed in. The data is already in the repo.</p>
 <pre class="cmd"><span class="c"># get the kit</span>
 git clone https://github.com/ismayc/monday-morning-agent.git

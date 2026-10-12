@@ -182,7 +182,7 @@ written entry, and every ruling cites the entry it used. Everything else is in
 ### The pages
 
 - **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-2/
-- **Change the definition of the play yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html
+- **Change the definition of the play yourself, nothing to install:** the explorer page, published after the episode airs on October 26, 2026 (its 54 definitions give the answer away)
 - **How the tool works, the dictionary included:** https://ismayc.github.io/monday-morning-agent/episode-2/tool.html
 - **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-2/map.html
 - **Five definitions of the tush push, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-2/definitions.html
@@ -260,8 +260,9 @@ tool's refusal, writes the entry, measures with it, and cites it. Leave out
 ### What the numbers say
 
 The answer goes up after the episode airs on October 26, 2026, with the season sheets
-for five seasons and for this season. Until then the tool's numbers for 54 definitions
-of the play are on [the explorer page](https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html).
+for five seasons and for this season, and the explorer page with the tool's numbers for
+54 definitions of the play. Unlike episode 1's, this explorer is held back: the right
+definition's gap is the answer.
 
 ## Across the episodes
 
@@ -276,8 +277,9 @@ decision. The public data carries betting-line columns; neither episode's
 `.github/workflows/refresh-data.yml` is scheduled three times a night (GitHub starts
 scheduled workflows hours late, so one slot is not enough; the file says why). It
 re-downloads the seasons once, rebuilds episode 1's slim file, explorer answers, and
-plays-page data, then episode 2's plays file and explorer answers from the same
-downloads, and commits when the plays changed. Pull before you push.
+plays-page data, then episode 2's plays file from the same downloads, and commits when
+the plays changed. Pull before you push. (It rebuilds episode 2's explorer answers too,
+but commits them only once the explorer page is published, after October 26, 2026.)
 
 ### Data
 

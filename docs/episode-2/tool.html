@@ -74,7 +74,7 @@
 
 <div class="top">
   <a href="../">The Monday Morning Agent</a>
-  <nav><a href="./">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="./#terms">Terms</a><a href="explorer.html">Change the definition</a><a href="tool.html" aria-current="page">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+  <nav><a href="./">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="./#terms">Terms</a><a href="tool.html" aria-current="page">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
 </div>
 
 <h1 class="long">How query-plays.mjs works</h1>
@@ -187,7 +187,7 @@ contains "tush push".</pre></div>
 
     <div class="stage">
       <i>6</i>
-      <div><h3>Print the definition, then the filters, then the result</h3><p>It prints the question, the entry from stage 2, quoted, the filter list from stage 4, the split from stage 5, and the result: plays, converted, and rate for each group, and the <a class="term" href="./#term-gap" data-def="The defined play's conversion rate minus the other short-yardage rushes' rate, in points.">gap</a> between them. Last, one standing reminder: whether the play should be legal is not in the output. With <code>--json</code> it prints the same content as data, which is how <a href="explorer.html">the explorer page</a> gets its answers.</p><p class="where">Lines 337 to 392</p></div>
+      <div><h3>Print the definition, then the filters, then the result</h3><p>It prints the question, the entry from stage 2, quoted, the filter list from stage 4, the split from stage 5, and the result: plays, converted, and rate for each group, and the <a class="term" href="./#term-gap" data-def="The defined play's conversion rate minus the other short-yardage rushes' rate, in points.">gap</a> between them. Last, one standing reminder: whether the play should be legal is not in the output. With <code>--json</code> it prints the same content as data, which is how the explorer page (published after the episode airs) gets its answers.</p><p class="where">Lines 337 to 392</p></div>
       <div><p class="eg">In the example</p><pre style="white-space:pre;overflow-x:auto;font-size:10.5px">RESULT
   group                            plays   converted       rate
   1  the defined play               1,554       1,199      77.2%
@@ -246,7 +246,7 @@ node ./query-plays.mjs --play tush-push --seasons 2021-2025</pre>
   <div class="rows">
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/query-plays.mjs">Read the code</a></b><span>All 392 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a></b><span>The README gives the shape of an <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, every key, and the rules for adding one.</span></div>
-    <div><b><a href="explorer.html">Change the definition</a></b><span>The same output for 54 definitions of the play and seven sets of seasons, with nothing to install.</span></div>
+    <div><b>Change the definition</b><span>The explorer page: the same output for 54 definitions of the play and seven sets of seasons, with nothing to install. Up after the episode airs on October 26, 2026.</span></div>
     <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written <a class="term" href="./#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, beside a <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>, behind a two-line allowlist.</span></div>
   </div>
 </section>

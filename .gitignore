@@ -15,3 +15,8 @@ episode-2/examples/05-ruling.md
 episode-2/examples/06-ruling-declined-ban-and-prediction.md
 episode-2/examples/07-the-entry-as-written.json
 dictionary/*.json
+# the explorer page too: its 54 definitions give the answer away (unlike episode 1's,
+# which stayed public; decided October 12, 2026). build-explorer-data.mjs still writes
+# the data file locally and in the Action; nothing commits it until the show has aired.
+docs/episode-2/explorer.html
+docs/episode-2/explorer-data.json

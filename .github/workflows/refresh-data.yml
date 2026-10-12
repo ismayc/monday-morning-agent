@@ -67,11 +67,16 @@ jobs:
         run: cd episode-2 && node ./slim-data.mjs
 
       - name: Episode 2, measure every definition the explorer page can build
+        # The file it writes, docs/episode-2/explorer-data.json, is gitignored until the
+        # episode has aired on October 26, 2026 (the page gives the answer away), so this
+        # step only proves the tool still runs on the new data; nothing below commits it.
+        # The after-show list in the private folder puts the file back in the two git
+        # lines below.
         run: cd episode-2 && node ./build-explorer-data.mjs
 
       - name: Commit if the plays changed
         run: |
-          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json episode-2/data docs/episode-2/explorer-data.json; then
+          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json episode-2/data; then
             echo "Nothing new since the last commit; nothing to push."
             exit 0
           fi
@@ -79,7 +84,7 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add episode-1/data/plays-slim.csv episode-1/data/plays-slim.meta.json docs/episode-1/explorer-data.json docs/episode-1/plays-data.json
-          git add episode-2/data/plays.csv episode-2/data/plays.meta.json docs/episode-2/explorer-data.json
+          git add episode-2/data/plays.csv episode-2/data/plays.meta.json
           git commit -m "data: 2026 through $through"
           git pull --rebase origin main
           git push origin HEAD:main
