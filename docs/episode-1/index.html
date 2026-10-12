@@ -175,8 +175,8 @@
       <div class="ruling">
         <p><b>The claim.</b> In games within 3 points at halftime, do teams that ran on more of their first-half plays win more often than teams that ran on fewer?</p>
         <p><b>Five seasons.</b> First half, close at halftime: <a class="term" href="#term-ran-most" data-def="The fourth of team-games with the highest rush share.">ran most</a> 46.3%, <a class="term" href="#term-ran-most" data-def="The fourth of team-games with the lowest rush share.">ran least</a> 55.3%, <a class="term" href="#term-gap" data-def="Win rate of the teams that ran most minus win rate of the teams that ran least, in points.">gap</a> -9.0 points, 188 <a class="term" href="#term-team-game" data-def="One team's side of one game. Every game gives two, one per team.">team-games</a> per group. First half, all games: 53.0% against 46.1%, gap 6.9. Second half: 87.0% against 11.7%, gap 75.4. 710 per group.</p>
-        <p><b>This season.</b> First half, close at halftime: 50.0% against 50.0%, gap 0.0, 10 team-games per group; one game moves a <a class="term" href="#term-win-rate" data-def="The share of a group's team-games in which the team went on to win the game.">win rate</a> by 10 points. Second half: 87.5% against 21.9%, gap 65.6, 32 per group.</p>
-        <p class="call"><b>Ruling.</b> Held back until the episode airs on October 12, 2026. The numbers above are the agent's; the call it made from them is given live, with the evidence, and goes up here afterward.</p>
+        <p><b>This season.</b> First half, close at halftime: 45.5% against 54.5%, gap -9.1, 11 team-games per group; one game moves a <a class="term" href="#term-win-rate" data-def="The share of a group's team-games in which the team went on to win the game.">win rate</a> by 9.1 points. Second half: 84.2% against 15.8%, gap 68.4, 38 per group.</p>
+        <p class="call"><b>Ruling.</b> Does not hold. Over five seasons, in games close at halftime, the teams that ran most in the first half won less often than the teams that ran least, not more. The strong link between running and winning shows up only in the second half, where the score at that point can explain it.</p>
         <p><b>What these plays cannot tell you.</b> Whether running sets up play-action or wears down a defense, because this file has no data on either.</p>
         <pre>node ./query-plays.mjs --seasons 2021-2025 --half 1 --halftime-margin 3
 node ./query-plays.mjs --seasons 2021-2025 --half 1
@@ -184,8 +184,17 @@ node ./query-plays.mjs --seasons 2021-2025 --half 2
 node ./query-plays.mjs --seasons 2026 --half 1 --halftime-margin 3
 node ./query-plays.mjs --seasons 2026 --half 2</pre>
       </div>
-      <p class="cap">A real <a class="term" href="#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> from a run on October 11, 2026: 14 seconds, five tool calls, abridged to fit. The 2026 season then ran through the October 8 game. In steps 2 and 4, marked yellow, the agent is using judgment; the rest is mechanical.</p>
+      <p class="cap">A real <a class="term" href="#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> from the run on air on October 12, 2026: 16 seconds, five tool calls, abridged to fit. The 2026 season then ran through the October 11 games. The full one is in the repo. In steps 2 and 4, marked yellow, the agent is using judgment; the rest is mechanical.</p>
     </div>
+  </div>
+</section>
+
+<section id="answer" data-nav="The answer">
+  <h2>The answer, on one page</h2>
+  <p>After the episode, the two season sheets went up. Each asks the tool the same nine questions, shows every answer as a bar, and prints a verdict by a rule stated on the page.</p>
+  <div class="rows">
+    <div><b><a href="season-sheet-2021-2025.html">Five seasons, 2021 to 2025</a></b><span>Does not hold as stated. Running early goes with a small edge across all games, the edge turns to -9.0 points once the halftime score is held within 3, and the large late <a class="term" href="#term-gap" data-def="Win rate of the teams that ran most minus win rate of the teams that ran least, in points.">gap</a> fits teams that are ahead running to use the clock.</span></div>
+    <div><b><a href="season-sheet-2026.html">This season, 2026</a></b><span>Too few games to rule, through the October 11 games: 11 <a class="term" href="#term-team-game" data-def="One team's side of one game. Every game gives two, one per team.">team-games</a> per group in the halftime test, where one game moves a <a class="term" href="#term-win-rate" data-def="The share of a group's team-games in which the team went on to win the game.">win rate</a> by 9 points. The sheet ends with the <a class="term" href="#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> the agent gave on air.</span></div>
   </div>
 </section>
 
@@ -236,7 +245,7 @@ node ./query-plays.mjs --seasons 2021-2025 --half 1
     <div><b><a href="map.html">Where we are</a></b><span>The episode in eight parts, in order, with what you see in each. On air, the yellow card is the part we are in.</span></div>
     <div><b><a href="meanings.html">Five meanings of the claim</a></b><span>What "establish the run" means to five different coaches, what each meaning would take to test, and the one the agent rules on. One card per keypress.</span></div>
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-1/analyst.md">The policy file</a></b><span>All eight sections, as the agent reads them.</span></div>
-    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/episode-1/examples">One real run, file by file</a></b><span>A tool read, the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, and a <a class="term" href="#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> on a claim the tool cannot answer. The rulings on the episode's claim go up after October 12, 2026.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/episode-1/examples">One real run, file by file</a></b><span>A tool read, the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, and a <a class="term" href="#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> on a claim the tool cannot answer, and from the episode on October 12, 2026: the run as it looked on screen, its ruling, and a bet the agent declined.</span></div>
     <div><b><a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">The live series</a></b><span>Eight episodes on O'Reilly, every other Monday.</span></div>
   </div>
 </section>

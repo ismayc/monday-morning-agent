@@ -16,8 +16,19 @@
 #       Where the event stream, the ruling, and the page land. Default ./rulings
 #   ANALYST_NO_OPEN=1 ./run-analyst.sh "..."
 #       Write the page but do not open it (a rehearsal batch, a machine with no browser)
+#   ANALYST_WORD_LIMIT=350 ./run-analyst.sh "..."
+#       The ruling's word limit, counted above the "Commands run" line. The policy says 350;
+#       set it lower to watch the over-limit path (the retry, then the failure).
 
 set -uo pipefail
+
+# The policy says "under 350 words" and the model usually runs over it (on October 12, 2026,
+# four of five rehearsal rulings did). A limit in the policy is an instruction; this script
+# enforces it. Over the limit, the ruling goes back to the model once with "shorten it", with
+# no tools, so nothing is rerun. Still over after that, the run fails with an OVER LIMIT line
+# and exit code 68; the long ruling is kept either way.
+LIMIT="${ANALYST_WORD_LIMIT:-350}"
+words_above_the_commands() { sed '/\*\*Commands run/,$d' "$1" | wc -w | tr -d ' '; }
 
 # Resolve our own directory and work from it: the policy refers to ./query-plays.mjs.
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -37,6 +48,7 @@ mkdir -p "$LOG_DIR"
 STAMP="$(date +%Y-%m-%d-%H%M%S)"
 STREAM="$LOG_DIR/run-$STAMP.jsonl"        # every event the agent produced
 RULING="$LOG_DIR/ruling-$STAMP.md"        # just the ruling, written by show-run.mjs
+FIRST="$LOG_DIR/ruling-$STAMP-first.md"   # the first ruling, kept when it ran over the limit
 PAGE="$LOG_DIR/run-$STAMP.html"           # the run as one page, written by show-run.mjs
 
 echo "run-analyst.sh: claim: $CLAIM"
@@ -75,11 +87,38 @@ echo "run-analyst.sh: event stream at $STREAM"
 
 # Verify the EFFECT, not the report of the effect: the ruling file exists only if the
 # stream ended with a result.
+WORDS=0
 if [ -s "$RULING" ]; then
-  echo "run-analyst.sh: ruling at $RULING ($(sed '/\*\*Commands run/,$d' "$RULING" | wc -w | tr -d ' ') words above the commands)"
+  WORDS="$(words_above_the_commands "$RULING")"
+  echo "run-analyst.sh: ruling at $RULING ($WORDS words above the commands, limit $LIMIT)"
 else
   echo "run-analyst.sh: WARNING, no ruling written to $RULING" >&2
   [ "$STATUS" -eq 0 ] && STATUS=65
+fi
+
+# The word limit, enforced: one retry with no tools, then failure. The retry's events go on
+# the end of the same stream, so the page is rebuilt from it and shows both rulings.
+if [ -s "$RULING" ] && [ "$WORDS" -gt "$LIMIT" ]; then
+  echo "run-analyst.sh: OVER LIMIT: $WORDS words, the policy allows $LIMIT. Sending the ruling back once: shorten it."
+  cp "$RULING" "$FIRST"
+  ASK="This ruling is yours, on the claim \"$CLAIM\". It runs $WORDS words above the Commands run line; the policy allows $LIMIT. Write it again in under $LIMIT words above that line: the same seven parts, the same numbers, the same commands, nothing new, and no tool calls. Reply with the ruling only."
+  claude -p "$(printf '%s\n\n%s\n' "$ASK" "$(cat "$FIRST")")" \
+    --append-system-prompt "$(cat "$POLICY_FILE")" \
+    --tools "" \
+    --permission-mode default \
+    --output-format stream-json --verbose \
+    2>>"$LOG_DIR/run-$STAMP.err" \
+    | tee -a "$STREAM" \
+    | node ./show-run.mjs "$RULING"
+  RETRY_STATUS="${PIPESTATUS[2]}"
+  WORDS="$(words_above_the_commands "$RULING")"
+  CLAIM="$CLAIM" ANALYST_WORD_LIMIT="$LIMIT" node ./render-run.mjs "$STREAM" "$PAGE" >/dev/null
+  if [ "$RETRY_STATUS" -ne 0 ] || [ "$WORDS" -gt "$LIMIT" ]; then
+    echo "run-analyst.sh: OVER LIMIT after one retry: $WORDS words above the commands, the policy allows $LIMIT. The ruling is saved; the run fails." >&2
+    STATUS=68
+  else
+    echo "run-analyst.sh: shortened to $WORDS words above the commands, within the limit of $LIMIT; the first ruling is at $FIRST"
+  fi
 fi
 
 # The page: easier to read than the terminal. Opened with the system's opener, if there is one.

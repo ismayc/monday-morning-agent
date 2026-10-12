@@ -1,0 +1,161 @@
+run-analyst.sh: claim: You have to establish the run.
+run-analyst.sh: starting 2026-10-12T08:24:20-07:00
+
+==============================================================================
+[0:06] TOOL CALL 1
+  node ./query-plays.mjs --seasons 2021-2025 --half 1 --halftime-margin 3
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    260,927
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)     179,045
+   5. no kneel-downs and no spikes (clock plays, not play calls)                               176,491
+   6. half: first half only (overtime out)                                                      87,209
+   7. score margin: any                                                                         87,209
+   8. halftime margin: whole games within 3 points at halftime (a game with no second-half play on file is dropped)    23,086
+
+  379 games in the plays kept (latest game 2026-01-25; weeks 2021: 1-18,20-22; 2022: 1-20; 2023: 1-3,5-18,20; 2024: 1-20; 2025: 1-6,8-21)
+RESULT
+  group        rush share          team-games   wins   win rate
+  1  ran most  48.5% to 73.5%             188     87      46.3%
+  2            41.7% to 48.5%             188     93      49.5%
+  3            34.6% to 41.7%             188     92      48.9%
+  4  ran least 11.8% to 34.6%             188    104      55.3%
+  gap, ran most minus ran least: -9.0 points
+
+==============================================================================
+[0:07] TOOL CALL 2
+  node ./query-plays.mjs --seasons 2021-2025 --half 1
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    260,927
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)     179,045
+   5. no kneel-downs and no spikes (clock plays, not play calls)                               176,491
+   6. half: first half only (overtime out)                                                      87,209
+   7. score margin: any                                                                         87,209
+   8. halftime margin: any                                                                      87,209
+
+  1,424 games in the plays kept (latest game 2026-02-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22)
+RESULT
+  group        rush share          team-games   wins   win rate
+  1  ran most  48.6% to 96.0%             710    376      53.0%
+  2            41.5% to 48.6%             710    368      51.8%
+  3            34.5% to 41.5%             710    349      49.2%
+  4  ran least 10.7% to 34.5%             710    327      46.1%
+  gap, ran most minus ran least: 6.9 points
+
+==============================================================================
+[0:07] TOOL CALL 3
+  node ./query-plays.mjs --seasons 2021-2025 --half 2
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    260,927
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)     179,045
+   5. no kneel-downs and no spikes (clock plays, not play calls)                               176,491
+   6. half: second half only (overtime out)                                                     88,070
+   7. score margin: any                                                                         88,070
+   8. halftime margin: any                                                                      88,070
+
+  1,424 games in the plays kept (latest game 2026-02-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22)
+RESULT
+  group        rush share          team-games   wins   win rate
+  1  ran most  55.0% to 97.1%             710    618      87.0%
+  2            42.9% to 55.0%             710    452      63.7%
+  3            31.3% to 42.9%             710    267      37.6%
+  4  ran least 2.8% to 31.3%              710     83      11.7%
+  gap, ran most minus ran least: 75.4 points
+
+==============================================================================
+[0:08] TOOL CALL 4
+  node ./query-plays.mjs --seasons 2026 --half 1 --halftime-margin 3
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    260,927
+   1. seasons: 2026                                                                             13,643
+   2. season type: regular season and playoffs                                                  13,643
+   3. weeks: all                                                                                13,643
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)       9,705
+   5. no kneel-downs and no spikes (clock plays, not play calls)                                 9,556
+   6. half: first half only (overtime out)                                                       4,762
+   7. score margin: any                                                                          4,762
+   8. halftime margin: whole games within 3 points at halftime (a game with no second-half play on file is dropped)     1,339
+
+  22 games in the plays kept (latest game 2026-10-11; weeks 2026: 1-5)
+RESULT
+  group        rush share          team-games   wins   win rate
+  1  ran most  50.0% to 55.6%              11      5      45.5%
+  2            42.9% to 50.0%              11      6      54.5%
+  3            36.1% to 42.3%              11      5      45.5%
+  4  ran least 23.1% to 35.1%              11      6      54.5%
+  gap, ran most minus ran least: -9.1 points
+
+  SMALL SAMPLE: 11 team-games per group. One game moves a win rate by 9.1 points.
+
+==============================================================================
+[0:08] TOOL CALL 5
+  node ./query-plays.mjs --seasons 2026 --half 2
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays-slim.csv, 18 of 372 columns kept, no betting columns                    260,927
+   1. seasons: 2026                                                                             13,643
+   2. season type: regular season and playoffs                                                  13,643
+   3. weeks: all                                                                                13,643
+   4. a rush or a pass by a team with the ball (kicks, punts, penalties, and timeouts out)       9,705
+   5. no kneel-downs and no spikes (clock plays, not play calls)                                 9,556
+   6. half: second half only (overtime out)                                                      4,705
+   7. score margin: any                                                                          4,705
+   8. halftime margin: any                                                                       4,705
+
+  78 games in the plays kept (latest game 2026-10-11; weeks 2026: 1-5)
+RESULT
+  group        rush share          team-games   wins   win rate
+  1  ran most  53.8% to 76.0%              38     32      84.2%
+  2            42.5% to 53.8%              38     26      68.4%
+  3            33.3% to 41.7%              38     12      31.6%
+  4  ran least 10.3% to 32.5%              38      6      15.8%
+  gap, ran most minus ran least: 68.4 points
+
+==============================================================================
+RULING
+==============================================================================
+**The claim:** In games tied or close at halftime (within 3 points), do teams that ran the most in the first half win clearly more often than teams that ran the least?
+
+**Five seasons (2021-2025, regular season and playoffs):**
+- First half, games within 3 points at halftime: ran most 46.3% vs ran least 55.3%, gap -9.0 points, 188 team-games per group.
+- First half, all games: ran most 53.0% vs ran least 46.1%, gap 6.9 points, 710 team-games per group.
+- Second half, all games: ran most 87.0% vs ran least 11.7%, gap 75.4 points, 710 team-games per group.
+
+The pattern goes the wrong way for the claim. When the halftime score is close, the teams that ran most early won less often. The small positive gap across all first halves fits teams running more because they were already ahead. The large second-half gap is what you would expect from teams with a lead running out the clock.
+
+**This season (2026, weeks 1-5, same filters):**
+- First half, games within 3 points at halftime: ran most 45.5% vs ran least 54.5%, gap -9.1 points, 11 team-games per group.
+- Second half, all games: ran most 84.2% vs ran least 15.8%, gap 68.4 points, 38 team-games per group.
+
+The tool flagged the halftime test as a small sample. With only 11 team-games per group, a single game moves a win rate by 9.1 points, so that gap of -9.1 is the size of one game.
+
+**The gap between the two answers:** In close games, five seasons show -9.0 and this season shows -9.1. In the second half, five seasons show 75.4 and this season shows 68.4. Both pairs point the same way, and neither gap differs by more than this season's few games can support.
+
+**Ruling:** Does not hold. Over five seasons, in games close at halftime, the teams that ran most in the first half won less often than the teams that ran least, not more. The strong link between running and winning shows up only in the second half, where the score at that point can explain it.
+
+**What these plays cannot tell you:** These plays can't say whether early runs set up play-action, wore down the defense, or gained yards, and they can't say whether running causes winning.
+
+**Commands run:**
+node ./query-plays.mjs --seasons 2021-2025 --half 1 --halftime-margin 3
+node ./query-plays.mjs --seasons 2021-2025 --half 1
+node ./query-plays.mjs --seasons 2021-2025 --half 2
+node ./query-plays.mjs --seasons 2026 --half 1 --halftime-margin 3
+node ./query-plays.mjs --seasons 2026 --half 2
+==============================================================================
+5 tool calls, 0 refused or failed, 16 seconds
+run-analyst.sh: finished 2026-10-12T08:24:39-07:00 with status 0
+run-analyst.sh: event stream at /Users/chesterismay/repos/oreilly-agent-sessions/monday-morning-agent/episode-1/rulings/run-2026-10-12-082420.jsonl
+run-analyst.sh: ruling at /Users/chesterismay/repos/oreilly-agent-sessions/monday-morning-agent/episode-1/rulings/ruling-2026-10-12-082420.md (381 words above the commands)
+run-analyst.sh: run page at /Users/chesterismay/repos/oreilly-agent-sessions/monday-morning-agent/episode-1/rulings/run-2026-10-12-082420.html

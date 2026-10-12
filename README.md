@@ -44,7 +44,7 @@ flowchart TB
 | `analyst.md` | The policy: eight sections, about 1,000 words. Who the agent is, its one tool, how to turn a claim into a question, answer it twice, show every filter, what it may not say, the shape of the ruling, the allowlist |
 | `analyst-outline.md` | The same file with only its eight headings: what the episode starts from and fills in on air, and the place to start your own |
 | `query-plays.mjs` | The one tool. Sorts every team's game by the share of its plays that were runs, cuts them into equal groups, and reports each group's win rate under the filters given. `node ./query-plays.mjs --help` lists the filters |
-| `run-analyst.sh` | The runner: `claude -p` with your claim as the prompt, the policy as the system prompt, and a one-line allowlist |
+| `run-analyst.sh` | The runner: `claude -p` with your claim as the prompt, the policy as the system prompt, and a one-line allowlist. It also holds the policy's word limit: a ruling over 350 words above the commands goes back to the model once with "shorten it", and if it is still over, the run fails with an OVER LIMIT line |
 | `show-run.mjs` | Turns the agent's event stream into what you see: each tool call with its filters and result as it lands, then the ruling |
 | `render-run.mjs` | Writes the same run as one page, `rulings/run-<stamp>.html`: the ruling first, then each call down a clock with its filters as a funnel and its result as a table and a bar. The runner opens it when the run ends; `node ./render-run.mjs rulings/run-<stamp>.jsonl` rebuilds it for an older run |
 | `season-sheet.mjs` | The answer on one page: asks the tool nine questions for a set of seasons (whole game, each half, the first half of games close at halftime, close games, the regular season, the playoffs) and writes them as one sheet with a verdict on the claim, by a rule printed on the page. `--seasons 2026` for this season, `--open` to open it, `--out` to put it anywhere. Written to `rulings/` by default, so a sheet is not public until it is published on purpose |
@@ -53,7 +53,7 @@ flowchart TB
 | `fetch-espn.mjs` | The fallback for this season: when nflverse has not yet published a game that has been played, fills it from ESPN's game summaries in the same 18 columns, and only until nflverse has it. `fetch-data.sh` runs it; `--check` only reports |
 | `build-explorer-data.mjs` | Asks the tool every question the explorer page's buttons can ask and saves the answers |
 | `build-plays-data.mjs` | Describes the plays file for the page that reads it: every column in the download with the kept ones and the betting lines marked, the counts, and every play of the latest week's games |
-| `examples/` | A tool read (text and JSON), the policy, and a ruling on a claim the tool cannot answer. The rulings on the episode's claim, with one run as it looked on screen and a bet the agent declined, go up here after the episode airs on October 12, 2026 |
+| `examples/` | A tool read (text and JSON), the policy, one run as it looked on screen, and three rulings: the episode's claim, a bet it declined, and a claim the tool cannot answer. The run and the first two rulings are from the episode on October 12, 2026 |
 | `rehearse.sh` | `tool`, `claims`, `verify`, `freeze`: the rehearsal beats as subcommands |
 
 ### How `query-plays.mjs` works
@@ -112,8 +112,9 @@ node ./query-plays.mjs --seasons 2021-2025 --half 1
 
 A run takes about 15 seconds and makes five tool calls for that claim. The ruling is
 saved under `rulings/`, and the whole run opens in your browser as one page when it
-ends (`ANALYST_NO_OPEN=1` writes the page without opening it). To refresh this season
-yourself: `./fetch-data.sh 2026`.
+ends (`ANALYST_NO_OPEN=1` writes the page without opening it). A ruling that runs over
+the policy's 350 words goes back to the model once, and the page then shows both
+versions. To refresh this season yourself: `./fetch-data.sh 2026`.
 
 ### What the numbers say
 
@@ -127,9 +128,15 @@ Five seasons, the teams that ran most against the teams that ran least:
 | First half, games within 3 points at halftime | 46.3% | 55.3% | -9.0 points |
 
 Running early and running late tell two different stories, and holding the halftime
-score close tells a third. Which one the agent ruled on, and why, is given on the
-episode on October 12, 2026, and goes up here afterward. One filter changes the story,
-which is why the tool prints every filter and the policy makes the agent read them.
+score close tells a third. Across all games, running early goes with a small edge. Hold
+the halftime score within 3 points and the edge turns to -9.0: the teams that ran least
+early won more. Running late goes with an enormous gap, and teams that are ahead run to
+use the clock. The agent ruled on October 12, 2026 that the claim does not hold; its
+ruling is in `examples/05-ruling.md`, and the evidence is on two season sheets,
+[five seasons](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2021-2025.html)
+and [this season](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2026.html).
+One filter changes the story, which is why the tool prints every filter and the policy
+makes the agent read them.
 
 ## What this agent does not do
 

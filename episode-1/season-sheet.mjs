@@ -124,12 +124,35 @@ ${gaps ? `<div class="evidence"><div><b>${gaps.early.toFixed(1)}</b><span>points
 <p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it. It reads the first half of games within 3 points at halftime: under 100 team-games per group is too few to rule; a gap under 5 points does not hold as stated; a gap of 10 or more holds in part; between the two is mixed. This is the page's rule, not the agent's. Every number is the tool's.</p>
 </div></div>`
 
+// The icons and the link preview, by absolute URL so the sheet carries them from rulings/
+// and from docs/ alike. The preview image is the episode's.
+const META_SITE = 'https://ismayc.github.io/monday-morning-agent'
+const metaUrl = `${META_SITE}/episode-1/season-sheet-${SEASONS}.html`
+const metaDesc = thisSeason
+  ? `Nine questions about establishing the run, asked of the ${SEASONS} season through the games of ${longDate(latest)}, with the tool's own numbers and a verdict by a rule stated on the page.`
+  : `Nine questions about establishing the run, answered from every play of ${SEASONS.replace('-', ' through ')}, with the tool's own numbers and a verdict by a rule stated on the page.`
 const html = `<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>${esc(title)}</title>
+<meta name="description" content="${esc(metaDesc)}">
+<link rel="icon" href="${META_SITE}/favicon.svg" type="image/svg+xml">
+<link rel="icon" href="${META_SITE}/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="${META_SITE}/apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="${esc(title)}">
+<meta property="og:description" content="${esc(metaDesc)}">
+<meta property="og:url" content="${metaUrl}">
+<meta property="og:image" content="${META_SITE}/episode-1/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="You have to establish the run. Three bars from 0 to 100 percent of games won, for the whole game, the first half, and the first half of games close at halftime.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="${esc(title)}">
+<meta name="twitter:description" content="${esc(metaDesc)}">
+<meta name="twitter:image" content="${META_SITE}/episode-1/og-image.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">

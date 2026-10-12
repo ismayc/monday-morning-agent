@@ -19,42 +19,71 @@ const num = (s) => Number(String(s).replace(/,/g, ''))
 const fmt = (n) => n.toLocaleString('en-US')
 
 // ------------------------------------------------- the run, from the event stream
-// Items in order: { kind: 'note', at, text } and { kind: 'call', n, at, command, text, error }.
-// `at` is m:ss since the run started when the live view supplies it, else ''.
-export function runFromStream(text) {
-  const run = { items: [], ruling: null, seconds: null, calls: 0, denied: 0, status: 1 }
+// Items in order: { kind: 'note', at, text }, { kind: 'call', n, at, command, text, error },
+// and { kind: 'ruling', at, text, words }: a ruling the runner sent back for a shorter one.
+// `at` is m:ss since the run started. The live view supplies it from its own clock; from a
+// saved stream it comes from the events' timestamps against the start in the file's name,
+// or, failing that, the last event's time minus the run's duration.
+// The words the policy limits are the ones above the "Commands run" line (the same count
+// as run-analyst.sh makes with sed and wc).
+export const wordsAbove = (md) => (String(md || '').split(/^.*\*\*Commands run/m)[0].match(/\S+/g) || []).length
+const mss = (ms) => { const s = Math.max(0, Math.round(ms / 1000)); return `${Math.floor(s / 60)}:${String(s % 60).padStart(2, '0')}` }
+// run-analyst.sh names each run by its start, to the second, in local time
+// (run-2026-10-12-082420.jsonl). That is the live clock's zero, so a page or a replay made
+// from the file can show the same clock. `claude -p` spends several seconds before its
+// first event, and its duration_ms leaves them out, so the events alone put the zero late.
+export const startFromName = (path) => {
+  const m = String(path || '').match(/run-(\d{4})-(\d\d)-(\d\d)-(\d\d)(\d\d)(\d\d)\.jsonl$/)
+  return m ? new Date(+m[1], m[2] - 1, +m[3], +m[4], +m[5], +m[6]).getTime() : null
+}
+export function runFromStream(text, limit = 350, start = null) {
+  const run = { items: [], ruling: null, seconds: null, calls: 0, denied: 0, status: 1, shortened: 0, limit }
   const pending = new Map()
   let heldText = null
+  let ts = null, firstTs = null, lastTs = null, t0 = start
   for (const line of String(text).split('\n')) {
     let ev
     try { ev = JSON.parse(line) } catch { continue }
+    if (ev.timestamp) { ts = Date.parse(ev.timestamp); if (firstTs === null) firstTs = ts; lastTs = ts }
     if (ev.type === 'assistant') {
       for (const part of ev.message?.content || []) {
-        if (part.type === 'text' && part.text.trim()) { if (heldText) run.items.push(heldText); heldText = { kind: 'note', at: '', text: part.text.trim() } }
+        if (part.type === 'text' && part.text.trim()) { if (heldText) run.items.push(heldText); heldText = { kind: 'note', ts, text: part.text.trim() } }
         if (part.type === 'tool_use') {
           if (heldText) { run.items.push(heldText); heldText = null }
           run.calls++
-          pending.set(part.id, { kind: 'call', n: run.calls, at: '', command: part.input?.command || JSON.stringify(part.input) })
+          pending.set(part.id, { kind: 'call', n: run.calls, ts, command: part.input?.command || JSON.stringify(part.input) })
         }
       }
     } else if (ev.type === 'user') {
       for (const part of ev.message?.content || []) {
         if (part.type !== 'tool_result') continue
-        const call = pending.get(part.tool_use_id) || { kind: 'call', n: '?', at: '', command: '(unknown call)' }
+        const call = pending.get(part.tool_use_id) || { kind: 'call', n: '?', ts, command: '(unknown call)' }
         pending.delete(part.tool_use_id)
         const body = Array.isArray(part.content) ? part.content.map(c => c.text || '').join('\n') : part.content
         if (part.is_error) run.denied++
         run.items.push({ ...call, text: String(body ?? ''), error: !!part.is_error })
       }
     } else if (ev.type === 'result') {
+      // A second result on the same stream is the runner's retry: the first ruling ran over
+      // the limit and went back to the model once. Keep it in the log, where it happened.
+      if (run.ruling !== null) {
+        run.shortened++
+        run.items.push({ kind: 'ruling', ts: run.rulingTs, text: run.ruling, words: wordsAbove(run.ruling) })
+      }
       run.ruling = ev.result || ''
+      run.rulingTs = ts
       run.status = ev.is_error ? 1 : 0
-      run.seconds = ev.duration_ms ? Math.round(ev.duration_ms / 1000) : null
+      if (ev.duration_ms) run.seconds = (run.seconds || 0) + Math.round(ev.duration_ms / 1000)
+      if (t0 === null && lastTs !== null && ev.duration_ms) t0 = lastTs - ev.duration_ms
       if (heldText && heldText.text !== run.ruling.trim()) run.items.push(heldText)
       heldText = null
     }
   }
   if (heldText) run.items.push(heldText)
+  if (t0 === null) t0 = firstTs
+  for (const it of run.items) { it.at = it.ts != null && t0 !== null ? mss(it.ts - t0) : ''; delete it.ts }
+  run.words = run.ruling === null ? null : wordsAbove(run.ruling)
+  run.started = t0 !== null ? new Date(t0).toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }) : ''
   return run
 }
 
@@ -178,16 +207,20 @@ ${mids.map(r => `<div class="mk mid" style="left:${r.winRate}%"></div>`).join(''
 }
 
 export function renderRun(run) {
+  const limit = run.limit || 350
   const items = run.items.map(it => it.kind === 'call' ? callHtml(it)
+    : it.kind === 'ruling' ? `<section class="note">${clock(it.at)}<div><p class="warn">First ruling: ${it.words} words above the commands, over the limit of ${limit}. The runner sent it back once: shorten it.</p><div class="ruling first">${rulingHtml(it.text)}</div></div></section>`
     : `<section class="note">${clock(it.at)}<p>${esc(it.text).replace(/\n+/g, '<br>')}</p></section>`).join('\n')
   const verdict = labeledLine(run.ruling, 'Ruling')
   const claim = run.claim || labeledLine(run.ruling, 'The claim')
   const claimNote = run.claim ? '' : ' <span class="restated">(as the agent restated it; the stream does not carry the claim)</span>'
+  const words = run.words ?? (run.ruling ? wordsAbove(run.ruling) : null)
   const meta = [
     run.started ? `Started ${esc(run.started)}` : '',
     `${run.calls} tool call${run.calls === 1 ? '' : 's'}`,
     `${run.denied} refused or failed`,
     run.seconds !== null && run.seconds !== undefined ? `${run.seconds} seconds` : '',
+    words === null ? '' : `${words} words above the commands${run.shortened ? ', shortened once' : ''}${words > limit ? `, over the limit of ${limit}` : ''}`,
   ].filter(Boolean).join('. ') + '.'
   return `<!DOCTYPE html>
 <html lang="en">
@@ -287,6 +320,9 @@ export function renderRun(run) {
   .ruling p.call { background: var(--yellow); color: var(--black); padding: 8px 12px; }
   .ruling code { background: var(--faint); padding: 1px 5px; }
   .ruling pre { margin-top: 12px; font-family: var(--code); font-size: 14px; background: var(--faint); padding: 10px 14px; overflow-x: auto; }
+  .note .warn { margin-top: 2px; }
+  .ruling.first { margin-top: 10px; padding-top: 0; border-top: 0; color: var(--soft); }
+  .ruling.first p.call { background: var(--faint); color: var(--ink); }
   footer { margin-top: 60px; padding-top: 14px; border-top: 1px solid var(--edge); font-size: 14.5px; color: var(--soft); }
   footer p { max-width: 90ch; }
   @media (max-width: 640px) { .log > h2 { padding-left: 0; } .log > section { grid-template-columns: 1fr; } .clock::after { display: none; } .log > section > :last-child { border-left: 0; padding-left: 0; } }
@@ -319,12 +355,12 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
   const src = process.argv[2]
   if (!src) { console.error('usage: node ./render-run.mjs rulings/run-<stamp>.jsonl [out.html]'); process.exit(64) }
   const out = process.argv[3] || src.replace(/\.jsonl$/, '') + '.html'
-  const run = runFromStream(readFileSync(src, 'utf8'))
+  const run = runFromStream(readFileSync(src, 'utf8'), Number(process.env.ANALYST_WORD_LIMIT) || 350, startFromName(src))
   // `claude -p` does not echo the prompt into the stream, so an older run's page takes its
-  // claim from the ruling's own restatement (and says so). A live run passes the claim in.
+  // claim from the ruling's own restatement (and says so). run-analyst.sh passes the claim in.
   run.claim = process.env.CLAIM || ''
   run.streamPath = src
   run.rulingPath = src.replace(/run-(.*)\.jsonl$/, 'ruling-$1.md')
   writeFileSync(out, renderRun(run))
-  console.log(`render-run: wrote ${out} (${run.calls} tool calls, ${run.denied} refused${run.ruling ? '' : ', no ruling'})`)
+  console.log(`render-run: wrote ${out} (${run.calls} tool calls, ${run.denied} refused${run.ruling ? `, ${run.words} words above the commands` : ', no ruling'}${run.shortened ? ', shortened once' : ''})`)
 }

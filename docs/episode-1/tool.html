@@ -173,14 +173,15 @@ NOT IN THIS OUTPUT</pre></div>
 </section>
 
 <section id="runner" data-nav="The runner">
-  <h2>The runner: run-analyst.sh, in five beats</h2>
-  <p>The tool above is what the agent calls. The runner is what you call: a shell script of about ninety lines that hands the agent one claim and makes its work visible. Top to bottom, it does five things.</p>
+  <h2>The runner: run-analyst.sh, in six beats</h2>
+  <p>The tool above is what the agent calls. The runner is what you call: a shell script of about 120 lines that hands the agent one claim and makes its work visible. Top to bottom, it does six things.</p>
   <div class="rows">
     <div><b>1. Takes the claim</b><span>From the command line, or from <code>claim.txt</code> when you give none. A claim with a quotation mark inside it goes in the file.</span></div>
     <div><b>2. Hands over the policy</b><span>It reads <code>analyst.md</code> and passes it to <code>claude -p</code> as the system prompt. The <a class="term" href="./#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> is the only thing written for this show; the model is unchanged.</span></div>
     <div><b>3. Sets the allowlist</b><span>One line: <code>Bash(node ./query-plays.mjs:*)</code>. This exact script, any arguments, and nothing else: no file reads, no writes, no network. The policy says it; this line enforces it.</span></div>
     <div><b>4. Streams the run</b><span>It asks for the event stream instead of one answer at the end, and pipes it through <code>show-run.mjs</code>, which prints each tool call as it lands, with the <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> and the result, and saves the <a class="term" href="./#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a> under <code>rulings/</code>.</span></div>
     <div><b>5. Opens the run as a page</b><span>When the run ends, <code>render-run.mjs</code> writes the whole run as one page, the ruling first and every call down a clock, and the runner opens it. A terminal is a hard place to read five tool calls.</span></div>
+    <div><b>6. Holds the word limit</b><span>The policy says under 350 words, and on its own the model runs over about half the time. The runner counts the words above the commands. Over the limit, the ruling goes back to the model once, with "shorten it" and no tools, and the page shows both rulings. Still over, the run fails with an OVER LIMIT line. Beat 3 is the same idea: the policy asks, the runner enforces.</span></div>
   </div>
   <p style="margin-top:16px">Nothing in the runner computes a number. It moves the claim, the policy, and the tool's printout between the pieces, and writes down what happened.</p>
 </section>
