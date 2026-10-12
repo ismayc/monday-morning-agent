@@ -271,7 +271,8 @@
       $('field').setAttribute('aria-label', 'Teams that ran most won ' + pct(rt / 100) + ', teams that ran least won ' + pct(rb / 100));
       a.result.forEach(function (r, i) {
         var tr = el('tr', i === 0 ? 'rmost' : i === a.result.length - 1 ? 'rleast' : '');
-        var name = el('td'); name.appendChild(el('span', '', r.group === 'ran most' ? 'Ran most' : r.group === 'ran least' ? 'Ran least' : 'Group ' + (i + 1)));
+        // Numbered from the top like the tool's own table: "1 Ran most", "2", "3", "4 Ran least".
+        var name = el('td'); name.appendChild(el('span', '', r.group === 'ran most' ? (i + 1) + ' Ran most' : r.group === 'ran least' ? (i + 1) + ' Ran least' : String(i + 1)));
         tr.appendChild(name);
         tr.appendChild(el('td', '', pct(r.from) + ' to ' + pct(r.to)));
         tr.appendChild(el('td', 'num', num(r.n)));

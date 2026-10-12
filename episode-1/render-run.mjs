@@ -81,8 +81,15 @@ export function parseTool(text) {
       if (m) t.filters.push({ n: +m[1], label: m[2], left: num(m[3]) })
     } else if (section === 't') t.then.push(l.trim())
     else if (section === 'r') {
-      const m = l.match(/^\s*(ran most|ran least|group \d+)\s+([\d.]+% to [\d.]+%)\s+(\d+)\s+(\d+)\s+([\d.]+)%\s*$/)
-      if (m) t.rows.push({ group: m[1], share: m[2], teamGames: +m[3], wins: +m[4], winRate: +m[5] })
+      // Rows print as "1  ran most", "2", "3", "4  ran least" (query-plays.mjs). The
+      // bare name stays in `group` for the class and the field; `label` is the row as printed.
+      // Runs saved before October 12, 2026 print the bare name ("ran most", "group 2") and still parse.
+      const m = l.match(/^\s*(?:(\d+)(?:\s+(ran most|ran least))?|(ran most|ran least|group \d+))\s+([\d.]+% to [\d.]+%)\s+(\d+)\s+(\d+)\s+([\d.]+)%\s*$/)
+      if (m) {
+        const group = m[2] || m[3] || `group ${m[1]}`
+        const label = m[3] || (m[2] ? `${m[1]}  ${m[2]}` : m[1])
+        t.rows.push({ group, label, share: m[4], teamGames: +m[5], wins: +m[6], winRate: +m[7] })
+      }
       const g = l.match(/gap, ran most minus ran least: (-?[\d.]+) points/)
       if (g) t.gap = +g[1]
     }
@@ -152,7 +159,7 @@ function callHtml(item) {
   }).join('\n')
   const rows = t.rows.map(r => {
     const cls = r.group === 'ran most' ? ' class="rmost"' : r.group === 'ran least' ? ' class="rleast"' : ''
-    return `<tr${cls}><td><span>${esc(r.group)}</span></td><td>${esc(r.share)}</td><td class="num">${fmt(r.teamGames)}</td><td class="num">${fmt(r.wins)}</td><td class="num">${r.winRate.toFixed(1)}%</td></tr>`
+    return `<tr${cls}><td><span>${esc(r.label)}</span></td><td>${esc(r.share)}</td><td class="num">${fmt(r.teamGames)}</td><td class="num">${fmt(r.wins)}</td><td class="num">${r.winRate.toFixed(1)}%</td></tr>`
   }).join('\n')
   const most = t.rows.find(r => r.group === 'ran most'), least = t.rows.find(r => r.group === 'ran least')
   const mids = t.rows.filter(r => r !== most && r !== least)

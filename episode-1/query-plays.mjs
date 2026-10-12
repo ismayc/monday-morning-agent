@@ -215,9 +215,13 @@ L.push(`  ${fmt(teamGames.length)} team-games kept, sorted by rush share, cut in
 L.push('')
 L.push('RESULT')
 L.push('  group        rush share          team-games   wins   win rate')
-for (const r of table) {
-  L.push(`  ${r.group.padEnd(12)} ${(pct(r.shareFrom) + ' to ' + pct(r.shareTo)).padEnd(19)} ${String(r.teamGames).padStart(10)} ${String(r.wins).padStart(6)} ${pct(r.winRate).padStart(10)}`)
-}
+table.forEach((r, i) => {
+  // Every row is numbered from the top, so the named ends read as the first and
+  // last of the same four groups: "1  ran most", "2", "3", "4  ran least". The
+  // JSON keeps the bare names; season-sheet.mjs and the explorer read those.
+  const label = r.group.startsWith('group ') ? String(i + 1) : `${i + 1}  ${r.group}`
+  L.push(`  ${label.padEnd(12)} ${(pct(r.shareFrom) + ' to ' + pct(r.shareTo)).padEnd(19)} ${String(r.teamGames).padStart(10)} ${String(r.wins).padStart(6)} ${pct(r.winRate).padStart(10)}`)
+})
 if (gap !== null) L.push(`  gap, ran most minus ran least: ${(100 * gap).toFixed(1)} points`)
 for (const w of warnings) L.push('', `  ${w}`)
 L.push('', 'NOT IN THIS OUTPUT', `  ${out.notInThisOutput}`)
