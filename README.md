@@ -15,16 +15,24 @@ the tool, the data, the runner, and real output. One page folder per episode und
 `docs/episode-N/`. The dictionary the agent writes from episode 2 on sits at the root,
 [`dictionary/`](dictionary/), because every later episode cites it.
 
-| # | The argument | Airs | What the agent learns | Where |
-|---|---|---|---|---|
-| 1 | "You have to establish the run." | October 12, 2026 (aired) | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
-| 2 | "Ban the tush push." | October 26, 2026 | Durable memory: a dictionary it writes and must cite from then on | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
-| 3 | "Kickers are too good now." | November 9, 2026 | Written rules for its charts | with the episode |
-| 4 | The pundit audit, claim chosen by the room | November 23, 2026 | A second agent as a standing fact-checker | with the episode |
-| 5 | "Coaches are cowards on fourth down." | December 7, 2026 | A written line it describes up to and declines to cross: no predictions | with the episode |
-| 6 | The mailbag, from the previous Q&A | January 11, 2027 | Working a queue of vague requests it did not choose | with the episode |
-| 7 | The agent writes its own column | January 25, 2027 | Choosing its own questions, checked before it ships | with the episode |
-| 8 | Two weeks unattended | February 8, 2027 | Running on a schedule, where the refusals matter more than the answers | with the episode |
+| # | The argument | Airs | The capability, in the registration page's words | What that means here | Where |
+|---|---|---|---|---|---|
+| 1 | "You have to establish the run." | October 12, 2026 (aired) | Transparent queries | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
+| 2 | "Ban the tush push." | October 26, 2026 | Shared data definitions as durable memory | A dictionary the agent writes and must cite from then on, and every later episode inherits | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
+| 3 | "Kickers are too good now." | November 9, 2026 | Consistent visualizations | Written rules for its charts | with the episode |
+| 4 | The pundit audit, claim chosen by the room | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room votes on the claim in episode 3's Q&A | with the episode |
+| 5 | "Coaches are cowards on fourth down." | December 7, 2026 | Operational boundaries | A written line it describes up to and declines to cross: no predictions | with the episode |
+| 6 | The mailbag, from the previous Q&A | January 11, 2027 | Request triage | Working a queue of vague requests it did not choose, from episode 5's Q&A | with the episode |
+| 7 | The agent writes its own column | January 25, 2027 | Self-directed analysis | Choosing its own questions, checked before it ships | with the episode |
+| 8 | Two weeks unattended | February 8, 2027 | Scheduled autonomy | Running on a schedule, where the refusals matter more than the answers | with the episode |
+
+The registration page also promises three things across the season: connecting an agent to
+real data and turning a plain question into reproducible analysis (episodes 1 and 2),
+making it reliable by validating its output, enforcing guardrails, and knowing when to
+refuse (the runner's checks from episode 1 on, the declines in every episode, the boundary in
+episode 5), and moving from copilot to autonomy through memory, triage, self-directed
+analysis, and scheduled work (episodes 2, 6, 7, and 8). Nothing in it predicts a game or
+touches a betting line.
 
 Every page has the same strip across the top, which stays put as you scroll, and a term
 with a dotted underline shows its definition on hover and links to that episode's

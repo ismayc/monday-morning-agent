@@ -100,12 +100,12 @@
 
 <section id="diagram" data-nav="When it runs">
   <h2>What happens when it runs</h2>
-  <p>Six stages, top to bottom, the same every time. A search skips the dictionary and stops after the first three filters. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --play tush-push --seasons 2021-2025</code>, on October 12, 2026, with the reference definition on file as a rehearsal <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>.</p>
+  <p>Six stages, top to bottom, the same every time. A search skips the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> and stops after the first three <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --play tush-push --seasons 2021-2025</code>, on October 12, 2026, with the reference definition on file as a rehearsal <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>.</p>
 
   <div class="flow">
     <div class="stage">
       <i>1</i>
-      <div><h3>Read the command</h3><p>It reads the <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a> typed after its name and checks each one. A flag it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant. A search with a team or a downs flag stops too.</p><p class="where">Lines 105 to 152</p></div>
+      <div><h3>Read the command</h3><p>It reads the filters typed after its name and checks each one. A flag it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant. A search with a team or a downs flag stops too.</p><p class="where">Lines 105 to 152</p></div>
       <div><p class="eg">In the example</p><pre>--play tush-push      the dictionary entry to apply
 --seasons 2021-2025   five seasons
 everything else       left at its default</pre></div>
