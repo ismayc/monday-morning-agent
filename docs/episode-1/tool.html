@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
 <style>
   /* The diagram: six stages, top to bottom. Each stage is one row of the sheet: its
      number, what the code does, and what that looks like for one real command. */
@@ -75,7 +76,7 @@
 <h1 class="long">How query-plays.mjs works</h1>
 <p class="lead">This is the one program the agent is allowed to run. It reads one file, throws out the plays the <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> exclude, counts what is left, and prints both the count and every filter it used. It is short enough to read in one sitting, and it was written before the agent existed.</p>
 
-<section id="language">
+<section id="language" data-nav="Written in">
   <h2>What it is written in</h2>
   <div class="rows">
     <div><b>JavaScript</b><span>One file, 224 lines. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
@@ -85,7 +86,7 @@
   </div>
 </section>
 
-<section id="diagram">
+<section id="diagram" data-nav="When it runs">
   <h2>What happens when it runs</h2>
   <p>Six stages, top to bottom, the same every time. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --seasons 2021-2025 --half 1</code>, on October 11, 2026.</p>
 
@@ -160,7 +161,7 @@ NOT IN THIS OUTPUT</pre></div>
   <p style="margin-top:16px">The agent reads that printout and nothing else. It never sees a play.</p>
 </section>
 
-<section id="never">
+<section id="never" data-nav="Never does">
   <h2>What it never does</h2>
   <p>These are properties of the code, not promises in a prompt. You can confirm each one by reading the file.</p>
   <div class="never">
@@ -171,7 +172,7 @@ NOT IN THIS OUTPUT</pre></div>
   </div>
 </section>
 
-<section id="runner">
+<section id="runner" data-nav="The runner">
   <h2>The runner: run-analyst.sh, in five beats</h2>
   <p>The tool above is what the agent calls. The runner is what you call: a shell script of about ninety lines that hands the agent one claim and makes its work visible. Top to bottom, it does five things.</p>
   <div class="rows">
@@ -184,7 +185,7 @@ NOT IN THIS OUTPUT</pre></div>
   <p style="margin-top:16px">Nothing in the runner computes a number. It moves the claim, the policy, and the tool's printout between the pieces, and writes down what happened.</p>
 </section>
 
-<section id="see">
+<section id="see" data-nav="See it">
   <h2>See it for yourself</h2>
 <pre class="cmd"><span class="c"># the example on this page</span>
 node ./query-plays.mjs --seasons 2021-2025 --half 1

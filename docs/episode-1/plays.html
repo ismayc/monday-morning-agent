@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
 <style>
   button { font: inherit; color: inherit; cursor: pointer; }
 
@@ -99,7 +100,7 @@
 <h1 class="long">Every play is one row. The agent reads eighteen columns of it.</h1>
 <p class="lead">Behind the scenes the plays are one CSV file: about a quarter of a million lines of plain text, downloaded from nflverse and cut down by a small script. Nobody should need a terminal command to look at a file like that, so this page reads it for you: which columns survived the cut, every play of last week's games, and how many plays there are.</p>
 
-<section id="cut">
+<section id="cut" data-nav="The cut">
   <h2>The cut: 372 columns to 18</h2>
   <p>Each play in the download has 372 columns: down, distance, the players, the weather, the play's description in words, and more. The agent's question needs 18 of them. Six of the others are betting lines. Those are not hidden from the agent; they are gone: the file it can reach does not have them.</p>
   <div class="tally"><span>372 in the download</span><span class="y"><b id="nkept">18</b> kept</span><span class="p"><b id="nbet">6</b> betting lines, cut on purpose</span><span><b id="nleft">348</b> others left behind</span></div>
@@ -107,7 +108,7 @@
   <p class="gridnote">Yellow is kept. Pink is a betting line, struck out. Everything else was left behind because the question never needs it, not because it is harmful.</p>
 </section>
 
-<section id="columns">
+<section id="columns" data-nav="The eighteen">
   <h2>The eighteen, one by one</h2>
   <p>What each column means, with its value on one real play from last week.</p>
   <div class="rows" id="cols">
@@ -132,7 +133,7 @@
   </div>
 </section>
 
-<section id="game">
+<section id="game" data-nav="Read a game">
   <h2 id="weekhead">Read a game</h2>
   <p id="weeklead">Every play of last week's games, in the order they happened, in the eighteen columns above. Pick a game.</p>
   <div class="games" id="games"></div>
@@ -145,7 +146,7 @@
   <p class="then">Gray rows are the ones the tool's play <a class="term" href="./#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> remove (filters 4 and 5 in its list): kickoffs, punts, kicks, penalties that wiped the play out, kneels, spikes, and rows with no team in possession. Yellow marks a run. The two lines above are the count the tool makes for each team: runs, passes, and the share that were runs.</p>
 </section>
 
-<section id="counts">
+<section id="counts" data-nav="How many plays">
   <h2>How many plays</h2>
   <div class="counts">
     <div>
@@ -164,7 +165,7 @@
   </div>
 </section>
 
-<section id="file">
+<section id="file" data-nav="The file">
   <h2>If you want the file itself</h2>
   <p>It is a CSV: plain text, one play per line, commas between the columns. Any spreadsheet opens it, and so does a terminal. These are the commands the show would otherwise have run on screen.</p>
 <pre class="cmd"><span class="c"># in episode-1/ of the repo</span>

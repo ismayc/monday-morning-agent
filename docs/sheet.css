@@ -27,8 +27,15 @@ code { font-family: var(--code); font-size: .88em; background: var(--faint); pad
 .top nav { display: flex; flex-wrap: wrap; gap: 4px 16px; font-weight: 500; font-size: 18px; }
 .top nav a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
 .top nav a[aria-current="page"] { background: var(--yellow); text-decoration: none; padding: 0 6px; }
+/* The second row, "On this page": the page's sections, built by sheet.js. One line that
+   scrolls sideways on a narrow screen rather than wrapping, so the strip stays short. */
+.top nav.sub { flex-basis: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0 14px; margin-top: 2px; padding-top: 6px; border-top: 1px solid var(--rule); font-size: 16px; white-space: nowrap; }
+.top nav.sub::-webkit-scrollbar { display: none; }
+.top nav.sub span { color: var(--soft); font-weight: 600; padding-right: 2px; }
+.top nav.sub a { text-decoration-thickness: 2px; }
+.top nav.sub a[aria-current="location"] { background: var(--yellow); text-decoration: none; padding: 0 6px; }
 /* Anchors land below the strip, not under it. */
-section, header, [id] { scroll-margin-top: 90px; }
+section, header, [id] { scroll-margin-top: 124px; }
 
 /* A term from the glossary: dotted underline, its definition on hover or focus, and a
    click takes you to the full entry. On touch screens there is no hover, so the tap goes

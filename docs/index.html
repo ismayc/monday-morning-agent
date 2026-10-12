@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="sheet.css">
+<script src="sheet.js" defer></script>
 <style>
   /* The season as a call sheet: one row per episode. The argument is the loud part. */
   .season { margin-top: 44px; border: 2px solid var(--ink); background: #fff; }
@@ -107,7 +108,7 @@
   </div>
 </div>
 
-<section id="spine">
+<section id="spine" data-nav="What ties them">
   <h2>What ties the eight together</h2>
   <p>In episode 1 a person reads every filter the agent uses. Each episode after that takes away one piece of that oversight and replaces it with something written down: a definition, a charting rule, a second agent that checks the first, a boundary, a schedule. By the finale the agent does the whole job alone, and the written rules are what make that safe.</p>
   <div class="rows">
@@ -118,12 +119,12 @@
   </div>
 </section>
 
-<section id="not">
+<section id="not" data-nav="What it does not do">
   <h2>What this agent does not do</h2>
   <p>No predictions, no odds, no wagering analysis, and no fantasy advice. That is a design decision, not a disclaimer. The public data carries betting-line columns, and the file the agent can reach does not include them. Deciding what an agent is not allowed to touch is part of building one you can trust.</p>
 </section>
 
-<section id="watch">
+<section id="watch" data-nav="Watch or build">
   <h2>Watch, or build along</h2>
   <div class="rows">
     <div><b><a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">Register for the live series</a></b><span>Mondays at 8:00 a.m. Pacific on O'Reilly: a 30-minute build, then 15 minutes of questions.</span></div>

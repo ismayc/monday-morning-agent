@@ -26,6 +26,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
 <link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
 <style>
   /* How it fits together: the sheet's cells, read top to bottom. */
   .chain { margin-top: 22px; max-width: 760px; border: 2px solid var(--ink); background: #fff; }
@@ -107,13 +108,13 @@
   <a class="go" href="explorer.html">Change the filters yourself</a>
 </header>
 
-<section id="minute">
+<section id="minute" data-nav="The setup">
   <h2>The setup in one minute</h2>
   <p>You hand the agent a claim. It turns the claim into a question, asks one small tool to count plays under <a class="term" href="#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> it chooses, and writes a short <a class="term" href="#term-ruling" data-def="The agent's answer: seven parts, under 350 words, ending with the commands it ran.">ruling</a>: the answer from five complete seasons, the answer from this season, and how far apart they are. The tool prints every filter it applied, so you can check the agent's work.</p>
   <p>The one thing written for this is a <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, a job description the agent follows. A run takes about fifteen seconds. This is episode 1 of <a href="../">an eight-episode O'Reilly live series</a>, and every number on this page is real.</p>
 </section>
 
-<section id="terms">
+<section id="terms" data-nav="The words">
   <h2>The words on these pages</h2>
   <p>Every number on the site comes from the same count, and the count uses a few words in a fixed way. Here they are, in the order the tool applies them. Wherever one of these words appears on a page with a dotted underline, hovering shows its definition and clicking brings you here.</p>
   <div class="rows glossary">
@@ -132,7 +133,7 @@
   </div>
 </section>
 
-<section id="existed">
+<section id="existed" data-nav="What existed">
   <h2>What already existed</h2>
   <p>None of this was made by the agent, and most of it was not made for the agent.</p>
   <div class="rows">
@@ -143,7 +144,7 @@
   </div>
 </section>
 
-<section id="shape">
+<section id="shape" data-nav="How it fits">
   <h2>How it fits together</h2>
   <p>Two kinds of work, kept apart. Counting plays has one right answer, so a small tool does it the same way every time. Deciding what to count, and what the count does and does not show, is judgment, and it follows a written <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>. The yellow cell is the only part that had to be written with care.</p>
   <div class="chain">
@@ -159,7 +160,7 @@
   </div>
 </section>
 
-<section id="run">
+<section id="run" data-nav="One run">
   <h2>What one run looks like</h2>
   <div class="run">
     <ol>
@@ -188,7 +189,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
   </div>
 </section>
 
-<section id="policy">
+<section id="policy" data-nav="The policy">
   <h2>The policy, in eight sections</h2>
   <p>The <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> is a Markdown file of about 1,000 words, written like a job description. Its headings run in the order the agent has to work: who it is, how it looks, how it asks, what it shows, what it may not say, and last, what it may run.</p>
   <div class="rows">
@@ -203,7 +204,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
   </div>
 </section>
 
-<section id="lessons">
+<section id="lessons" data-nav="What carries">
   <h2>What carries to your own agent</h2>
   <div class="carry">
     <div><b>Give the agent one door to the data</b><span>It does not write queries. It picks <a class="term" href="#term-filter" data-def="A rule that drops plays or whole games before counting. The tool prints each one in order.">filters</a> for one fixed tool. So you check the filters it chose, not code it wrote.</span></div>
@@ -215,7 +216,7 @@ node ./query-plays.mjs --seasons 2026 --half 2</pre>
   </div>
 </section>
 
-<section id="try">
+<section id="try" data-nav="Try it">
   <h2>Try it yourself</h2>
   <p>With nothing installed, <a href="explorer.html">the explorer page</a> shows the tool's real output for every combination of its buttons.</p>
   <p>To run the agent, you need a Mac or Linux machine with Node, git, and the Claude Code CLI signed in. The data is already in the repo.</p>
@@ -240,7 +241,7 @@ node ./query-plays.mjs --seasons 2021-2025 --half 1
   </div>
 </section>
 
-<section id="series">
+<section id="series" data-nav="The series">
   <h2>The rest of the series</h2>
   <p>This is episode 1 of eight. Each episode settles one argument and takes away one piece of human oversight, replacing it with something written down. <a href="../">All eight arguments are on the series page.</a> Next, on October 26, 2026: "Ban the tush push."</p>
 </section>
