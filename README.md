@@ -16,6 +16,13 @@ episode.
 - **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-1/map.html
 - **Five meanings of the claim, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-1/meanings.html
 - **The words the count uses (team-game, rush share, gap, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-1/#terms
+- **Episode 2, the short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-2/
+- **Change the definition of the play yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html
+- **How episode 2's tool works, the dictionary included:** https://ismayc.github.io/monday-morning-agent/episode-2/tool.html
+- **Where we are, episode 2 in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-2/map.html
+- **Five definitions of the tush push, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-2/definitions.html
+- **Episode 2's words (the defined play, primary passer, entry, cite, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-2/#terms
+- **The dictionary, the definitions the agent measures with:** [`dictionary/`](dictionary/), from episode 2 on
 
 Every page has the same strip across the top, which stays put as you scroll, and a term with a dotted underline shows its definition on hover and links to the glossary.
 
@@ -138,6 +145,86 @@ and [this season](https://ismayc.github.io/monday-morning-agent/episode-1/season
 One filter changes the story, which is why the tool prints every filter and the policy
 makes the agent read them.
 
+## Episode 2: "Ban the tush push."
+
+The play nobody can stop arguing about has no name in the data: not one of 260,927
+play descriptions, 2021 through the 2026 games of October 11, contains the words "tush
+push." So the agent has to define the play before it can judge it. It writes the
+definition into a dictionary at the root of this repo, the tool measures only by a
+written entry, and every ruling cites the entry it used. Everything else is in
+`episode-2/`.
+
+```mermaid
+flowchart TB
+    claim["A claim<br/>'Ban the tush push.'"]
+    policy["analyst.md<br/>the policy: nine sections, one new: Your dictionary"]
+    agent["The agent<br/>claude -p, allowed to run one script and write one kind of file"]
+    dict["dictionary/NAME.json<br/>one written definition per file; the runner<br/>appends every entry to the policy before a run"]
+    tool["query-plays.mjs<br/>read-only: prints the definition, every filter, then the result"]
+    data["data/plays.csv<br/>260,927 plays, 31 of 372 columns, no betting lines"]
+    ruling["One ruling<br/>the entry it used, five seasons, this season, the commands it ran"]
+    claim --> agent
+    policy --> agent
+    dict -- "fed back before every run" --> agent
+    agent -- "writes a new entry, never changes one" --> dict
+    agent -- "names the entry and the filters" --> tool
+    tool -- "reads one entry" --> dict
+    tool -- "reads" --> data
+    tool -- "definition, filters, and result" --> agent
+    agent --> ruling
+```
+
+| File | What it is |
+|---|---|
+| `analyst.md` | The policy: nine sections, about 1,400 words. Episode 1's eight plus "Your dictionary," third: search by name first, use an entry on file and never change it, write one when there is none, and cite it. The ruling has eight parts, the new one **Definition used**, under 400 words above the commands |
+| `analyst-outline.md` | The nine headings and nothing else |
+| `query-plays.mjs` | The one tool, 392 lines. `--search "WORDS" --seasons ...` counts the play descriptions containing the words, per season. `--play NAME --seasons ...` reads `dictionary/NAME.json`, prints it, applies the filters in order, and compares the defined play with every other rush with the same yards to go: plays, converted, rate, and the gap. With no entry of that name it stops with exit code 65 and prints the shape of one. `node ./query-plays.mjs --help` lists every flag |
+| `run-analyst.sh` | The runner: `claude -p` with your claim, the policy plus the dictionary as the system prompt, and a two-line allowlist (`Bash(node ./query-plays.mjs:*)` and `Edit(//<repo>/dictionary/*.json)`). It holds the word limit as in episode 1, and adds three memory checks: the dictionary appended before the run, the citation required after it (exit 69 if still missing after one retry), and any entry that was on file and changed put back (exit 70); a new entry the tool rejects fails the run (exit 71). `ANALYST_DICT_DIR` points it at another dictionary folder |
+| `show-run.mjs` | The live view: each tool call with its definition, filters, and result, each entry written shown in full, the ruling at the end |
+| `render-run.mjs` | The run as one page, `rulings/run-<stamp>.html`: the ruling and the entry it cites at the top, then a search's count per season, an entry written, and each comparison with its filter funnel, its bar, and its table |
+| `season-sheet.mjs` | The answer on one page: the name search, the entry quoted, nine situations as bars, by season and by team, and a verdict by a rule printed on the page. Written to `rulings/` by default |
+| `data/plays.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published, 31 columns with the play description last |
+| `slim-data.mjs`, `fetch-data.sh` | How that file is made, from the raw seasons episode 1 downloads, so nothing is downloaded twice |
+| `build-explorer-data.mjs` | Writes the explorer page's 54 definitions into a scratch dictionary, measures each for seven sets of seasons, and saves the answers |
+| `examples/` | The search by name, the tool refusing with no entry, and the policy. The run from the episode, its rulings, and the entry the agent wrote are added after October 26, 2026 |
+| `rehearse.sh` | `entry`, `tool`, `claims`, `verify`, `freeze`, `reset`: the rehearsal beats as subcommands, all writing into `rehearsal-runs/`, never into `../dictionary` |
+
+### The dictionary
+
+[`dictionary/`](dictionary/) holds the written definitions the agent measures with, one
+JSON file per entry: a name, the day it was written, the definition in plain words,
+four rules the data can apply (who carried, the yards to go, shotgun or not, the downs),
+what it is compared with, and what it cannot see. The agent may add an entry and may
+never change one; a different definition is a new entry with a new name. It sits at the
+root, not in `episode-2/`, because every later episode that measures a play cites it.
+Its [README](dictionary/README.md) gives the shape and every key. It is empty until the
+first entry, `tush-push`, is written on air on October 26, 2026.
+
+### Run it
+
+```
+cd monday-morning-agent/episode-2
+
+# the search by name
+node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+
+# a play with no entry: the tool stops and prints the shape of one
+node ./query-plays.mjs --play no-such-play --seasons 2021-2025
+
+# the agent, into a scratch dictionary so your copy of the real one stays as it is
+ANALYST_DICT_DIR=$(mktemp -d) ./run-analyst.sh "Ban the tush push."
+```
+
+With an empty dictionary a run takes under a minute: it searches by name, gets the
+tool's refusal, writes the entry, measures with it, and cites it. Leave out
+`ANALYST_DICT_DIR` and the agent reads and writes the repo's own `dictionary/`.
+
+### What the numbers say
+
+The answer goes up after the episode airs on October 26, 2026, with the season sheets
+for five seasons and for this season. Until then the tool's numbers for 54 definitions
+of the play are on [the explorer page](https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html).
+
 ## What this agent does not do
 
 No predictions, no odds, no wagering analysis, and no fantasy advice. That is a design
@@ -163,7 +250,7 @@ Week 4 games of 2026: the two sources agree on a team's runs and passes within t
 plays, and on rush share within 1.15 points.
 
 The site is `docs/`: the series page at the root and one folder per episode
-(`docs/episode-1/`), all sharing `docs/sheet.css` and the icons. The link-preview images
+(`docs/episode-1/`, `docs/episode-2/`), all sharing `docs/sheet.css` and the icons. The link-preview images
 and the icons are rendered from the `og-image.html` beside each image and from
 `docs/apple-touch-icon.html`; each file's first
 comment has the command (serve `docs/` locally first, since the preview source loads

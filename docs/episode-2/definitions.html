@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Five definitions of the tush push: the Monday Morning Agent</title>
+<meta name="description" content="Ask five fans what the tush push is and you get five answers. Five definitions, what each would take to measure, which ones the data can see, and the one the agent writes into its dictionary.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="Five definitions of the tush push">
+<meta property="og:description" content="Ask five fans what the tush push is and you get five answers. Which ones the data can see, and the one the agent writes into its dictionary.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-2/definitions.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ban the tush push. A big pink zero: plays named tush push in 260,927 play descriptions, 2021 to 2026, so the agent has to define it before it can judge it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Five definitions of the tush push">
+<meta name="twitter:description" content="Five definitions, which ones the data can see, and the one the agent writes into its dictionary.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  /* On air: one card per keypress. The cards keep their space from the start, so nothing
+     on screen moves when one appears. The next keypress shows which ones the data can see;
+     the last marks the one the agent writes. Without JavaScript every card shows, with its
+     marks. */
+  h1.long { max-width: 26ch; }
+  .lead { margin-top: 18px; }
+  .cards { margin-top: 30px; border: 2px solid var(--ink); background: #fff; }
+  .card { display: grid; grid-template-columns: 56px minmax(240px, 31%) 1fr auto; gap: 0 20px; align-items: center; padding: 13px 18px 14px; border-bottom: 2px solid var(--ink); transition: opacity .35s ease; }
+  .card:last-child { border-bottom: 0; }
+  .card i { font-style: normal; font-family: var(--display); font-weight: 700; font-size: 48px; line-height: .9; align-self: start; }
+  .card b { font-family: var(--display); font-weight: 600; font-size: clamp(24px, 2.6vw, 32px); line-height: 1.05; }
+  .card span { font-size: 16.5px; line-height: 1.35; color: var(--soft); max-width: 70ch; }
+  .card em { font-style: normal; color: var(--ink); font-weight: 500; }
+  .card .tag { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.1; text-align: center; border: 2px solid var(--ink); padding: 6px 12px; white-space: nowrap; visibility: hidden; }
+  .card .tag small { display: block; font-weight: 500; font-size: 15px; margin-top: 2px; }
+  .js .card:not(.on) { visibility: hidden; opacity: 0; }
+  .marked .card .tag, .noscript .card .tag { visibility: visible; }
+  .card.can .tag { background: var(--faint); }
+  .card .tag small.final { display: none; }
+  .noscript .card .tag small.final, .stage7 .card.ruled .tag small.final { display: block; }
+  .card.ruled { background: var(--yellow); }
+  .card.ruled span { color: var(--ink); }
+  .card.ruled .tag { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
+  .js .stage7 .card:not(.ruled) { opacity: .45; }
+  @media (max-width: 760px) { .card { grid-template-columns: 48px 1fr; align-items: start; } .card i { font-size: 40px; } .card span, .card .tag { grid-column: 2; } .card span { margin-top: 4px; } .card .tag { justify-self: start; margin-top: 8px; } }
+
+  .keys { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15.5px; color: var(--soft); align-items: center; }
+  .keys kbd { font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--ink); border: 1.5px solid var(--ink); padding: 0 7px; border-radius: 3px; background: #fff; }
+  .keys button { font: inherit; color: inherit; cursor: pointer; background: #fff; border: 2px solid var(--ink); padding: 2px 12px; font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); }
+  .keys button:hover { background: var(--yellow); }
+  .noscript .keys { display: none; }
+  .sources { margin-top: 56px; }
+  .sources p { max-width: 80ch; font-size: 16.5px; }
+</style>
+</head>
+<body class="noscript">
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html" aria-current="page">Five definitions</a><a href="./#terms">Terms</a><a href="explorer.html">Change the definition</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<h1 class="long">Ask five fans what the tush push is.</h1>
+<p class="lead">You get five answers. They are different definitions, and the data can see some of their clauses and not others. 260,927 plays, 31 columns each, and not one column says who pushed.</p>
+
+<div class="cards" id="cards" aria-live="polite">
+  <div class="card" data-n="1">
+    <i>1</i>
+    <b>The quarterback sneak, with teammates pushing from behind.</b>
+    <span>What it would take: who lined up behind the quarterback, and who pushed. <em>Not in the data: the columns name who carried the ball, not who pushed him.</em></span>
+    <div class="tag">Not in the data</div>
+  </div>
+  <div class="card can" data-n="2">
+    <i>2</i>
+    <b>A quarterback run with two or fewer yards to go, from under center.</b>
+    <span>What it would take: who carried (the <a class="term" href="./#term-primary-passer" data-def="The player with the most pass attempts for his team in that game: the quarterback, as the data can see it.">primary passer</a>, the quarterback as the data can see him), the yards to go, and the <a class="term" href="./#term-under-center" data-def="The quarterback took the snap a few yards back: the shotgun column is 1. The only formation detail in the data.">shotgun</a> column at 0. <em>Every clause is a column.</em></span>
+    <div class="tag">The data can see it<small class="final">The one the agent writes</small></div>
+  </div>
+  <div class="card" data-n="3">
+    <i>3</i>
+    <b>Any play from the Eagles' formation.</b>
+    <span>What it would take: where every player lined up before the snap. <em>Not in the data: the only formation detail in the 31 columns is shotgun or not.</em></span>
+    <div class="tag">Not in the data</div>
+  </div>
+  <div class="card can" data-n="4">
+    <i>4</i>
+    <b>Any quarterback run with one yard to go, any formation.</b>
+    <span>What it would take: who carried, and the yards to go. <em>The data can see both, and <a href="explorer.html">the explorer</a> can build it.</em></span>
+    <div class="tag">The data can see it</div>
+  </div>
+  <div class="card can" data-n="5">
+    <i>5</i>
+    <b>Any rush on third or fourth and short.</b>
+    <span>What it would take: the down, the yards to go, and a rush. <em>The data can see all three, and the explorer can build it. But it is not the play: it counts every handoff too.</em></span>
+    <div class="tag">The data can see it</div>
+  </div>
+</div>
+
+<div class="keys" id="keys">
+  <button type="button" id="next">Next</button>
+  <span><kbd>Space</kbd> next</span>
+  <span><kbd>Backspace</kbd> back</span>
+  <span><kbd>R</kbd> start over</span>
+  <span id="where"></span>
+</div>
+
+<section class="sources">
+  <h2>Where the argument stands</h2>
+  <p>In May 2025 the NFL voted on a proposal to ban the play. It got 22 votes to 10. A rule change needs 24, so the ban failed. No ban was proposed for 2026, so the play is legal this season.</p>
+  <p>The agent writes the second definition. It is the closest the 31 columns come to what fans mean, and its last line says what it cannot see: who pushed. That definition is page one of the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>. Every later <a class="term" href="./#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> that measures the play has to use it and <a class="term" href="./#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">cite</a> it, and a different definition has to be a new <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> with a new name. <a href="explorer.html">Change the definition yourself</a> and watch the answer move.</p>
+</section>
+
+<footer>
+  <p>Episode 2 of <a href="../">The Monday Morning Agent</a>, an O'Reilly live series. Plays from nflverse, CC BY 4.0.</p>
+</footer>
+
+</main>
+<script>
+(function () {
+  var body = document.body, cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var where = document.getElementById('where'), LAST = cards.length + 2, stage = 0;
+  var box = document.getElementById('cards');
+  body.className = 'js';
+  // #3 opens the page with three cards shown; #7 with everything marked.
+  var fromHash = parseInt(location.hash.slice(1), 10);
+  if (fromHash >= 0 && fromHash <= LAST) stage = fromHash;
+  function paint() {
+    cards.forEach(function (c, i) {
+      var n = i + 1;
+      c.classList.toggle('on', stage >= n);
+      c.classList.toggle('ruled', n === 2 && stage >= LAST);
+    });
+    box.classList.toggle('marked', stage >= cards.length + 1);
+    box.classList.toggle('stage7', stage >= LAST);
+    where.textContent = stage === 0 ? 'Nothing shown yet' : stage <= cards.length ? stage + ' of ' + cards.length : stage === cards.length + 1 ? 'The ones the data can see' : 'The one the agent writes';
+  }
+  function step(d) { stage = Math.max(0, Math.min(LAST, stage + d)); paint(); }
+  document.getElementById('next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (k === ' ' || k === 'Enter' || k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown') { e.preventDefault(); step(1); }
+    else if (k === 'Backspace' || k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp') { e.preventDefault(); step(-1); }
+    else if (k === 'r' || k === 'R' || k === 'Home') { e.preventDefault(); stage = 0; paint(); }
+  });
+  box.addEventListener('click', function (e) { if (e.target.closest('a')) return; step(1); });
+  paint();
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How query-plays.mjs works: episode 2 of the Monday Morning Agent</title>
+<meta name="description" content="A diagram of the one tool the agent may run in episode 2: 392 lines of JavaScript that search the play descriptions, or read one dictionary entry and measure the play it defines, printing every filter.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="How query-plays.mjs works, episode 2">
+<meta property="og:description" content="The one tool the agent may run, as a diagram: it searches the play descriptions, or reads one dictionary entry and measures the play it defines. It never measures a definition that is not written down.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-2/tool.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ban the tush push. A big pink zero: plays named tush push in 260,927 play descriptions, 2021 to 2026, so the agent has to define it before it can judge it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="How query-plays.mjs works, episode 2">
+<meta name="twitter:description" content="The one tool the agent may run, as a diagram. It never measures a definition that is not written down.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  /* The diagram: six stages, top to bottom, with the search branching off after the
+     shared filters. Each stage is one row of the sheet: its number, what the code does,
+     and what that looks like for one real command. */
+  .flow { margin-top: 26px; border: 2px solid var(--ink); background: #fff; }
+  .stage { display: grid; grid-template-columns: 74px 1fr 1fr; border-bottom: 2px solid var(--ink); }
+  .stage:last-child { border-bottom: 0; }
+  .stage > i { font-style: normal; font-family: var(--display); font-weight: 700; font-size: 58px; line-height: 1; padding: 12px 0 0; text-align: center; border-right: 2px solid var(--ink); }
+  .stage > div { padding: 14px 18px 16px; min-width: 0; }
+  .stage > div + div { border-left: 1px solid var(--rule); background: var(--sheet); }
+  .stage h3 { font-family: var(--display); font-weight: 700; font-size: 27px; line-height: 1.08; margin-bottom: 4px; }
+  .stage p { font-size: 16.5px; line-height: 1.45; }
+  .stage p + p { margin-top: 8px; }
+  .stage .where { font-size: 14px; color: var(--soft); margin-top: 8px; }
+  .stage.loud > i, .stage.loud > div:first-of-type { background: var(--yellow); }
+  .stage.branch > i { font-size: 30px; padding-top: 18px; background: var(--faint); }
+  .stage.branch > div:first-of-type { background: var(--faint); }
+  .eg { font-family: var(--display); font-weight: 600; font-size: 19px; margin-bottom: 6px; }
+  .stage pre { font-family: var(--code); font-size: 12.5px; line-height: 1.55; white-space: pre-wrap; word-break: break-word; }
+  .down { display: block; padding: 4px 18px 4px 92px; background: var(--faint); border-bottom: 2px solid var(--ink); font-size: 14.5px; color: var(--soft); }
+  .stop { display: inline-block; background: var(--pink); padding: 0 6px; }
+  ol.funnel { list-style: none; font-size: 14.5px; }
+  ol.funnel li { display: grid; grid-template-columns: 1fr auto; gap: 4px 12px; padding: 4px 0 6px; border-bottom: 1px solid var(--rule); }
+  ol.funnel li:last-child { border-bottom: 0; }
+  ol.funnel b { font-weight: 500; font-variant-numeric: tabular-nums; }
+  ol.funnel .bar { grid-column: 1 / -1; height: 6px; background: var(--faint); position: relative; }
+  ol.funnel .bar u { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); }
+  ol.funnel .bar s { position: absolute; top: 0; bottom: 0; background: var(--pink); }
+  @media (max-width: 820px) {
+    .stage { grid-template-columns: 54px 1fr; }
+    .stage > i { font-size: 44px; grid-row: span 2; }
+    .stage > div + div { border-left: 0; border-top: 1px solid var(--rule); }
+    .down { padding-left: 72px; }
+  }
+  .never { margin-top: 18px; display: grid; grid-template-columns: repeat(5, 1fr); border: 2px solid var(--ink); background: #fff; }
+  .never div { padding: 12px 16px 14px; border-right: 1px solid var(--rule); font-size: 16px; }
+  .never div:last-child { border-right: 0; }
+  .never div.new { background: var(--yellow); }
+  .never b { display: block; font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.1; margin-bottom: 3px; }
+  @media (max-width: 960px) { .never { grid-template-columns: 1fr 1fr; } .never div { border-bottom: 1px solid var(--rule); } .never div:nth-child(even) { border-right: 0; } .never div:last-child { grid-column: span 2; border-bottom: 0; } }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="./#terms">Terms</a><a href="explorer.html">Change the definition</a><a href="tool.html" aria-current="page">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<h1 class="long">How query-plays.mjs works</h1>
+<p class="lead">This is the one program the agent is allowed to run in episode 2. It answers two shapes of question: how many play descriptions contain some words, and how often a <a class="term" href="./#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a> <a class="term" href="./#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converts</a> against every other <a class="term" href="./#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> rush. For the second, it will not measure a play until the play is written down in the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>. It prints the definition it used and every <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a>, and it was written before the agent existed.</p>
+
+<section id="language" data-nav="Written in">
+  <h2>What it is written in</h2>
+  <div class="rows">
+    <div><b>JavaScript</b><span>One file, 392 lines, rewritten for this episode. The <code>.mjs</code> ending means it is a JavaScript module: a file that brings in other code with <code>import</code>.</span></div>
+    <div><b>Run by Node.js</b><span>Node.js is the program that runs JavaScript outside a web browser. You start the tool by typing <code>node ./query-plays.mjs</code> and then the <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>.</span></div>
+    <div><b>Nothing to install</b><span>It imports three things, and all three come with Node itself: <code>node:fs</code> to read a file, and <code>node:path</code> and <code>node:url</code> to find the data and the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> next to the script. There is no <code>package.json</code> and no <code>npm install</code>.</span></div>
+    <div><b>Not written by the agent</b><span>The agent does not write or change this code. It chooses the filters, and it writes dictionary <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entries</a>, which are data the tool reads, not code.</span></div>
+  </div>
+</section>
+
+<section id="modes" data-nav="Two questions">
+  <h2>Two shapes of question</h2>
+  <div class="rows">
+    <div><b>A search</b><span><code>--search "tush push" --seasons 2021-2026</code>. It counts the play descriptions that contain the words, in any case, season by season, with up to five examples. When nothing matches it says so: <code>NO MATCH</code>. It takes only the seasons, the season type, and the weeks.</span></div>
+    <div><b>A defined play against the field</b><span><code>--play tush-push --seasons 2021-2025</code>. It reads the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> of that name, keeps the rushes with the entry's yards to go or fewer, and splits them in two: the <a class="term" href="./#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a>, and every other <a class="term" href="./#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> rush. Then it counts how often each <a class="term" href="./#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converted</a>. Flags such as <code>--team</code>, <code>--not-team</code>, <code>--downs</code>, and <code>--by season</code> narrow both groups or split the result.</span></div>
+  </div>
+</section>
+
+<section id="diagram" data-nav="When it runs">
+  <h2>What happens when it runs</h2>
+  <p>Six stages, top to bottom, the same every time. A search skips the dictionary and stops after the first three filters. The left column is what the code does. The right column is what that looked like for one real command, <code>node ./query-plays.mjs --play tush-push --seasons 2021-2025</code>, on October 12, 2026, with the reference definition on file as a rehearsal <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>.</p>
+
+  <div class="flow">
+    <div class="stage">
+      <i>1</i>
+      <div><h3>Read the command</h3><p>It reads the <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a> typed after its name and checks each one. A flag it does not know, or a value that makes no sense, stops it right there with a message and <span class="stop">exit code 64</span>. It never guesses what you meant. A search with a team or a downs flag stops too.</p><p class="where">Lines 105 to 152</p></div>
+      <div><p class="eg">In the example</p><pre>--play tush-push      the dictionary entry to apply
+--seasons 2021-2025   five seasons
+everything else       left at its default</pre></div>
+    </div>
+    <span class="down">If every flag is valid, it goes on.</span>
+
+    <div class="stage loud">
+      <i>2</i>
+      <div><h3>Read one dictionary entry</h3><p>It opens <code>dictionary/tush-push.json</code>, and only that file, and checks every key against the entry's fixed shape. With no entry of that name it stops with <span class="stop">exit code 65</span> and prints the shape an entry takes. An entry with a missing key, an unknown key, or a value outside the choices stops it with exit code 64 and the reason.</p><p>It reads one entry and prints it before any filter. There is no flag for a definition made up on the spot, so whatever it measures has a written, named, dated definition, and the printout quotes it. A search skips this stage.</p><p class="where">Lines 54 to 103, called at 153 to 159; printed at 363 to 370</p></div>
+      <div><p class="eg">In the example</p><pre>DEFINITION, FROM THE DICTIONARY
+  dictionary/tush-push.json, written 2026-10-12
+    by a rehearsal, not the analyst
+  "A quarterback run with two or fewer yards to go,
+   not from shotgun."
+  rules: the runner is the team's primary passer
+    that game (the player with its most pass
+    attempts); not from shotgun; any down;
+    2 or fewer yards to go
+  compared with: every other rush with the same
+    yards to go
+  cannot see: who pushed the runner, or any
+    formation detail beyond shotgun or not</pre></div>
+    </div>
+    <span class="down">The definition is fixed before a single play is read.</span>
+
+    <div class="stage">
+      <i>3</i>
+      <div><h3>Load the plays</h3><p>It reads <code>data/plays.csv</code> into memory, one row per play. The play description is the last column, because it is the only one that can hold a comma. This is the only data file it opens, and it only reads it.</p><p class="where">Lines 161 to 193</p></div>
+      <div><p class="eg">In the example</p><pre>260,927 plays
+31 columns each, of the 372 in the raw data
+no betting column among them</pre></div>
+    </div>
+    <span class="down">Every play is now in memory. Nothing has been removed yet.</span>
+
+    <div class="stage loud">
+      <i>4</i>
+      <div><h3>Apply the filters, in order, and write each one down</h3><p>The seasons, the season type, and the weeks come first, for both shapes of question. For a <a class="term" href="./#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a>, five more follow: the team with the ball, the downs, a rush, the yards to go the entry sets, and goal to go. After each one it records the filter and the plays left, even when the filter removed nothing.</p><p>Before the rush filter removes the passes, it finds each team's <a class="term" href="./#term-primary-passer" data-def="The player with the most pass attempts for his team in that game: the quarterback, as the data can see it.">primary passer</a> in each game, the player with the most pass attempts, so the passes it counts from are still there.</p><p class="where">Lines 195 to 230, then 273 to 297; the primary passer at 278 to 290</p></div>
+      <div><p class="eg">In the example, plays left after each</p>
+        <ol class="funnel">
+          <li><span>0. The file</span><b>260,927</b><span class="bar"><u style="width:100%"></u></span></li>
+          <li><span>1. Seasons 2021 to 2025</span><b>247,284</b><span class="bar"><u style="width:94.77%"></u><s style="left:94.77%;width:5.23%"></s></span></li>
+          <li><span>2. Regular season and playoffs</span><b>247,284</b><span class="bar"><u style="width:94.77%"></u></span></li>
+          <li><span>3. All weeks</span><b>247,284</b><span class="bar"><u style="width:94.77%"></u></span></li>
+          <li><span>4. Team with the ball: any</span><b>247,284</b><span class="bar"><u style="width:94.77%"></u></span></li>
+          <li><span>5. Downs: any</span><b>247,284</b><span class="bar"><u style="width:94.77%"></u></span></li>
+          <li><span>6. A rush by the team with the ball</span><b>74,608</b><span class="bar"><u style="width:28.59%"></u><s style="left:28.59%;width:66.18%"></s></span></li>
+          <li><span>7. Yards to go: 2 or fewer, the entry's distance</span><b>11,331</b><span class="bar"><u style="width:4.34%"></u><s style="left:4.34%;width:24.25%"></s></span></li>
+          <li><span>8. Goal to go: any</span><b>11,331</b><span class="bar"><u style="width:4.34%"></u></span></li>
+        </ol>
+      </div>
+    </div>
+    <span class="down">Only the plays that passed every filter go on. Pink is what a filter took out.</span>
+
+    <div class="stage branch">
+      <i>or</i>
+      <div><h3>A search ends here: read every description left</h3><p>After the first three filters, a search reads each play's description and counts the ones that contain the words, season by season. It keeps up to five examples. With no match it prints <code>NO MATCH</code> and the count it searched.</p><p class="where">Lines 232 to 271</p></div>
+      <div><p class="eg">For <code>--search "tush push" --seasons 2021-2026</code></p><pre>season   plays searched   containing "tush push"
+2021             49,922            0
+2022             49,434            0
+2023             49,665            0
+2024             49,492            0
+2025             48,771            0
+2026             13,643            0
+all             260,927            0
+
+NO MATCH: not one of the 260,927 descriptions
+contains "tush push".</pre></div>
+    </div>
+    <span class="down">A defined play goes on.</span>
+
+    <div class="stage">
+      <i>5</i>
+      <div><h3>Split what is left by the definition, and count</h3><p>Each rush left either matches the entry's rules or it does not: who carried, <a class="term" href="./#term-under-center" data-def="The quarterback took the snap a few yards back: the shotgun column is 1. The only formation detail in the data.">shotgun</a> or not, which downs. The matches are the defined play; the rest are the <a class="term" href="./#term-other-rushes" data-def="Every other rush left after the filters: the same yards to go or fewer, and not a match for the definition.">other short-yardage rushes</a>. A play <a class="term" href="./#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converted</a> when it gained the first down or scored. Fewer than 50 defined plays adds a small-sample warning; none at all, a NO RESULT line.</p><p class="where">Lines 299 to 335</p></div>
+      <div><p class="eg">In the example</p><pre>11,331 rushes with 2 or fewer yards to go
+ 1,554 match the definition
+ 9,777 are every other rush in the same situation</pre></div>
+    </div>
+    <span class="down">The numbers are done. All that is left is to print them.</span>
+
+    <div class="stage">
+      <i>6</i>
+      <div><h3>Print the definition, then the filters, then the result</h3><p>It prints the question, the entry from stage 2, quoted, the filter list from stage 4, the split from stage 5, and the result: plays, converted, and rate for each group, and the <a class="term" href="./#term-gap" data-def="The defined play's conversion rate minus the other short-yardage rushes' rate, in points.">gap</a> between them. Last, one standing reminder: whether the play should be legal is not in the output. With <code>--json</code> it prints the same content as data, which is how <a href="explorer.html">the explorer page</a> gets its answers.</p><p class="where">Lines 337 to 392</p></div>
+      <div><p class="eg">In the example</p><pre style="white-space:pre;overflow-x:auto;font-size:10.5px">RESULT
+  group                            plays   converted       rate
+  1  the defined play               1,554       1,199      77.2%
+  2  other short-yardage rushes     9,777       6,567      67.2%
+  gap, the defined play minus the others: 10.0 points
+
+NOT IN THIS OUTPUT
+  Whether the play should be legal.</pre></div>
+    </div>
+  </div>
+  <p style="margin-top:16px">The agent reads that printout and nothing else. It never sees a play.</p>
+</section>
+
+<section id="never" data-nav="Never does">
+  <h2>What it never does</h2>
+  <p>These are properties of the code, not promises in a prompt. You can confirm each one by reading the file.</p>
+  <div class="never">
+    <div><b>It never writes</b>No file is created, changed, or deleted, the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> included. The agent writes <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entries</a>; the tool only reads them.</div>
+    <div><b>It never goes online</b>No network call of any kind. It works with Wi-Fi off.</div>
+    <div><b>It never sees a betting line</b>The file it reads has 31 columns, and none of them is one.</div>
+    <div><b>It never guesses</b>Give it the same <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>, the same entry, and the same file, and it prints the same numbers, every time.</div>
+    <div class="new"><b>It never measures a definition that is not written down</b>No entry, no number. It stops and prints the shape of an entry instead.</div>
+  </div>
+</section>
+
+<section id="runner" data-nav="The runner">
+  <h2>The runner: run-analyst.sh, in nine beats</h2>
+  <p>The tool above is what the agent calls. The runner is what you call: a shell script of about 250 lines that hands the agent one claim and makes its work visible. The first six beats are episode 1's. The last three are new: they check the agent's memory in code rather than by asking.</p>
+  <div class="rows marked">
+    <div><b>1. Takes the claim</b><span>From the command line, or from <code>claim.txt</code> when you give none.</span></div>
+    <div><b>2. Hands over the policy</b><span>It reads <code>analyst.md</code> and passes it to <code>claude -p</code> as the system prompt. The model is unchanged.</span></div>
+    <div><b>3. Sets the allowlist</b><span>Two lines: <code>Bash(node ./query-plays.mjs:*)</code>, the one script with any arguments, and <code>Edit(//&lt;repo&gt;/dictionary/*.json)</code>, a new <code>.json</code> file in the <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> folder. No file reads, no other writes, no network. The path is absolute because a rule with <code>../</code> in it never matches.</span></div>
+    <div><b>4. Streams the run</b><span>It asks for the event stream instead of one answer at the end, and pipes it through <code>show-run.mjs</code>, which prints each tool call as it lands and shows each <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> written in full.</span></div>
+    <div><b>5. Opens the run as a page</b><span>When the run ends, <code>render-run.mjs</code> writes the whole run as one page, the <a class="term" href="./#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> and the entry it <a class="term" href="./#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">cites</a> at the top, every call down a clock, and the runner opens it.</span></div>
+    <div><b>6. Holds the word limit</b><span>Under 400 words above the commands, up from 350 because the ruling gained a part. Over the limit, the ruling goes back once with "shorten it" and no tools. Still over, the run fails with exit code 68.</span></div>
+    <div class="hl"><b>7. Appends the dictionary</b><span>Before the run it copies the dictionary aside, then appends every entry to the <a class="term" href="./#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> under "The dictionary today," with today's date. The agent has no Read tool. This is how it remembers what it wrote.</span></div>
+    <div class="hl"><b>8. Requires the citation</b><span>After the run it reads the saved event stream for every <code>--play NAME</code> the agent ran, and checks that the ruling has a "Definition used" line naming that entry. Missing, the ruling goes back once with no tools. Still missing, the run fails with exit code 69.</span></div>
+    <div class="hl"><b>9. Restores a changed entry</b><span>It compares each entry that was on file with the copy made before the run. One that changed is put back, and the run fails with exit code 70. A new entry is checked with the tool; one the tool rejects fails the run with exit code 71.</span></div>
+  </div>
+  <p style="margin-top:16px">Nothing in the runner computes a number. It moves the claim, the policy, the dictionary, and the tool's printout between the pieces, and checks what came back.</p>
+</section>
+
+<section id="see" data-nav="See it">
+  <h2>See it for yourself</h2>
+<pre class="cmd"><span class="c"># the search on this page</span>
+node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+
+<span class="c"># every flag it accepts</span>
+node ./query-plays.mjs --help
+
+<span class="c"># a play with no entry: it stops and prints the shape of one</span>
+node ./query-plays.mjs --play no-such-play --seasons 2021-2025
+
+<span class="c"># the example on this page, once the episode's entry is in the repo</span>
+node ./query-plays.mjs --play tush-push --seasons 2021-2025</pre>
+  <div class="rows">
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/query-plays.mjs">Read the code</a></b><span>All 392 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a></b><span>The README gives the shape of an <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, every key, and the rules for adding one.</span></div>
+    <div><b><a href="explorer.html">Change the definition</a></b><span>The same output for 54 definitions of the play and seven sets of seasons, with nothing to install.</span></div>
+    <div><b><a href="./">How the agent is set up</a></b><span>Where this tool sits: under a written <a class="term" href="./#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, beside a <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>, behind a two-line allowlist.</span></div>
+  </div>
+</section>
+
+<footer><p>The line numbers and the example's numbers were read from the code and its output on October 12, 2026. The Monday Morning Agent is an O'Reilly live series hosted by Chester Ismay. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0.</p></footer>
+
+</main>
+</body>
+</html>

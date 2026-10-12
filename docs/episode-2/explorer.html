@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Change the definition: the Monday Morning Agent explorer, episode 2</title>
+<meta name="description" content="Define the tush push yourself: who carried, the yards to go, the formation, the downs. See the definition, every filter the tool applied, and how often the play converted against every other short-yardage rush. Nothing to install.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="Change the definition: what counts as a tush push?">
+<meta property="og:description" content="Pick who carried, the yards to go, the formation, and the downs. See the definition, every filter the tool applied, and the answer it gave. The same output the agent reads, with nothing to install.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ban the tush push. A big pink zero: plays named tush push in 260,927 play descriptions, 2021 to 2026, so the agent has to define it before it can judge it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Change the definition: what counts as a tush push?">
+<meta name="twitter:description" content="Pick who carried, the yards to go, the formation, and the downs. See every filter the tool applied and the answer it gave.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  button { font: inherit; color: inherit; cursor: pointer; }
+
+  /* Four presets, one change each from the reference definition. */
+  .drive { margin-top: 30px; display: grid; grid-template-columns: repeat(4, 1fr); border: 2px solid var(--ink); background: #fff; }
+  .drive button { text-align: left; background: none; border: 0; border-right: 2px solid var(--ink); padding: 10px 14px 12px; display: grid; grid-template-columns: auto 1fr; gap: 0 12px; align-items: start; }
+  .drive button:last-child { border-right: 0; }
+  .drive button i { font-style: normal; font-family: var(--display); font-weight: 700; font-size: 44px; line-height: .95; grid-row: span 2; }
+  .drive button b { font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.1; }
+  .drive button span { font-size: 14.5px; color: var(--soft); line-height: 1.3; }
+  .drive button:hover, .drive button.on { background: var(--yellow); }
+  .drive button.on span { color: var(--ink); }
+  @media (max-width: 860px) { .drive { grid-template-columns: 1fr 1fr; } .drive button:nth-child(even) { border-right: 0; } .drive button:nth-child(-n+2) { border-bottom: 2px solid var(--ink); } }
+  @media (max-width: 480px) { .drive { grid-template-columns: 1fr; } .drive button { border-right: 0; border-bottom: 2px solid var(--ink); } .drive button:last-child { border-bottom: 0; } }
+
+  /* The call sheet: one row per clause of the definition, one cell per choice. */
+  .sheet { margin-top: 18px; border: 2px solid var(--ink); background: #fff; }
+  .sheet fieldset { border: 0; border-bottom: 2px solid var(--ink); display: grid; grid-template-columns: 190px 1fr; min-width: 0; }
+  .sheet fieldset:last-of-type { border-bottom: 0; }
+  .sheet legend { float: left; width: 190px; padding: 11px 14px; font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.15; }
+  .cells { display: flex; flex-wrap: wrap; border-left: 2px solid var(--ink); grid-column: 2; }
+  .cells button { flex: 1 1 auto; background: none; border: 0; border-right: 1px solid var(--rule); padding: 11px 14px; font-size: 16.5px; font-weight: 500; text-align: center; white-space: nowrap; }
+  .cells button:last-child { border-right: 0; }
+  .cells button:hover { background: var(--faint); }
+  .cells button[aria-pressed="true"] { background: var(--yellow); font-weight: 600; }
+  @media (max-width: 700px) { .sheet fieldset { grid-template-columns: 1fr; } .sheet legend { float: none; width: auto; padding-bottom: 4px; } .cells { border-left: 0; border-top: 1px solid var(--rule); grid-column: 1; } }
+
+  .cmd1 { display: flex; align-items: center; gap: 12px; margin-top: 18px; border: 2px solid var(--ink); background: #fff; padding: 11px 14px; }
+  .cmd1 code { flex: 1; background: none; padding: 0; font-size: 15px; overflow-x: auto; white-space: nowrap; }
+  .cmd1 button { background: none; border: 2px solid var(--ink); padding: 2px 12px; font-family: var(--display); font-weight: 600; font-size: 18px; }
+  .cmd1 button:hover { background: var(--yellow); }
+
+  .answer { margin-top: 44px; }
+  #sentence { font-size: clamp(19px, 2.2vw, 23px); line-height: 1.4; max-width: 62ch; }
+  #sentence b { font-weight: 600; }
+  #sentence .y { background: var(--yellow); padding: 0 5px; } #sentence .b { background: var(--blue); padding: 0 5px; }
+  .answer .field { height: 60px; margin: 58px 0 68px; }
+  .answer .field .mk b { font-size: clamp(30px, 4.6vw, 46px); }
+  #warn { border: 2px solid var(--ink); background: var(--pink); padding: 10px 14px; font-weight: 500; max-width: none; margin-bottom: 18px; }
+  #empty { border: 2px solid var(--ink); background: var(--faint); padding: 14px 16px; margin-top: 16px; }
+
+  .work { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; margin-top: 26px; }
+  @media (max-width: 900px) { .work { grid-template-columns: 1fr; } }
+  .work h3 { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.05; padding-bottom: 8px; border-bottom: 2px solid var(--ink); }
+  .work h3 + * { margin-top: 0; }
+  .def { border: 2px solid var(--ink); background: var(--blue); padding: 12px 14px; margin: 12px 0 26px; }
+  .def q { display: block; font-size: 18px; font-weight: 500; quotes: "\201C" "\201D"; }
+  .def ul { list-style: none; margin-top: 8px; font-size: 15px; }
+  .def li { padding: 2px 0; }
+  .def .ref { display: inline-block; margin-top: 8px; font-family: var(--display); font-weight: 600; font-size: 17px; background: var(--ink); color: var(--yellow); padding: 0 8px; }
+  ol.filters { list-style: none; }
+  ol.filters li { padding: 9px 0 10px; border-bottom: 1px solid var(--rule); font-size: 16px; color: var(--soft); }
+  ol.filters .row { display: flex; justify-content: space-between; gap: 14px; align-items: baseline; }
+  ol.filters .n { color: var(--ink); font-variant-numeric: tabular-nums; white-space: nowrap; font-weight: 500; }
+  ol.filters .bar { height: 7px; background: var(--faint); margin-top: 6px; position: relative; }
+  ol.filters .bar i { position: absolute; left: 0; top: 0; bottom: 0; background: var(--ink); transition: width .45s ease; }
+  ol.filters .bar u { position: absolute; top: 0; bottom: 0; background: var(--pink); transition: left .45s ease, width .45s ease; }
+  ol.filters li.cut { color: var(--ink); }
+  ol.filters li.cut .took { background: var(--pink); padding: 0 5px; margin-right: 8px; font-size: 14.5px; }
+  .then { font-size: 15.5px; color: var(--soft); margin-top: 12px; }
+  tr.rdef td:first-child span { background: var(--yellow); padding: 0 5px; }
+  tr.roth td:first-child span { background: var(--blue); padding: 0 5px; }
+  .gapline { margin-top: 10px; font-size: 16.5px; }
+  .not { margin-top: 16px; font-size: 16.5px; border-left: 5px solid var(--ink); padding-left: 14px; }
+  .note { margin-top: 14px; font-size: 15.5px; color: var(--soft); }
+  .asof { margin-top: 40px; font-size: 15px; color: var(--soft); max-width: 80ch; }
+
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 44px; align-items: start; margin-top: 18px; }
+  @media (max-width: 900px) { .twocol { grid-template-columns: 1fr; } }
+  .twocol h3 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.05; margin-bottom: 6px; }
+  .searchgrid { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); border: 2px solid var(--ink); background: #fff; }
+  .searchgrid > div { padding: 12px 14px 14px; border-right: 1px solid var(--rule); min-width: 0; }
+  .searchgrid > div:last-child { border-right: 0; }
+  .searchgrid q { display: block; font-family: var(--display); font-weight: 600; font-size: 22px; }
+  .searchgrid b { display: inline-block; font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1; padding: 0 8px; margin: 4px 0 6px; font-variant-numeric: tabular-nums; }
+  .searchgrid b.none { background: var(--pink); }
+  .searchgrid table { font-size: 14.5px; }
+  .searchgrid td { padding: 3px 8px 3px 0; }
+  .searchgrid p { font-size: 13.5px; color: var(--soft); margin-top: 8px; line-height: 1.35; }
+  @media (max-width: 900px) { .searchgrid { grid-template-columns: 1fr 1fr; } .searchgrid > div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); } .searchgrid > div:nth-child(2) { border-right: 0; } }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="./#terms">Terms</a><a href="explorer.html" aria-current="page">Change the definition</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<h1 class="long">"Ban the tush push." Change the definition and check.</h1>
+<p class="lead">The data has no name for the play, so the tool measures only a written definition. Here you write it: who carried, how many yards to go, the formation, and the downs. Each combination is a different <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, and the page shows what the tool printed for it: the definition, every <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a> with the plays left after it, and how often the <a class="term" href="./#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a> <a class="term" href="./#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converted</a> against every other <a class="term" href="./#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> rush. This is the same output the agent reads.</p>
+
+<div class="drive" aria-label="Four definitions, one change each">
+  <button type="button" data-preset="2021-2025|primary-passer|2|under-center|any"><i>1</i><b>The reference definition</b><span>A quarterback run, two or fewer, not from shotgun.</span></button>
+  <button type="button" data-preset="2021-2025|any|2|under-center|any"><i>2</i><b>Anyone, two or fewer</b><span>Take the quarterback out.</span></button>
+  <button type="button" data-preset="2021-2025|primary-passer|2|shotgun|any"><i>3</i><b>Shotgun instead</b><span>The same play from shotgun.</span></button>
+  <button type="button" data-preset="2021-2025|primary-passer|2|under-center|4"><i>4</i><b>Fourth down only</b><span>The reference play, on fourth down.</span></button>
+</div>
+
+<div class="sheet">
+  <fieldset><legend>Seasons</legend><div class="cells" data-key="seasons"></div></fieldset>
+  <fieldset><legend>Who carried</legend><div class="cells" data-key="rusher"></div></fieldset>
+  <fieldset><legend>Yards to go</legend><div class="cells" data-key="yards"></div></fieldset>
+  <fieldset><legend>Formation</legend><div class="cells" data-key="formation"></div></fieldset>
+  <fieldset><legend>Downs</legend><div class="cells" data-key="downs"></div></fieldset>
+</div>
+
+<div class="cmd1"><code id="command">Loading the tool's answers</code><button type="button" id="copy">Copy</button></div>
+
+<div class="answer" aria-live="polite">
+  <p id="sentence"></p>
+  <div id="empty" hidden></div>
+  <div class="field" id="field"><div class="gap" id="gap"></div><div class="mk least" id="mb"><b></b></div><div class="mk most" id="mt"><b></b></div></div>
+  <p id="warn" hidden></p>
+  <p class="fieldkey">The bar is a scale of plays converted, from 0% at the left to 100% at the right, with a line every ten and a heavy line at 50%. The <i class="y">yellow</i> marker is the conversion rate of the defined play, the <i class="b">blue</i> marker the rate of the <a class="term" href="./#term-other-rushes" data-def="Every other rush left after the filters: the same yards to go or fewer, and not a match for the definition.">other short-yardage rushes</a>, and the hatched stretch between them is the <a class="term" href="./#term-gap" data-def="The defined play's conversion rate minus the other short-yardage rushes' rate, in points.">gap</a>. The two colors are the lines a TV broadcast paints on the field: blue the line of scrimmage, yellow the line to gain.</p>
+</div>
+
+<div class="work">
+  <div>
+    <h3>The definition</h3>
+    <div class="def" id="def"></div>
+    <h3>The filters, in order</h3>
+    <ol class="filters" id="filters"></ol>
+    <p class="then" id="then"></p>
+  </div>
+  <div>
+    <h3>The two groups</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Group</th><th class="num">Plays</th><th class="num">Converted</th><th class="num">Rate</th></tr></thead>
+      <tbody id="rows"></tbody>
+    </table></div>
+    <p class="gapline" id="gapline"></p>
+    <p class="not"><strong>Not in this output: whether the play should be legal.</strong> A gap is how often each kind of play converted in the plays kept. It does not say why, and it does not say what the rule should be.</p>
+    <p class="note">A downs choice here is part of the definition, so it narrows only the defined play. The comparison stays every other rush with the same yards to go, on any down. The tool's <code>--downs</code> flag, which the agent can add to a command, narrows both groups instead.</p>
+  </div>
+</div>
+
+<p class="asof" id="asof"></p>
+
+<section id="tables" data-nav="By season and team">
+  <h2>The reference definition, by season and by team</h2>
+  <p>The same tool with <code>--by season</code> and <code>--by team</code>, for the reference definition: a quarterback run with two or fewer yards to go, not from <a class="term" href="./#term-under-center" data-def="The quarterback took the snap a few yards back: the shotgun column is 1. The only formation detail in the data.">shotgun</a>, on any down. A team gets a row once it has 10 or more <a class="term" href="./#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined plays</a>.</p>
+  <div class="twocol">
+    <div>
+      <h3>Season by season, 2021 to 2025</h3>
+      <div class="scroll"><table><thead><tr><th>Season</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody id="byseason"></tbody></table></div>
+    </div>
+    <div>
+      <h3>Team by team, 2021 to 2025</h3>
+      <div class="scroll"><table><thead><tr><th>Team</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody id="byteam"></tbody></table></div>
+      <h3 style="margin-top:26px">Team by team, 2026</h3>
+      <div class="scroll"><table><thead><tr><th>Team</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody id="byteam26"></tbody></table></div>
+    </div>
+  </div>
+</section>
+
+<section id="searches" data-nav="The searches">
+  <h2>The four searches by name</h2>
+  <p>Before any definition, the search: how many play descriptions, 2021 through 2026, contain the words. A description matches when it contains them, in any case, anywhere in the text.</p>
+  <div class="searchgrid" id="searchgrid"></div>
+</section>
+
+<section id="about" data-nav="About these answers">
+  <h2>About these answers</h2>
+  <p>Nothing here is computed in your browser. A script, <code>build-explorer-data.mjs</code>, wrote each of the 54 definitions these buttons can build as an <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> in a scratch <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>, asked the tool to measure each one for seven sets of seasons, 378 answers in all, saved what it printed, and removed the scratch dictionary. The page divides the counts the tool printed and rounds once, the same way the tool does.</p>
+  <p>Only the reference definition has a dictionary entry of its own: <code>tush-push</code>, which the agent writes on air on October 26, 2026, and which goes into the repo afterward. The other 53 were written to the scratch dictionary only. Every command on this page names the scratch entry, as the script ran it, so against the repo's dictionary the tool refuses it: no entry of that name is on file. For the reference definition, use <code>--play tush-push</code> once the episode's entry is in the repo. To measure any other, write it as an entry first.</p>
+</section>
+
+<footer><p>Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0, cut to 31 of its 372 columns; no betting column is kept. Built for The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
+
+</main>
+
+<script>
+(function () {
+  var LABELS = {
+    seasons: { '2021-2025': 'Five seasons, 2021 to 2025', '2026': 'This season, 2026', '2021': '2021', '2022': '2022', '2023': '2023', '2024': '2024', '2025': '2025' },
+    rusher: { 'primary-passer': 'The primary passer', any: 'Anyone' },
+    yards: { '1': 'One yard', '2': 'Two or fewer', '3': 'Three or fewer' },
+    formation: { 'under-center': 'Under center', shotgun: 'Shotgun', any: 'Any formation' },
+    downs: { any: 'Any down', '3,4': 'Third and fourth', '4': 'Fourth only' }
+  };
+  var SAY = { '2021-2025': 'Across five seasons, 2021 to 2025', '2026': 'So far in 2026' };
+  // How each rule reads in the definition box, in the tool's own words.
+  var RULE = {
+    rusher: { 'primary-passer': "the runner is the team's primary passer that game (the player with its most pass attempts)", any: 'any runner' },
+    formation: { 'under-center': 'not from shotgun', shotgun: 'from shotgun', any: 'any formation' },
+    downs: { any: 'any down', '3,4': 'down 3 or 4 only', '4': 'down 4 only' }
+  };
+  // Button order. Listed here because an object with number-like keys does not keep its order.
+  var SHOW = {
+    seasons: ['2021-2025', '2026', '2021', '2022', '2023', '2024', '2025'],
+    rusher: ['primary-passer', 'any'], yards: ['1', '2', '3'], formation: ['under-center', 'shotgun', 'any'], downs: ['any', '3,4', '4']
+  };
+  var ORDER = ['seasons', 'rusher', 'yards', 'formation', 'downs'];
+  var state = { seasons: '2021-2025', rusher: 'primary-passer', yards: '2', formation: 'under-center', downs: 'any' };
+  var data = null;
+  var $ = function (id) { return document.getElementById(id); };
+  var pct = function (x) { return (100 * x).toFixed(1) + '%'; };
+  var num = function (n) { return n.toLocaleString('en-US'); };
+  function el(tag, cls, text) { var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; }
+
+  // #2021-2025|primary-passer|2|under-center|any. Downs may be written 3,4 or 34.
+  function readHash() {
+    var parts = decodeURIComponent(location.hash.slice(1)).split('|');
+    if (parts.length !== 5) return;
+    if (parts[4] === '34') parts[4] = '3,4';
+    ORDER.forEach(function (k, i) { if (LABELS[k][parts[i]] !== undefined) state[k] = parts[i]; });
+  }
+  function hashKey() { return ORDER.map(function (o) { return state[o]; }).join('|'); }
+  function entryName() { return 'v-' + state.rusher + '-' + state.yards + '-' + state.formation + '-' + state.downs.replace(',', ''); }
+  function isReference() {
+    var r = data.reference;
+    return state.rusher === r.rusher && +state.yards === r.yards && state.formation === r.formation && state.downs === r.downs;
+  }
+
+  function buildControls() {
+    document.querySelectorAll('.cells').forEach(function (cells) {
+      var k = cells.getAttribute('data-key');
+      SHOW[k].forEach(function (v) {
+        var b = el('button', '', LABELS[k][v]);
+        b.type = 'button'; b.setAttribute('data-v', v);
+        b.addEventListener('click', function () { state[k] = v; render(true); });
+        cells.appendChild(b);
+      });
+    });
+    document.querySelectorAll('[data-preset]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var p = b.getAttribute('data-preset').split('|');
+        ORDER.forEach(function (k, i) { state[k] = p[i]; });
+        render(true);
+      });
+    });
+    $('copy').addEventListener('click', function () {
+      var t = $('command').textContent;
+      if (navigator.clipboard) navigator.clipboard.writeText(t).then(function () { $('copy').textContent = 'Copied'; setTimeout(function () { $('copy').textContent = 'Copy'; }, 1200); });
+    });
+  }
+
+  function sentence(a, def) {
+    var s = $('sentence'); s.textContent = '';
+    var lead = (SAY[state.seasons] || 'In ' + state.seasons) + ', ' + def.plainWords.charAt(0).toLowerCase() + def.plainWords.slice(1, -1);
+    var d = a.defined, o = a.other;
+    if (!d.plays) { s.appendChild(document.createTextNode(lead + ': no play matches the definition, so there is no result.')); return; }
+    s.appendChild(document.createTextNode(lead + ': '));
+    s.appendChild(el('b', 'y', 'the defined play converted ' + pct(d.converted / d.plays) + ' of ' + num(d.plays) + ' plays'));
+    if (!o.plays) { s.appendChild(document.createTextNode(', and there is no other rush to compare it with.')); return; }
+    s.appendChild(document.createTextNode(' and '));
+    s.appendChild(el('b', 'b', 'other short-yardage rushes ' + pct(o.converted / o.plays) + ' of ' + num(o.plays)));
+    s.appendChild(document.createTextNode('. That is a gap of ' + a.gap.toFixed(1) + ' points.'));
+  }
+
+  function defBox(a, def) {
+    var box = $('def'); box.textContent = '';
+    box.appendChild(el('q', '', def.plainWords));
+    var ul = el('ul');
+    ul.appendChild(el('li', '', 'rules: ' + RULE.rusher[state.rusher] + '; ' + RULE.formation[state.formation] + '; ' + RULE.downs[state.downs] + '; ' + state.yards + ' or fewer yards to go'));
+    ul.appendChild(el('li', '', 'compared with: every other rush with the same yards to go'));
+    box.appendChild(ul);
+    if (isReference()) box.appendChild(el('span', 'ref', "The reference definition: the rules the episode's entry is expected to carry"));
+  }
+
+  function render(push) {
+    var hk = hashKey();
+    document.querySelectorAll('.cells').forEach(function (cells) {
+      var k = cells.getAttribute('data-key');
+      cells.querySelectorAll('button').forEach(function (b) { b.setAttribute('aria-pressed', String(b.getAttribute('data-v') === state[k])); });
+    });
+    document.querySelectorAll('[data-preset]').forEach(function (b) { b.classList.toggle('on', b.getAttribute('data-preset') === hk); });
+    if (push) history.replaceState(null, '', '#' + hk);
+    var name = entryName(), a = data.answers[state.seasons + '|' + name], def = data.definitions[name];
+    $('command').textContent = a.command;
+    defBox(a, def);
+
+    var list = $('filters'); list.textContent = '';
+    var first = a.filters[0].playsLeft, prev = first;
+    a.filters.forEach(function (f, i) {
+      var took = prev - f.playsLeft;
+      var li = el('li', took > 0 ? 'cut' : '');
+      var row = el('div', 'row');
+      row.appendChild(el('span', '', i + '. ' + f.filter));
+      var n = el('span', 'n');
+      if (took > 0) n.appendChild(el('span', 'took', 'took out ' + num(took)));
+      n.appendChild(document.createTextNode(num(f.playsLeft)));
+      row.appendChild(n);
+      var bar = el('div', 'bar'), kept = el('i'), gone = el('u');
+      kept.style.width = (100 * f.playsLeft / first).toFixed(2) + '%';
+      gone.style.left = (100 * f.playsLeft / first).toFixed(2) + '%';
+      gone.style.width = (100 * took / first).toFixed(2) + '%';
+      bar.appendChild(kept); bar.appendChild(gone); li.appendChild(row); li.appendChild(bar); list.appendChild(li);
+      prev = f.playsLeft;
+    });
+    $('then').textContent = 'Then, the definition splits what is left: ' + num(a.games) + ' games in the plays kept; ' +
+      num(a.defined.plays) + ' plays match the definition; ' + num(a.other.plays) + ' are every other rush in the same situation.';
+
+    var d = a.defined, o = a.other, has = d.plays > 0 && o.plays > 0;
+    sentence(a, def);
+    var rows = $('rows'); rows.textContent = '';
+    [['rdef', '1 The defined play', d], ['roth', '2 Other short-yardage rushes', o]].forEach(function (g) {
+      var tr = el('tr', g[0]);
+      var td = el('td'); td.appendChild(el('span', '', g[1])); tr.appendChild(td);
+      tr.appendChild(el('td', 'num', num(g[2].plays)));
+      tr.appendChild(el('td', 'num', num(g[2].converted)));
+      tr.appendChild(el('td', 'num', g[2].plays ? pct(g[2].converted / g[2].plays) : 'n/a'));
+      rows.appendChild(tr);
+    });
+    $('gapline').textContent = a.gap === null ? 'No gap: one of the two groups is empty.' : 'Gap, the defined play minus the others: ' + a.gap.toFixed(1) + ' points.';
+
+    $('field').hidden = !has; $('empty').hidden = has;
+    if (!has) {
+      $('empty').textContent = !o.plays
+        ? 'With anyone carrying, any formation, and any down, every short-yardage rush matches the definition, so nothing is left to compare it with. The tool says NO RESULT rather than invent a comparison.'
+        : 'No play in the plays kept matches this definition, so the tool gives no result. That is an answer too: the agent has to say it has nothing, not invent a number.';
+    } else {
+      var rd = 100 * d.converted / d.plays, ro = 100 * o.converted / o.plays;
+      $('mt').style.left = rd + '%'; $('mt').firstChild.textContent = pct(rd / 100);
+      $('mb').style.left = ro + '%'; $('mb').firstChild.textContent = pct(ro / 100);
+      $('gap').style.left = Math.min(rd, ro) + '%'; $('gap').style.width = Math.abs(rd - ro) + '%';
+      $('field').setAttribute('aria-label', 'The defined play converted ' + pct(rd / 100) + ', other short-yardage rushes ' + pct(ro / 100));
+    }
+    var w = $('warn'), shown = a.warnings.filter(function (x) { return x.indexOf('SMALL SAMPLE') === 0; });
+    if (shown.length) { w.hidden = false; w.textContent = shown[0].replace('SMALL SAMPLE: ', 'Small sample: '); } else { w.hidden = true; }
+  }
+
+  function byTable(id, by) {
+    var tb = $(id); tb.textContent = '';
+    if (!by.rows.length) { var tr = el('tr'), td = el('td', '', 'No team has 10 defined plays yet.'); td.colSpan = 6; tr.appendChild(td); tb.appendChild(tr); return; }
+    by.rows.forEach(function (r) {
+      var tr = el('tr');
+      tr.appendChild(el('td', '', r.key));
+      tr.appendChild(el('td', 'num', num(r.defined.plays)));
+      tr.appendChild(el('td', 'num', pct(r.defined.converted / r.defined.plays)));
+      tr.appendChild(el('td', 'num', num(r.other.plays)));
+      tr.appendChild(el('td', 'num', r.other.plays ? pct(r.other.converted / r.other.plays) : 'n/a'));
+      tr.appendChild(el('td', 'num', r.gap === null ? 'n/a' : (100 * r.gap).toFixed(1)));
+      tb.appendChild(tr);
+    });
+  }
+
+  function searches(s) {
+    var grid = $('searchgrid'); grid.textContent = '';
+    ['tush push', 'brotherly shove', 'sneak', 'push'].forEach(function (w) {
+      var x = s[w]; if (!x) return;
+      var cell = el('div');
+      cell.appendChild(el('q', '', w));
+      cell.appendChild(el('b', x.matched ? '' : 'none', num(x.matched)));
+      var t = el('table'), tb = el('tbody');
+      Object.keys(x.bySeason).forEach(function (season) {
+        var tr = el('tr'); tr.appendChild(el('td', '', season)); tr.appendChild(el('td', 'num', num(x.bySeason[season].matched))); tb.appendChild(tr);
+      });
+      t.appendChild(tb); cell.appendChild(t);
+      if (!x.matched) cell.appendChild(el('p', '', 'NO MATCH: not one of the ' + num(x.searched) + ' descriptions contains "' + w + '".'));
+      else x.examples.slice(0, 2).forEach(function (e) { cell.appendChild(el('p', '', e.season + ' week ' + e.week + ': ' + e.desc)); });
+      grid.appendChild(cell);
+    });
+  }
+
+  // When the daily refresh last ran. The answers file changes only when new games are
+  // published, so its own date cannot show a refresh that has stopped; the workflow's
+  // last successful run can. If GitHub does not answer, the line stays as it is.
+  var RUNS = 'https://api.github.com/repos/ismayc/monday-morning-agent/actions/workflows/refresh-data.yml/runs?status=success&per_page=1';
+  var STALE_HOURS = 36;
+  function lastRefresh() {
+    fetch(RUNS).then(function (r) { return r.ok ? r.json() : null; }).then(function (j) {
+      var run = j && j.workflow_runs && j.workflow_runs[0];
+      if (!run) return;
+      var ran = new Date(run.updated_at);
+      var when = ran.toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' });
+      var hours = (Date.now() - ran.getTime()) / 36e5;
+      $('asof').textContent += hours > STALE_HOURS
+        ? ' The refresh last ran ' + when + ', ' + Math.round(hours) + ' hours ago, so newer games may be missing.'
+        : ' It last checked for new games on ' + when + '.';
+    }).catch(function () {});
+  }
+
+  buildControls();
+  fetch('explorer-data.json').then(function (r) { return r.json(); }).then(function (d) {
+    data = d; readHash(); render(false);
+    byTable('byseason', d.bySeason); byTable('byteam', d.byTeam); byTable('byteam26', d.byTeam2026);
+    searches(d.searches);
+    $('asof').textContent = 'The 2026 season here runs through the game of ' + d.season2026.latestGame + ' (weeks ' + d.season2026.weeks + '). 2021 to 2025 are complete seasons. A GitHub Action reruns the same tool every day and updates these answers when new games are published.';
+    window.addEventListener('hashchange', function () { readHash(); render(false); });
+    lastRefresh();
+  }).catch(function () { $('command').textContent = 'The saved answers did not load. Reload the page; if it still fails, run the command from the repo instead.'; });
+})();
+</script>
+</body>
+</html>

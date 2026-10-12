@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Ban the tush push." Episode 2 of The Monday Morning Agent</title>
+<meta name="description" content="The play nobody can stop arguing about has no name in the data. How an AI agent defines a play before it judges it, writes the definition into a dictionary, and has to cite it from then on.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="&quot;Ban the tush push.&quot; First, the agent has to define it.">
+<meta property="og:description" content="Not one of 260,927 NFL play descriptions contains the words tush push. So the agent writes a definition into a dictionary, measures with it, and cites it. How it is set up, for someone who has never built an agent. By Chester Ismay.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-2/">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ban the tush push. A big pink zero: plays named tush push in 260,927 play descriptions, 2021 to 2026, so the agent has to define it before it can judge it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="&quot;Ban the tush push.&quot; First, the agent has to define it.">
+<meta name="twitter:description" content="Not one of 260,927 NFL play descriptions contains the words tush push. So the agent writes a definition into a dictionary, and cites it from then on.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  /* The hook: the name search came back empty. The zero is the loud thing on the page,
+     pink like the zero on the run page, because pink means nothing was left. */
+  .hook { margin-top: 36px; display: grid; grid-template-columns: auto 1fr; gap: 12px 30px; align-items: center; }
+  .hook .zero { font-family: var(--display); font-weight: 700; font-size: clamp(150px, 22vw, 250px); line-height: .8; background: var(--pink); padding: 18px 34px 10px; border: 2px solid var(--ink); font-variant-numeric: tabular-nums; }
+  .hook .said { font-family: var(--display); font-weight: 600; font-size: clamp(30px, 3.8vw, 46px); line-height: 1.02; max-width: 16ch; }
+  @media (max-width: 640px) { .hook { grid-template-columns: 1fr; } .hook .zero { justify-self: start; } }
+  .searches { margin-top: 26px; display: grid; grid-template-columns: repeat(4, 1fr); border: 2px solid var(--ink); background: #fff; }
+  .searches > div { padding: 10px 16px 12px; border-right: 1px solid var(--rule); }
+  .searches > div:last-child { border-right: 0; }
+  .searches q { display: block; font-family: var(--display); font-weight: 600; font-size: 22px; line-height: 1.1; }
+  .searches b { display: inline-block; font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1; margin-top: 4px; padding: 0 8px; font-variant-numeric: tabular-nums; }
+  .searches b.none { background: var(--pink); }
+  .searches span { display: block; font-size: 14.5px; color: var(--soft); line-height: 1.3; margin-top: 4px; }
+  @media (max-width: 760px) { .searches { grid-template-columns: 1fr 1fr; } .searches > div:nth-child(-n+2) { border-bottom: 1px solid var(--rule); } .searches > div:nth-child(2) { border-right: 0; } }
+
+  /* How it fits together: the sheet's cells, read top to bottom. */
+  .chain { margin-top: 22px; max-width: 760px; border: 2px solid var(--ink); background: #fff; }
+  .chain > div { padding: 13px 18px; border-bottom: 2px solid var(--ink); display: grid; grid-template-columns: 190px 1fr; gap: 4px 20px; align-items: baseline; }
+  .chain > div:last-child { border-bottom: 0; }
+  .chain b { font-family: var(--display); font-weight: 700; font-size: 25px; line-height: 1.1; }
+  .chain span { font-size: 16.5px; }
+  .chain .written { background: var(--yellow); }
+  .chain .via { padding: 5px 18px; background: var(--faint); font-size: 14.5px; color: var(--soft); display: block; }
+  .chain .checks { background: var(--faint); border-top: 2px solid var(--ink); }
+  @media (max-width: 640px) { .chain > div { grid-template-columns: 1fr; } }
+
+  .run { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 18px; }
+  @media (max-width: 900px) { .run { grid-template-columns: 1fr; } }
+  .run ol { list-style: none; counter-reset: s; border-top: 2px solid var(--ink); }
+  .run li { counter-increment: s; position: relative; padding: 12px 0 12px 50px; border-bottom: 1px solid var(--rule); font-size: 17px; }
+  .run li::before { content: counter(s); position: absolute; left: 0; top: 7px; font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; width: 36px; text-align: center; }
+  .run li.judge::before { background: var(--yellow); }
+  .ruling { border: 2px solid var(--ink); background: #fff; padding: 20px 22px; font-size: 16px; line-height: 1.5; }
+  .ruling p { margin-bottom: 11px; max-width: none; }
+  .ruling b { font-family: var(--display); font-weight: 700; font-size: 20px; }
+  .ruling .call { background: var(--yellow); padding: 8px 10px; margin: 0 -10px 11px; }
+  .ruling .held { color: var(--soft); border-left: 4px solid var(--rule); padding-left: 10px; }
+  .ruling pre { font-family: var(--code); font-size: 12.5px; color: var(--soft); white-space: pre-wrap; border-top: 1px solid var(--rule); padding-top: 10px; }
+  .cap { font-size: 14.5px; color: var(--soft); margin-top: 10px; }
+
+  .carry { margin-top: 18px; columns: 2; column-gap: 44px; border-top: 2px solid var(--ink); padding-top: 4px; }
+  .carry > div { break-inside: avoid; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .carry b { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.15; display: block; margin-bottom: 3px; }
+  .carry span { font-size: 16.5px; }
+  @media (max-width: 760px) { .carry { columns: 1; } }
+
+  .go { display: inline-block; margin-top: 18px; font-family: var(--display); font-weight: 700; font-size: 26px; background: var(--yellow); border: 2px solid var(--ink); padding: 8px 18px; text-decoration: none; }
+  .go:hover { background: var(--ink); color: var(--yellow); }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./" aria-current="page">Episode 2</a><a href="map.html">Where we are</a><a href="definitions.html">Five definitions</a><a href="#terms">Terms</a><a href="explorer.html">Change the definition</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<header>
+  <h1>"Ban the tush push."</h1>
+
+  <div class="hook" role="img" aria-label="0 of 260,927 play descriptions contain the words tush push">
+    <div class="zero">0</div>
+    <p class="said">of 260,927 play descriptions contain the words "tush push."</p>
+  </div>
+
+  <div class="searches" aria-label="Four searches of the play descriptions, 2021 through 2026">
+    <div><q>tush push</q><b class="none">0</b><span>Not once, in any season.</span></div>
+    <div><q>brotherly shove</q><b class="none">0</b><span>Not once, either.</span></div>
+    <div><q>sneak</q><b>2</b><span>Both in 2021: Herbert in week 1, Brady in week 10.</span></div>
+    <div><q>push</q><b>16,257</b><span>As in "pushed ob": a player pushed out of bounds.</span></div>
+  </div>
+
+  <p class="lead">Every NFL play from 2021 through the 2026 games of October 11 comes with a one-line description, and not one of them names the most argued-about play in the league. So an AI agent cannot find the play, let alone judge it, until it says what it will count as one. It has to define the play before it can judge it, write that definition down, and use it every time after.</p>
+  <p style="margin-top:22px">This episode is about that written definition. The agent keeps it in a <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>, a folder of files it writes and the tool reads. The tool will not measure a play that is not in it, every <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> has to name the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> it used, and every later episode inherits the folder. This page is how that is set up, for someone who has never built an agent.</p>
+  <a class="go" href="explorer.html">Change the definition yourself</a>
+</header>
+
+<section id="minute" data-nav="The setup">
+  <h2>The setup in one minute</h2>
+  <p>You hand the agent a claim. It turns the claim into a question and asks one small tool to measure. This time the tool will not measure a play until the play is written down in the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>. So the agent searches for the play by name, finds nothing, writes a definition into the dictionary, and measures with it: how often the <a class="term" href="#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a> <a class="term" href="#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converts</a> against every other <a class="term" href="#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> rush. Its <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> <a class="term" href="#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">cites</a> the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> it used.</p>
+  <p>Since episode 1, the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> gained a section, the tool learned to read the dictionary, and the dictionary started out empty. The entry itself is written by the agent, on air. A run with an empty dictionary takes under a minute. This is episode 2 of <a href="../">an eight-episode O'Reilly live series</a>, and every number on this page is real.</p>
+</section>
+
+<section id="terms" data-nav="The words">
+  <h2>The words on these pages</h2>
+  <p>Every number on the site comes from the same tool, and the tool uses a few words in a fixed way. Here they are, roughly in the order the tool applies them. Wherever one of these words appears on a page with a dotted underline, hovering shows its definition and clicking brings you here.</p>
+  <div class="rows glossary">
+    <div id="term-play"><b>Play</b><span>One snap in the data, with its one-line description. A search reads every play: 260,927 descriptions from 2021 through the 2026 games of October 11. A defined play counts only rushes, so passes, kicks, punts, penalties that wiped the play out, kneel-downs, and two-point tries are out. Five seasons hold 74,608 rushes.</span></div>
+    <div id="term-filter"><b>Filter</b><span>A rule that drops plays before anything is counted: which seasons, which weeks, which team has the ball, which downs, a rush, the yards to go. The tool prints every filter in order with the number of plays left after it. Nothing is dropped that is not printed.</span></div>
+    <div id="term-short-yardage"><b>Short yardage</b><span>Only a yard or two to go for a first down or a score. Here the dictionary entry sets the distance: two or fewer yards to go in the reference definition. Over five seasons, 11,331 rushes had two or fewer to go.</span></div>
+    <div id="term-defined-play"><b>The defined play</b><span>The rushes, after the filters, that match the entry's rules. In the reference definition: a run by the primary passer, with two or fewer yards to go, not from shotgun, on any down. It is what fans mean by the tush push, as far as the data can see it.</span></div>
+    <div id="term-other-rushes"><b>Other short-yardage rushes</b><span>Every other rush left after the filters: the same yards to go or fewer, and not a match for the definition. Handoffs, shotgun runs, a quarterback who is not the primary passer. It is what the defined play is measured against.</span></div>
+    <div id="term-converted"><b>Converted, conversion rate</b><span>A play converted when it gained the first down or scored a touchdown. The conversion rate is converted plays divided by plays, printed to one decimal place.</span></div>
+    <div id="term-gap"><b>Gap</b><span>The defined play's conversion rate minus the rate of the other short-yardage rushes, in percentage points. It is positive when the defined play converted more often.</span></div>
+    <div id="term-primary-passer"><b>Primary passer</b><span>The quarterback, as the data can see it. The 31 columns have no position, so the tool takes the player with the most pass attempts for his team in that game. A run by that player is a quarterback run. A backup who threw fewer passes that day is not the primary passer.</span></div>
+    <div id="term-under-center"><b>Under center, shotgun</b><span>The shotgun column is 1 when the quarterback took the snap standing a few yards back, and 0 otherwise. "Under center" here means the column is 0. It is the only formation detail the data carries: not who lined up behind the quarterback, and not who pushed.</span></div>
+    <div id="term-dictionary"><b>Dictionary, entry</b><span>The folder <code>dictionary/</code> at the root of the repo, one JSON file per entry. An entry is one written definition: a name, the day it was written, the definition in plain words, four rules (who carried, yards to go, formation, downs), what it is compared with, and what it cannot see. The tool measures only by an entry. The agent may add one, never change one.</span></div>
+    <div id="term-cite"><b>Cite</b><span>Name the entry a number came from, by its name, file, and date, as the tool printed them. Every ruling that measures a play carries a "Definition used" line, and the runner checks that it is there.</span></div>
+    <div id="term-small-sample"><b>Small sample</b><span>The tool's warning when fewer than 50 plays match the definition. Then one play moves the rate by 100 divided by that count: at 17 plays, by 5.9 points.</span></div>
+    <div id="term-policy"><b>Policy</b><span>The file written for this agent, <code>analyst.md</code>: a job description that says how to turn a claim into a question, how to use the dictionary, what to show, and what it may not say.</span></div>
+    <div id="term-ruling"><b>Ruling</b><span>The agent's answer, in eight parts: the claim as a question, the definition used, the five-season numbers, this season's numbers, how far apart they are, one sentence of judgment, what the plays cannot tell you, and the exact commands it ran. Under 400 words.</span></div>
+  </div>
+</section>
+
+<section id="existed" data-nav="What existed">
+  <h2>What already existed</h2>
+  <p>None of this was made by the agent. One piece is new since episode 1, and it was empty.</p>
+  <div class="rows">
+    <div><b>Public play-by-play</b><span>Every NFL play, published by the nflverse community under a CC BY 4.0 license. 372 columns per play, refreshed during the season.</span></div>
+    <div><b>A cut to 31 columns</b><span>Episode 1 kept 18. This one keeps 31, adding the down, the yards to go, goal to go, <a class="term" href="#term-under-center" data-def="The quarterback took the snap a few yards back: the shotgun column is 1. The only formation detail in the data.">shotgun</a>, who ran and who passed, first down, touchdown, yards gained, and the play description itself. There is still no betting column, so the agent cannot read one even by mistake.</span></div>
+    <div><b>One read-only tool</b><span><code>query-plays.mjs</code>, rewritten for this episode: 392 lines of JavaScript. It answers two shapes of question, a search of the descriptions or a <a class="term" href="#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a> against every other <a class="term" href="#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> rush, and it prints every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a> in order. It changes nothing. <a href="tool.html">This diagram shows how it works</a>.</span></div>
+    <div><b>Claude Code</b><span>One command reads a prompt, calls only the tools it is allowed to call, and exits. There is no server to write.</span></div>
+    <div><b>An empty dictionary</b><span>A folder at the root of the repo, <a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary"><code>dictionary/</code></a>, with a README that gives the shape of an <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> and the rules: the agent may add an entry, never change one. It held no entry when the episode began. The first is written on air.</span></div>
+  </div>
+</section>
+
+<section id="shape" data-nav="How it fits">
+  <h2>How it fits together</h2>
+  <p>Two kinds of work, kept apart, as in episode 1. Counting plays has one right answer, so a small tool does it the same way every time. Deciding what to count is judgment. What is new is where one piece of that judgment lives: the definition of the play is written into a file, once, and the tool reads the file. The yellow cells are the parts written with care: the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> by hand, the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> by the agent.</p>
+  <div class="chain">
+    <div><b>A claim</b><span>"Ban the tush push."</span></div>
+    <div class="written"><b>The policy</b><span><code>analyst.md</code>, nine sections, one of them new: "Your dictionary"</span></div>
+    <div><b>The agent</b><span>Claude Code, allowed to run exactly one script and to write one kind of file in one folder</span></div>
+    <span class="via">It writes a definition once, then names it in every call.</span>
+    <div class="written"><b>The dictionary</b><span><code>dictionary/tush-push.json</code>: one written definition per file, read by the tool and fed back to the agent before every run</span></div>
+    <span class="via">The tool reads one <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, and only the one it was given.</span>
+    <div><b>The tool</b><span><code>query-plays.mjs</code> prints the definition, every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a>, then the result</span></div>
+    <span class="via">It reads, and only reads.</span>
+    <div><b>The plays</b><span>260,927 plays, 31 columns, a one-line description each, no betting lines</span></div>
+    <span class="via">The definition, the filters, and the result go back up to the agent.</span>
+    <div><b>One ruling</b><span>The entry it used, by name, file, and date; five seasons, this season, and the exact commands it ran</span></div>
+    <div class="checks"><b>The runner's three checks</b><span>The dictionary appended to the policy before the run. The <a class="term" href="#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">citation</a> required after it. Any entry that was on file and changed, put back, and the run failed.</span></div>
+  </div>
+</section>
+
+<section id="run" data-nav="One run">
+  <h2>What one run looks like</h2>
+  <div class="run">
+    <ol>
+      <li><strong>The claim goes in</strong> as one sentence, and the runner adds the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> to the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>. That day it read "Entries on file: none."</li>
+      <li class="judge"><strong>The agent splits the claim.</strong> Whether to ban the play is a judgment about safety and the game people want, and the plays cannot settle it. Whether the play <a class="term" href="#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converts</a> far more often than every other <a class="term" href="#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> rush, they can. Then it searches the descriptions for "tush push": zero.</li>
+      <li><strong>The tool refuses.</strong> The agent asks it to measure <code>--play tush-push</code>. With no <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> of that name, the tool stops with exit code 65 and prints the shape an entry takes.</li>
+      <li class="judge"><strong>It writes the entry</strong>, <code>dictionary/tush-push.json</code>: a run by the <a class="term" href="#term-primary-passer" data-def="The player with the most pass attempts for his team in that game: the quarterback, as the data can see it.">primary passer</a>, with two or fewer yards to go, not from <a class="term" href="#term-under-center" data-def="The quarterback took the snap a few yards back: the shotgun column is 1. The only formation detail in the data.">shotgun</a>, on any down. Its last line says what those rules cannot see: who pushed the runner.</li>
+      <li class="judge"><strong>Three reads with that entry.</strong> Five seasons; five seasons without the Eagles, the read it chose because the team that runs the play most could carry the pooled number; and this season.</li>
+      <li><strong>One ruling</strong>, citing the entry. The runner checks the <a class="term" href="#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">citation</a>, checks that the new entry is one the tool can use, and saves the <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a>. The agent can write nothing else.</li>
+    </ol>
+    <div>
+      <div class="ruling">
+        <p>Whether the tush push should be legal is a judgment about safety and the game people want, and the plays cannot settle it.</p>
+        <p><b>The claim.</b> The quarterback sneak from <a class="term" href="#term-under-center" data-def="The shotgun column is 0. Shotgun or not is the only formation detail the data carries.">under center</a> with two or fewer yards to go converts far more often than every other rush at the same distance, enough to be a different kind of play.</p>
+        <p><b>Definition used.</b> tush-push, dictionary/tush-push.json, written 2026-10-12 by the analyst, episode 2, written in this run because the dictionary was empty. Plain words: a quarterback run with two or fewer yards to go, taken from under center rather than shotgun, on any down. The entry cannot see who pushed, whether anyone pushed, or how the line blocked. The search by name found no match: not one of the 260,927 descriptions from 2021 through 2026 contains "tush push".</p>
+        <p class="held"><b>Five seasons. This season. The gap between the two answers.</b> Left off this page until the episode airs. The tool's numbers for the same definition are on <a href="explorer.html">the explorer</a>.</p>
+        <p class="call"><b>Ruling.</b> Held back until the episode airs on October 26, 2026.</p>
+        <p><b>What these plays cannot tell you.</b> Whether anyone pushed the runner, how the line was blocked, whether anyone was hurt, or what the rule should be.</p>
+        <pre>node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+node ./query-plays.mjs --play tush-push --seasons 2021-2025
+node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI
+node ./query-plays.mjs --play tush-push --seasons 2026</pre>
+      </div>
+      <p class="cap">A real ruling from a run on October 12, 2026, with an empty dictionary: 48 seconds, six tool calls, one of them refused, abridged to fit. The 2026 season then ran through the October 11 games. The yellow numbers mark where the agent is using judgment; the rest is mechanical.</p>
+    </div>
+  </div>
+</section>
+
+<section id="policy" data-nav="The policy">
+  <h2>The policy, in nine sections</h2>
+  <p>The <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> is a Markdown file of about 1,400 words, written like a job description. It is episode 1's eight sections with one added, third, right after the tool: the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>.</p>
+  <div class="rows marked">
+    <div><b>Job description</b><span>Not a pundit, no opinions about teams. The person in the room who went back and counted. New: it keeps a dictionary, and it must use it.</span></div>
+    <div><b>Your one tool</b><span>Two shapes of question: a search of the descriptions, and a <a class="term" href="#term-defined-play" data-def="The rushes, after the filters, that match the dictionary entry's rules.">defined play</a> against every other rush with the same yards to go. The printout is the truth about what was measured. Never open the data file or the dictionary folder directly.</span></div>
+    <div class="hl"><b>Your dictionary</b><span>Search for the play by name first, and say what you found. If an <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> is on file, use it by name, and never change it; a different definition is a new entry with a new name. If there is none, write one, in the shape the tool prints, with what its rules cannot see. Cite the entry by name, file, and date. "A number without its definition is not a number."</span></div>
+    <div><b>Turn the claim into a question</b><span>Whether a play should be legal is not a data question: say so in one sentence and set it aside. Test the claim underneath, that the play <a class="term" href="#term-converted" data-def="Converted: the play gained the first down or scored. The conversion rate is converted plays divided by plays.">converts</a> far more often than every other <a class="term" href="#term-short-yardage" data-def="Only a yard or two to go. The dictionary entry sets the distance: two or fewer in the reference definition.">short-yardage</a> play. Then run the read that could prove it wrong: without the team that runs it most, or season by season.</span></div>
+    <div><b>Answer it twice</b><span>Five complete seasons, then this season, with the same entry and the same <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>. Repeat any small-sample warning.</span></div>
+    <div><b>Show every filter</b><span>Each number comes with its filters and its entry. End with the exact commands, the search included. Never report a number the tool did not print.</span></div>
+    <div><b>What you may not say</b><span>No predictions, no view on what the rule should be, no advice to a team, a bettor, or a fantasy player, and no claim about why the play converts.</span></div>
+    <div><b>The output contract</b><span>One <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a>, under 400 words, in eight parts. The new one is "Definition used," and it is why the limit went up from 350.</span></div>
+    <div><b>Tools you may use</b><span>Two lines: the one script, and writing a new <code>.json</code> file in the dictionary folder. No reading files, no writing anywhere else, no network.</span></div>
+  </div>
+</section>
+
+<section id="lessons" data-nav="What carries">
+  <h2>What carries to your own agent</h2>
+  <div class="carry">
+    <div><b>Memory is a file the agent writes and the runner feeds back</b><span>The agent has no Read tool. Before every run the runner appends every <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> to the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>, under "The <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> today," so the agent starts from what it wrote last time. Nothing is remembered that is not in the folder.</span></div>
+    <div><b>The tool reads only the file</b><span>There is no flag for a definition made up on the spot. With no entry, the tool stops and prints the shape of one. So every number has a written, named definition behind it.</span></div>
+    <div><b>A different definition is a new entry, never an edit</b><span>Edit an entry in place and every earlier <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> that <a class="term" href="#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">cited</a> it now points at something else. The runner copies the dictionary before a run and compares it after; a changed entry is put back and the run fails.</span></div>
+    <div><b>The citation is checked, not asked for</b><span>The policy asks for a "Definition used" line. The runner reads the saved run for every entry the agent measured with, and checks that the ruling names it. Missing, the ruling goes back once; still missing, the run fails.</span></div>
+    <div><b>Scope the permission by folder and extension</b><span>The second allowlist line is <code>Edit(//&lt;repo&gt;/dictionary/*.json)</code>. The agent can write a new entry and nothing else, not even the README beside it. Tested before the show: a write into the folder was allowed, and a write next to it was refused.</span></div>
+  </div>
+</section>
+
+<section id="try" data-nav="Try it">
+  <h2>Try it yourself</h2>
+  <p>With nothing installed, <a href="explorer.html">the explorer page</a> shows the tool's real output for 54 definitions of the play, across seven sets of seasons.</p>
+  <p>To run the agent, you need a Mac or Linux machine with Node, git, and the Claude Code CLI signed in. The data is already in the repo.</p>
+<pre class="cmd"><span class="c"># get the kit</span>
+git clone https://github.com/ismayc/monday-morning-agent.git
+cd monday-morning-agent/episode-2
+
+<span class="c"># the search by name</span>
+node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+
+<span class="c"># a play with no entry: the tool stops and prints the shape of one</span>
+node ./query-plays.mjs --play no-such-play --seasons 2021-2025
+
+<span class="c"># the whole agent, into a scratch dictionary so your copy of the real one stays as it is</span>
+ANALYST_DICT_DIR=$(mktemp -d) ./run-analyst.sh "Ban the tush push."</pre>
+  <p style="margin-top:14px">Leave out <code>ANALYST_DICT_DIR</code> and the agent reads and writes the repo's own <code>dictionary/</code>. Until October 26 that folder is empty, so the agent writes the first <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> in your copy. After the episode, the entry written on air is in the repo, and the agent uses that one.</p>
+  <div class="rows">
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent">The repository</a></b><span>The kit for each episode, the data, the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>, and the examples from real runs.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a></b><span>The README with the shape of an entry and the rules for adding one. The entries go here after they are written.</span></div>
+    <div><b><a href="tool.html">How the tool works</a></b><span>A diagram of <code>query-plays.mjs</code>: its two shapes of question, the dictionary read before any <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a>, and one real command followed through. Then the runner's nine beats.</span></div>
+    <div><b><a href="map.html">Where we are</a></b><span>The episode in eight parts, in order, with what you see in each. On air, the yellow card is the part we are in.</span></div>
+    <div><b><a href="definitions.html">Five definitions of the play</a></b><span>What "the tush push" means to five different fans, what each would take to measure, which ones the 31 columns can see, and the one the agent writes. One card per keypress.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/analyst.md">The policy file</a></b><span>All nine sections, as the agent reads them.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/episode-2/examples">Real runs, file by file</a></b><span>The search by name, the tool refusing with no entry, and the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>. The run from the episode, its <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a>, and the entry the agent wrote go up after October 26, 2026.</span></div>
+    <div><b><a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">The live series</a></b><span>Eight episodes on O'Reilly, every other Monday.</span></div>
+  </div>
+</section>
+
+<section id="series" data-nav="The series">
+  <h2>The rest of the series</h2>
+  <p>This is episode 2 of eight. Each episode settles one argument and takes away one piece of human oversight, replacing it with something written down. Here it is the definition, and from now on every episode that measures a play inherits the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a>. <a href="../episode-1/">Episode 1, "You have to establish the run,"</a> showed the tool's <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>. <a href="../">All eight arguments are on the series page.</a> Next, on November 9, 2026: "Kickers are too good now."</p>
+</section>
+
+<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. Episode 2 airs October 26, 2026. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0. The numbers and the <a class="term" href="#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a> on this page are real; the ruling is abridged to fit, and its answer is held back until the episode airs.</p></footer>
+
+</main>
+</body>
+</html>

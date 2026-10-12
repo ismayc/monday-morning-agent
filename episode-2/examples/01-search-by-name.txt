@@ -1,0 +1,27 @@
+QUESTION
+  How many play descriptions contain the words "tush push"?
+  a description matches when it contains the words, in any case, anywhere in the text
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 31 of 372 columns kept, no betting columns                         260,927
+   1. seasons: 2021-2026                                                                       260,927
+   2. season type: regular season and playoffs                                                 260,927
+   3. weeks: all                                                                               260,927
+
+THEN, EVERY DESCRIPTION READ
+  1,502 games in the plays kept (latest game 2026-10-11; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22; 2026: 1-5)
+
+RESULT
+  season   plays searched   descriptions containing "tush push"
+  2021             49,922            0
+  2022             49,434            0
+  2023             49,665            0
+  2024             49,492            0
+  2025             48,771            0
+  2026             13,643            0
+  all             260,927            0
+
+  NO MATCH: not one of the 260,927 descriptions contains "tush push".
+
+NOT IN THIS OUTPUT
+  Anything the descriptions do not say. A play that happened but was written up in other words is not a match, and a description is one line of text, not a film clip.

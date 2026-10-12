@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where we are: the Monday Morning Agent, episode 2</title>
+<meta name="description" content="The eight parts of episode 2, in order, with what you will see in each. On air, the yellow card is the part we are in.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="Where we are: episode 2 in eight parts">
+<meta property="og:description" content="The eight parts of the episode, in order, with what you will see in each.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-2/map.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Ban the tush push. A big pink zero: plays named tush push in 260,927 play descriptions, 2021 to 2026, so the agent has to define it before it can judge it.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Where we are: episode 2 in eight parts">
+<meta name="twitter:description" content="The eight parts of the episode, in order, with what you will see in each.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-2/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  /* On air: one keypress at each hand-off moves the yellow card down one part. The cards
+     never move or resize, so the room can keep its place. Without JavaScript the page is
+     the plain agenda. */
+  h1.long { max-width: 26ch; }
+  .lead { margin-top: 18px; }
+  .cards { margin-top: 30px; border: 2px solid var(--ink); background: #fff; }
+  .card { display: grid; grid-template-columns: 56px minmax(220px, 30%) 1fr auto; gap: 0 20px; align-items: center; padding: 11px 18px 12px; border-bottom: 2px solid var(--ink); transition: opacity .35s ease, background .35s ease; }
+  .card:last-child { border-bottom: 0; }
+  .card i { font-style: normal; font-family: var(--display); font-weight: 700; font-size: 44px; line-height: .9; align-self: start; }
+  .card b { font-family: var(--display); font-weight: 600; font-size: clamp(22px, 2.4vw, 29px); line-height: 1.05; }
+  .card span { font-size: 16.5px; line-height: 1.35; color: var(--soft); max-width: 70ch; }
+  .card .tag { font-family: var(--display); font-weight: 600; font-size: 19px; line-height: 1.1; text-align: center; border: 2px solid var(--rule); color: var(--soft); padding: 6px 12px; min-width: 96px; white-space: nowrap; }
+  .card .tag::after { content: attr(data-min) " min"; }
+  .card.now { background: var(--yellow); }
+  .card.now span { color: var(--ink); }
+  .card.now .tag { background: var(--ink); color: var(--yellow); border-color: var(--ink); }
+  .card.now .tag::after { content: "Now"; }
+  .card.done { opacity: .45; }
+  .card.done .tag::after { content: "Done"; }
+  @media (max-width: 760px) { .card { grid-template-columns: 48px 1fr; align-items: start; } .card i { font-size: 36px; } .card span, .card .tag { grid-column: 2; } .card span { margin-top: 4px; } .card .tag { justify-self: start; margin-top: 8px; } }
+
+  .keys { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 22px; font-size: 15.5px; color: var(--soft); align-items: center; }
+  .keys kbd { font-family: var(--display); font-weight: 600; font-size: 16px; color: var(--ink); border: 1.5px solid var(--ink); padding: 0 7px; border-radius: 3px; background: #fff; }
+  .keys button { font: inherit; cursor: pointer; background: #fff; border: 2px solid var(--ink); padding: 2px 12px; font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); }
+  .keys button:hover { background: var(--yellow); }
+  .noscript .keys { display: none; }
+  .more { margin-top: 56px; }
+  .more p { max-width: 80ch; font-size: 16.5px; }
+</style>
+</head>
+<body class="noscript">
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 2</a><a href="map.html" aria-current="page">Where we are</a><a href="definitions.html">Five definitions</a><a href="./#terms">Terms</a><a href="explorer.html">Change the definition</a><a href="tool.html">The tool</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<h1 class="long">Where we are.</h1>
+<p class="lead">Episode 2 runs in eight parts, about 29 minutes, then questions. On air the yellow card is the part we are in. Everything you see is in <a href="https://github.com/ismayc/monday-morning-agent">the public repo</a>, so you can follow along or come back to it later.</p>
+
+<div class="cards" id="cards" aria-live="polite">
+  <div class="card" data-n="1"><i>1</i><b>The argument</b><span>Ban the tush push: the league voted on it in May 2025, and the ban failed. Five things fans mean by the play. Before the agent can judge it, it has to find it.</span><div class="tag" data-min="2"></div></div>
+  <div class="card" data-n="2"><i>2</i><b>The search, by hand</b><span>Three searches of 260,927 play descriptions: "tush push," "brotherly shove," and "sneak." Zero, zero, two. The play has no name in the data.</span><div class="tag" data-min="2"></div></div>
+  <div class="card" data-n="3"><i>3</i><b>The definition and the dictionary</b><span>Which parts of each definition the 31 columns can see. The <a class="term" href="./#term-dictionary" data-def="The folder of written definitions, one JSON file per entry. The tool measures only by an entry.">dictionary</a> folder and its README. The tool refusing to measure a play with no <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, and the shape an entry takes.</span><div class="tag" data-min="4"></div></div>
+  <div class="card" data-n="4"><i>4</i><b>The policy, read against episode 1's</b><span>Side by side, what changed: the tool, the new "Your dictionary" section, the ban as a question the plays cannot settle, the <a class="term" href="./#term-ruling" data-def="The agent's answer: eight parts, under 400 words, citing its entry and ending with the commands it ran.">ruling</a>'s eighth part, and a two-line allowlist.</span><div class="tag" data-min="6"></div></div>
+  <div class="card" data-n="5"><i>5</i><b>Run it</b><span>The runner's new beats, then the episode's claim goes in: the search, the refusal, the entry written, three reads, and a ruling that <a class="term" href="./#term-cite" data-def="Name the entry a number came from, by name, file, and date. The runner checks the ruling does.">cites</a> its entry.</span><div class="tag" data-min="4"></div></div>
+  <div class="card" data-n="6"><i>6</i><b>Memory, proved</b><span>Your claim from the chat, with the entry now on file: the agent uses it, does not rewrite it, and cites it. Then a claim it has to decline.</span><div class="tag" data-min="4"></div></div>
+  <div class="card" data-n="7"><i>7</i><b>Close</b><span>Memory is a file. The tool reads only the file. The runner checks the citation and the file. Next: kickers.</span><div class="tag" data-min="1"></div></div>
+  <div class="card" data-n="8"><i>8</i><b>The season sheets, then Q&amp;A</b><span>Five seasons rebuilt live, this season's sheet made live, then your questions.</span><div class="tag" data-min="6"></div></div>
+</div>
+
+<div class="keys" id="keys">
+  <button type="button" id="next">Next part</button>
+  <span><kbd>Space</kbd> next</span>
+  <span><kbd>Backspace</kbd> back</span>
+  <span><kbd>R</kbd> start over</span>
+  <span id="where"></span>
+</div>
+
+<section class="more">
+  <h2>While you wait</h2>
+  <p>The <a href="./">episode page</a> explains the setup for someone who has never built an agent. <a href="definitions.html">Five definitions</a> shows what the data can and cannot see, <a href="explorer.html">the explorer</a> shows the tool's real output for 54 definitions of the play, and <a href="tool.html">the tool page</a> is a diagram of the one script the agent is allowed to run. The <a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">dictionary</a> is empty until the agent writes its first <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, on air.</p>
+</section>
+
+<footer>
+  <p>Episode 2 of <a href="../">The Monday Morning Agent</a>, an O'Reilly live series. Plays from nflverse, CC BY 4.0.</p>
+</footer>
+
+</main>
+<script>
+(function () {
+  var body = document.body, cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var where = document.getElementById('where'), box = document.getElementById('cards'), LAST = cards.length, stage = 0;
+  body.className = 'js';
+  // #3 opens the page with part 3 marked as now; #0 with nothing marked.
+  var fromHash = parseInt(location.hash.slice(1), 10);
+  if (fromHash >= 0 && fromHash <= LAST) stage = fromHash;
+  function paint() {
+    cards.forEach(function (c, i) {
+      var n = i + 1;
+      c.classList.toggle('now', stage === n);
+      c.classList.toggle('done', stage > n);
+    });
+    where.textContent = stage === 0 ? 'Not started' : 'Part ' + stage + ' of ' + LAST;
+  }
+  function step(d) { stage = Math.max(0, Math.min(LAST, stage + d)); paint(); }
+  document.getElementById('next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (k === ' ' || k === 'Enter' || k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown') { e.preventDefault(); step(1); }
+    else if (k === 'Backspace' || k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp') { e.preventDefault(); step(-1); }
+    else if (k === 'r' || k === 'R' || k === 'Home') { e.preventDefault(); stage = 0; paint(); }
+  });
+  box.addEventListener('click', function () { step(1); });
+  paint();
+})();
+</script>
+</body>
+</html>

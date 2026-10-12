@@ -1,0 +1,17 @@
+query-plays: no entry named "tush-push" in /Users/chesterismay/repos/oreilly-agent-sessions/monday-morning-agent/dictionary. The tool only speaks the dictionary: write /Users/chesterismay/repos/oreilly-agent-sessions/monday-morning-agent/dictionary/tush-push.json first, in this shape:
+{
+  "name": "tush-push",                      the file is dictionary/<name>.json; lowercase letters, digits, hyphens
+  "written": "2026-10-26",                  the day it was written, YYYY-MM-DD
+  "by": "the analyst, episode 2",           who wrote it (optional)
+  "plainWords": "A quarterback run with two or fewer yards to go, not from shotgun.",
+  "rules": {
+    "rusher": "primary-passer",             who carried: "primary-passer" (the player with the most
+                                            pass attempts for that team in that game) or "any"
+    "yardsToGoMax": 2,                      a whole number, 1 to 10
+    "formation": "under-center",            "under-center" (not shotgun), "shotgun", or "any"
+    "downs": "any"                          "any", or a list such as [3, 4]
+  },
+  "comparedWith": "every other rush with the same yards to go",
+  "cannotSee": "who pushed the runner, or any formation detail beyond shotgun or not"   (optional)
+}
+Entries on file: none
