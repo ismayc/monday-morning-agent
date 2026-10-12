@@ -5,30 +5,47 @@ every filter it applied on screen.
 
 This is the repo behind [The Monday Morning Agent](https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/),
 an eight-episode O'Reilly live series hosted by Chester Ismay. Each episode settles one
-argument NFL fans cannot stop having and adds one skill to the agent. One folder per
-episode.
+argument NFL fans cannot stop having and adds one skill to the agent. The series page
+is https://ismayc.github.io/monday-morning-agent/.
 
-- **The series, all eight arguments:** https://ismayc.github.io/monday-morning-agent/
-- **Episode 1, the short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-1/
+## The eight episodes
+
+One folder per episode, `episode-N/`, holding everything the agent ran on: the policy,
+the tool, the data, the runner, and real output. One page folder per episode under
+`docs/episode-N/`. The dictionary the agent writes from episode 2 on sits at the root,
+[`dictionary/`](dictionary/), because every later episode cites it.
+
+| # | The argument | Airs | What the agent learns | Where |
+|---|---|---|---|---|
+| 1 | "You have to establish the run." | October 12, 2026 (aired) | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
+| 2 | "Ban the tush push." | October 26, 2026 | Durable memory: a dictionary it writes and must cite from then on | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
+| 3 | "Kickers are too good now." | November 9, 2026 | Written rules for its charts | with the episode |
+| 4 | The pundit audit, claim chosen by the room | November 23, 2026 | A second agent as a standing fact-checker | with the episode |
+| 5 | "Coaches are cowards on fourth down." | December 7, 2026 | A written line it describes up to and declines to cross: no predictions | with the episode |
+| 6 | The mailbag, from the previous Q&A | January 11, 2027 | Working a queue of vague requests it did not choose | with the episode |
+| 7 | The agent writes its own column | January 25, 2027 | Choosing its own questions, checked before it ships | with the episode |
+| 8 | Two weeks unattended | February 8, 2027 | Running on a schedule, where the refusals matter more than the answers | with the episode |
+
+Every page has the same strip across the top, which stays put as you scroll, and a term
+with a dotted underline shows its definition on hover and links to that episode's
+glossary. Each episode's section below starts with its pages.
+
+## Episode 1: "You have to establish the run."
+
+One agent, one read-only data tool, every filter shown. Everything is in `episode-1/`.
+
+### The pages
+
+- **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-1/
 - **The plays, row by row, and the cut from 372 columns to 18:** https://ismayc.github.io/monday-morning-agent/episode-1/plays.html
 - **Change a filter yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-1/explorer.html
 - **How the one tool works, as a diagram:** https://ismayc.github.io/monday-morning-agent/episode-1/tool.html
 - **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-1/map.html
 - **Five meanings of the claim, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-1/meanings.html
 - **The words the count uses (team-game, rush share, gap, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-1/#terms
-- **Episode 2, the short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-2/
-- **Change the definition of the play yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html
-- **How episode 2's tool works, the dictionary included:** https://ismayc.github.io/monday-morning-agent/episode-2/tool.html
-- **Where we are, episode 2 in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-2/map.html
-- **Five definitions of the tush push, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-2/definitions.html
-- **Episode 2's words (the defined play, primary passer, entry, cite, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-2/#terms
-- **The dictionary, the definitions the agent measures with:** [`dictionary/`](dictionary/), from episode 2 on
+- **The answer, with evidence:** [five seasons](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2021-2025.html) and [this season](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2026.html)
 
-Every page has the same strip across the top, which stays put as you scroll, and a term with a dotted underline shows its definition on hover and links to the glossary.
-
-## Episode 1: "You have to establish the run."
-
-One agent, one read-only data tool, every filter shown. Everything is in `episode-1/`.
+### The kit
 
 ```mermaid
 flowchart TB
@@ -154,6 +171,19 @@ definition into a dictionary at the root of this repo, the tool measures only by
 written entry, and every ruling cites the entry it used. Everything else is in
 `episode-2/`.
 
+### The pages
+
+- **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-2/
+- **Change the definition of the play yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html
+- **How the tool works, the dictionary included:** https://ismayc.github.io/monday-morning-agent/episode-2/tool.html
+- **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-2/map.html
+- **Five definitions of the tush push, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-2/definitions.html
+- **The words (the defined play, primary passer, entry, cite, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-2/#terms
+- **The dictionary, the definitions the agent measures with:** [`dictionary/`](dictionary/)
+- **The answer, with evidence:** two season sheets, published after the episode airs on October 26, 2026
+
+### The kit
+
 ```mermaid
 flowchart TB
     claim["A claim<br/>'Ban the tush push.'"]
@@ -225,29 +255,34 @@ The answer goes up after the episode airs on October 26, 2026, with the season s
 for five seasons and for this season. Until then the tool's numbers for 54 definitions
 of the play are on [the explorer page](https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html).
 
-## What this agent does not do
+## Across the episodes
+
+### What this agent does not do
 
 No predictions, no odds, no wagering analysis, and no fantasy advice. That is a design
-decision. The public data carries betting-line columns; `slim-data.mjs` does not keep
-them, so the file the agent can reach has none.
+decision. The public data carries betting-line columns; neither episode's
+`slim-data.mjs` keeps them, so no file the agent can reach has one.
 
-## A scheduled workflow commits to `main`
+### A scheduled workflow commits to `main`
 
 `.github/workflows/refresh-data.yml` is scheduled three times a night (GitHub starts
 scheduled workflows hours late, so one slot is not enough; the file says why). It
-re-downloads the seasons, rebuilds the slim file, the explorer page's answers, and the
-plays page's data, and commits when the plays changed. Pull before you push.
+re-downloads the seasons once, rebuilds episode 1's slim file, explorer answers, and
+plays-page data, then episode 2's plays file and explorer answers from the same
+downloads, and commits when the plays changed. Pull before you push.
 
-## Data
+### Data
 
 Play-by-play data is from [nflverse](https://github.com/nflverse/nflverse-data),
-licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The file here is a
-cut of it: 18 of 372 columns, seasons 2021 through 2026. nflverse rebuilds its file
-several times a day in season, so a Sunday game is normally there by Monday morning; for
-the morning it is not, `fetch-espn.mjs` fills the missing games from ESPN's public game
-summaries on your own machine (the committed file is nflverse only). Measured on all 16
-Week 4 games of 2026: the two sources agree on a team's runs and passes within three
-plays, and on rush share within 1.15 points.
+licensed [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). Each episode keeps
+its own cut of it, seasons 2021 through 2026: episode 1 keeps 18 of the 372 columns
+(`episode-1/data/plays-slim.csv`), episode 2 keeps 31, the play description among them
+(`episode-2/data/plays.csv`). nflverse rebuilds its file several times a day in season,
+so a Sunday game is normally there by Monday morning; for the morning it is not,
+episode 1's `fetch-espn.mjs` fills the missing games from ESPN's public game summaries
+on your own machine (the committed files are nflverse only, and episode 2's file has no
+ESPN fill at all). Measured on all 16 Week 4 games of 2026: the two sources agree on a
+team's runs and passes within three plays, and on rush share within 1.15 points.
 
 The site is `docs/`: the series page at the root and one folder per episode
 (`docs/episode-1/`, `docs/episode-2/`), all sharing `docs/sheet.css` and the icons. The link-preview images
