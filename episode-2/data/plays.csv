@@ -258632,6 +258632,205 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,5,2026_05_BAL_ATL,2026-10-11,ATL,BAL,ATL,BAL,5,1,10,0,72,pass,0,1,0,0,0,1,0,,,00-0036212,T.Tagovailoa,20,1,0,-7,(2:50) (Shotgun) 1-T.Tagovailoa pass short middle to 5-D.London to ATL 48 for 20 yards (24-M.Starks).
 2026,REG,5,2026_05_BAL_ATL,2026-10-11,ATL,BAL,ATL,BAL,5,1,10,0,52,pass,0,1,0,0,0,1,0,,,00-0036212,T.Tagovailoa,0,0,0,-7,(2:11) (Shotgun) 1-T.Tagovailoa pass short middle intended for 5-D.London INTERCEPTED by 14-K.Hamilton at BAL 40. 14-K.Hamilton to BAL 42 for 2 yards (5-D.London).
 2026,REG,5,2026_05_BAL_ATL,2026-10-11,ATL,BAL,ATL,BAL,5,,0,0,,,,,0,0,0,0,0,,,,,,,,-7,END GAME
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,1,,0,0,,,,,0,0,0,0,0,,,,,,,,,GAME
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,42-E.Evans kicks 61 yards from LA 35 to BUF 4. 7-R.Davis pushed ob at LA 26 for 70 yards (42-E.Evans).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,1,10,0,26,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,3,0,0,0,(14:50) 4-J.Cook up the middle to LA 23 for 3 yards (53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,2,7,0,23,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,0,0,0,0,(14:13) (Shotgun) 17-J.Allen pass incomplete deep middle to 88-D.Knox.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,3,7,0,23,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,-8,0,0,0,(14:08) (Shotgun) 17-J.Allen sacked at LA 31 for -8 yards (10-J.Stewart).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,4,15,0,31,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,0,"(13:28) 16-T.Bass 49 yard field goal is GOOD, Center-69-R.Ferguson, Holder-39-T.Doman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-3,16-T.Bass kicks 58 yards from BUF 35 to LA 7. 11-A.Bachman to LA 30 for 23 yards (56-J.Solomon).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,1,10,0,70,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,3,0,0,-3,(13:18) (Shotgun) 9-M.Stafford pass short left to 84-C.Parkinson pushed ob at LA 33 for 3 yards (47-C.Benford).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,2,7,0,67,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,4,0,0,-3,(12:41) 9-M.Stafford pass short left to 12-P.Nacua to LA 37 for 4 yards (47-C.Benford).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,3,3,0,63,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,4,1,0,-3,(12:02) (Shotgun) 9-M.Stafford pass short left to 12-P.Nacua to LA 41 for 4 yards (47-C.Benford).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,1,10,0,59,no_play,0,0,0,0,0,0,0,,,,,0,0,0,-3,"(11:25) PENALTY on LA-69-K.Dotson, False Start, 5 yards, enforced at LA 41 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,1,15,0,64,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,7,0,0,-3,(11:11) 23-K.Williams up the middle to LA 43 for 7 yards (22-C.Gardner-Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,2,8,0,57,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,9,1,0,-3,(10:31) 9-M.Stafford pass short right to 12-P.Nacua ran ob at BUF 48 for 9 yards.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,1,10,0,48,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-3,(9:54) (Shotgun) 9-M.Stafford pass short right to 23-K.Williams pushed ob at BUF 48 for no gain (47-C.Benford; 99-T.Parker).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,2,10,0,48,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,9,0,0,-3,(9:20) (Shotgun) 9-M.Stafford pass short right to 89-T.Higbee to BUF 39 for 9 yards (8-T.Bernard).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,3,1,0,39,run,1,0,0,0,0,1,0,00-0037840,K.Williams,,,0,0,0,-3,(8:40) (Shotgun) 23-K.Williams up the middle to BUF 39 for no gain (8-T.Bernard; 98-T.Sanders).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,4,1,0,39,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,2,1,0,-3,(8:00) 23-K.Williams left guard to BUF 37 for 2 yards (24-C.Bishop; 21-D.Igbinosun).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,1,10,0,37,pass,0,1,0,0,0,0,1,,,00-0026498,M.Stafford,7,0,0,-3,(7:27) (No Huddle) 9-M.Stafford pass short middle to 12-P.Nacua to BUF 30 for 7 yards (42-D.Williams; 22-C.Gardner-Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,2,3,0,30,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,5,0,0,-3,"(6:51) 23-K.Williams up the middle to BUF 21 for 9 yards (99-T.Parker). PENALTY on LA-89-T.Higbee, Offensive Holding, 10 yards, enforced at BUF 25."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,2,8,0,35,run,1,0,0,0,0,1,0,00-0039738,B.Corum,,,3,0,0,-3,(6:25) (Shotgun) 24-B.Corum up the middle to BUF 32 for 3 yards (42-D.Williams; 55-M.Hoecht).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,3,5,0,32,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-3,(5:44) (Shotgun) 9-M.Stafford pass incomplete short middle to 12-P.Nacua.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,4,5,0,32,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,-3,"(5:40) 92-H.Mevis 50 yard field goal is No Good, Wide Left, Center-49-J.Cardona, Holder-42-E.Evans."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,1,10,0,60,pass,0,1,0,0,0,0,0,,,00-0034857,J.Allen,7,0,0,3,(5:35) 17-J.Allen pass short left to 4-J.Cook ran ob at BUF 47 for 7 yards (94-D.Johnson; 22-T.McDuffie).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,2,3,0,53,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,6,1,0,3,(5:03) 4-J.Cook right guard to LA 47 for 6 yards (0-B.Young; 37-Q.Lake).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,1,10,0,47,run,1,0,0,0,1,1,0,00-0034857,J.Allen,,,8,0,0,3,(4:24) (Shotgun) 17-J.Allen scrambles left end ran ob at LA 39 for 8 yards (35-J.Watson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,2,2,0,39,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,3,1,0,3,(3:50) 4-J.Cook right tackle to LA 36 for 3 yards (91-K.Turner; 53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,1,10,0,36,no_play,0,0,0,0,0,1,0,,,,,0,1,0,3,"(3:10) (Shotgun) 17-J.Allen sacked at LA 46 for -10 yards (99-A.Donald). PENALTY on LA-22-T.McDuffie, Illegal Contact, 5 yards, enforced at LA 36 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,1,10,0,31,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,4,0,0,3,(3:00) 4-J.Cook left tackle to LA 27 for 4 yards (53-N.Landman; 48-O.Speights).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,2,6,0,27,run,1,0,0,0,0,1,0,00-0037248,J.Cook,,,15,1,0,3,(2:25) (Shotgun) 4-J.Cook up the middle to LA 12 for 15 yards (5-K.Kinchens).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,1,10,0,12,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,1,0,0,3,(1:45) 4-J.Cook left guard to LA 11 for 1 yard (99-A.Donald).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,2,9,0,11,run,1,0,0,0,1,0,0,00-0034857,J.Allen,,,6,0,0,3,(1:05) 17-J.Allen scrambles left end to LA 5 for 6 yards (99-A.Donald; 3-K.Curl).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,3,3,0,5,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,0,0,0,3,(:19) (Shotgun) 17-J.Allen pass incomplete short left to 88-D.Knox.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,1,4,3,0,5,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,3,"(:13) 16-T.Bass 23 yard field goal is GOOD, Center-69-R.Ferguson, Holder-39-T.Doman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-6,16-T.Bass kicks 60 yards from BUF 35 to LA 5. 88-J.Whittington to LA 29 for 24 yards (99-T.Parker).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,1,10,0,71,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,6,0,0,-6,(:05) 9-M.Stafford pass short right to 89-T.Higbee pushed ob at LA 35 for 6 yards (47-C.Benford).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,1,,0,0,,,,,0,0,0,0,0,,,,,,,,-6,END QUARTER 1
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,4,0,65,run,1,0,0,0,0,0,0,00-0039075,P.Nacua,,,0,0,0,-6,(15:00) 12-P.Nacua left end to LA 35 for no gain (42-D.Williams; 22-C.Gardner-Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,4,0,65,no_play,0,0,0,0,0,1,0,,,,,0,1,0,-6,"(14:27) (Shotgun) PENALTY on BUF-55-M.Hoecht, Neutral Zone Infraction, 5 yards, enforced at LA 35 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,60,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,10,1,0,-6,(14:13) 9-M.Stafford pass short left to 24-B.Corum pushed ob at 50 for 10 yards (24-C.Bishop). The first down was assisted by replay.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,50,run,1,0,0,0,0,0,0,00-0039738,B.Corum,,,3,0,0,-6,(13:42) 24-B.Corum up the middle to BUF 47 for 3 yards (96-D.Walker).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,7,0,47,run,1,0,0,0,0,1,0,00-0039738,B.Corum,,,10,1,0,-6,(13:00) (Shotgun) 24-B.Corum up the middle to BUF 37 for 10 yards (47-C.Benford; 24-C.Bishop).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,37,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,9,0,0,-6,(12:23) 9-M.Stafford pass short right to 24-B.Corum pushed ob at BUF 28 for 9 yards (8-T.Bernard).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,1,0,28,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,1,1,0,-6,(11:45) 23-K.Williams left tackle to BUF 27 for 1 yard (90-D.Carter; 22-C.Gardner-Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by LA at 11:02.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,27,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,3,0,0,-6,(11:02) 23-K.Williams right tackle to BUF 24 for 3 yards (97-G.Gaines; 42-D.Williams).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,7,0,24,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,-6,(10:23) 9-M.Stafford pass incomplete short right to 12-P.Nacua.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,7,0,24,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,8,1,0,-6,(10:19) (Shotgun) 9-M.Stafford pass short middle to 12-P.Nacua to BUF 16 for 8 yards (8-T.Bernard).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,16,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,-6,(9:39) 9-M.Stafford pass incomplete deep left to 17-D.Adams.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,10,0,16,run,1,0,0,0,0,0,0,00-0039075,P.Nacua,,,9,0,0,-6,(9:35) 12-P.Nacua left end to BUF 7 for 9 yards (3-D.Hamlin; 42-D.Williams).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,1,0,7,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,3,1,0,-6,(8:50) 9-M.Stafford pass short right to 87-D.Allen to BUF 4 for 3 yards (22-C.Gardner-Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,4,1,4,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,4,1,1,-6,"(8:04) (Shotgun) 9-M.Stafford pass short left to 17-D.Adams for 4 yards, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,0,"92-H.Mevis extra point is GOOD, Center-49-J.Cardona, Holder-42-E.Evans."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-1,92-H.Mevis kicks 63 yards from LA 35 to BUF 2. 19-G.Dortch to BUF 31 for 29 yards (37-Q.Lake; 94-D.Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,1,10,0,69,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,4,0,0,-1,(7:54) 4-J.Cook up the middle to BUF 35 for 4 yards (53-N.Landman; 3-K.Curl).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,2,6,0,65,run,1,0,0,0,1,0,0,00-0034857,J.Allen,,,7,1,0,-1,(7:17) 17-J.Allen scrambles left end ran ob at BUF 42 for 7 yards (48-O.Speights).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,1,10,0,58,no_play,0,0,0,0,0,0,0,,,,,0,0,0,-1,"(6:36) PENALTY on BUF-85-J.Hawes, False Start, 5 yards, enforced at BUF 42 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,1,15,0,63,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,6,0,0,-1,(6:22) (Shotgun) 17-J.Allen pass short right to 10-K.Shakir to BUF 43 for 6 yards (53-N.Landman). BUF-79-S.Brown was injured during the play.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,2,9,0,57,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,40,1,0,-1,(5:56) (Shotgun) 17-J.Allen pass short right to 26-T.Johnson pushed ob at LA 17 for 40 yards (0-B.Young).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,1,10,0,17,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,17,1,1,-1,"(5:16) 4-J.Cook right tackle for 17 yards, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,5,"16-T.Bass extra point is GOOD, Center-69-R.Ferguson, Holder-39-T.Doman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-6,16-T.Bass kicks 62 yards from BUF 35 to LA 3. 88-J.Whittington to LA 36 for 33 yards (29-J.Kilgore).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,64,run,1,0,0,0,0,1,0,00-0037840,K.Williams,,,3,0,0,-6,(5:04) (Shotgun) 23-K.Williams left guard to LA 39 for 3 yards (98-T.Sanders).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,7,0,61,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,4,0,0,-6,(4:24) 23-K.Williams up the middle to LA 43 for 4 yards (98-T.Sanders; 42-D.Williams).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,3,0,57,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,4,1,0,-6,(3:43) (Shotgun) 9-M.Stafford pass short right to 8-T.Atwell pushed ob at LA 47 for 4 yards (1-M.Hairston).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,53,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,-6,0,0,-6,(3:15) 9-M.Stafford sacked at LA 41 for -6 yards (90-D.Carter).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,16,0,59,no_play,0,0,0,0,0,1,0,,,,,0,1,0,-6,"(2:31) (Shotgun) 9-M.Stafford pass incomplete short right to 89-T.Higbee (22-C.Gardner-Johnson). PENALTY on BUF-22-C.Gardner-Johnson, Unnecessary Roughness, 15 yards, enforced at LA 41 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,44,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,-6,"(2:26) 9-M.Stafford pass deep right to 12-P.Nacua ran ob at BUF 29 for 15 yards. Buffalo challenged the pass completion ruling, and the play was REVERSED. 9-M.Stafford pass incomplete deep right to 12-P.Nacua."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,10,0,44,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-6,(2:20) (Shotgun) 9-M.Stafford pass incomplete short right to 12-P.Nacua (52-K.Elarms-Orr) [8-T.Bernard].
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,10,0,44,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-6,"(2:15) (Shotgun) PENALTY on LA-77-A.Jackson, False Start, 5 yards, enforced at BUF 44 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,15,0,49,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,6,0,0,-6,(2:15) (Shotgun) 9-M.Stafford pass short right to 23-K.Williams to BUF 43 for 6 yards (8-T.Bernard; 3-D.Hamlin).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,4,9,0,43,punt,0,0,0,0,0,0,0,,,,,0,0,0,-6,"(2:00) 42-E.Evans punts 31 yards to BUF 12, Center-49-J.Cardona, fair catch by 19-G.Dortch."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,1,10,0,88,run,1,0,0,0,0,1,0,00-0037248,J.Cook,,,2,0,0,6,(1:52) (Shotgun) 4-J.Cook right tackle to BUF 14 for 2 yards (37-Q.Lake).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,2,8,0,86,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,7,0,0,6,(1:11) (Shotgun) 17-J.Allen pass short left to 86-D.Kincaid to BUF 21 for 7 yards (30-J.Wallace).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by BUF at 00:37.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,3,1,0,79,no_play,0,0,0,0,0,1,0,,,,,0,0,0,6,"(:37) (Shotgun) PENALTY on BUF, Illegal Shift, 5 yards, enforced at BUF 21 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,2,3,6,0,84,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,0,0,0,6,(:37) (Shotgun) 17-J.Allen pass deep right intended for 0-K.Coleman INTERCEPTED by 35-J.Watson at LA 40. 35-J.Watson to LA 43 for 3 yards (88-D.Knox).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,10,0,57,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-6,"(:20) (Shotgun) PENALTY on LA-71-W.McClendon, False Start, 5 yards, enforced at LA 43 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,1,15,0,62,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-6,(:20) (Shotgun) 9-M.Stafford pass incomplete short right to 89-T.Higbee.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,2,15,0,62,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,13,0,0,-6,(:15) (Shotgun) 9-M.Stafford pass short middle to 17-D.Adams to BUF 49 for 13 yards (21-D.Igbinosun).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by LA at 00:08.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,2,3,2,0,49,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-6,(:08) (Shotgun) 9-M.Stafford pass incomplete deep middle to 12-P.Nacua.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,2,,0,0,,,,,0,0,0,0,0,,,,,,,,,END QUARTER 2
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-6,16-T.Bass kicks 57 yards from BUF 35 to LA 8. 11-A.Bachman to LA 40 for 32 yards (30-A.Kendall; 18-T.Sherfield).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,60,run,1,0,0,0,0,0,0,00-0039738,B.Corum,,,2,0,0,-6,(14:52) 24-B.Corum up the middle to LA 42 for 2 yards (9-B.Chubb; 98-T.Sanders).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,2,8,0,58,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,14,1,0,-6,(14:20) 9-M.Stafford pass short left to 12-P.Nacua to BUF 44 for 14 yards (47-C.Benford; 8-T.Bernard).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,44,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,-6,(13:33) 9-M.Stafford pass incomplete short middle to 84-C.Parkinson.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,2,10,0,44,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,5,0,0,-6,(13:27) (Shotgun) 9-M.Stafford pass short right to 12-P.Nacua to BUF 39 for 5 yards (42-D.Williams; 30-A.Kendall).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,3,5,0,39,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,4,0,0,-6,(12:45) (Shotgun) 9-M.Stafford pass short right to 23-K.Williams pushed ob at BUF 35 for 4 yards (3-D.Hamlin).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,4,1,0,35,no_play,0,0,0,0,0,0,0,,,,,0,0,0,-6,"(12:08) (Run formation) PENALTY on LA-89-T.Higbee, False Start, 5 yards, enforced at BUF 35 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,4,6,0,40,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,10,1,0,-6,(11:50) (Shotgun) 9-M.Stafford pass short right to 89-T.Higbee to BUF 30 for 10 yards (24-C.Bishop).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,30,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,12,1,0,-6,(11:08) 9-M.Stafford pass short left to 12-P.Nacua to BUF 18 for 12 yards (21-D.Igbinosun).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,18,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-6,(10:22) (Shotgun) 9-M.Stafford pass incomplete short left to 24-B.Corum.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,2,10,0,18,no_play,0,0,0,0,0,1,0,,,,,0,1,0,-6,"(10:18) (Shotgun) 9-M.Stafford pass incomplete deep middle to 89-T.Higbee [55-M.Hoecht]. PENALTY on BUF-24-C.Bishop, Defensive Pass Interference, 17 yards, enforced at BUF 18 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,1,1,1,run,1,0,0,0,0,0,0,00-0039738,B.Corum,,,1,1,1,-6,"(10:14) 24-B.Corum right tackle for 1 yard, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,0,"92-H.Mevis extra point is GOOD, Center-49-J.Cardona, Holder-42-E.Evans."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-1,92-H.Mevis kicks 62 yards from LA 35 to BUF 3. 19-G.Dortch to BUF 32 for 29 yards (36-M.Pulley).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,10,0,68,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,5,1,0,-1,"(10:05) 4-J.Cook up the middle to BUF 37 for 5 yards (10-J.Stewart; 3-K.Curl). PENALTY on LA-55-B.Fiske, Face Mask, 15 yards, enforced at BUF 37."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,10,0,48,no_play,0,0,0,0,0,0,0,,,,,0,0,0,-1,"(9:54) 17-J.Allen pass short right to 0-K.Coleman to LA 31 for 17 yards (37-Q.Lake; 3-K.Curl). PENALTY on BUF-68-T.Grable, Offensive Holding, 10 yards, enforced at LA 48 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,20,0,58,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,-1,0,0,-1,(9:20) 4-J.Cook up the middle to BUF 41 for -1 yards (3-K.Curl).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,2,21,0,59,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,0,0,0,-1,(8:35) (Shotgun) 17-J.Allen pass incomplete deep right to 86-D.Kincaid.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,3,21,0,59,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,0,0,0,-1,(8:31) (Shotgun) 17-J.Allen pass incomplete deep left to 13-S.Bell (35-J.Watson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,4,21,0,59,punt,0,0,0,0,0,0,0,,,,,0,0,0,-1,"(8:24) 39-T.Doman punts 52 yards to LA 7, Center-69-R.Ferguson, fair catch by 11-A.Bachman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,93,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,3,0,0,1,(8:17) 9-M.Stafford pass short right to 12-P.Nacua to LA 10 for 3 yards (21-D.Igbinosun).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,2,7,0,90,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,3,0,0,1,(7:40) 23-K.Williams up the middle to LA 13 for 3 yards (98-T.Sanders).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,3,4,0,87,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,1,(7:01) (Shotgun) 9-M.Stafford pass incomplete short right to 17-D.Adams.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,4,4,0,87,punt,0,0,0,0,0,0,0,,,,,0,0,0,1,"(6:56) 42-E.Evans punts 62 yards to BUF 25, Center-49-J.Cardona. 19-G.Dortch pushed ob at BUF 39 for 14 yards (33-D.Connors; 89-T.Higbee)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,10,0,61,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,11,1,0,-1,(6:44) 4-J.Cook up the middle to 50 for 11 yards (37-Q.Lake).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,10,0,50,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,0,0,0,-1,"(6:12) 4-J.Cook up the middle to 50 for no gain (53-N.Landman). FUMBLES (53-N.Landman), recovered by BUF-64-O.Torrence at 50."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,2,10,0,50,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,5,0,0,-1,(5:51) (Shotgun) 17-J.Allen pass short right to 26-T.Johnson to LA 45 for 5 yards (3-K.Curl).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,3,5,0,45,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,26,1,0,-1,(5:11) (Shotgun) 17-J.Allen pass short left to 26-T.Johnson ran ob at LA 19 for 26 yards (3-K.Curl).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,10,0,19,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-1,"(4:34) (Shotgun) 17-J.Allen pass short middle to 0-K.Coleman to LA 12 for 7 yards (53-N.Landman). PENALTY on BUF-85-J.Hawes, Offensive Pass Interference, 10 yards, enforced at LA 19 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,20,0,29,no_play,0,0,0,0,0,1,0,,,,,0,1,0,-1,"(4:08) (Shotgun) 17-J.Allen pass incomplete deep right to 0-K.Coleman. PENALTY on LA-37-Q.Lake, Defensive Pass Interference, 21 yards, enforced at LA 29 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,8,1,8,pass,0,1,0,0,0,0,0,,,00-0034857,J.Allen,0,0,0,-1,(4:02) 17-J.Allen pass incomplete short right.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,2,8,1,8,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,0,0,0,-1,(3:56) (Shotgun) 17-J.Allen pass incomplete short right to 13-S.Bell.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,3,8,1,8,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-1,"(3:49) (Shotgun) PENALTY on BUF-68-T.Grable, False Start, 5 yards, enforced at LA 8 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,3,13,1,13,run,1,0,0,0,1,1,0,00-0034857,J.Allen,,,9,1,0,-1,"(3:49) (Shotgun) 17-J.Allen scrambles right end to LA 4 for 9 yards (5-K.Kinchens). PENALTY on LA-30-J.Wallace, Defensive Holding, 2 yards, enforced at LA 4."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,1,2,1,2,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,-5,0,0,-1,(3:32) 4-J.Cook up the middle to LA 7 for -5 yards (53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,2,7,1,7,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,7,1,1,-1,"(2:49) (Shotgun) 17-J.Allen pass short right to 0-K.Coleman for 7 yards, TOUCHDOWN. LA-35-J.Watson was injured during the play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,,0,0,2,no_play,0,0,0,0,0,0,0,,,,,0,0,0,5,"(Pass formation) PENALTY on BUF-70-A.Anderson, False Start, 5 yards, enforced at LA 2 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,3,,0,0,20,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,5,"16-T.Bass extra point is No Good, Wide Right, Center-69-R.Ferguson, Holder-39-T.Doman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-5,"16-T.Bass kicks 61 yards from BUF 35 to LA 4. 88-J.Whittington to LA 27 for 23 yards (44-J.Andreessen). PENALTY on LA-44-G.Stuard, Offensive Holding, 10 yards, enforced at LA 27."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,83,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,6,0,0,-5,(2:40) (Shotgun) 9-M.Stafford pass short right to 12-P.Nacua to LA 23 for 6 yards (47-C.Benford).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,2,4,0,77,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,28,1,0,-5,(1:57) 9-M.Stafford pass deep left to 89-T.Higbee to BUF 49 for 28 yards (24-C.Bishop).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,49,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,34,1,0,-5,(1:14) 9-M.Stafford pass short left to 24-B.Corum to BUF 15 for 34 yards (22-C.Gardner-Johnson). BUF-22-C.Gardner-Johnson was injured during the play.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,1,10,0,15,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,11,1,0,-5,(:40) 9-M.Stafford pass short right to 12-P.Nacua to BUF 4 for 11 yards (24-C.Bishop; 42-D.Williams).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,3,,0,0,,,,,0,0,0,0,0,,,,,,,,-5,END QUARTER 3
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,4,1,4,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,2,0,0,-5,(15:00) 23-K.Williams up the middle to BUF 2 for 2 yards (24-C.Bishop; 96-D.Walker).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,2,2,1,2,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,2,1,1,-5,"(14:20) 9-M.Stafford pass short left to 12-P.Nacua for 2 yards, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,,0,0,2,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,1,TWO-POINT CONVERSION ATTEMPT. 9-M.Stafford is sacked. ATTEMPT FAILS.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-1,"92-H.Mevis kicks 58 yards from LA 35 to BUF 7. 19-G.Dortch to BUF 32 for 25 yards (48-O.Speights). PENALTY on BUF-83-K.Latu, Offensive Holding, 10 yards, enforced at BUF 30."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,80,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,7,0,0,-1,(14:11) 4-J.Cook left guard to BUF 27 for 7 yards (3-K.Curl). ** Injury Update: LA-35-J.Watson has returned to the game.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,2,3,0,73,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,18,1,0,-1,(13:32) 4-J.Cook up the middle to BUF 45 for 18 yards (5-K.Kinchens).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,55,run,1,0,0,0,1,0,0,00-0034857,J.Allen,,,22,1,0,-1,(12:50) 17-J.Allen scrambles up the middle to LA 33 for 22 yards (22-T.McDuffie).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,33,pass,0,1,0,0,0,1,1,,,00-0034857,J.Allen,31,1,0,-1,"(12:14) (No Huddle, Shotgun) 17-J.Allen pass short left to 7-R.Davis to LA 2 for 31 yards (37-Q.Lake)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,2,1,2,no_play,0,0,0,0,0,0,1,,,,,0,0,0,-1,"(11:41) (No Huddle) 17-J.Allen left guard to LA 1 for 1 yard (0-B.Young). PENALTY on LA-10-J.Stewart, Defensive Offside, 1 yard, enforced at LA 2 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,1,1,1,run,1,0,0,0,0,0,0,00-0034857,J.Allen,,,1,1,1,-1,"(11:33) 17-J.Allen up the middle for 1 yard, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,,0,0,2,pass,0,1,0,0,0,0,0,,,00-0034857,J.Allen,2,0,0,5,TWO-POINT CONVERSION ATTEMPT. 17-J.Allen pass to 86-D.Kincaid is complete. ATTEMPT SUCCEEDS.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-7,16-T.Bass kicks 61 yards from BUF 35 to LA 4. 88-J.Whittington to LA 29 for 25 yards (55-M.Hoecht).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,71,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,12,1,0,-7,(11:23) 23-K.Williams left end to LA 41 for 12 yards (24-C.Bishop). ** Injury Update: BUF-22-C.Gardner-Johnson has returned to the game.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,59,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,-7,(10:46) 9-M.Stafford pass incomplete short right to 23-K.Williams. BUF-8-T.Bernard was injured during the play.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,2,10,0,59,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,7,0,0,-7,(10:41) (Shotgun) 9-M.Stafford pass short middle to 12-P.Nacua to LA 48 for 7 yards (52-K.Elarms-Orr).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,3,3,0,52,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,4,1,0,-7,(10:03) (Shotgun) 9-M.Stafford pass short left to 12-P.Nacua to BUF 48 for 4 yards (47-C.Benford). BUF-47-C.Benford was injured during the play. ** Injury Update: BUF-8-T.Bernard has returned to the game.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,48,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,30,1,0,-7,(9:38) 9-M.Stafford pass deep left to 89-T.Higbee to BUF 18 for 30 yards (24-C.Bishop).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,18,no_play,0,0,0,0,0,0,0,,,,,0,1,0,-7,"(8:51) 9-M.Stafford pass incomplete short left to 23-K.Williams (21-D.Igbinosun). PENALTY on BUF-21-D.Igbinosun, Defensive Pass Interference, 10 yards, enforced at BUF 18 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,8,1,8,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,4,0,0,-7,(8:47) 23-K.Williams up the middle to BUF 4 for 4 yards (9-B.Chubb).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,2,4,1,4,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,-1,0,0,-7,(8:02) 23-K.Williams up the middle to BUF 5 for -1 yards (96-D.Walker).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,3,5,1,5,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,5,1,1,-7,"(7:18) (Shotgun) 9-M.Stafford pass short middle to 17-D.Adams for 5 yards, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,-1,"92-H.Mevis extra point is GOOD, Center-49-J.Cardona, Holder-42-E.Evans."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,92-H.Mevis kicks 60 yards from LA 35 to BUF 5. 7-R.Davis to BUF 29 for 24 yards (88-J.Whittington; 47-W.Bailey).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,71,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,6,0,0,0,(7:07) 4-J.Cook left guard to BUF 35 for 6 yards (97-P.Ford; 91-K.Turner).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,2,4,0,65,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,-1,0,0,0,(6:33) 4-J.Cook up the middle to BUF 34 for -1 yards (0-B.Young).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,3,5,0,66,run,1,0,0,0,1,1,0,00-0034857,J.Allen,,,15,1,0,0,(5:54) (Shotgun) 17-J.Allen scrambles right guard to BUF 49 for 15 yards (5-K.Kinchens).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,51,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,5,0,0,0,(5:06) 4-J.Cook right tackle to LA 46 for 5 yards (97-P.Ford).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,2,5,0,46,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,6,1,0,0,(4:29) (Shotgun) 17-J.Allen pass short right to 88-D.Knox to LA 40 for 6 yards (48-O.Speights).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,40,run,1,0,0,0,0,0,0,00-0039875,R.Davis,,,4,0,0,0,(3:48) 7-R.Davis left tackle to LA 36 for 4 yards (10-J.Stewart; 53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,2,6,0,36,pass,0,1,0,0,0,1,1,,,00-0034857,J.Allen,17,1,0,0,"(3:17) (No Huddle, Shotgun) 17-J.Allen pass deep middle to 10-K.Shakir to LA 19 for 17 yards (5-K.Kinchens)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,10,0,19,no_play,0,0,0,0,0,1,0,,,,,0,0,0,0,"(2:42) (Shotgun) PENALTY on BUF-85-J.Hawes, False Start, 5 yards, enforced at LA 19 - No Play."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,15,0,24,run,1,0,0,0,0,1,0,00-0039875,R.Davis,,,-2,0,0,0,(2:42) (Shotgun) 7-R.Davis left end to LA 26 for -2 yards (22-T.McDuffie).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,2,17,0,26,run,1,0,0,0,1,1,0,00-0034857,J.Allen,,,21,1,0,0,(2:00) (Shotgun) 17-J.Allen scrambles right guard to LA 5 for 21 yards (30-J.Wallace; 3-K.Curl).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by LA at 01:48.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,1,5,1,5,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,0,0,0,0,(1:48) 4-J.Cook right end to LA 5 for no gain (53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by LA at 01:44.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,2,5,1,5,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,5,1,1,0,"(1:44) 4-J.Cook up the middle for 5 yards, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,6,"16-T.Bass extra point is GOOD, Center-69-R.Ferguson, Holder-39-T.Doman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-7,16-T.Bass kicks 62 yards from BUF 35 to LA 3. 88-J.Whittington pushed ob at LA 37 for 34 yards (18-T.Sherfield).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,63,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,14,1,0,-7,(1:32) (Shotgun) 9-M.Stafford pass short middle to 17-D.Adams to BUF 49 for 14 yards (24-C.Bishop). ** Injury Update: BUF-47-C.Benford has returned to the game.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,49,pass,0,1,0,0,0,1,1,,,00-0026498,M.Stafford,5,0,0,-7,"(1:15) (No Huddle, Shotgun) 9-M.Stafford pass short right to 23-K.Williams ran ob at BUF 44 for 5 yards (21-D.Igbinosun)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,2,5,0,44,pass,0,1,0,0,0,1,1,,,00-0026498,M.Stafford,16,1,0,-7,"(1:09) (No Huddle, Shotgun) 9-M.Stafford pass short right to 12-P.Nacua to BUF 28 for 16 yards (3-D.Hamlin)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,28,pass,0,1,0,0,0,1,1,,,00-0026498,M.Stafford,15,1,0,-7,"(:47) (No Huddle, Shotgun) 9-M.Stafford pass short left to 17-D.Adams ran ob at BUF 13 for 15 yards (47-C.Benford)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,10,0,13,pass,0,1,0,0,0,1,1,,,00-0026498,M.Stafford,3,0,0,-7,"(:42) (No Huddle, Shotgun) 9-M.Stafford pass short right to 23-K.Williams pushed ob at BUF 10 for 3 yards (30-A.Kendall)."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,2,7,0,10,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,0,0,0,-7,(:35) (Shotgun) 9-M.Stafford pass incomplete short middle to 12-P.Nacua.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,3,7,0,10,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,9,1,0,-7,(:31) (Shotgun) 9-M.Stafford pass short middle to 23-K.Williams to BUF 1 for 9 yards (3-D.Hamlin).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,1,1,1,1,run,1,0,0,0,0,1,1,00-0037840,K.Williams,,,1,1,1,-7,"(:08) (No Huddle, Shotgun) 23-K.Williams left guard for 1 yard, TOUCHDOWN."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,4,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,-1,"92-H.Mevis extra point is GOOD, Center-49-J.Cardona, Holder-42-E.Evans."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,92-H.Mevis kicks 64 yards from LA 35 to BUF 1. 19-G.Dortch to BUF 25 for 24 yards (56-S.Dolac; 94-D.Johnson).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,4,,0,0,,,,,0,0,0,0,0,,,,,,,,,END QUARTER 4
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,92-H.Mevis kicks 58 yards from LA 35 to BUF 7. 7-R.Davis to BUF 27 for 20 yards (56-S.Dolac).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,1,10,0,73,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,3,0,0,0,(9:53) 4-J.Cook up the middle to BUF 30 for 3 yards (55-B.Fiske).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,2,7,0,70,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,1,0,0,0,"(9:12) (Shotgun) 17-J.Allen pass short left to 26-T.Johnson to BUF 40 for 10 yards (91-K.Turner; 53-N.Landman). PENALTY on BUF-13-S.Bell, Offensive Holding, 10 yards, enforced at BUF 31."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,2,16,0,79,pass,0,1,0,0,0,1,0,,,00-0034857,J.Allen,57,1,0,0,(8:48) (Shotgun) 17-J.Allen pass short middle to 10-K.Shakir to LA 22 for 57 yards (5-K.Kinchens).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,1,10,0,22,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,0,0,0,0,"(8:00) 4-J.Cook up the middle to LA 22 for no gain (53-N.Landman). FUMBLES (53-N.Landman), RECOVERED by LA-99-A.Donald at LA 20."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,1,10,0,80,run,1,0,0,0,0,0,0,00-0037840,K.Williams,,,3,0,0,0,(7:54) 23-K.Williams left end to LA 23 for 3 yards (21-D.Igbinosun; 96-D.Walker).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,2,7,0,77,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,21,1,0,0,(7:15) 9-M.Stafford pass deep middle to 87-D.Allen to LA 44 for 21 yards (22-C.Gardner-Johnson) [96-D.Walker].
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,5,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by BUF at 06:37.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,1,10,0,56,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,0,(6:37) 9-M.Stafford pass incomplete deep right to 12-P.Nacua (21-D.Igbinosun) [15-G.Rousseau]. The penalty was assisted by replay.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,2,10,0,56,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,21,1,0,0,(6:30) (Shotgun) 9-M.Stafford pass deep right to 12-P.Nacua to BUF 35 for 21 yards (24-C.Bishop; 8-T.Bernard).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,5,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by LA at 05:41.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,1,10,0,35,pass,0,1,0,0,0,0,0,,,00-0026498,M.Stafford,0,0,0,0,(5:41) 9-M.Stafford pass incomplete deep middle to 23-K.Williams.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,2,10,0,35,pass,0,1,0,0,0,1,0,,,00-0026498,M.Stafford,5,0,0,0,(5:37) (Shotgun) 9-M.Stafford pass short left to 12-P.Nacua to BUF 30 for 5 yards (42-D.Williams).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,5,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by LA at 04:51.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,,,5,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by BUF at 04:51.
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,3,5,0,30,run,1,0,0,0,0,1,0,00-0037840,K.Williams,,,0,0,0,0,(4:51) (Shotgun) 23-K.Williams right tackle to BUF 30 for no gain (15-G.Rousseau; 21-D.Igbinosun).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,4,5,0,30,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,0,"(4:16) 92-H.Mevis 48 yard field goal is BLOCKED (15-G.Rousseau), Center-49-J.Cardona, Holder-42-E.Evans."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,1,10,0,62,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,3,0,0,0,(4:11) 4-J.Cook up the middle to BUF 41 for 3 yards (53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,2,7,0,59,run,1,0,0,0,1,1,0,00-0034857,J.Allen,,,19,1,0,0,(3:35) (Shotgun) 17-J.Allen scrambles up the middle to LA 40 for 19 yards (37-Q.Lake).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,1,10,0,40,run,1,0,0,0,0,0,0,00-0034857,J.Allen,,,13,1,0,0,(2:50) 17-J.Allen left end ran ob at LA 27 for 13 yards (53-N.Landman).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,1,10,0,27,run,1,0,0,0,0,0,0,00-0037248,J.Cook,,,0,0,0,0,(2:45) 4-J.Cook up the middle to LA 27 for no gain (90-T.Davis).
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,BUF,LA,5,2,10,0,27,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,0,"(2:00) 16-T.Bass 45 yard field goal is GOOD, Center-69-R.Ferguson, Holder-39-T.Doman."
+2026,REG,5,2026_05_BUF_LA,2026-10-12,LA,BUF,LA,BUF,5,,0,0,,,,,0,0,0,0,0,,,,,,,,-3,END GAME
 2026,REG,5,2026_05_CHI_GB,2026-10-11,GB,CHI,,,1,,0,0,,,,,0,0,0,0,0,,,,,,,,,GAME
 2026,REG,5,2026_05_CHI_GB,2026-10-11,GB,CHI,CHI,GB,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,28-T.Smack kicks 59 yards from GB 35 to CHI 6. 13-Z.Thomas to CHI 29 for 23 yards (36-K.Hadden; 33-E.Williams).
 2026,REG,5,2026_05_CHI_GB,2026-10-11,GB,CHI,CHI,GB,1,1,10,0,71,run,1,0,0,0,0,0,0,00-0040735,L.Burden,,,1,0,0,0,(14:55) 10-L.Burden left end pushed ob at CHI 30 for 1 yard (33-E.Williams).
