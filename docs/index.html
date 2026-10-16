@@ -53,7 +53,16 @@
   .step { display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
   .stack { display: flex; flex-direction: column-reverse; }
   .t { border: 2px solid var(--ink); margin-bottom: -2px; background: var(--blue); font-family: var(--display); font-weight: 600; font-size: 15px; line-height: 1.1; padding: 6px 7px 7px; min-height: 46px; display: flex; align-items: center; }
-  .t.new { background: var(--yellow); }
+  /* Carried rules are tinted by age: the oldest (the base, at the bottom) deepest, each
+     later rule lighter, so one rule reads as a band across the season. */
+  .stack .t:nth-child(1) { background: #5bbcf5; }
+  .stack .t:nth-child(2) { background: #8ad4ff; }
+  .stack .t:nth-child(3) { background: #a3ddff; }
+  .stack .t:nth-child(4) { background: #b9e5ff; }
+  .stack .t:nth-child(5) { background: #cdecff; }
+  .stack .t:nth-child(6) { background: #dff3ff; }
+  .stack .t:nth-child(7) { background: #edf8ff; }
+  .stack .t.new { background: var(--yellow); }
   .stack .t:first-child { margin-bottom: 0; }
   .cap { padding: 10px 0 12px; min-height: 96px; display: grid; grid-template-columns: auto 1fr; gap: 0 8px; align-items: start; align-content: start; }
   .cap a, .cap i { grid-row: span 2; font-style: normal; font-family: var(--display); font-weight: 700; font-size: 46px; line-height: .9; text-decoration: none; }
@@ -174,7 +183,7 @@
         <div class="cap"><i>8</i><b>Scheduled autonomy</b><span>February 8</span></div>
       </div>
     </div>
-    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode. The same two colors as the charts: blue is where the line started, yellow is the line to gain.</figcaption>
+    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode, deeper the older the rule, so each one reads as a band across the season. The same two colors as the charts: blue is where the line started, yellow is the line to gain.</figcaption>
   </figure>
   <div class="rows">
     <div><b>A written policy</b><span>A plain-language job description the agent follows. It grows a section at a time across the season.</span></div>
