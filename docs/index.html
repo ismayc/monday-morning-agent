@@ -44,7 +44,33 @@
   a.ep:hover > i, a.ep:hover > div + div { border-color: var(--yellow); }
   a.ep p { color: var(--ink); }
   .ep .open { font-family: var(--display); font-weight: 700; font-size: 22px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  /* The stairs: what each episode adds, stacked on what it keeps. Eight columns, each a
+     pile of written rules growing bottom-up, the newest on top in yellow and the rest in
+     blue. The two colors mean what they mean on the charts: blue is where the line started,
+     yellow is the line to gain. On a narrow screen the same piles run as rows. */
+  .stairs { margin-top: 22px; }
+  .steps { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0 10px; align-items: end; border-bottom: 4px solid var(--ink); }
+  .step { display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
+  .stack { display: flex; flex-direction: column-reverse; }
+  .t { border: 2px solid var(--ink); margin-bottom: -2px; background: var(--blue); font-family: var(--display); font-weight: 600; font-size: 15px; line-height: 1.1; padding: 6px 7px 7px; min-height: 46px; display: flex; align-items: center; }
+  .t.new { background: var(--yellow); }
+  .stack .t:first-child { margin-bottom: 0; }
+  .cap { padding: 10px 0 12px; min-height: 96px; display: grid; grid-template-columns: auto 1fr; gap: 0 8px; align-items: start; align-content: start; }
+  .cap a, .cap i { grid-row: span 2; font-style: normal; font-family: var(--display); font-weight: 700; font-size: 46px; line-height: .9; text-decoration: none; }
+  .cap a { text-decoration: underline; text-decoration-thickness: 3px; text-underline-offset: 4px; text-decoration-color: var(--yellow); }
+  .cap b { font-family: var(--display); font-weight: 600; font-size: 17px; line-height: 1.1; }
+  .cap span { font-size: 14px; color: var(--soft); line-height: 1.2; margin-top: 3px; }
+  .stairs figcaption { margin-top: 10px; font-size: 15.5px; color: var(--soft); max-width: 80ch; }
+  .stairs figcaption .y { background: var(--yellow); color: var(--ink); padding: 0 5px; }
+  .stairs figcaption .b { background: var(--blue); color: var(--ink); padding: 0 5px; }
   @media (max-width: 860px) {
+    .steps { display: block; border-bottom: 0; border-top: 2px solid var(--ink); }
+    .step { display: grid; grid-template-columns: 150px 1fr; gap: 0 14px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+    .step .cap { order: -1; padding: 0; }
+    .stack { flex-direction: row; flex-wrap: wrap; gap: 6px; align-content: flex-start; }
+    .t { margin: 0; min-height: 0; padding: 4px 8px; }
+    .stack .t { order: 1; }
+    .stack .t.new { order: 0; }
     .ep { grid-template-columns: 60px 1fr; }
     .ep > i { font-size: 46px; grid-row: span 2; }
     .ep > div + div { border-left: 0; border-top: 1px solid var(--rule); }
@@ -112,6 +138,44 @@
   <h2>What ties the eight together</h2>
   <p>In episode 1 a person reads every filter the agent uses. Each episode after that takes away one piece of that oversight and replaces it with something written down: a definition, a charting rule, a second agent that checks the first, a boundary, a schedule. By the finale the agent does the whole job alone, and the written rules are what make that safe.</p>
   <p style="margin-top:12px">The registration page names the eight capabilities in this order, one per episode: transparent queries, shared data definitions as durable memory, consistent visualizations, independent fact-checking, operational boundaries, request triage, self-directed analysis, and scheduled autonomy. Each episode page says which one it is.</p>
+  <p style="margin-top:12px">Nothing is taken away between episodes. Each one adds a written rule on top of the ones before, so the stack is taller every two weeks.</p>
+  <figure class="stairs" aria-label="What each episode adds, and what it keeps from the episodes before. Yellow is the rule added in that episode; blue is a rule carried from an earlier one.">
+    <div class="steps">
+      <div class="step">
+        <div class="stack"><div class="t new">A policy, one tool, a one-line allowlist</div></div>
+        <div class="cap"><a href="episode-1/">1</a><b>Transparent queries</b><span>October 12</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t new">A dictionary it must cite</div></div>
+        <div class="cap"><a href="episode-2/">2</a><b>Shared data definitions as durable memory</b><span>October 26</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t new">Rules for its charts</div></div>
+        <div class="cap"><i>3</i><b>Consistent visualizations</b><span>November 9</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t new">A second agent that checks it</div></div>
+        <div class="cap"><i>4</i><b>Independent fact-checking</b><span>November 23</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t new">A line it will not cross</div></div>
+        <div class="cap"><i>5</i><b>Operational boundaries</b><span>December 7</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t">A line it will not cross</div><div class="t new">A queue it did not choose</div></div>
+        <div class="cap"><i>6</i><b>Request triage</b><span>January 11</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t">A line it will not cross</div><div class="t">A queue it did not choose</div><div class="t new">Its own questions, checked</div></div>
+        <div class="cap"><i>7</i><b>Self-directed analysis</b><span>January 25</span></div>
+      </div>
+      <div class="step">
+        <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t">A line it will not cross</div><div class="t">A queue it did not choose</div><div class="t">Its own questions, checked</div><div class="t new">A schedule, nobody watching</div></div>
+        <div class="cap"><i>8</i><b>Scheduled autonomy</b><span>February 8</span></div>
+      </div>
+    </div>
+    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode. The same two colors as the charts: blue is where the line started, yellow is the line to gain.</figcaption>
+  </figure>
   <div class="rows">
     <div><b>A written policy</b><span>A plain-language job description the agent follows. It grows a section at a time across the season.</span></div>
     <div><b>Small tools that show their work</b><span>The agent does not write its own queries. It picks filters for tools that print everything they did.</span></div>
