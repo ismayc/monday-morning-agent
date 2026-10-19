@@ -12,7 +12,8 @@
 // the defined play against every other short-yardage rush under nine situations (all
 // downs, third and fourth down, fourth down, one yard to go, goal to go, without the
 // Eagles, the Eagles alone, the regular season, the playoffs), then the same result by
-// season and by team. Each answer is the conversion bar from the episode pages, with
+// season and by team, and for a range of seasons the by-team count once per season
+// (who ran it). Each answer is the conversion bar from the episode pages, with
 // the tool's own numbers and warnings under it. Nothing is computed here except the
 // verdict, which compares two gaps the tool printed.
 //
@@ -59,6 +60,11 @@ const answers = QUESTIONS.map(q => {
 })
 const bySeason = { command: `node ./query-plays.mjs --play ${PLAY} --seasons ${SEASONS} --by season`, out: run(['--play', PLAY, '--seasons', SEASONS, '--by', 'season']) }
 const byTeam = { command: `node ./query-plays.mjs --play ${PLAY} --seasons ${SEASONS} --by team`, out: run(['--play', PLAY, '--seasons', SEASONS, '--by', 'team']) }
+// Who ran it, season by season: for a range of seasons, the by-team table once per
+// season, so the sheet can show one row per team and one column per season (added
+// October 19, 2026). A single season has nothing to spread out, so it gets no table.
+const years = SEASONS.includes('-') ? (([a, b]) => Array.from({ length: b - a + 1 }, (_, i) => String(a + i)))(SEASONS.split('-').map(Number)) : []
+const byTeamByYear = years.map(y => ({ year: y, out: run(['--play', PLAY, '--seasons', y, '--by', 'team']) }))
 
 const first = answers[0].out
 const dict = first.dictionary
@@ -119,6 +125,32 @@ function rowHtml(a) {
 </div>`
 }
 const byRows = (b, what) => b.out.by.rows.map(r => `<tr><td>${esc(r.key)}</td><td class="num">${fmt(r.defined.plays)}</td><td class="num"><span class="y">${pct(r.defined.rate)}</span></td><td class="num">${fmt(r.other.plays)}</td><td class="num"><span class="b">${pct(r.other.rate)}</span></td><td class="num">${r.gap === null ? 'n/a' : (100 * r.gap).toFixed(1)}</td></tr>`).join('\n') || `<tr><td colspan="6">No ${what} has ${b.out.by.minDefinedPlays} plays matching the definition yet.</td></tr>`
+
+function teamGridHtml() {
+  if (!years.length) return ''
+  const counts = {}, order = []
+  for (const r of byTeam.out.by.rows) { order.push(r.key); counts[r.key] = { sum: r.defined.plays } }
+  const most = {}
+  for (const { year, out } of byTeamByYear) for (const r of out.by.rows) {
+    if (!counts[r.key]) { counts[r.key] = { sum: null }; order.push(r.key) }
+    counts[r.key][year] = r.defined.plays
+    if (!most[year] || r.defined.plays > most[year]) most[year] = r.defined.plays
+  }
+  const league = Object.fromEntries(bySeason.out.by.rows.map(r => [String(r.key), r.defined.plays]))
+  const head = `<tr><th>Team</th>${years.map(y => `<th class="num">${y}</th>`).join('')}<th class="num sum">${esc(SEASONS.replace('-', ' to '))}</th></tr>`
+  const all = `<tr class="all"><td>Every team</td>${years.map(y => `<td class="num">${league[y] === undefined ? '' : fmt(league[y])}</td>`).join('')}<td class="num sum">${fmt(first.result.defined.plays)}</td></tr>`
+  const rows = order.map(t => `<tr><td>${esc(t)}</td>${years.map(y => {
+    const n = counts[t][y]
+    if (n === undefined) return '<td class="num few">under 10</td>'
+    return `<td class="num">${n === most[y] ? `<span class="y">${fmt(n)}</span>` : fmt(n)}</td>`
+  }).join('')}<td class="num sum">${counts[t].sum === null ? 'under 10' : fmt(counts[t].sum)}</td></tr>`).join('\n')
+  return `<div class="teams"><h2>Who ran it, season by season</h2>
+<code>${esc(`node ./query-plays.mjs --play ${PLAY} --seasons ${years[0]} --by team`)} (and each season to ${esc(years[years.length - 1])})</code>
+<p>One row per team, one column per season: the plays that matched the definition. Each season's most is in yellow; the first row is every team together. The tool lists a team once it has ${byTeam.out.by.minDefinedPlays} matching plays in a season, so a smaller count reads "under 10". Teams in order of the five-season column.</p>
+<table id="teamgrid"><thead>${head}</thead><tbody>${all}
+${rows}</tbody></table></div>`
+}
+const teamGrid = teamGridHtml()
 
 const title = thisSeason
   ? `This season so far: ${SEASONS}, through ${longDate(latest) || 'no games yet'}`
@@ -225,6 +257,14 @@ const html = `<!DOCTYPE html>
   td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-variant-numeric: tabular-nums; }
   .num { text-align: right; }
   .not { margin-top: 28px; font-size: 16.5px; border-left: 5px solid var(--ink); padding-left: 14px; max-width: 70ch; }
+  .teams { margin-top: 44px; padding-top: 18px; border-top: 2px solid var(--ink); }
+  .teams h2 { font-size: 28px; }
+  .teams code { display: block; margin: 6px 0 10px; font-size: 12.5px; white-space: normal; word-break: break-all; }
+  .teams p { font-size: 15.5px; color: var(--soft); max-width: 90ch; margin-bottom: 14px; }
+  #teamgrid th { white-space: nowrap; }
+  #teamgrid td.few { color: var(--soft); font-size: 13.5px; }
+  #teamgrid tr.all td { font-weight: 600; border-bottom: 2px solid var(--ink); }
+  #teamgrid .sum { border-left: 2px solid var(--ink); padding-left: 12px; }
   footer { margin-top: 56px; padding-top: 14px; border-top: 4px solid var(--ink); font-size: 14.5px; color: var(--soft); }
   footer p { max-width: 90ch; }
 </style>
@@ -247,9 +287,10 @@ ${answers.map(rowHtml).join('\n')}
 <div><h2>By season</h2><code>${esc(bySeason.command)}</code><table><thead><tr><th>Season</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody>${byRows(bySeason, 'season')}</tbody></table></div>
 <div><h2>By team</h2><code>${esc(byTeam.command)}</code><table><thead><tr><th>Team</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody>${byRows(byTeam, 'team')}</tbody></table><p style="margin-top:8px;font-size:14px;color:var(--soft)">Teams with ${byTeam.out.by.minDefinedPlays} or more plays matching the definition, most first.</p></div>
 </div>
+${teamGrid}
 <p class="not"><strong>Not on this sheet: why, and whether.</strong> Every gap here is how often each kind of play converted in the plays kept. It does not say why the play converts, who pushed, or whether anyone was hurt, and it does not say what the rule should be.</p>
 ${rulingBlock}
-<footer><p>Made ${esc(new Date().toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }))} by season-sheet.mjs, which ran query-plays.mjs ${answers.length + 3} times (the command under each question) and wrote down what it printed. Seasons on file: ${esc(weeks)}. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
+<footer><p>Made ${esc(new Date().toLocaleString('en-US', { dateStyle: 'long', timeStyle: 'short' }))} by season-sheet.mjs, which ran query-plays.mjs ${answers.length + 3 + years.length} times (the command under each question) and wrote down what it printed. Seasons on file: ${esc(weeks)}. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
 </main>
 </body>
 </html>

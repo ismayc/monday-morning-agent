@@ -10,7 +10,8 @@
 // a scratch dictionary (54 entries), asks query-plays.mjs to measure with each for each
 // set of seasons (378 answers, about three minutes), and keeps what the tool printed. It
 // also keeps the four name searches the episode page quotes, and the by-season and
-// by-team tables for the reference definition. The page shows exactly what the tool
+// by-team tables for the reference definition, the by-team one once per season as
+// well (who ran it, season by season). The page shows exactly what the tool
 // said; it computes nothing itself. No Claude call, no key. The scratch dictionary is
 // removed afterward; the real one in ../dictionary is not touched.
 import { execFileSync } from 'node:child_process'
@@ -82,6 +83,10 @@ const refName = nameOf(REF.rusher, REF.yards, REF.formation, REF.downs)
 const bySeason = tool(['--play', refName, '--seasons', '2021-2025', '--by', 'season']).by
 const byTeam = tool(['--play', refName, '--seasons', '2021-2025', '--by', 'team']).by
 const byTeam2026 = tool(['--play', refName, '--seasons', '2026', '--by', 'team']).by
+// Who ran it, season by season: the by-team table once per season, so the page can
+// show one row per team and one column per season (added October 19, 2026).
+const byTeamBySeason = {}
+for (const s of ['2021', '2022', '2023', '2024', '2025', '2026']) byTeamBySeason[s] = tool(['--play', refName, '--seasons', s, '--by', 'team']).by
 const searches = {}
 for (const words of SEARCHES) {
   const out = tool(['--search', words, '--seasons', '2021-2026'])
@@ -93,6 +98,6 @@ const file = join(DIR, '..', 'docs', 'episode-2', 'explorer-data.json')
 writeFileSync(file, JSON.stringify({
   season2026: { latestGame: latest, weeks: weeks2026 },
   options: { SEASONS, RUSHERS, YARDS, FORMATIONS, DOWNS }, reference: REF, definitions, answers,
-  bySeason, byTeam, byTeam2026, searches,
+  bySeason, byTeam, byTeam2026, byTeamBySeason, searches,
 }) + '\n')
 console.log(`wrote ${file}: ${Object.keys(answers).length} answers for ${Object.keys(definitions).length} definitions, ${SEARCHES.length} searches, 2026 through ${latest} (weeks ${weeks2026})`)
