@@ -17,7 +17,7 @@ the tool, the data, the runner, and real output. One page folder per episode und
 
 | # | The argument | Airs | The capability, in the registration page's words | What that means here | Where |
 |---|---|---|---|---|---|
-| 1 | "You have to establish the run." | October 12, 2026 (aired) | Transparent queries | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
+| 1 | "You have to establish the run." | October 12, 2026 (aired; [recording and recap](https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/), [Substack](https://oreillyradar.substack.com/p/building-an-ai-analyst-one-football)) | Transparent queries | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
 | 2 | "Ban the tush push." | October 26, 2026 | Shared data definitions as durable memory | A dictionary the agent writes and must cite from then on, and every later episode inherits | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
 | 3 | "Kickers are too good now." | November 9, 2026 | Consistent visualizations | Written rules for its charts | with the episode |
 | 4 | The pundit audit, claim chosen by the room | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room votes on the claim in episode 3's Q&A | with the episode |
