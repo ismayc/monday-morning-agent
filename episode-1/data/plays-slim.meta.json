@@ -20,7 +20,7 @@
     "qb_spike",
     "score_differential"
   ],
-  "plays": 263664,
+  "plays": 263835,
   "source": "https://github.com/nflverse/nflverse-data/releases/tag/pbp",
   "espnGames": []
 }

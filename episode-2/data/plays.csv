@@ -263663,3 +263663,174 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by SF at 00:06.
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,WAS,SF,4,3,22,0,40,pass,0,1,0,0,0,1,0,,,00-0039910,J.Daniels,-18,0,0,-6,(:06) (Shotgun) 5-J.Daniels sacked at WAS 42 for -18 yards (sack split by 56-K.White and 94-R.Height).
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,WAS,SF,4,,0,0,,,,,0,0,0,0,0,,,,,,,,-6,END GAME
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,1,,0,0,,,,,0,0,0,0,0,,,,,,,,,GAME
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,8-C.Santos kicks 60 yards from CHI 35 to NE 5. 9-C.Kiner to NE 31 for 26 yards (38-S.Thomas; 47-B.Johnson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,1,10,0,69,pass,0,1,0,0,0,0,0,,,00-0039851,D.Maye,0,0,0,0,(14:53) 10-D.Maye pass incomplete short left to 1-A.Brown.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,2,10,0,69,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,19,1,0,0,(14:49) (Shotgun) 10-D.Maye pass short right to 38-R.Stevenson pushed ob at 50 for 19 yards (1-J.Johnson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,1,10,0,50,no_play,0,0,0,0,0,1,0,,,,,0,0,0,0,"(14:16) (Shotgun) 10-D.Maye pass short right to 82-E.Raridon to CHI 47 for 3 yards (31-D.Thieneman; 44-N.Sewell). PENALTY on NE-72-W.Rouse, Offensive Holding, 10 yards, enforced at 50 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,1,20,0,60,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,8,0,0,0,(13:44) (Shotgun) 10-D.Maye pass short right to 32-T.Henderson to NE 48 for 8 yards (12-D.Bush).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,2,12,0,52,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,6,0,0,0,(13:04) (Shotgun) 10-D.Maye pass short left to 32-T.Henderson to CHI 46 for 6 yards (24-M.Muhammad; 31-D.Thieneman).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,3,6,0,46,run,1,0,0,0,0,1,0,00-0036875,R.Stevenson,,,1,0,0,0,(12:16) (Shotgun) 38-R.Stevenson left guard to CHI 45 for 1 yard (48-D.Jackson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,4,5,0,45,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,-1,0,0,0,(11:35) (Shotgun) 10-D.Maye sacked at CHI 46 for -1 yards (6-K.Gordon).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,1,10,0,54,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,26,1,0,0,(11:30) 18-C.Williams pass short right to 10-L.Burden to NE 28 for 26 yards (4-C.Woodson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,1,10,0,28,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,3,0,0,0,(10:44) 4-D.Swift left tackle to NE 25 for 3 yards (4-C.Woodson; 25-M.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,2,7,0,25,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,0,(10:07) (Shotgun) 18-C.Williams pass incomplete short right to 84-C.Loveland.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,3,7,0,25,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,0,(10:02) (Shotgun) 18-C.Williams pass incomplete short right to 14-K.Raymond.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,4,7,0,25,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,0,"(9:58) 8-C.Santos 43 yard field goal is GOOD, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-3,8-C.Santos kicks 63 yards from CHI 35 to NE 2. 9-C.Kiner to NE 27 for 25 yards (30-Z.Scott; 38-S.Thomas).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,1,10,0,73,run,1,0,0,0,0,0,0,00-0040734,T.Henderson,,,1,0,0,-3,(9:46) 32-T.Henderson up the middle to NE 28 for 1 yard (44-N.Sewell).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,2,9,0,72,run,1,0,0,0,0,1,0,00-0040734,T.Henderson,,,5,0,0,-3,(9:12) (Shotgun) 32-T.Henderson right guard to NE 33 for 5 yards (48-D.Jackson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,3,4,0,67,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,0,0,0,-3,(8:28) (Shotgun) 10-D.Maye pass incomplete short right to 18-K.Williams [92-D.Hardy].
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,4,4,0,67,punt,0,0,0,0,0,0,0,,,,,0,0,0,-3,"(8:24) 19-M.Wishnowsky punts 46 yards to CHI 21, Center-47-J.Ashby, fair catch by 14-K.Raymond."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,1,10,0,79,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,3,0,0,3,(8:17) 4-D.Swift right end to CHI 24 for 3 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,2,7,0,76,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,0,0,0,3,(7:43) (Shotgun) 4-D.Swift right guard to CHI 24 for no gain (50-G.Jacas).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,3,7,0,76,no_play,0,0,0,0,0,1,0,,,,,0,0,0,3,"(7:01) (Shotgun) PENALTY on NE-97-M.Williams, Encroachment, 5 yards, enforced at CHI 24 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,3,2,0,71,no_play,0,0,0,0,0,0,0,,,,,0,0,0,3,"(6:47) PENALTY on CHI-58-D.Wright, False Start, 5 yards, enforced at CHI 29 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,3,7,0,76,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,3,(6:28) (Shotgun) 18-C.Williams pass short left to 4-D.Swift to CHI 24 for no gain (53-C.Elliss; 22-C.Woods).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,4,7,0,76,punt,0,0,0,0,0,0,0,,,,,0,0,0,3,"(5:54) 19-T.Taylor punts 42 yards to NE 34, Center-46-S.Daly, fair catch by 25-M.Jones."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,1,10,0,66,run,1,0,0,0,0,1,0,00-0040556,C.Kiner,,,3,0,0,-3,(5:46) (Shotgun) 9-C.Kiner right tackle to NE 37 for 3 yards (95-S.Turner).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,2,7,0,63,run,1,0,0,0,0,0,0,00-0040556,C.Kiner,,,-1,0,0,-3,"(5:11) 9-C.Kiner right tackle to NE 36 for -1 yards (24-M.Muhammad, 48-D.Jackson)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,3,8,0,64,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,-1,0,0,-3,"(4:33) (Shotgun) 10-D.Maye pass short left to 3-D.Douglas to NE 35 for -1 yards (6-K.Gordon, 21-C.Lewis)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,4,9,0,65,punt,0,0,0,0,0,0,0,,,,,0,0,0,-3,"(3:48) 19-M.Wishnowsky punts 46 yards to CHI 19, Center-47-J.Ashby. 14-K.Raymond pushed ob at CHI 26 for 7 yards (54-D.Muasau)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,1,10,0,74,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,0,0,0,3,(3:38) 18-C.Williams pass incomplete deep right.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,2,10,0,74,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,11,1,0,3,(3:30) (Shotgun) 18-C.Williams pass short left to 84-C.Loveland pushed ob at CHI 37 for 11 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,1,10,0,63,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,1,0,0,3,(3:03) (Shotgun) 4-D.Swift left end to CHI 38 for 1 yard (53-C.Elliss; 25-M.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,2,9,0,62,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,58,1,0,3,(2:32) (Shotgun) 18-C.Williams pass deep left to 10-L.Burden to NE 4 for 58 yards (31-K.Byard).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,1,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by CHI at 01:43.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,1,4,1,4,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,4,1,1,3,"(1:43) 4-D.Swift left end for 4 yards, TOUCHDOWN."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,1,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,9,"8-C.Santos extra point is GOOD, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-10,8-C.Santos kicks 61 yards from CHI 35 to NE 4. 9-C.Kiner to NE 26 for 22 yards (92-D.Hardy).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,1,10,0,74,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,4,0,0,-10,(1:32) (Shotgun) 10-D.Maye pass short middle to 38-R.Stevenson to NE 30 for 4 yards (44-N.Sewell).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,2,6,0,70,run,1,0,0,0,0,0,0,00-0036875,R.Stevenson,,,4,0,0,-10,(:57) 38-R.Stevenson left end to NE 34 for 4 yards (94-A.Booker).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,3,2,0,66,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,15,1,0,-10,(:14) (Shotgun) 10-D.Maye pass short middle to 82-E.Raridon to NE 49 for 15 yards (21-C.Lewis).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,1,,0,0,,,,,0,0,0,0,0,,,,,,,,-10,END QUARTER 1
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,51,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,9,0,0,-10,(15:00) (Shotgun) 10-D.Maye pass short middle to 38-R.Stevenson to CHI 42 for 9 yards (12-D.Bush).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,2,1,0,42,run,1,0,0,0,0,0,0,00-0039851,D.Maye,,,0,0,0,-10,(14:26) 10-D.Maye up the middle to CHI 42 for no gain (90-N.Gallimore).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,3,1,0,42,no_play,0,0,0,0,0,1,0,,,,,0,1,0,-10,"(13:42) (Shotgun) 74-C.Lomu reported in as eligible. PENALTY on CHI, Defensive Too Many Men on Field, 6 yards, enforced at CHI 42 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,36,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,16,1,0,-10,(13:31) (Shotgun) 10-D.Maye pass short left to 85-H.Henry to CHI 20 for 16 yards (29-T.Stevenson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,20,run,1,0,0,0,0,0,0,00-0036875,R.Stevenson,,,13,1,0,-10,(12:54) 38-R.Stevenson left guard to CHI 7 for 13 yards (21-C.Lewis; 29-T.Stevenson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,7,1,7,run,1,0,0,0,0,0,0,00-0036875,R.Stevenson,,,0,0,0,-10,(12:16) 38-R.Stevenson left end to CHI 7 for no gain (48-D.Jackson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,2,7,1,7,run,1,0,0,0,1,1,0,00-0039851,D.Maye,,,7,1,1,-10,"(11:37) (Shotgun) 10-D.Maye scrambles right guard to CHI 1 for 6 yards (20-C.Phillips). New England challenged the short of the goal line ruling, and the play was REVERSED. (Shotgun) 10-D.Maye scrambles right guard for 7 yards, TOUCHDOWN."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,-4,"8-A.Borregales extra point is GOOD, Center-47-J.Ashby, Holder-19-M.Wishnowsky."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,3,"8-A.Borregales kicks 60 yards from NE 35 to CHI 5. 13-Z.Thomas pushed ob at NE 48 for 47 yards (28-K.Vildor). PENALTY on NE-54-D.Muasau, Illegal Formation, 5 yards, enforced at NE 48."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,43,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,14,1,0,3,(11:26) 18-C.Williams pass short left to 85-C.Kmet pushed ob at NE 29 for 14 yards (0-C.Gonzalez).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,29,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,-2,0,0,3,(10:55) 18-C.Williams sacked at NE 31 for -2 yards (93-L.Taylor).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,12,0,31,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,5,0,0,3,(10:09) (Shotgun) 4-D.Swift left guard to NE 26 for 5 yards (53-C.Elliss; 31-K.Byard). NE-31-K.Byard was injured during the play.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,3,7,0,26,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,6,0,0,3,(9:37) (Shotgun) 18-C.Williams pass short left to 15-R.Odunze to NE 20 for 6 yards (14-R.Spillane; 25-M.Jones). (Virtual Measurement).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,4,1,0,20,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,5,1,0,3,(8:57) 4-D.Swift left tackle pushed ob at NE 15 for 5 yards (4-C.Woodson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,15,run,1,0,0,0,0,0,0,00-0040735,L.Burden,,,7,0,0,3,(8:20) 10-L.Burden left end pushed ob at NE 8 for 7 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,3,0,8,run,1,0,0,0,0,0,0,00-0039918,C.Williams,,,0,0,0,3,"(7:49) 18-C.Williams left guard to NE 8 for no gain. PENALTY on CHI-18-C.Williams, Illegal Forward Handoff, 5 yards, enforced at NE 8."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,3,8,0,13,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,3,"(7:12) (Shotgun) 18-C.Williams pass incomplete short left to 15-R.Odunze. ** Injury Update: NE-31-K.Byard has returned to the game. Penalty on CHI-15-R.Odunze, Offensive Pass Interference, declined."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,4,8,0,13,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,3,"(7:08) 8-C.Santos 31 yard field goal is GOOD, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-6,8-C.Santos kicks 62 yards from CHI 35 to NE 3. 9-C.Kiner to NE 32 for 29 yards (9-J.Walker; 31-D.Thieneman).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,68,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,16,1,0,-6,(6:58) (Shotgun) 10-D.Maye pass short right to 86-E.Chism to NE 48 for 16 yards (31-D.Thieneman).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,52,run,1,0,0,0,0,1,0,00-0040556,C.Kiner,,,4,0,0,-6,(6:19) (Shotgun) 9-C.Kiner right guard to CHI 48 for 4 yards (94-A.Booker).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,2,6,0,48,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,11,1,0,-6,(5:42) (Shotgun) 10-D.Maye pass short left to 82-E.Raridon to CHI 37 for 11 yards (48-D.Jackson; 29-T.Stevenson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,37,run,1,0,0,0,0,0,0,00-0040556,C.Kiner,,,7,0,0,-6,(5:04) 9-C.Kiner up the middle to CHI 30 for 7 yards (94-A.Booker).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,2,3,0,30,run,1,0,0,0,1,1,0,00-0039851,D.Maye,,,15,1,0,-6,(4:21) (Shotgun) 10-D.Maye scrambles right end to CHI 15 for 15 yards (31-D.Thieneman).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by NE at 03:32.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,15,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,0,0,0,-6,(3:32) (Shotgun) 10-D.Maye pass deep right intended for 82-E.Raridon INTERCEPTED by 48-D.Jackson at CHI -7. Touchback.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,80,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,6,0,0,6,(3:25) 18-C.Williams pass short right to 85-C.Kmet pushed ob at CHI 26 for 6 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,4,0,74,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,6,(3:04) (Shotgun) 18-C.Williams pass incomplete short middle to 84-C.Loveland.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,3,4,0,74,no_play,0,0,0,0,0,1,0,,,,,0,1,0,6,"(2:58) (Shotgun) 18-C.Williams pass incomplete short right. PENALTY on NE-22-C.Woods, Defensive Holding, 5 yards, enforced at CHI 26 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,69,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,0,0,0,6,(2:50) 18-C.Williams pass incomplete short right to 84-C.Loveland (4-C.Woodson) [50-G.Jacas].
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,10,0,69,run,1,0,0,0,0,1,0,00-0039021,R.Johnson,,,9,0,0,6,"(2:43) (Shotgun) 23-R.Johnson left end ran ob at CHI 43 for 12 yards (4-C.Woodson). PENALTY on CHI-13-Z.Thomas, Offensive Holding, 10 yards, enforced at CHI 40."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,11,0,70,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,22,1,0,6,"(2:21) (Shotgun) 18-C.Williams pass deep middle to 10-L.Burden to NE 48 for 22 yards (22-C.Woods; 14-R.Spillane). PENALTY on NE-50-G.Jacas, Roughing the Passer, 15 yards, enforced at NE 48."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,33,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,6,0,0,6,(2:00) 4-D.Swift right tackle to NE 27 for 6 yards (94-C.Durden; 25-M.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,4,0,27,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,10,1,0,6,(1:16) 4-D.Swift left end to NE 17 for 10 yards (91-E.Ponder).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,1,10,0,17,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,6,(:34) (Shotgun) 18-C.Williams pass incomplete short left.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,2,10,0,17,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,-7,0,0,6,(:27) (Shotgun) 18-C.Williams sacked at NE 24 for -7 yards (25-M.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by CHI at 00:21.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,3,17,0,24,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,24,1,1,6,"(:21) (Shotgun) 18-C.Williams pass short right to 10-L.Burden for 24 yards, TOUCHDOWN."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,2,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,12,"8-C.Santos extra point is GOOD, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-13,8-C.Santos kicks 56 yards from CHI 35 to NE 9. 18-K.Williams to NE 34 for 25 yards (22-E.Hicks).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,66,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,18,1,0,-13,(:09) (Shotgun) 10-D.Maye pass deep middle to 1-A.Brown to CHI 48 for 18 yards (24-M.Muhammad).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by NE at 00:03.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,1,10,0,48,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,48,1,1,-13,"(:03) (Shotgun) 10-D.Maye pass short right to 38-R.Stevenson for 48 yards, TOUCHDOWN."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,2,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,-7,"8-A.Borregales extra point is GOOD, Center-47-J.Ashby, Holder-19-M.Wishnowsky."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,2,,0,0,,,,,0,0,0,0,0,,,,,,,,,END QUARTER 2
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,6,8-A.Borregales kicks 60 yards from NE 35 to CHI 5. 13-Z.Thomas pushed ob at CHI 28 for 23 yards (33-M.Brown).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,1,10,0,72,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,7,0,0,6,(14:54) (Shotgun) 18-C.Williams pass short left to 84-C.Loveland pushed ob at CHI 35 for 7 yards (4-C.Woodson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,2,3,0,65,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,1,0,0,6,(14:27) 4-D.Swift left end pushed ob at CHI 36 for 1 yard (5-Dr.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,3,2,0,64,run,1,0,0,0,1,1,0,00-0039918,C.Williams,,,5,1,0,6,(13:52) (Shotgun) 18-C.Williams scrambles left end pushed ob at CHI 41 for 5 yards (22-C.Woods).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,1,10,0,59,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,9,0,0,6,"(13:12) (Shotgun) 4-D.Swift right end to 50 for 9 yards (25-M.Jones, 31-K.Byard)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,2,1,0,50,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,11,1,0,6,(12:32) 18-C.Williams pass short middle to 4-D.Swift to NE 39 for 11 yards (31-K.Byard).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,1,10,0,39,no_play,0,0,0,0,0,1,0,,,,,0,0,0,6,"(11:53) (Shotgun) 18-C.Williams pass short right to 15-R.Odunze to NE 35 for 4 yards (25-M.Jones) [50-G.Jacas]. PENALTY on CHI-67-G.Bradbury, Offensive Holding, 10 yards, enforced at NE 39 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,1,20,0,49,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,6,0,0,6,(11:27) (Shotgun) 18-C.Williams pass short right to 84-C.Loveland to NE 43 for 6 yards (31-K.Byard).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,2,14,0,43,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,22,1,0,6,(11:04) (Shotgun) 18-C.Williams pass deep left to 84-C.Loveland to NE 21 for 22 yards (23-J.Reed).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,1,10,0,21,run,1,0,0,0,1,0,0,00-0039918,C.Williams,,,9,0,0,6,(10:27) 18-C.Williams scrambles right end to NE 12 for 9 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,2,1,0,12,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,12,1,1,6,"(9:48) 18-C.Williams pass short left to 84-C.Loveland for 12 yards, TOUCHDOWN."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,12,"8-C.Santos extra point is GOOD, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-13,"8-C.Santos kicks 65 yards from CHI 35 to landing zone to end zone, Touchback to the NE 20."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,80,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,14,1,0,-13,(9:41) (Shotgun) 10-D.Maye pass short right to 85-H.Henry ran ob at NE 34 for 14 yards.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,66,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,0,0,0,-13,(9:07) (Shotgun) 10-D.Maye pass incomplete deep left to 1-A.Brown (24-M.Muhammad).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,2,10,0,66,run,1,0,0,0,0,1,0,00-0036875,R.Stevenson,,,3,0,0,-13,(8:59) (Shotgun) 38-R.Stevenson left guard to NE 37 for 3 yards (97-J.Lynch; 93-K.Street). CHI-24-M.Muhammad was injured during the play.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,3,7,0,63,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,13,1,0,-13,(8:20) (Shotgun) 10-D.Maye pass short right to 85-H.Henry to 50 for 13 yards (50-G.Jarrett).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,50,run,1,0,0,0,0,1,0,00-0040734,T.Henderson,,,3,0,0,-13,(7:36) (Shotgun) 32-T.Henderson left guard to CHI 47 for 3 yards (59-J.Kromah).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,2,7,0,47,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-13,"(6:52) (Shotgun) PENALTY on CHI-12-D.Bush, Neutral Zone Infraction, 5 yards, enforced at CHI 47 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,2,2,0,42,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-13,"(6:32) (Shotgun) 32-T.Henderson right guard to CHI 36 for 6 yards (96-J.van den Berg). PENALTY on NE-76-M.Moses, Offensive Holding, 10 yards, enforced at CHI 42 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,2,12,0,52,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,16,1,0,-13,(6:13) (Shotgun) 10-D.Maye pass deep left to 1-A.Brown to CHI 36 for 16 yards (29-T.Stevenson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,36,pass,0,1,0,0,0,0,0,,,00-0039851,D.Maye,-2,0,0,-13,"(5:34) 10-D.Maye pass short middle to 85-H.Henry to CHI 38 for -2 yards (59-J.Kromah, 48-D.Jackson)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,2,12,0,38,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,13,1,0,-13,(4:50) (Shotgun) 10-D.Maye pass short middle to 85-H.Henry to CHI 25 for 13 yards (21-C.Lewis).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,25,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-13,"(4:11) (Shotgun) PENALTY on NE-82-E.Raridon, False Start, 5 yards, enforced at CHI 25 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,15,0,30,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,30,1,1,-13,"(3:52) (Shotgun) 10-D.Maye pass deep right to 82-E.Raridon for 30 yards, TOUCHDOWN."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,-7,"8-A.Borregales extra point is GOOD, Center-47-J.Ashby, Holder-19-M.Wishnowsky."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,6,8-A.Borregales kicks 61 yards from NE 35 to CHI 4. 13-Z.Thomas pushed ob at CHI 26 for 22 yards (54-D.Muasau).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,1,10,0,74,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,2,0,0,6,(3:39) 18-C.Williams pass short left to 84-C.Loveland pushed ob at CHI 28 for 2 yards (23-J.Reed).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,2,8,0,72,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,0,0,0,6,(3:12) 18-C.Williams pass incomplete short right to 14-K.Raymond [53-C.Elliss].
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,3,8,0,72,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,6,(3:09) (Shotgun) 18-C.Williams pass incomplete deep right to 84-C.Loveland.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,3,4,8,0,72,punt,0,0,0,0,0,0,0,,,,,0,0,0,6,"(3:03) 19-T.Taylor punts 65 yards to NE 7, Center-46-S.Daly. 25-M.Jones to NE 26 for 19 yards (92-D.Hardy; 47-B.Johnson)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,74,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,14,1,0,-6,(2:50) (Shotgun) 10-D.Maye pass short middle to 85-H.Henry to NE 40 for 14 yards (21-C.Lewis).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,1,10,0,60,run,1,0,0,0,0,1,0,00-0036875,R.Stevenson,,,1,0,0,-6,(2:13) (Shotgun) 38-R.Stevenson right guard to NE 41 for 1 yard (6-K.Gordon).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,2,9,0,59,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,8,0,0,-6,(1:33) (Shotgun) 10-D.Maye pass short middle to 3-D.Douglas to NE 49 for 8 yards (31-D.Thieneman).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,3,1,0,51,no_play,0,0,0,0,0,0,0,,,,,0,0,0,-6,"(:54) 74-C.Lomu reported in as eligible. PENALTY on NE-66-W.Campbell, False Start, 5 yards, enforced at NE 49 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,3,6,0,56,run,1,0,0,0,1,1,0,00-0039851,D.Maye,,,4,0,0,-6,(:40) (Shotgun) 10-D.Maye scrambles left end to NE 48 for 4 yards (12-D.Bush).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,3,,0,0,,,,,0,0,0,0,0,,,,,,,,-6,END QUARTER 3
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,4,2,0,52,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-6,"(15:00) (Shotgun) PENALTY on NE-65-M.Pryor, False Start, 5 yards, enforced at NE 48 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,4,7,0,57,punt,0,0,0,0,0,0,0,,,,,0,0,0,-6,"(15:00) 19-M.Wishnowsky punts 43 yards to CHI 14, Center-47-J.Ashby, fair catch by 14-K.Raymond."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,86,no_play,0,0,0,0,0,0,0,,,,,0,0,0,6,"(14:53) 4-D.Swift right tackle to CHI 16 for 2 yards (50-G.Jacas). PENALTY on CHI, Illegal Shift, 5 yards, enforced at CHI 14 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,15,0,91,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,7,0,0,6,(14:29) (Shotgun) 4-D.Swift right end to CHI 16 for 7 yards (25-M.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,8,0,84,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,-3,0,0,6,(13:50) (Shotgun) 18-C.Williams pass short right to 4-D.Swift pushed ob at CHI 13 for -3 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,11,0,87,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,21,1,0,6,(13:14) (Shotgun) 18-C.Williams pass deep right to 15-R.Odunze to CHI 34 for 21 yards (0-C.Gonzalez).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,66,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,5,0,0,6,(12:37) 4-D.Swift right guard to CHI 39 for 5 yards (94-C.Durden).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,5,0,61,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,10,1,0,6,(11:54) (Shotgun) 4-D.Swift right tackle to CHI 49 for 10 yards (31-K.Byard; 22-C.Woods).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,51,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,4,0,0,6,(11:10) (Shotgun) 18-C.Williams pass short right to 4-D.Swift to NE 47 for 4 yards (0-C.Gonzalez).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,6,0,47,run,1,0,0,0,0,0,0,00-0039021,R.Johnson,,,4,0,0,6,(10:29) 23-R.Johnson right end to NE 43 for 4 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,2,0,43,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,6,(9:44) (Shotgun) 18-C.Williams pass incomplete short right to 84-C.Loveland.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by CHI at 09:40.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,4,2,0,43,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,9,1,0,6,"(9:40) (Shotgun) 18-C.Williams pass short middle to 84-C.Loveland to NE 34 for 9 yards (22-C.Woods). Penalty on NE-0-C.Gonzalez, Illegal Use of Hands, declined."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,34,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,0,0,0,6,(9:21) 4-D.Swift right end to NE 34 for no gain (4-C.Woodson; 53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,10,0,34,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,-1,0,0,6,"(8:41) (Shotgun) 4-D.Swift right guard to NE 35 for -1 yards (25-M.Jones, 97-M.Williams)."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,11,0,35,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,0,0,0,6,(8:09) (Shotgun) 18-C.Williams pass incomplete deep right [53-C.Elliss].
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,4,11,0,35,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,6,"(8:02) 8-C.Santos 53 yard field goal is No Good, Hit Right Upright, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,1,10,0,57,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,0,0,0,-6,(7:57) (Shotgun) 10-D.Maye pass incomplete short left to 3-D.Douglas.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,2,10,0,57,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,-10,0,0,-6,(7:52) (Shotgun) 10-D.Maye sacked at NE 33 for -10 yards (sack split by 31-D.Thieneman and 92-D.Hardy).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,3,20,0,67,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,13,0,0,-6,(7:11) (Shotgun) 10-D.Maye pass short left to 38-R.Stevenson to NE 46 for 13 yards (92-D.Hardy; 6-K.Gordon).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,4,7,0,54,punt,0,0,0,0,0,0,0,,,,,0,0,0,-6,"(6:28) 19-M.Wishnowsky punts 45 yards to CHI 9, Center-47-J.Ashby, fair catch by 14-K.Raymond."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,91,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,1,0,0,6,(6:22) (Shotgun) 4-D.Swift right tackle to CHI 10 for 1 yard (53-C.Elliss; 14-R.Spillane).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,9,0,90,pass,0,1,0,0,0,0,0,,,00-0039918,C.Williams,8,0,0,6,(5:46) 18-C.Williams pass short right to 85-C.Kmet to CHI 18 for 8 yards (14-R.Spillane). CHI-85-C.Kmet was injured during the play.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,1,0,82,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,2,0,0,6,"(5:27) 65-L.Newman reported in as eligible. 4-D.Swift left end to CHI 26 for 8 yards (4-C.Woodson). PENALTY on CHI-13-Z.Thomas, Offensive Holding, 10 yards, enforced at CHI 20."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,9,0,90,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,21,1,0,6,(4:59) (Shotgun) 18-C.Williams pass deep right to 15-R.Odunze to CHI 31 for 21 yards (25-M.Jones).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,69,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,-2,0,0,6,(4:13) 4-D.Swift left guard to CHI 29 for -2 yards (97-M.Williams).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,12,0,71,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,21,1,0,6,(3:32) (Shotgun) 18-C.Williams pass short right to 15-R.Odunze to 50 for 21 yards (0-C.Gonzalez; 31-K.Byard).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,50,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,4,0,0,6,(2:47) 4-D.Swift left tackle to NE 46 for 4 yards (4-C.Woodson; 14-R.Spillane).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,6,0,46,run,1,0,0,0,1,0,0,00-0039918,C.Williams,,,5,0,0,6,(2:03) 18-C.Williams scrambles right end ran ob at NE 41 for 5 yards (53-C.Elliss).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,1,0,41,no_play,0,0,0,0,0,0,0,,,,,0,1,0,6,"(1:56) PENALTY on NE-94-C.Durden, Encroachment, 6 yards, enforced at NE 41 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,35,run,1,0,0,0,0,1,0,00-0036275,D.Swift,,,3,0,0,6,(1:56) (Shotgun) 65-L.Newman reported in as eligible. 4-D.Swift right guard to NE 32 for 3 yards (94-C.Durden).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by NE at 01:51.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,2,7,0,32,run,1,0,0,0,0,0,0,00-0036275,D.Swift,,,2,0,0,6,(1:51) 65-L.Newman reported in as eligible. 4-D.Swift right tackle to NE 30 for 2 yards (94-C.Durden).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by NE at 01:46.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,3,5,0,30,pass,0,1,0,0,0,1,0,,,00-0039918,C.Williams,-10,0,0,6,(1:46) (Shotgun) 18-C.Williams sacked at NE 40 for -10 yards (90-C.Barmore). NE-90-C.Barmore was injured during the play.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #3 by NE at 01:39.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,4,15,0,40,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,6,"(1:39) 8-C.Santos 58 yard field goal is GOOD, Center-46-S.Daly, Holder-19-T.Taylor."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-9,8-C.Santos kicks 62 yards from CHI 35 to NE 3. 18-K.Williams to NE 25 for 22 yards (47-B.Johnson; 31-D.Thieneman).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,1,10,0,75,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,3,0,0,-9,(1:28) (Shotgun) 10-D.Maye pass short right to 85-H.Henry pushed ob at NE 28 for 3 yards (31-D.Thieneman; 6-K.Gordon).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,2,7,0,72,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,14,1,0,-9,(1:21) (Shotgun) 10-D.Maye pass short right to 1-A.Brown pushed ob at NE 42 for 14 yards (1-J.Johnson) [50-G.Jarrett].
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,1,10,0,58,no_play,0,0,0,0,0,1,0,,,,,0,1,0,-9,"(1:15) (Shotgun) 10-D.Maye pass incomplete deep right to 86-E.Chism [6-K.Gordon]. PENALTY on CHI-1-J.Johnson, Defensive Pass Interference, 13 yards, enforced at NE 42 - No Play."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,1,10,0,45,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,0,0,0,-9,(1:09) (Shotgun) 10-D.Maye pass incomplete deep left to 1-A.Brown (29-T.Stevenson).
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,2,10,0,45,pass,0,1,0,0,0,1,0,,,00-0039851,D.Maye,16,1,0,-9,(1:01) (Shotgun) 10-D.Maye pass short right to 3-D.Douglas to CHI 29 for 16 yards (12-D.Bush) [50-G.Jarrett].
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,1,10,0,29,qb_spike,0,1,0,1,0,0,1,,,00-0039851,D.Maye,0,0,0,-9,(:43) (No Huddle) 10-D.Maye spiked the ball to stop the clock.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,NE,CHI,4,2,10,0,29,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,-9,"(:42) 8-A.Borregales 47 yard field goal is GOOD, Center-47-J.Ashby, Holder-19-M.Wishnowsky."
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,6,19-M.Wishnowsky kicks onside 12 yards from NE 35 to NE 47. 15-R.Odunze (didn't try to advance) to NE 47 for no gain.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,1,10,0,47,qb_kneel,1,0,1,0,0,0,0,00-0039918,C.Williams,,,-1,0,0,6,(:36) 18-C.Williams kneels to NE 48 for -1 yards.
+2026,REG,7,2026_07_NE_CHI,2026-10-22,CHI,NE,CHI,NE,4,,0,0,,,,,0,0,0,0,0,,,,,,,,6,END GAME
