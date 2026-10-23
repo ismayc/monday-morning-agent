@@ -44,6 +44,14 @@
   a.ep:hover > i, a.ep:hover > div + div { border-color: var(--yellow); }
   a.ep p { color: var(--ink); }
   .ep .open { font-family: var(--display); font-weight: 700; font-size: 22px; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+  /* The recording strip under the lead: the latest episode's recording, one link, the
+     label in the ink-and-yellow tag the explorer uses for the reference definition. */
+  .aired { margin-top: 22px; display: grid; grid-template-columns: auto 1fr; align-items: stretch; gap: 0 18px; border: 2px solid var(--ink); background: #fff; color: inherit; text-decoration: none; }
+  .aired b { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; background: var(--ink); color: var(--yellow); padding: 14px 18px; display: flex; align-items: center; white-space: nowrap; }
+  .aired span { font-size: 16.5px; line-height: 1.4; padding: 11px 16px 12px 0; align-self: center; }
+  .aired span u { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--yellow); }
+  .aired:hover b { background: var(--yellow); color: var(--ink); }
+  @media (max-width: 600px) { .aired { grid-template-columns: 1fr; gap: 0; } .aired b { padding: 10px 14px; } .aired span { padding: 10px 14px 12px; } }
   /* The stairs: what each episode adds, stacked on what it keeps. Eight columns, each a
      pile of written rules growing bottom-up, the newest on top in yellow and the rest in
      blue. The two colors mean what they mean on the charts: blue is where the line started,
@@ -98,6 +106,10 @@
   <h1>An agent that checks the tape.</h1>
   <p class="lead">Everybody knows the Monday morning quarterback, the person who second-guesses every coaching decision after the fact. This one goes back and counts. Every other Monday, live on O'Reilly, an AI agent takes one argument NFL fans cannot stop having and settles it from about a quarter of a million real plays, with every step of its work on screen.</p>
   <p style="margin-top:14px">Each episode gets a page here once it is built: how the agent was set up, in plain language, with something you can try yourself.</p>
+  <a class="aired" href="https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/">
+    <b>Watch episode 1</b>
+    <span>"You have to establish the run" aired Monday, October 12, 2026. The recording and a recap are on <u>O'Reilly Radar</u>.</span>
+  </a>
 </header>
 
 <div class="season">
