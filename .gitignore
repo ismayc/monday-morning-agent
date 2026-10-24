@@ -20,3 +20,6 @@ dictionary/*.json
 # the data file locally and in the Action; nothing commits it until the show has aired.
 docs/episode-2/explorer.html
 docs/episode-2/explorer-data.json
+# the rehearsal walkthrough (the script as captions over the pages); built by the private
+# folder, never published
+docs/episode-2/walkthrough/
