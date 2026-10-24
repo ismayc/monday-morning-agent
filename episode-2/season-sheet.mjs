@@ -158,6 +158,13 @@ const title = thisSeason
 const lead = thisSeason
   ? `The same questions as the five-season sheet, asked of this season alone: weeks ${esc(weeks.replace(/^\d+: /, ''))}, through the games of ${esc(longDate(latest))}. The groups are small and the tool says so wherever it matters.`
   : `Nine situations, each answered by the one tool from every play of ${SEASONS.replace('-', ' through ')}, measuring with the definition below. Yellow is the defined play, blue is every other rush with the same yards to go, and the hatched stretch between them is the gap in how often each converted.`
+// A note under the verdict for a season that is not like the others, keyed by
+// season so it prints only on that season's sheet. Added October 24, 2026 at
+// Chester's ask, after Hurts was ruled out.
+const SEASON_NOTES = {
+  2026: '<strong>This season is not like the last five.</strong> Jalen Hurts, the Eagles\' quarterback, is expected to miss the rest of the 2026 season after week 5 (blood clots, reported October 19, 2026); Tanner McKee started from week 6. The Eagles\' plays on this sheet are from the games before that, so this season is no test of the Eagles\' version of the play, and every Eagles row here will stay small. The five complete seasons are the evidence.',
+}
+const seasonNote = thisSeason && SEASON_NOTES[SEASONS] ? `<p class="not season">${SEASON_NOTES[SEASONS]}</p>` : ''
 const headline = `<div class="verdict"><b>${esc(V.word)}</b><div>
 <p class="vtext">${esc(V.text)}</p>
 ${gapAll !== null ? `<div class="evidence"><div><b>${fmt(search.out.matched)}</b><span>of ${fmt(search.out.searched)} play descriptions name the play</span></div><div><b>${gapAll.toFixed(1)}</b><span>points: the gap, all downs</span></div><div><b>${gapNoPHI === null ? 'n/a' : gapNoPHI.toFixed(1)}</b><span>points: the gap without the Eagles</span></div></div>` : ''}
@@ -257,6 +264,7 @@ const html = `<!DOCTYPE html>
   td { padding: 7px 10px 7px 0; border-bottom: 1px solid var(--rule); vertical-align: top; font-variant-numeric: tabular-nums; }
   .num { text-align: right; }
   .not { margin-top: 28px; font-size: 16.5px; border-left: 5px solid var(--ink); padding-left: 14px; max-width: 70ch; }
+  .not.season { margin-top: 18px; border-left-color: var(--pink); }
   .teams { margin-top: 44px; padding-top: 18px; border-top: 2px solid var(--ink); }
   .teams h2 { font-size: 28px; }
   .teams code { display: block; margin: 6px 0 10px; font-size: 12.5px; white-space: normal; word-break: break-all; }
@@ -275,6 +283,7 @@ const html = `<!DOCTYPE html>
 <h1>${esc(title)}</h1>
 <p class="lead">${lead}</p>
 ${headline}
+${seasonNote}
 <div class="entry"><b>Measured with</b><div>
 <p class="plain">"${esc(dict.plainWords)}"</p>
 <p>${esc(dict.file)}, written ${esc(dict.written)}${dict.by ? ` by ${esc(dict.by)}` : ''}. Rules: ${esc(dict.ruleWords.join('; '))}; ${dict.rules.yardsToGoMax} or fewer yards to go. Compared with ${esc(dict.comparedWith)}.${dict.cannotSee ? ` Cannot see: ${esc(dict.cannotSee)}.` : ''}</p>
