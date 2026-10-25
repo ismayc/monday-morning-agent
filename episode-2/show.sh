@@ -2,7 +2,9 @@
 # show.sh: the commands run on air in episode 2, one word each, so no long command
 # has to be typed or pasted while the room watches.
 #
-#   ./show.sh search            the three searches by name: "tush push", "brotherly shove", sneak
+#   ./show.sh search "<term>" [flags]   one search by name, the flags passed through to query-plays.mjs
+#                               (on air, three in turn: "tush push", "brotherly shove", sneak, each
+#                               with --seasons 2021-2026)
 #   ./show.sh refuse            the tool asked for a play with no entry: exit 65 and the entry's shape
 #   ./show.sh verify            analyst.md, the file on screen, against its frozen hash
 #   ./show.sh run "<claim>"     the agent, one claim, as run-analyst.sh runs it
@@ -35,14 +37,16 @@ claim() {
 
 case "${1:-}" in
   search)
-    show 'node ./query-plays.mjs --search "tush push" --seasons 2021-2026' \
-      node ./query-plays.mjs --search "tush push" --seasons 2021-2026
-    echo
-    show 'node ./query-plays.mjs --search "brotherly shove" --seasons 2021-2026' \
-      node ./query-plays.mjs --search "brotherly shove" --seasons 2021-2026
-    echo
-    show 'node ./query-plays.mjs --search sneak --seasons 2021-2026' \
-      node ./query-plays.mjs --search sneak --seasons 2021-2026
+    if [ -z "${2:-}" ]; then
+      echo "show.sh search: give it the term in quotation marks, then any query-plays.mjs flags, for example:" >&2
+      echo "  ./show.sh search \"tush push\" --seasons 2021-2026" >&2
+      exit 64
+    fi
+    term="$2"
+    shift 2
+    q="$term"
+    case "$term" in *[\ \"]*) q="\"$term\"" ;; esac   # quoted in the echo only when it needs to be
+    show "node ./query-plays.mjs --search $q${*:+ $*}" node ./query-plays.mjs --search "$term" "$@"
     ;;
   refuse)
     show 'node ./query-plays.mjs --play tush-push --seasons 2021-2025' \
@@ -77,5 +81,5 @@ case "${1:-}" in
     exit "$st"
     ;;
   *)
-    sed -n '2,11p' "$0"; exit 64 ;;
+    sed -n '2,13p' "$0"; exit 64 ;;
 esac

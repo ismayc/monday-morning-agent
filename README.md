@@ -227,7 +227,7 @@ flowchart TB
 | `build-explorer-data.mjs` | Writes the explorer page's 54 definitions into a scratch dictionary, measures each for seven sets of seasons, and saves the answers |
 | `examples/` | The search by name, the tool refusing with no entry, and the policy. The run from the episode, its rulings, and the entry the agent wrote are added after October 26, 2026 |
 | `rehearse.sh` | `entry`, `tool`, `claims`, `verify`, `freeze`, `reset`: the rehearsal beats as subcommands, all writing into `rehearsal-runs/`, never into `../dictionary` |
-| `show.sh` | The on-air commands, one word each: `search`, `refuse`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"`. Each prints the real tool line before it runs it, and `ANALYST_DICT_DIR` passes through |
+| `show.sh` | The on-air commands, one word each: `search "<term>" [flags]`, `refuse`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"`. Each prints the real tool line before it runs it, and `ANALYST_DICT_DIR` passes through |
 
 ### The dictionary
 
