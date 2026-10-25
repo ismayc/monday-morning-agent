@@ -243,6 +243,13 @@ node ./query-plays.mjs --play no-such-play --seasons 2021-2025
 
 <span class="c"># the example on this page, once the episode's entry is in the repo</span>
 node ./query-plays.mjs --play tush-push --seasons 2021-2025</pre>
+  <p>On air these are typed the short way, through <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/show.sh">show.sh</a> in the same folder: one word, the term or the claim, and the flags pass through. It prints the real tool line above each result, so nothing on this page is hidden by it.</p>
+<pre class="cmd"><span class="c"># the same search, and the agent on one claim</span>
+./show.sh search "tush push" --seasons 2021-2026
+./show.sh run "Ban the tush push."
+
+<span class="c"># its six words</span>
+./show.sh</pre>
   <div class="rows">
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/query-plays.mjs">Read the code</a></b><span>All 392 lines, with the line numbers this page refers to. The runner is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-2/run-analyst.sh">run-analyst.sh</a>, beside it.</span></div>
     <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a></b><span>The README gives the shape of an <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, every key, and the rules for adding one.</span></div>
