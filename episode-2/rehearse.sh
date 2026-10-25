@@ -20,7 +20,7 @@
 set -uo pipefail
 DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$DIR"
-FROZEN=(analyst.md analyst-outline.md query-plays.mjs run-analyst.sh show-run.mjs render-run.mjs season-sheet.mjs slim-data.mjs fetch-data.sh build-explorer-data.mjs)
+FROZEN=(analyst.md analyst-outline.md query-plays.mjs run-analyst.sh show.sh show-run.mjs render-run.mjs season-sheet.mjs slim-data.mjs fetch-data.sh build-explorer-data.mjs)
 RDICT="$DIR/rehearsal-runs/dictionary"
 
 write_entry() {
