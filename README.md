@@ -87,6 +87,7 @@ flowchart TB
 | `build-plays-data.mjs` | Describes the plays file for the page that reads it: every column in the download with the kept ones and the betting lines marked, the counts, and every play of the latest week's games |
 | `examples/` | A tool read (text and JSON), the policy, one run as it looked on screen, and three rulings: the episode's claim, a bet it declined, and a claim the tool cannot answer. The run and the first two rulings are from the episode on October 12, 2026 |
 | `rehearse.sh` | `tool`, `claims`, `verify`, `freeze`: the rehearsal beats as subcommands |
+| `show.sh` | The commands the episode typed on air, one word each, for rerunning it from this folder: `columns`, `tool`, `verify`, `run "<claim>"`, `sheets`. Each prints the real line before it runs it. Added after the show; episode 1 aired with the long commands typed by hand |
 
 ### How `query-plays.mjs` works
 
