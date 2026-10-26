@@ -49,6 +49,61 @@
   .field-fig figcaption { margin-top: 8px; font-size: 15.5px; color: var(--soft); max-width: 80ch; }
   .field-fig figcaption .y { background: var(--yellow); color: var(--ink); padding: 0 5px; }
   .field-fig figcaption .b { background: var(--blue); color: var(--ink); padding: 0 5px; }
+  /* The other diagrams share one small vocabulary: ink outlines, the faint fill for a
+     stretch of ground, blue for where something starts, yellow for the line or the play
+     that matters. On a phone the SVG shrinks, so its text grows to stay readable. */
+  .dg { margin: 22px 0 18px; }
+  .dg svg { display: block; width: 100%; height: auto; }
+  .dg figcaption { margin-top: 8px; font-size: 15.5px; color: var(--soft); max-width: 80ch; }
+  .dg .y { background: var(--yellow); color: var(--ink); padding: 0 5px; }
+  .dg .b { background: var(--blue); color: var(--ink); padding: 0 5px; }
+  .dg text { font-family: var(--display); font-weight: 600; font-size: 17px; fill: var(--ink); }
+  .dg text.soft { fill: var(--soft); font-weight: 500; font-size: 15px; }
+  .dg text.big { font-weight: 700; font-size: 20px; }
+  .dg text.in { font-size: 11px; font-weight: 700; text-anchor: middle; }
+  .dg text.in.w { fill: #fff; }
+  .dg .box { fill: #fff; stroke: var(--ink); stroke-width: 2; }
+  .dg .faint { fill: var(--faint); stroke: var(--ink); stroke-width: 2; }
+  .dg .ylw { fill: var(--yellow); stroke: var(--ink); stroke-width: 2; }
+  .dg .blu { fill: var(--blue); stroke: var(--ink); stroke-width: 2; }
+  .dg .gray { fill: var(--rule); stroke: var(--ink); stroke-width: 2; }
+  .dg .dark { fill: var(--ink); stroke: var(--ink); stroke-width: 2; }
+  .dg .los { stroke: var(--blue); stroke-width: 5; }
+  .dg .ltg { stroke: var(--yellow); stroke-width: 5; }
+  .dg .edge { stroke: var(--ink); stroke-width: 9; }
+  .dg .ink { stroke: var(--ink); stroke-width: 2.5; fill: none; }
+  .dg .rule { stroke: var(--rule); stroke-width: 2; }
+  .panels { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 18px; }
+  .panels figure { border: 2px solid var(--ink); background: #fff; padding: 10px 12px 8px; margin: 0; }
+  .panels h3 { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1; margin-bottom: 6px; }
+  .panels figcaption { margin-top: 6px; font-size: 15px; color: var(--soft); }
+  .panels .dg text, .panels .dg text.soft { font-size: 12px; }
+  .dg tspan.y { fill: var(--ink); font-weight: 700; }
+  .dg tspan.b { fill: var(--ink); font-weight: 700; }
+  section h3 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; margin: 26px 0 4px; }
+  .drive h3 { margin-top: 20px; }
+  .drive .scroll { overflow-x: auto; }
+  .drive table { width: 100%; border-collapse: collapse; font-size: 15.5px; line-height: 1.35; min-width: 560px; }
+  .drive th { text-align: left; font-family: var(--display); font-weight: 700; font-size: 17px; padding: 6px 12px 6px 0; border-bottom: 2px solid var(--ink); }
+  .drive td { padding: 7px 12px 7px 0; border-bottom: 1px solid var(--rule); vertical-align: top; }
+  .drive td:first-child { font-family: var(--display); font-weight: 700; font-size: 19px; width: 44px; }
+  /* On a phone the wide diagrams keep their size and scroll sideways inside their box,
+     like the tables, instead of shrinking their text past reading size. The three
+     formation panels stack and grow instead. The drive tables stack their cells. */
+  @media (max-width: 700px) {
+    .panels { grid-template-columns: 1fr; }
+    .dg.wide { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    .dg.wide svg { min-width: 640px; }
+    .dg.wide figcaption::before { content: "Scroll sideways for the whole picture. "; font-weight: 600; }
+    .drive table { min-width: 0; }
+    .drive thead { display: none; }
+    .drive tbody, .drive tr, .drive td { display: block; }
+    .drive tr { display: grid; grid-template-columns: 44px 1fr; gap: 0 10px; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+    .drive td { border: 0; padding: 0; }
+    .drive td:first-child { grid-row: span 3; }
+    .drive td:nth-child(2) { font-weight: 600; }
+    .drive td:nth-child(4) { color: var(--soft); }
+  }
   /* One row of the data: the column name, its value, and what it says. */
   .onerow { margin-top: 18px; }
   .onerow td:first-child code { white-space: nowrap; }
@@ -117,8 +172,113 @@
     <figcaption>A first down at the offense's own 35-yard line. The <span class="b">blue</span> line is where the play starts; the <span class="y">yellow</span> line is the line to gain, 10 yards on. The charts on the episode pages use the same two colors.</figcaption>
   </figure>
   <p>Fans say a down as two numbers. "Third and 2" means third down, with 2 yards to go to the line to gain. When the line to gain would be past the goal line, the yards to go are the yards to the end zone, and the down is "goal to go," as in "first and goal."</p>
+  <figure class="dg wide">
+    <svg viewBox="0 0 600 190" role="img" aria-label="One set of downs. First and 10: a run gains 4 yards. Second and 6: a pass gains 3. Third and 3: a run gains 5, crosses the line to gain, and earns a new first down.">
+      <text x="150" y="20">Line of scrimmage</text>
+      <text x="510" y="20" text-anchor="end">Line to gain</text>
+      <g class="rule"><line x1="222" y1="30" x2="222" y2="180"/><line x1="294" y1="30" x2="294" y2="180"/><line x1="366" y1="30" x2="366" y2="180"/><line x1="438" y1="30" x2="438" y2="180"/></g>
+      <line class="edge" x1="150" y1="28" x2="150" y2="182"/><line class="los" x1="150" y1="28" x2="150" y2="182"/>
+      <line class="edge" x1="510" y1="28" x2="510" y2="182"/><line class="ltg" x1="510" y1="28" x2="510" y2="182"/>
+      <text x="138" y="63" text-anchor="end">1st and 10</text>
+      <rect class="faint" x="150" y="40" width="144" height="34"/><text class="soft" x="222" y="62" text-anchor="middle">run, +4</text>
+      <text x="138" y="113" text-anchor="end">2nd and 6</text>
+      <rect class="faint" x="294" y="90" width="108" height="34"/><text class="soft" x="348" y="112" text-anchor="middle">pass, +3</text>
+      <text x="138" y="163" text-anchor="end">3rd and 3</text>
+      <rect class="ylw" x="402" y="140" width="180" height="34"/><text x="492" y="162" text-anchor="middle">run, +5: first down</text>
+    </svg>
+    <figcaption>One set of downs, 10 yards to gain. The gray bars are the first two plays, the <span class="y">yellow</span> bar the one that crosses the line to gain and starts a new set. Had the third play fallen short, it would have been fourth and short, and the choice below.</figcaption>
+  </figure>
   <p>On fourth down most teams do not use the last try. They punt, kicking the ball far down the field, or, when close enough, kick a field goal. Trying for the yards instead is called going for it. Whether coaches should do it more often is episode 5's argument, "Coaches are cowards on fourth down."</p>
   <p>A play ends when the ball carrier is tackled to the ground or goes out of bounds, when a pass hits the ground without a catch, or when someone scores. Each play is one row in the data.</p>
+  <p style="margin-top:18px">Sometimes the two teams switch roles in the middle of a play. The defense takes the ball, becomes the offense at once, and can run the other way with it before the play ends. These are turnovers, and there are three kinds.</p>
+  <div class="rows">
+    <div><b>Interception</b><span>A defender catches a pass meant for the offense. The ball is his team's from that moment, and he can run it back until he is tackled, goes out of bounds, or reaches the end zone, which fans call a pick-six.</span></div>
+    <div><b>Fumble</b><span>The ball carrier loses the ball before he is down, and whoever picks it up keeps it. If a defender does, he can run it back the same way. The offense can recover its own fumble and carry on.</span></div>
+    <div><b>Turnover on downs</b><span>The offense goes for it on fourth down and falls short. The other team takes over right there, with no kick in between.</span></div>
+  </div>
+  <figure class="dg wide">
+    <svg viewBox="0 0 600 150" role="img" aria-label="A real interception on a field strip. Arizona, with the ball at its own 23, throws deep. Tennessee's Kevin Byard catches it at the Arizona 44 and runs it back 12 yards to the Arizona 32, where Tennessee's offense takes over, now moving toward the left end zone.">
+      <text class="big" x="20" y="18">One real turnover: Arizona throws, Tennessee catches it</text>
+      <rect class="box" x="20" y="34" width="560" height="50"/>
+      <rect class="faint" x="20" y="34" width="30" height="50"/><rect class="faint" x="550" y="34" width="30" height="50"/>
+      <g class="rule"><line x1="100" y1="35" x2="100" y2="83"/><line x1="150" y1="35" x2="150" y2="83"/><line x1="200" y1="35" x2="200" y2="83"/><line x1="250" y1="35" x2="250" y2="83"/><line x1="300" y1="35" x2="300" y2="83"/><line x1="350" y1="35" x2="350" y2="83"/><line x1="400" y1="35" x2="400" y2="83"/><line x1="450" y1="35" x2="450" y2="83"/><line x1="500" y1="35" x2="500" y2="83"/></g>
+      <g class="in"><text class="in" x="100" y="80">10</text><text class="in" x="150" y="80">20</text><text class="in" x="200" y="80">30</text><text class="in" x="250" y="80">40</text><text class="in" x="300" y="80">50</text><text class="in" x="350" y="80">40</text><text class="in" x="400" y="80">30</text><text class="in" x="450" y="80">20</text><text class="in" x="500" y="80">10</text></g>
+      <circle class="ylw" cx="165" cy="50" r="6"/>
+      <path class="ink" d="M173 50 h87" stroke-dasharray="5 4"/><path class="ink" d="M254 44 l8 6 l-8 6"/>
+      <circle class="gray" cx="270" cy="50" r="7"/>
+      <path class="ink" d="M262 66 h-44" stroke-dasharray="5 4"/><path class="ink" d="M224 60 l-8 6 l8 6"/>
+      <circle class="blu" cx="210" cy="66" r="6"/>
+      <text class="soft" x="20" y="106"><tspan class="y">Yellow:</tspan> Arizona throws from its own 23. Gray: a Tennessee safety catches it at the 44.</text>
+      <text class="soft" x="20" y="128"><tspan class="b">Blue:</tspan> he runs it back to the 32, where Tennessee's offense takes over, moving left.</text>
+    </svg>
+    <figcaption>A pass of 21 yards, a return of 12, and the ball changes hands in one play. From week 1 of 2021, Arizona at Tennessee, as the data describes it: "1-K.Murray pass deep left intended for 86-D.Harris INTERCEPTED by 31-K.Byard at ARI 44. 31-K.Byard to ARI 32 for 12 yards." The kept columns do not flag a turnover, but the description does, and the next row's <code>posteam</code> is the other team.</figcaption>
+  </figure>
+</section>
+
+<section id="drive" data-nav="A drive">
+  <h2>A drive, start to finish</h2>
+  <p>A drive is one team's run of plays with the ball, from where it gets it to where it gives it up or scores. Here are two made-up drives, play by play, with the ball's path on the field above each. The team starts at its own 25-yard line, where a kickoff usually leaves it, and moves to the right.</p>
+  <figure class="dg wide">
+    <svg viewBox="0 0 600 302" role="img" aria-label="Two drives on a field strip. Drive A: eight plays from the team's own 25 to the other team's 45, three first downs, then a punt that leaves the other team at its own 10. Drive B: seven plays from the own 30 to the other team's 30, then a 47-yard field goal try, made for 3 points or missed, with the other team taking over at its own 37.">
+      <text class="big" x="20" y="18">Drive A: three first downs, then a punt</text>
+      <rect class="box" x="20" y="34" width="560" height="50"/>
+      <rect class="faint" x="20" y="34" width="30" height="50"/><rect class="faint" x="550" y="34" width="30" height="50"/>
+      <g class="rule"><line x1="100" y1="35" x2="100" y2="83"/><line x1="150" y1="35" x2="150" y2="83"/><line x1="200" y1="35" x2="200" y2="83"/><line x1="250" y1="35" x2="250" y2="83"/><line x1="300" y1="35" x2="300" y2="83"/><line x1="350" y1="35" x2="350" y2="83"/><line x1="400" y1="35" x2="400" y2="83"/><line x1="450" y1="35" x2="450" y2="83"/><line x1="500" y1="35" x2="500" y2="83"/></g>
+      <g class="in"><text class="in" x="100" y="80">10</text><text class="in" x="150" y="80">20</text><text class="in" x="200" y="80">30</text><text class="in" x="250" y="80">40</text><text class="in" x="300" y="80">50</text><text class="in" x="350" y="80">40</text><text class="in" x="400" y="80">30</text><text class="in" x="450" y="80">20</text><text class="in" x="500" y="80">10</text></g>
+      <rect class="faint" x="175" y="42" width="20" height="22"/><rect class="faint" x="195" y="42" width="15" height="22"/><rect class="ylw" x="210" y="42" width="25" height="22"/>
+      <rect class="ylw" x="235" y="42" width="60" height="22"/>
+      <rect class="faint" x="295" y="42" width="10" height="22"/><rect class="faint" x="305" y="42" width="20" height="22"/>
+      <path class="ink" d="M330 53 h158" stroke-dasharray="5 4"/><path class="ink" d="M482 47 l8 6 l-8 6"/>
+      <circle class="blu" cx="500" cy="53" r="6"/>
+      <g class="in"><text class="in" x="185" y="98">1</text><text class="in" x="202" y="98">2</text><text class="in" x="222" y="98">3</text><text class="in" x="265" y="98">4</text><text class="in" x="298" y="98">5, 6</text><text class="in" x="320" y="98">7</text><text class="in" x="412" y="98">8: punt</text></g>
+      <text class="soft" x="20" y="124">Punt from the other team's 45. Their offense takes over at their own 10, the <tspan class="b">blue</tspan> dot.</text>
+
+      <text class="big" x="20" y="162">Drive B: to the other team's 30, then a field goal try</text>
+      <rect class="box" x="20" y="178" width="560" height="50"/>
+      <rect class="faint" x="20" y="178" width="30" height="50"/><rect class="faint" x="550" y="178" width="30" height="50"/>
+      <g class="rule"><line x1="100" y1="179" x2="100" y2="227"/><line x1="150" y1="179" x2="150" y2="227"/><line x1="200" y1="179" x2="200" y2="227"/><line x1="250" y1="179" x2="250" y2="227"/><line x1="300" y1="179" x2="300" y2="227"/><line x1="350" y1="179" x2="350" y2="227"/><line x1="400" y1="179" x2="400" y2="227"/><line x1="450" y1="179" x2="450" y2="227"/><line x1="500" y1="179" x2="500" y2="227"/></g>
+      <g class="in"><text class="in" x="100" y="224">10</text><text class="in" x="150" y="224">20</text><text class="in" x="200" y="224">30</text><text class="in" x="250" y="224">40</text><text class="in" x="300" y="224">50</text><text class="in" x="350" y="224">40</text><text class="in" x="400" y="224">30</text><text class="in" x="450" y="224">20</text><text class="in" x="500" y="224">10</text></g>
+      <rect class="ylw" x="200" y="186" width="75" height="22"/>
+      <rect class="faint" x="275" y="186" width="30" height="22"/><rect class="ylw" x="305" y="186" width="95" height="22"/>
+      <rect class="faint" x="400" y="186" width="5" height="22"/><rect class="faint" x="400" y="186" width="5" height="22"/>
+      <circle class="ylw" cx="365" cy="197" r="6"/>
+      <path class="ink" d="M372 197 h198" stroke-dasharray="5 4"/><path class="ink" d="M566 191 l8 6 l-8 6"/>
+      <g class="in"><text class="in" x="237" y="242">1</text><text class="in" x="290" y="242">2</text><text class="in" x="352" y="242">3</text><text class="in" x="402" y="242">4, 5, 6</text><text class="in" x="470" y="242">7: field goal try, 47 yards</text></g>
+      <text class="soft" x="20" y="268">Made: 3 points, and the scoring team kicks off to the other team.</text>
+      <text class="soft" x="20" y="290">Missed: the other team takes over at the spot of the kick, its own 37, the <tspan class="y">yellow</tspan> dot.</text>
+    </svg>
+    <figcaption>Each bar is one play, as long as the yards it gained. A <span class="y">yellow</span> bar reached the line to gain and earned a new first down; a gray one did not. The dashed arrows are kicks. The play numbers match the tables below. On fourth and short a coach may go for it instead: make the yards and the drive goes on; fall short and the ball changes hands right there.</figcaption>
+  </figure>
+  <div class="drive">
+    <h3>Drive A</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Play</th><th>Down, distance, and spot</th><th>What happened</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1st and 10 at its own 25</td><td>A run gains 4 yards.</td><td>2nd and 6 at the 29.</td></tr>
+        <tr><td>2</td><td>2nd and 6 at the 29</td><td>A short pass gains 3.</td><td>3rd and 3 at the 32.</td></tr>
+        <tr><td>3</td><td>3rd and 3 at the 32</td><td>A run gains 5, past the line to gain.</td><td>First down at the 37.</td></tr>
+        <tr><td>4</td><td>1st and 10 at the 37</td><td>A pass gains 12.</td><td>First down at the 49.</td></tr>
+        <tr><td>5</td><td>1st and 10 at the 49</td><td>A run gains 2, across midfield.</td><td>2nd and 8 at the other team's 49.</td></tr>
+        <tr><td>6</td><td>2nd and 8 at the other team's 49</td><td>A pass falls incomplete.</td><td>3rd and 8, same spot.</td></tr>
+        <tr><td>7</td><td>3rd and 8 at the 49</td><td>A pass gains 4, short of the line to gain.</td><td>4th and 4 at the 45.</td></tr>
+        <tr><td>8</td><td>4th and 4 at the 45</td><td>Too far from the posts for a field goal, so the team punts.</td><td>The other team's offense takes over at its own 10.</td></tr>
+      </tbody>
+    </table></div>
+    <h3>Drive B</h3>
+    <div class="scroll"><table>
+      <thead><tr><th>Play</th><th>Down, distance, and spot</th><th>What happened</th><th>Result</th></tr></thead>
+      <tbody>
+        <tr><td>1</td><td>1st and 10 at its own 30</td><td>A pass gains 15.</td><td>First down at the 45.</td></tr>
+        <tr><td>2</td><td>1st and 10 at the 45</td><td>A run gains 6.</td><td>2nd and 4 at the other team's 49.</td></tr>
+        <tr><td>3</td><td>2nd and 4 at the 49</td><td>A pass gains 19.</td><td>First down at the 30.</td></tr>
+        <tr><td>4</td><td>1st and 10 at the 30</td><td>A run gains 1.</td><td>2nd and 9 at the 29.</td></tr>
+        <tr><td>5</td><td>2nd and 9 at the 29</td><td>A pass falls incomplete.</td><td>3rd and 9, same spot.</td></tr>
+        <tr><td>6</td><td>3rd and 9 at the 29</td><td>A run loses 1.</td><td>4th and 10 at the 30.</td></tr>
+        <tr><td>7</td><td>4th and 10 at the 30</td><td>A field goal try from the 30: 47 yards.</td><td>Made: 3 points, then a kickoff. Missed: the other team takes over at its own 37.</td></tr>
+      </tbody>
+    </table></div>
+  </div>
+  <p style="margin-top:18px">In the data a drive is just its rows in order, with the <code>down</code>, <code>ydstogo</code>, and <code>yardline_100</code> columns moving from one row to the next. The agent never looks at a drive as a whole in episodes 1 and 2. It counts plays.</p>
 </section>
 
 <section id="runs" data-nav="Runs and passes">
@@ -134,7 +294,59 @@
 <section id="formation" data-nav="Under center">
   <h2>Where the quarterback stands</h2>
   <p>The quarterback takes the snap from one of two places. <a class="term" href="#term-under-center" data-def="The quarterback stands right behind the center and takes the ball from his hands. In the data: shotgun is 0.">Under center</a>, he stands right behind the center, hands under him, and the ball comes straight back into them. In the <a class="term" href="#term-shotgun" data-def="The quarterback stands a few yards back and the ball is snapped to him through the air. In the data: shotgun is 1.">shotgun</a>, he stands a few yards back and the ball is snapped to him through the air. The data has one column for this, named <code>shotgun</code>: 1 for shotgun and 0 otherwise. It is the only detail the data carries about where anyone lined up.</p>
-  <p>With a yard or less to go, a team often calls a quarterback sneak. The quarterback takes the snap under center and pushes straight ahead behind the center.</p>
+  <div class="panels">
+    <figure>
+      <h3>Under center</h3>
+      <div class="dg">
+        <svg viewBox="0 0 200 190" role="img" aria-label="Under center: five linemen on the line of scrimmage, the quarterback right behind the center, defenders across the line.">
+          <text class="soft" x="8" y="56">defense</text>
+          <g class="gray"><circle cx="60" cy="52" r="7"/><circle cx="80" cy="52" r="7"/><circle cx="100" cy="52" r="7"/><circle cx="120" cy="52" r="7"/><circle cx="140" cy="52" r="7"/></g>
+          <line class="los" x1="10" y1="70" x2="190" y2="70"/>
+          <text class="soft" x="8" y="92">offense</text>
+          <g class="box"><circle cx="60" cy="88" r="8"/><circle cx="80" cy="88" r="8"/><circle cx="120" cy="88" r="8"/><circle cx="140" cy="88" r="8"/></g>
+          <circle class="dark" cx="100" cy="88" r="8"/>
+          <circle class="ylw" cx="100" cy="106" r="9"/><text class="soft" x="114" y="110">QB</text>
+        </svg>
+      </div>
+      <figcaption>The quarterback takes the ball straight from the center's hands. <code>shotgun</code> is 0.</figcaption>
+    </figure>
+    <figure>
+      <h3>Shotgun</h3>
+      <div class="dg">
+        <svg viewBox="0 0 200 190" role="img" aria-label="Shotgun: the same line, the quarterback five yards behind the center, the ball snapped through the air.">
+          <text class="soft" x="8" y="56">defense</text>
+          <g class="gray"><circle cx="60" cy="52" r="7"/><circle cx="80" cy="52" r="7"/><circle cx="100" cy="52" r="7"/><circle cx="120" cy="52" r="7"/><circle cx="140" cy="52" r="7"/></g>
+          <line class="los" x1="10" y1="70" x2="190" y2="70"/>
+          <text class="soft" x="8" y="92">offense</text>
+          <g class="box"><circle cx="60" cy="88" r="8"/><circle cx="80" cy="88" r="8"/><circle cx="120" cy="88" r="8"/><circle cx="140" cy="88" r="8"/></g>
+          <circle class="dark" cx="100" cy="88" r="8"/>
+          <path class="ink" d="M100 100 v50" stroke-dasharray="4 3"/><path class="ink" d="M95 146 l5 8 l5 -8"/>
+          <circle class="ylw" cx="100" cy="168" r="9"/><text class="soft" x="114" y="172">QB, 5 yards back</text>
+        </svg>
+      </div>
+      <figcaption>The ball flies back to the quarterback. <code>shotgun</code> is 1.</figcaption>
+    </figure>
+    <figure>
+      <h3>The tush push</h3>
+      <div class="dg">
+        <svg viewBox="0 0 200 190" role="img" aria-label="The tush push: the quarterback under center, two teammates behind him pushing forward.">
+          <text class="soft" x="8" y="56">defense</text>
+          <g class="gray"><circle cx="60" cy="52" r="7"/><circle cx="80" cy="52" r="7"/><circle cx="100" cy="52" r="7"/><circle cx="120" cy="52" r="7"/><circle cx="140" cy="52" r="7"/></g>
+          <line class="los" x1="10" y1="70" x2="190" y2="70"/>
+          <text class="soft" x="8" y="92">offense</text>
+          <g class="box"><circle cx="60" cy="88" r="8"/><circle cx="80" cy="88" r="8"/><circle cx="120" cy="88" r="8"/><circle cx="140" cy="88" r="8"/></g>
+          <circle class="dark" cx="100" cy="88" r="8"/>
+          <circle class="ylw" cx="100" cy="106" r="9"/><text class="soft" x="114" y="110">QB</text>
+          <g class="blu"><circle cx="88" cy="126" r="8"/><circle cx="112" cy="126" r="8"/></g>
+          <text class="soft" x="126" y="130">pushers</text>
+          <path class="ink" d="M88 158 v-20 m-5 8 l5 -8 l5 8"/><path class="ink" d="M112 158 v-20 m-5 8 l5 -8 l5 8"/>
+          <text class="soft" x="100" y="178" text-anchor="middle">push</text>
+        </svg>
+      </div>
+      <figcaption>A sneak with a shove. The data sees a run by the quarterback, under center, short to go. It cannot see the <span class="b">pushers</span>.</figcaption>
+    </figure>
+  </div>
+  <p style="margin-top:18px">With a yard or less to go, a team often calls a quarterback sneak. The quarterback takes the snap under center and pushes straight ahead behind the center.</p>
   <p>The tush push is a sneak with teammates lined up behind the quarterback who push him forward. The Philadelphia Eagles made it famous, and fans also call it the brotherly shove, after Philadelphia's nickname, the City of Brotherly Love. In May 2025 the team owners voted on a proposal to ban it: 22 for and 10 against. A rule change needs 24 of the 32 votes, so the ban failed and the play stayed legal.</p>
   <p>The play-by-play descriptions never name it, and that is episode 2's whole problem. The agent has to define the play from the columns it has: who carried the ball, the yards to go, shotgun or not, and the down. No column says who pushed. <a href="episode-2/definitions.html">Five definitions</a> shows which parts of a fan's definition the data can see.</p>
 </section>
@@ -143,6 +355,12 @@
   <h2>Converting</h2>
   <p>A short-yardage play is one with a yard or two to go. On such a play, <a class="term" href="#term-conversion" data-def="A play converted when it gained the first down or scored. The rate is converted plays divided by plays.">converted</a> means the play gained the first down or scored a touchdown. The conversion rate is converted plays divided by plays, so 70 conversions in 100 plays is a rate of 70 percent.</p>
   <p>To compare two groups of plays, the site subtracts one group's rate from the other's and calls the result the gap, in points. Here "points" means percentage points: a rate of 70 percent against a rate of 60 percent is a gap of 10 points. That is not a gap of 10 percent, since 10 is one sixth of 60.</p>
+  <p style="margin-top:18px">The episode pages draw every comparison the same way. Here is episode 2's main one, read from <a href="episode-2/season-sheet-2021-2025.html">its five-season sheet</a>:</p>
+  <div class="field" role="img" aria-label="Five seasons, all downs: the defined play converted 78.3 percent, every other rush at that distance 70.0 percent, a gap of 8.3 points">
+    <div class="gap" style="left:70%;width:8.3%"></div>
+    <div class="mk least" style="left:70%"><b>70.0%</b></div><div class="mk most" style="left:78.3%"><b>78.3%</b></div>
+  </div>
+  <p class="fieldkey"><i class="y">78.3%</i> is the defined play, the tush push as the agent wrote it down, in 1,472 plays from 2021 through 2025. <i class="b">70.0%</i> is every other rush with one yard or less to go, 6,282 plays. The hatched band between them is the gap, 8.3 points. The scale runs from 0 to 100 percent, with a tick every 10.</p>
 </section>
 
 <section id="kicking" data-nav="Kicking">
@@ -154,23 +372,104 @@
     <div><b>Kickoff</b><span>It starts each half and follows every touchdown and field goal: one team kicks the ball off a tee, deep to the other, which catches it and runs it back.</span></div>
     <div><b>Punt</b><span>On fourth down, the punter drops the ball and kicks it before it lands, to send it far down the field.</span></div>
   </div>
+  <figure class="dg wide">
+    <svg viewBox="0 0 600 196" role="img" aria-label="How a field goal is measured: the line of scrimmage at the 30-yard line, the kick spot 7 yards behind it, 30 yards to the goal line, and 10 yards of end zone to the goal posts, 47 yards in all.">
+      <text class="soft" x="10" y="40">kick spot</text>
+      <text x="146" y="40">Line of scrimmage, the 30</text>
+      <text x="540" y="40" text-anchor="end">goal posts</text>
+      <rect class="box" x="40" y="60" width="500" height="80"/>
+      <rect class="faint" x="440" y="60" width="100" height="80"/>
+      <g class="rule"><line x1="240" y1="61" x2="240" y2="139"/><line x1="340" y1="61" x2="340" y2="139"/></g>
+      <line class="ink" x1="440" y1="58" x2="440" y2="142"/>
+      <g class="soft"><text class="soft" x="240" y="128" text-anchor="middle">20</text><text class="soft" x="340" y="128" text-anchor="middle">10</text></g>
+      <text class="soft" transform="translate(495 100) rotate(90)" text-anchor="middle">END ZONE</text>
+      <line class="edge" x1="140" y1="52" x2="140" y2="148"/><line class="los" x1="140" y1="52" x2="140" y2="148"/>
+      <line class="edge" x1="540" y1="52" x2="540" y2="148"/>
+      <circle class="ylw" cx="70" cy="100" r="7"/>
+      <path class="ink" d="M70 156 v8 h470 v-8"/>
+      <text class="big" x="305" y="188" text-anchor="middle">47 yards: 7 back, 30 to the goal line, 10 of end zone</text>
+    </svg>
+    <figcaption>Where the distance comes from. The holder sets the ball 7 yards behind the line of scrimmage, and the posts stand at the back of the end zone, so a kick from the 30-yard line is a 47-yard field goal. The same arithmetic makes an extra point, snapped from the 15, a 33-yard kick.</figcaption>
+  </figure>
 </section>
 
 <section id="season" data-nav="The season">
   <h2>The season</h2>
   <p>The NFL has 32 teams. Each plays 17 regular-season games over 18 weeks, with one week off, from September to early January. Then 14 teams, seven from each of the league's two conferences, play a knockout tournament, the playoffs, which ends with the Super Bowl in February. A season is named for the year it starts, so the 2025 season's Super Bowl was played in February 2026.</p>
+  <figure class="dg wide">
+    <svg viewBox="0 0 600 112" role="img" aria-label="The season as 22 weeks: weeks 1 to 18 are the regular season, September to January; weeks 19 to 22 are the playoffs, ending with the Super Bowl in February.">
+      <text x="14" y="24">Regular season, weeks 1 to 18</text>
+      <text x="586" y="24" text-anchor="end">Playoffs, 19 to 22</text>
+      <g class="box"><rect x="14" y="36" width="24" height="36"/><rect x="40" y="36" width="24" height="36"/><rect x="66" y="36" width="24" height="36"/><rect x="92" y="36" width="24" height="36"/><rect x="118" y="36" width="24" height="36"/><rect x="144" y="36" width="24" height="36"/><rect x="170" y="36" width="24" height="36"/><rect x="196" y="36" width="24" height="36"/><rect x="222" y="36" width="24" height="36"/><rect x="248" y="36" width="24" height="36"/><rect x="274" y="36" width="24" height="36"/><rect x="300" y="36" width="24" height="36"/><rect x="326" y="36" width="24" height="36"/><rect x="352" y="36" width="24" height="36"/><rect x="378" y="36" width="24" height="36"/><rect x="404" y="36" width="24" height="36"/><rect x="430" y="36" width="24" height="36"/><rect x="456" y="36" width="24" height="36"/></g>
+      <g class="blu"><rect x="482" y="36" width="24" height="36"/><rect x="508" y="36" width="24" height="36"/><rect x="534" y="36" width="24" height="36"/></g>
+      <rect class="ylw" x="560" y="36" width="24" height="36"/>
+      <g class="in"><text class="in" x="26" y="59">1</text><text class="in" x="52" y="59">2</text><text class="in" x="78" y="59">3</text><text class="in" x="104" y="59">4</text><text class="in" x="130" y="59">5</text><text class="in" x="156" y="59">6</text><text class="in" x="182" y="59">7</text><text class="in" x="208" y="59">8</text><text class="in" x="234" y="59">9</text><text class="in" x="260" y="59">10</text><text class="in" x="286" y="59">11</text><text class="in" x="312" y="59">12</text><text class="in" x="338" y="59">13</text><text class="in" x="364" y="59">14</text><text class="in" x="390" y="59">15</text><text class="in" x="416" y="59">16</text><text class="in" x="442" y="59">17</text><text class="in" x="468" y="59">18</text><text class="in" x="494" y="59">19</text><text class="in" x="520" y="59">20</text><text class="in" x="546" y="59">21</text><text class="in" x="572" y="59">22</text></g>
+      <g class="soft"><text class="soft" x="26" y="96" text-anchor="middle">Sep</text><text class="soft" x="130" y="96" text-anchor="middle">Oct</text><text class="soft" x="234" y="96" text-anchor="middle">Nov</text><text class="soft" x="364" y="96" text-anchor="middle">Dec</text><text class="soft" x="468" y="96" text-anchor="middle">Jan</text><text class="soft" x="572" y="96" text-anchor="middle">Feb</text></g>
+    </svg>
+    <figcaption>The season in weeks, as the <code>week</code> column counts them. Each team plays 17 of the 18 regular-season weeks and sits out one. The <span class="b">blue</span> weeks are the playoff rounds, and the <span class="y">yellow</span> one is the Super Bowl. The months are approximate: the season opens the week after Labor Day.</figcaption>
+  </figure>
   <p>The site's data holds the seasons 2021 to 2025, all complete, and the 2026 season so far. The 2026 numbers change as games are played. The <code>week</code> column is the schedule week: 1 to 18 in the regular season, and 19 to 22 for the four rounds of the playoffs. The <code>season_type</code> column says regular season or playoffs, and the agent can filter on it.</p>
 </section>
 
 <section id="who" data-nav="Who is who">
   <h2>Who is who</h2>
+  <figure class="dg wide">
+    <svg viewBox="0 0 600 236" role="img" aria-label="Eleven players on each side at the snap. Offense: five linemen with the center in the middle, a tight end beside them, three wide receivers spread wide, the quarterback behind the center, and a running back behind him. Defense: four linemen across from the offensive line, three linebackers behind them, two cornerbacks across from the wide receivers, and two safeties deep.">
+      <text class="soft" x="12" y="40">DEFENSE</text>
+      <text class="soft" x="12" y="196">OFFENSE</text>
+      <g class="gray"><circle cx="200" cy="22" r="10"/><circle cx="400" cy="22" r="10"/></g>
+      <g class="in"><text class="in" x="200" y="26">S</text><text class="in" x="400" y="26">S</text></g>
+      <text class="soft" x="300" y="27" text-anchor="middle">safeties</text>
+      <g class="gray"><circle cx="240" cy="52" r="10"/><circle cx="300" cy="52" r="10"/><circle cx="360" cy="52" r="10"/></g>
+      <g class="in"><text class="in" x="240" y="56">LB</text><text class="in" x="300" y="56">LB</text><text class="in" x="360" y="56">LB</text></g>
+      <text class="soft" x="300" y="78" text-anchor="middle">linebackers</text>
+      <g class="gray"><circle cx="255" cy="94" r="10"/><circle cx="285" cy="94" r="10"/><circle cx="315" cy="94" r="10"/><circle cx="345" cy="94" r="10"/></g>
+      <g class="in"><text class="in" x="255" y="98">DE</text><text class="in" x="285" y="98">DT</text><text class="in" x="315" y="98">DT</text><text class="in" x="345" y="98">DE</text></g>
+      <text class="soft" x="370" y="99">defensive line</text>
+      <g class="gray"><circle cx="70" cy="94" r="10"/><circle cx="530" cy="94" r="10"/></g>
+      <g class="in"><text class="in" x="70" y="98">CB</text><text class="in" x="530" y="98">CB</text></g>
+      <text class="soft" x="86" y="99">cornerback</text><text class="soft" x="514" y="99" text-anchor="end">cornerback</text>
+      <line class="los" x1="20" y1="114" x2="580" y2="114"/>
+      <g class="box"><circle cx="240" cy="138" r="10"/><circle cx="270" cy="138" r="10"/><circle cx="330" cy="138" r="10"/><circle cx="360" cy="138" r="10"/><circle cx="400" cy="138" r="10"/><circle cx="70" cy="138" r="10"/><circle cx="150" cy="138" r="10"/><circle cx="530" cy="138" r="10"/></g>
+      <circle class="dark" cx="300" cy="138" r="10"/>
+      <g class="in"><text class="in" x="240" y="142">T</text><text class="in" x="270" y="142">G</text><text class="in w" x="300" y="142">C</text><text class="in" x="330" y="142">G</text><text class="in" x="360" y="142">T</text><text class="in" x="400" y="142">TE</text><text class="in" x="70" y="142">WR</text><text class="in" x="150" y="142">WR</text><text class="in" x="530" y="142">WR</text></g>
+      <text class="soft" x="300" y="166" text-anchor="middle">the offensive line: tackle, guard, center, guard, tackle</text>
+      <circle class="ylw" cx="300" cy="186" r="10"/><text class="soft" x="318" y="191">quarterback</text>
+      <circle class="box" cx="300" cy="218" r="10"/><text class="soft" x="318" y="223">running back</text>
+    </svg>
+    <figcaption>One common lineup at the snap, the offense moving up the page: 11 on each side. The <span class="y">yellow</span> circle is the quarterback, under center here. The letters are the position names below. Most plays start from something like this, and the data records none of it beyond the <code>shotgun</code> column.</figcaption>
+  </figure>
+  <h3>Offense</h3>
   <div class="rows">
-    <div><b>Quarterback</b><span>Takes the snap, throws the passes, and runs the offense. The data has no position column, so the site treats the <a class="term" href="#term-primary-passer" data-def="The player with the most pass attempts for his team in that game: the quarterback, as the data can see him.">primary passer</a>, the player with the most pass attempts for his team in that game, as the quarterback.</span></div>
-    <div><b>Running backs</b><span>Line up behind the quarterback and carry the ball on most runs.</span></div>
-    <div><b>Offensive line</b><span>The five players at the front who block, with the center in the middle.</span></div>
-    <div><b>Receivers</b><span>Wide receivers and tight ends, who run down the field to catch passes. Tight ends also block.</span></div>
-    <div><b>The defense</b><span>Eleven players whose job is to tackle the ball carrier, stop passes, and take the ball away.</span></div>
+    <div><b>Quarterback (QB)</b><span>Takes the snap, throws the passes, and runs the offense. The data has no position column, so the site treats the <a class="term" href="#term-primary-passer" data-def="The player with the most pass attempts for his team in that game: the quarterback, as the data can see him.">primary passer</a>, the player with the most pass attempts for his team in that game, as the quarterback.</span></div>
+    <div><b>Running back (RB)</b><span>Lines up behind the quarterback and carries the ball on most runs. Also catches short passes and blocks.</span></div>
+    <div><b>Wide receivers (WR)</b><span>Line up wide, run down the field, and catch passes. Two or three are on the field for most plays.</span></div>
+    <div><b>Tight end (TE)</b><span>Lines up beside the line. Part blocker, part receiver.</span></div>
+    <div><b>Offensive line (T, G, C)</b><span>The five players at the front who block: two tackles outside, two guards inside, and the center in the middle, who snaps the ball. They never carry it.</span></div>
+  </div>
+  <h3>Defense</h3>
+  <div class="rows">
+    <div><b>Defensive line (DE, DT)</b><span>The players across from the offensive line: defensive ends outside and defensive tackles inside. They push into the offense to stop runs at the line and to reach the quarterback before he throws, a sack.</span></div>
+    <div><b>Linebackers (LB)</b><span>A few yards behind the line. They tackle runners who get through, cover short passes, and sometimes rush the quarterback too.</span></div>
+    <div><b>Cornerbacks (CB)</b><span>Line up across from the wide receivers and follow them, to knock the pass away or catch it themselves, an interception.</span></div>
+    <div><b>Safeties (S)</b><span>The deepest two, the last line against a long pass or a runner who breaks free. The word is also the name of a 2-point score, which is a different thing.</span></div>
+    <div><b>Defensive backs</b><span>The cornerbacks and safeties together. On a down where a pass is likely, a defense often swaps a linebacker or a lineman for a fifth defensive back, the nickel, or a sixth, the dime.</span></div>
+  </div>
+  <h3>Special teams</h3>
+  <p>The units on the field for kicks: kickoffs, punts, field goals, and extra points. They are mostly backups and specialists, and a game has 20 or so of their plays.</p>
+  <div class="rows">
+    <div><b>Kicker (K)</b><span>Kicks field goals, extra points, and kickoffs. Episode 3's argument, "Kickers are too good now," is about this one player.</span></div>
+    <div><b>Punter (P)</b><span>Punts on fourth down, and often holds for field goals.</span></div>
+    <div><b>Long snapper and holder</b><span>The long snapper sends the ball back about 7 yards for a kick and about 15 for a punt. The holder catches the snap and sets the ball upright for a field goal or an extra point.</span></div>
+    <div><b>Returner</b><span>Catches a punt or a kickoff and runs it back up the field. He can also signal a fair catch, which ends the play where he catches it.</span></div>
+    <div><b>Coverage and blocking</b><span>The other players on a kick: on the kicking team they run down the field to tackle the returner, and on the receiving team they block for him.</span></div>
+  </div>
+  <h3>Coaches and officials</h3>
+  <div class="rows">
     <div><b>Head coach</b><span>Runs the team on game day and makes the big calls, among them whether to punt, kick a field goal, or go for it on fourth down.</span></div>
+    <div><b>Offensive coordinator</b><span>Designs the offense and usually calls its plays, one at a time, into the quarterback's helmet radio before each snap. Some head coaches call the plays themselves.</span></div>
+    <div><b>Defensive coordinator</b><span>Designs the defense and calls its plays the same way, choosing who is on the field and what each player covers or rushes.</span></div>
+    <div><b>Special teams coordinator</b><span>Runs the kicking units: who is on the field for each kick and what they do.</span></div>
     <div><b>Referee</b><span>Leads the officials, who place the ball after each play, measure for first downs, and call penalties.</span></div>
   </div>
 </section>
@@ -207,29 +506,69 @@
 
 <section id="glossary" data-nav="Glossary">
   <h2>Glossary</h2>
-  <p>The words above, in one place, as this site uses them. The episode pages have their own lists for the words each count uses.</p>
+  <p>The words above, in one place, as this site uses them, grouped by topic and alphabetical inside each group. The episode pages have their own lists for the words each count uses.</p>
+  <h3>The field and the clock</h3>
   <div class="rows">
-    <div id="term-snap"><b>Snap</b><span>The start of every play: the center passes the ball back between his legs to the quarterback.</span></div>
-    <div id="term-down"><b>Down</b><span>One try. The offense gets four downs to gain 10 yards. The <code>down</code> column holds 1 to 4.</span></div>
-    <div id="term-yards-to-go"><b>Yards to go</b><span>The distance from the line of scrimmage to the line to gain. "Third and 2" is third down with 2 yards to go. The column is <code>ydstogo</code>.</span></div>
-    <div id="term-line-to-gain"><b>Line to gain</b><span>The spot the offense has to reach for a new first down, 10 yards from where the current first down started, or the goal line when that is closer.</span></div>
-    <div id="term-first-down"><b>First down</b><span>The first of a new set of four tries. A play that gains the yards to go earns one; the <code>first_down</code> column is 1 when it did.</span></div>
+    <div id="term-end-zone"><b>End zone</b><span>The 10-yard area past each goal line. Getting the ball into it is a touchdown. The goal posts stand on its back line.</span></div>
+    <div id="term-halftime"><b>Halftime</b><span>The break after the second quarter. Episode 1 uses the score at halftime as a filter.</span></div>
+    <div id="term-line-of-scrimmage"><b>Line of scrimmage</b><span>The spot where the ball sits before a play, and the line across the field that neither team may cross until the snap.</span></div>
+    <div id="term-overtime"><b>Overtime</b><span>Extra time when the score is tied after four quarters. A regular-season game can still end in a tie after it; a playoff game cannot.</span></div>
+    <div id="term-yard-line"><b>Yard line</b><span>How a spot on the field is named: the 25-yard line is 25 yards from the nearer goal line, so every number from 1 to 49 appears twice, once on each side of the 50. The <code>yardline_100</code> column counts from the end zone the offense is going for.</span></div>
+  </div>
+  <h3>Downs and plays</h3>
+  <div class="rows">
     <div id="term-conversion"><b>Conversion</b><span>On a short-yardage play, gaining the first down or scoring a touchdown. The conversion rate is converted plays divided by plays.</span></div>
-    <div id="term-rush"><b>Rush</b><span>A run: a player carries the ball forward instead of throwing it.</span></div>
+    <div id="term-down"><b>Down</b><span>One try. The offense gets four downs to gain 10 yards. The <code>down</code> column holds 1 to 4.</span></div>
+    <div id="term-drive"><b>Drive</b><span>One team's run of plays with the ball, from where it got it to where it scored or gave it up.</span></div>
+    <div id="term-first-down"><b>First down</b><span>The first of a new set of four tries. A play that gains the yards to go earns one; the <code>first_down</code> column is 1 when it did.</span></div>
+    <div id="term-goal-to-go"><b>Goal to go</b><span>A down where the line to gain is the goal line itself, because it is closer than 10 yards. The <code>goal_to_go</code> column is 1.</span></div>
+    <div id="term-going-for-it"><b>Going for it</b><span>Using the fourth down to try for the yards instead of punting or kicking a field goal. Fall short and the other team takes the ball where the play ended.</span></div>
+    <div id="term-line-to-gain"><b>Line to gain</b><span>The spot the offense has to reach for a new first down, 10 yards from where the current first down started, or the goal line when that is closer.</span></div>
+    <div id="term-snap"><b>Snap</b><span>The start of every play: the center passes the ball back between his legs to the quarterback.</span></div>
+    <div id="term-turnover"><b>Turnover</b><span>The offense loses the ball to the defense: a pass the defense catches (an interception), or a ball the carrier drops and the defense recovers (a fumble). Failing on fourth down is a turnover on downs.</span></div>
+    <div id="term-yards-to-go"><b>Yards to go</b><span>The distance from the line of scrimmage to the line to gain. "Third and 2" is third down with 2 yards to go. The column is <code>ydstogo</code>.</span></div>
+  </div>
+  <h3>Runs, passes, and where the quarterback stands</h3>
+  <div class="rows">
     <div id="term-pass"><b>Pass</b><span>A forward throw by the quarterback to a teammate, who has to catch it before it touches the ground.</span></div>
-    <div id="term-under-center"><b>Under center</b><span>The quarterback stands right behind the center and takes the ball from his hands. In the data, <code>shotgun</code> is 0.</span></div>
+    <div id="term-rush"><b>Rush</b><span>A run: a player carries the ball forward instead of throwing it.</span></div>
+    <div id="term-rush-share"><b>Rush share</b><span>A team's runs divided by its runs plus passes, for one game or part of one. Episode 1's measure of how much a team ran.</span></div>
     <div id="term-shotgun"><b>Shotgun</b><span>The quarterback stands a few yards back and the ball is snapped to him through the air. In the data, <code>shotgun</code> is 1.</span></div>
     <div id="term-sneak"><b>Sneak</b><span>With a yard or less to go, the quarterback takes the snap under center and pushes straight ahead.</span></div>
     <div id="term-tush-push"><b>Tush push</b><span>A sneak with teammates behind the quarterback pushing him forward, also called the brotherly shove. The data never names it, so episode 2's agent defines it from the columns.</span></div>
-    <div id="term-quarterback"><b>Quarterback</b><span>The player who takes the snap, throws the passes, and runs the offense.</span></div>
-    <div id="term-primary-passer"><b>Primary passer</b><span>The quarterback as the data can see him: the player with the most pass attempts for his team in that game. The data has no position column.</span></div>
-    <div id="term-touchdown"><b>Touchdown</b><span>The ball carried into the end zone or caught there. Worth 6 points, plus a try for 1 or 2 more.</span></div>
-    <div id="term-field-goal"><b>Field goal</b><span>A kick between the goal posts at the back of the end zone. Worth 3 points.</span></div>
+    <div id="term-under-center"><b>Under center</b><span>The quarterback stands right behind the center and takes the ball from his hands. In the data, <code>shotgun</code> is 0.</span></div>
+  </div>
+  <h3>Scoring and kicking</h3>
+  <div class="rows">
+    <div id="term-extra-point"><b>Extra point</b><span>The 1-point kick after a touchdown, snapped from the 15-yard line, about 33 yards.</span></div>
+    <div id="term-field-goal"><b>Field goal</b><span>A kick between the goal posts at the back of the end zone. Worth 3 points. Its distance is the yards to the goal line, plus 7 for the spot of the kick, plus 10 for the end zone.</span></div>
+    <div id="term-kickoff"><b>Kickoff</b><span>The kick off a tee that starts each half and follows every score. The other team catches it and runs it back, and its drive starts where the runner is stopped.</span></div>
     <div id="term-punt"><b>Punt</b><span>A kick on fourth down, dropped from the hands, that sends the ball far down the field to the other team.</span></div>
-    <div id="term-turnover"><b>Turnover</b><span>The offense loses the ball to the defense: a pass the defense catches (an interception), or a ball the carrier drops and the defense recovers (a fumble). Failing on fourth down is a turnover on downs.</span></div>
-    <div id="term-halftime"><b>Halftime</b><span>The break after the second quarter. Episode 1 uses the score at halftime as a filter.</span></div>
-    <div id="term-regular-season"><b>Regular season</b><span>The 17 games each team plays over 18 weeks, September to early January. In the data, <code>season_type</code> is REG.</span></div>
+    <div id="term-safety-score"><b>Safety (the score)</b><span>Two points for the defense, for tackling the ball carrier in his own end zone.</span></div>
+    <div id="term-touchdown"><b>Touchdown</b><span>The ball carried into the end zone or caught there. Worth 6 points, plus a try for 1 or 2 more.</span></div>
+    <div id="term-two-point-try"><b>Two-point try</b><span>After a touchdown, one play from the 2-yard line instead of the kick. Reach the end zone and it is worth 2.</span></div>
+  </div>
+  <h3>People</h3>
+  <div class="rows">
+    <div id="term-coordinators"><b>Coordinators</b><span>The three assistant coaches who run the offense, the defense, and the special teams, and usually call their plays.</span></div>
+    <div id="term-cornerback"><b>Cornerback</b><span>A defender who lines up across from a wide receiver and follows him on passes.</span></div>
+    <div id="term-defensive-line"><b>Defensive line</b><span>The defenders across from the offensive line: ends outside, tackles inside. They stop runs at the line and rush the quarterback.</span></div>
+    <div id="term-head-coach"><b>Head coach</b><span>Runs the team and makes the fourth-down call.</span></div>
+    <div id="term-linebacker"><b>Linebacker</b><span>A defender a few yards behind the line, who tackles runners, covers short passes, and sometimes rushes.</span></div>
+    <div id="term-offensive-line"><b>Offensive line</b><span>The five blockers at the front: two tackles, two guards, and the center, who snaps the ball.</span></div>
+    <div id="term-primary-passer"><b>Primary passer</b><span>The quarterback as the data can see him: the player with the most pass attempts for his team in that game. The data has no position column.</span></div>
+    <div id="term-quarterback"><b>Quarterback</b><span>The player who takes the snap, throws the passes, and runs the offense.</span></div>
+    <div id="term-receivers"><b>Receivers</b><span>The players who catch passes: wide receivers, who line up wide, and tight ends, who line up beside the line and block too.</span></div>
+    <div id="term-running-back"><b>Running back</b><span>The player behind the quarterback who carries the ball on most runs.</span></div>
+    <div id="term-safety-position"><b>Safety (the position)</b><span>One of the two deepest defenders, the last line against a long pass or a runner who breaks free.</span></div>
+    <div id="term-special-teams"><b>Special teams</b><span>The units on the field for kicks: the kicker, the punter, the long snapper, the holder, the returner, and the players who cover or block.</span></div>
+  </div>
+  <h3>The season and the data</h3>
+  <div class="rows">
+    <div id="term-play"><b>Play</b><span>One snap, from the ball's movement to the whistle. One row in the data, with its one-line description.</span></div>
     <div id="term-playoffs"><b>Playoffs</b><span>The knockout tournament of 14 teams after the regular season, ending with the Super Bowl in February. In the data, <code>season_type</code> is POST.</span></div>
+    <div id="term-regular-season"><b>Regular season</b><span>The 17 games each team plays over 18 weeks, September to early January. In the data, <code>season_type</code> is REG.</span></div>
+    <div id="term-season"><b>Season</b><span>One year of games, named for the year it starts. The site holds 2021 through 2025 complete, and 2026 as it is played.</span></div>
     <div id="term-week"><b>Week</b><span>The schedule week: 1 to 18 in the regular season, 19 to 22 in the playoffs.</span></div>
   </div>
 </section>
