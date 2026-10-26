@@ -63,5 +63,12 @@ these choices, and says which. A rejected entry is not a definition.
 
 ## Entries
 
-None yet. The first, `tush-push`, is written on air on October 26, 2026, and
-committed here afterward.
+| Entry | Written | Plain words |
+|---|---|---|
+| [`tush-push`](tush-push.json) | 2026-10-26, by the analyst, episode 2, on air | The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down. |
+
+The entry is committed exactly as the agent wrote it on air on October 26, 2026,
+in the run `episode-2/examples/04-run-on-screen.txt` shows. Three rehearsal runs
+had chosen two or fewer yards to go; the agent on air chose one yard or less, and
+that is the definition every later ruling cites. A different definition is a new
+entry with a new name.

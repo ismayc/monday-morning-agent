@@ -68,6 +68,8 @@ const byTeamByYear = years.map(y => ({ year: y, out: run(['--play', PLAY, '--sea
 
 const first = answers[0].out
 const dict = first.dictionary
+// The all-downs caption names the entry's distance (the on-air entry chose one yard, not two).
+answers[0].sub = `Every rush with ${dict.rules.yardsToGoMax === 1 ? 'one yard or less' : `${dict.rules.yardsToGoMax} or fewer yards`} to go, the defined play against the rest.`
 const latest = first.coverage.latestGameDate || ''
 const longDate = (iso) => iso ? new Date(iso + 'T12:00:00').toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' }) : ''
 const weeks = Object.entries(first.coverage.weeksBySeason).map(([s, w]) => `${s}: ${w}`).join('; ')

@@ -51,7 +51,7 @@ One agent, one read-only data tool, every filter shown. Everything is in `episod
 - **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-1/map.html
 - **Five meanings of the claim, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-1/meanings.html
 - **The words the count uses (team-game, rush share, gap, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-1/#terms
-- **The answer, with evidence:** [five seasons](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2021-2025.html) and [this season](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2026.html)
+- **Appendix, the season sheets (not reached on air):** [five seasons](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2021-2025.html) and [this season](https://ismayc.github.io/monday-morning-agent/episode-1/season-sheet-2026.html)
 
 ### The kit
 
@@ -183,13 +183,13 @@ written entry, and every ruling cites the entry it used. Everything else is in
 ### The pages
 
 - **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-2/
-- **Change the definition of the play yourself, nothing to install:** the explorer page, published after the episode airs on October 26, 2026 (its 54 definitions give the answer away)
+- **Change the definition of the play yourself, nothing to install:** https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html
 - **How the tool works, the dictionary included:** https://ismayc.github.io/monday-morning-agent/episode-2/tool.html
 - **Where we are, the episode in eight parts:** https://ismayc.github.io/monday-morning-agent/episode-2/map.html
 - **Five definitions of the tush push, one per keypress:** https://ismayc.github.io/monday-morning-agent/episode-2/definitions.html
 - **The words (the defined play, primary passer, entry, cite, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-2/#terms
 - **The dictionary, the definitions the agent measures with:** [`dictionary/`](dictionary/)
-- **The answer, with evidence:** two season sheets, published after the episode airs on October 26, 2026
+- **Appendix, the season sheets (not reached on air):** [five seasons](https://ismayc.github.io/monday-morning-agent/episode-2/season-sheet-2021-2025.html) and [this season](https://ismayc.github.io/monday-morning-agent/episode-2/season-sheet-2026.html)
 
 ### The kit
 
@@ -225,7 +225,7 @@ flowchart TB
 | `data/plays.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published, 31 columns with the play description last |
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made, from the raw seasons episode 1 downloads, so nothing is downloaded twice |
 | `build-explorer-data.mjs` | Writes the explorer page's 54 definitions into a scratch dictionary, measures each for seven sets of seasons, and saves the answers |
-| `examples/` | The search by name, the tool refusing with no entry, and the policy. The run from the episode, its rulings, and the entry the agent wrote are added after October 26, 2026 |
+| `examples/` | The search by name, the tool refusing with no entry, the policy, and from the episode on October 26, 2026: the run as it looked on screen, its ruling, the entry the agent wrote, and a claim it declined |
 | `rehearse.sh` | `entry`, `tool`, `claims`, `verify`, `freeze`, `reset`: the rehearsal beats as subcommands, all writing into `rehearsal-runs/`, never into `../dictionary` |
 | `show.sh` | The on-air commands, one word each: `search "<term>" [flags]`, `refuse`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"`. Each prints the real tool line before it runs it, and `ANALYST_DICT_DIR` passes through |
 
@@ -237,8 +237,8 @@ four rules the data can apply (who carried, the yards to go, shotgun or not, the
 what it is compared with, and what it cannot see. The agent may add an entry and may
 never change one; a different definition is a new entry with a new name. It sits at the
 root, not in `episode-2/`, because every later episode that measures a play cites it.
-Its [README](dictionary/README.md) gives the shape and every key. It is empty until the
-first entry, `tush-push`, is written on air on October 26, 2026.
+Its [README](dictionary/README.md) gives the shape and every key. Its first entry,
+`tush-push`, was written on air on October 26, 2026, and is committed as written.
 
 ### Run it
 
@@ -261,10 +261,29 @@ tool's refusal, writes the entry, measures with it, and cites it. Leave out
 
 ### What the numbers say
 
-The answer goes up after the episode airs on October 26, 2026, with the season sheets
-for five seasons and for this season, and the explorer page with the tool's numbers for
-54 definitions of the play. Unlike episode 1's, this explorer is held back: the right
-definition's gap is the answer.
+Measured with the entry the agent wrote on air (a run by the primary passer, one yard or
+less to go, under center, any down), the play converts more often than every other rush
+at that distance, and not only in Philadelphia. The agent's ruling on air: "The claim
+does not hold in its strong form: the defined play converted 8.3 points more often than
+other short-yardage rushes over five seasons and 7.8 points more without PHI, which is a
+real edge but not a gap that makes it a different kind of play."
+
+| 2021 to 2025 | The defined play | Every other rush at that distance | Gap |
+|---|---|---|---|
+| All downs | 78.3% of 1,472 | 70.0% of 6,282 | 8.3 points |
+| Third and fourth down | 82.9% of 1,149 | 70.1% of 3,515 | 12.8 |
+| Every team but the Eagles | 77.9% of 1,299 | 70.1% of 6,134 | 7.8 |
+| The Eagles only | 80.9% of 173 | 65.5% of 148 | 15.4 |
+
+All nine situations, with a verdict by a rule printed on the page, are on the
+[five-season sheet](https://ismayc.github.io/monday-morning-agent/episode-2/season-sheet-2021-2025.html),
+which ends with the ruling, and the
+[2026 sheet](https://ismayc.github.io/monday-morning-agent/episode-2/season-sheet-2026.html)
+asks the same questions of this season (through the October 25 games: 82.0% of 128
+against 67.7% of 477, a gap of 14.3 points). The episode did not reach the sheets on
+air, so the episode page carries them as an appendix. The tool's numbers for 54
+definitions of the play, this one among them, are on
+[the explorer page](https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html).
 
 ## Across the episodes
 
@@ -279,9 +298,8 @@ decision. The public data carries betting-line columns; neither episode's
 `.github/workflows/refresh-data.yml` is scheduled three times a night (GitHub starts
 scheduled workflows hours late, so one slot is not enough; the file says why). It
 re-downloads the seasons once, rebuilds episode 1's slim file, explorer answers, and
-plays-page data, then episode 2's plays file from the same downloads, and commits when
-the plays changed. Pull before you push. (It rebuilds episode 2's explorer answers too,
-but commits them only once the explorer page is published, after October 26, 2026.)
+plays-page data, then episode 2's plays file and explorer answers from the same
+downloads, and commits when the plays changed. Pull before you push.
 
 ### Data
 
@@ -296,7 +314,9 @@ on your own machine (the committed files are nflverse only, and episode 2's file
 ESPN fill at all). Measured on all 16 Week 4 games of 2026: the two sources agree on a
 team's runs and passes within three plays, and on rush share within 1.15 points.
 
-The site is `docs/`: the series page at the root and one folder per episode
+The site is `docs/`: the series page at the root, [the game explained](https://ismayc.github.io/monday-morning-agent/football.html)
+for people who have never watched American football (`docs/football.html`, linked from
+the top of the series page), and one folder per episode
 (`docs/episode-1/`, `docs/episode-2/`), all sharing `docs/sheet.css` and the icons. The link-preview images
 and the icons are rendered from the `og-image.html` beside each image and from
 `docs/apple-touch-icon.html`; each file's first

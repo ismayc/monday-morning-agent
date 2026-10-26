@@ -1,0 +1,57 @@
+<!doctype html><meta charset="utf-8"><title>Link preview source: the game, explained</title>
+<!-- Source for og-image-football.png (1200x630), the link preview of football.html. Re-render:
+     serve docs/ locally (python3 -m http.server 8745 -d docs), then with a throwaway profile:
+       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --user-data-dir=/tmp/og-profile \
+         --window-size=1200,630 --hide-scrollbars --virtual-time-budget=5000 \
+         --screenshot=og-image-football.png http://127.0.0.1:8745/og-image-football.html
+     Needs the network once, for the Barlow fonts. No statistics: the field is drawn like the
+     diagram on football.html, here a first down at the offense's own 25 with the line to
+     gain at the 35. -->
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="sheet.css">
+<style>
+  html,body{margin:0}
+  body{width:1200px;height:630px;overflow:hidden;position:relative}
+  .pad{position:absolute;inset:0;padding:38px 60px}
+  .who{font-family:var(--display);font-weight:600;font-size:30px;border-bottom:4px solid var(--ink);padding-bottom:10px;display:flex;justify-content:space-between}
+  .who span:last-child{font-weight:500}
+  h1{margin-top:22px;font-size:112px;max-width:none;line-height:.9;white-space:nowrap}
+  svg{display:block;margin-top:26px;width:1080px;height:auto}
+  .turf{fill:#fff;stroke:var(--ink);stroke-width:3}
+  .ez{fill:var(--faint)}
+  .yl{stroke:var(--rule);stroke-width:2}
+  .gl{stroke:var(--ink);stroke-width:2}
+  .num{font-family:var(--display);font-weight:600;font-size:22px;fill:var(--soft);text-anchor:middle}
+  .ezt{font-family:var(--display);font-weight:700;font-size:17px;fill:var(--ink);text-anchor:middle;letter-spacing:.06em}
+  .lab{font-family:var(--display);font-weight:700;font-size:22px;fill:var(--ink)}
+  .edge{stroke:var(--ink);stroke-width:9}
+  .los{stroke:var(--blue);stroke-width:5}
+  .ltg{stroke:var(--yellow);stroke-width:5}
+  .so{margin-top:14px;font-family:var(--display);font-weight:600;font-size:44px;line-height:1.1;max-width:none}
+  .so b{font-weight:700;background:var(--yellow);padding:0 6px}
+</style>
+<div class="pad">
+  <div class="who"><span>The Monday Morning Agent</span><span>American football, for people who have never watched it</span></div>
+  <h1>The game, explained.</h1>
+  <svg viewBox="0 0 600 157" aria-hidden="true">
+    <rect class="turf" x="1.5" y="30" width="597" height="100"/>
+    <rect class="ez" x="3" y="31.5" width="47" height="97"/>
+    <rect class="ez" x="550" y="31.5" width="47" height="97"/>
+    <g class="yl">
+      <line x1="100" y1="31" x2="100" y2="129"/><line x1="150" y1="31" x2="150" y2="129"/><line x1="200" y1="31" x2="200" y2="129"/><line x1="250" y1="31" x2="250" y2="129"/><line x1="300" y1="31" x2="300" y2="129"/>
+      <line x1="350" y1="31" x2="350" y2="129"/><line x1="400" y1="31" x2="400" y2="129"/><line x1="450" y1="31" x2="450" y2="129"/><line x1="500" y1="31" x2="500" y2="129"/>
+    </g>
+    <line class="gl" x1="50" y1="30" x2="50" y2="130"/><line class="gl" x1="550" y1="30" x2="550" y2="130"/>
+    <text class="ezt" transform="translate(32 80) rotate(-90)">END ZONE</text>
+    <text class="ezt" transform="translate(574 80) rotate(90)">END ZONE</text>
+    <g class="num"><text x="100" y="118">10</text><text x="150" y="118">20</text><text x="200" y="118">30</text><text x="250" y="118">40</text><text x="300" y="118">50</text><text x="350" y="118">40</text><text x="400" y="118">30</text><text x="450" y="118">20</text><text x="500" y="118">10</text></g>
+    <line class="edge" x1="175" y1="28" x2="175" y2="132"/><line class="los" x1="175" y1="28" x2="175" y2="132"/>
+    <line class="edge" x1="225" y1="28" x2="225" y2="132"/><line class="ltg" x1="225" y1="28" x2="225" y2="132"/>
+    <text class="lab" x="169" y="20" text-anchor="end">Line of scrimmage</text>
+    <text class="lab" x="231" y="20">Line to gain</text>
+    <path d="M175 140 v6 h50 v-6" stroke="#14171a" stroke-width="2.5" fill="none"/>
+    <text class="lab" x="238" y="150" style="font-size:16px">10 yards</text>
+  </svg>
+  <p class="so">Four tries to gain 10 yards. <b>Every try is one row in the data.</b></p>
+</div>

@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The game, explained: the Monday Morning Agent</title>
+<meta name="description" content="American football for people who have never watched it: how a game runs, what a down is, runs and passes, the tush push, kicking, and the season, then one real row of the play-by-play data behind the Monday Morning Agent, and a glossary.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="The game, explained: American football for people who have never watched it">
+<meta property="og:description" content="Just enough NFL football to follow the Monday Morning Agent's arguments and its data: downs, runs and passes, the tush push, kicking, the season, and one real row of play-by-play.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/football.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/og-image-football.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The game, explained. A football field with a blue line of scrimmage and a yellow line to gain 10 yards on. Four tries to gain 10 yards, and every try is one row in the data.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The game, explained: American football for people who have never watched it">
+<meta name="twitter:description" content="Just enough NFL football to follow the arguments and the data: downs, runs and passes, the tush push, kicking, and the season.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/og-image-football.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="sheet.css">
+<script src="sheet.js" defer></script>
+<style>
+  /* The field: 120 yards drawn at 5 units a yard, the two end zones shaded. The same two
+     colors as the charts: blue is where the play starts (the line of scrimmage), yellow is
+     the line to gain. Each colored line sits on a wider ink line so the yellow reads on white. */
+  h1.long { max-width: 22ch; }
+  .field-fig { margin: 22px 0 18px; }
+  .field-fig svg { display: block; width: 100%; height: auto; }
+  .field-fig .turf { fill: #fff; stroke: var(--ink); stroke-width: 3; }
+  .field-fig .ez { fill: var(--faint); }
+  .field-fig .yl { stroke: var(--rule); stroke-width: 2; }
+  .field-fig .gl { stroke: var(--ink); stroke-width: 2; }
+  .field-fig .num { font-family: var(--display); font-weight: 600; font-size: 20px; fill: var(--soft); text-anchor: middle; }
+  .field-fig .ezt { font-family: var(--display); font-weight: 700; font-size: 17px; fill: var(--ink); text-anchor: middle; letter-spacing: .06em; }
+  .field-fig .lab { font-family: var(--display); font-weight: 700; font-size: 19px; fill: var(--ink); }
+  .field-fig .edge { stroke: var(--ink); stroke-width: 9; }
+  .field-fig .los { stroke: var(--blue); stroke-width: 5; }
+  .field-fig .ltg { stroke: var(--yellow); stroke-width: 5; }
+  .field-fig .ink { stroke: var(--ink); stroke-width: 2.5; fill: none; }
+  @media (max-width: 640px) { .field-fig .lab, .field-fig .num { font-size: 24px; } .field-fig .ezt { font-size: 19px; } }
+  .field-fig figcaption { margin-top: 8px; font-size: 15.5px; color: var(--soft); max-width: 80ch; }
+  .field-fig figcaption .y { background: var(--yellow); color: var(--ink); padding: 0 5px; }
+  .field-fig figcaption .b { background: var(--blue); color: var(--ink); padding: 0 5px; }
+  /* One row of the data: the column name, its value, and what it says. */
+  .onerow { margin-top: 18px; }
+  .onerow td:first-child code { white-space: nowrap; }
+  .onerow td:nth-child(2) { font-family: var(--display); font-weight: 600; font-size: 19px; white-space: nowrap; }
+  .onerow tr.desc td:nth-child(2) { white-space: normal; font-family: var(--code); font-weight: 400; font-size: 15px; }
+  @media (max-width: 640px) {
+    .onerow, .onerow tbody, .onerow tr, .onerow td { display: block; }
+    .onerow thead { display: none; }
+    .onerow tr { display: grid; grid-template-columns: auto 1fr; gap: 0 12px; padding: 9px 0; border-bottom: 1px solid var(--rule); }
+    .onerow td { border: 0; padding: 0; }
+    .onerow td:last-child { grid-column: 1 / -1; font-size: 15.5px; color: var(--soft); margin-top: 2px; }
+    .onerow tr.desc td:nth-child(2) { grid-column: 1 / -1; margin-top: 4px; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <span>The Monday Morning Agent</span>
+  <nav><a href="./">The series</a><a href="football.html" aria-current="page">The game, explained</a><a href="episode-1/">Episode 1</a><a href="episode-2/">Episode 2</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<header>
+  <h1 class="long">American football, for people who have never watched it.</h1>
+  <p class="lead">Every argument on this site is about NFL football, and many of you watch from countries where "football" means a different game. This page gives you just enough of this one to follow the arguments and the data. The numbers themselves are on the episode pages.</p>
+</header>
+
+<section id="game" data-nav="The game">
+  <h2>The game in one minute</h2>
+  <p>Two teams have 11 players each on the field. One team has the ball, the offense, and tries to move it down a field 100 yards long and into the end zone, a 10-yard area at the far end. The other team, the defense, tries to stop it. When the offense scores or loses the ball, the teams swap roles.</p>
+  <p>A game is four quarters of 15 minutes of game clock. The clock stops often, for incomplete passes, timeouts, scores, and more, so a game takes about three hours in real time. Halftime comes after the second quarter. A game tied after four quarters goes to overtime.</p>
+  <div class="rows">
+    <div><b>Touchdown, 6 points</b><span>Carry the ball into the end zone, or catch a pass there. The scoring team then tries for 1 more point with a short kick, or 2 more points by running or passing into the end zone again from 2 yards out.</span></div>
+    <div><b>Field goal, 3 points</b><span>Kick the ball between the goal posts at the back of the end zone.</span></div>
+    <div><b>Safety, 2 points</b><span>Rare: the defense scores by tackling the ball carrier in his own end zone.</span></div>
+  </div>
+</section>
+
+<section id="downs" data-nav="Plays and downs">
+  <h2>Plays and downs</h2>
+  <p>The game is a series of separate plays. Each starts with a <a class="term" href="#term-snap" data-def="The start of every play: the center passes the ball back to the quarterback.">snap</a>, when the ball is passed back from the ground to start the action, and ends a few seconds later. Between the two teams, a game has about 130 to 160 plays, counting kicks.</p>
+  <p>The offense gets four tries, called <a class="term" href="#term-down" data-def="One try. The offense gets four to gain 10 yards.">downs</a>, to gain 10 yards. If it gains them, it gets a new first down and four more tries for the next 10 yards. If it falls short after four tries, the ball goes to the other team where the last play ended. The spot where a play starts is the line of scrimmage. The spot the offense has to reach is the <a class="term" href="#term-line-to-gain" data-def="The spot the offense must reach for a new first down, 10 yards from where the first down started.">line to gain</a>.</p>
+  <figure class="field-fig">
+    <svg viewBox="0 0 600 206" role="img" aria-label="A football field 100 yards long between the goal lines, with a 10-yard end zone at each end. The offense moves left to right. A blue line of scrimmage at its own 35-yard line, and a yellow line to gain 10 yards ahead, at its own 45.">
+      <rect class="turf" x="1.5" y="40" width="597" height="120"/>
+      <rect class="ez" x="3" y="41.5" width="47" height="117"/>
+      <rect class="ez" x="550" y="41.5" width="47" height="117"/>
+      <g class="yl">
+        <line x1="100" y1="41" x2="100" y2="159"/><line x1="150" y1="41" x2="150" y2="159"/><line x1="200" y1="41" x2="200" y2="159"/><line x1="250" y1="41" x2="250" y2="159"/><line x1="300" y1="41" x2="300" y2="159"/>
+        <line x1="350" y1="41" x2="350" y2="159"/><line x1="400" y1="41" x2="400" y2="159"/><line x1="450" y1="41" x2="450" y2="159"/><line x1="500" y1="41" x2="500" y2="159"/>
+      </g>
+      <line class="gl" x1="50" y1="40" x2="50" y2="160"/><line class="gl" x1="550" y1="40" x2="550" y2="160"/>
+      <text class="ezt" transform="translate(32 100) rotate(-90)">END ZONE</text>
+      <text class="ezt" transform="translate(574 100) rotate(90)">END ZONE</text>
+      <g class="num"><text x="100" y="146">10</text><text x="150" y="146">20</text><text x="200" y="146">30</text><text x="250" y="146">40</text><text x="300" y="146">50</text><text x="350" y="146">40</text><text x="400" y="146">30</text><text x="450" y="146">20</text><text x="500" y="146">10</text></g>
+      <line class="edge" x1="225" y1="38" x2="225" y2="162"/><line class="los" x1="225" y1="38" x2="225" y2="162"/>
+      <line class="edge" x1="275" y1="38" x2="275" y2="162"/><line class="ltg" x1="275" y1="38" x2="275" y2="162"/>
+      <text class="lab" x="219" y="28" text-anchor="end">Line of scrimmage</text>
+      <text class="lab" x="281" y="28">Line to gain</text>
+      <path class="ink" d="M225 167 v7 h50 v-7"/>
+      <text class="lab" x="250" y="200" text-anchor="middle">10 yards</text>
+      <text class="lab" x="335" y="192">Offense moves</text>
+      <path class="ink" d="M490 186 h80 m-12 -8 l12 8 l-12 8"/>
+    </svg>
+    <figcaption>A first down at the offense's own 35-yard line. The <span class="b">blue</span> line is where the play starts; the <span class="y">yellow</span> line is the line to gain, 10 yards on. The charts on the episode pages use the same two colors.</figcaption>
+  </figure>
+  <p>Fans say a down as two numbers. "Third and 2" means third down, with 2 yards to go to the line to gain. When the line to gain would be past the goal line, the yards to go are the yards to the end zone, and the down is "goal to go," as in "first and goal."</p>
+  <p>On fourth down most teams do not use the last try. They punt, kicking the ball far down the field, or, when close enough, kick a field goal. Trying for the yards instead is called going for it. Whether coaches should do it more often is episode 5's argument, "Coaches are cowards on fourth down."</p>
+  <p>A play ends when the ball carrier is tackled to the ground or goes out of bounds, when a pass hits the ground without a catch, or when someone scores. Each play is one row in the data.</p>
+</section>
+
+<section id="runs" data-nav="Runs and passes">
+  <h2>Runs and passes</h2>
+  <p>Every play from the offense starts when the center, the player in the middle of the line, snaps the ball to the quarterback. Then the offense has two choices.</p>
+  <div class="rows">
+    <div><b>A run, or rush</b><span>The quarterback hands the ball to a teammate, usually a running back, who carries it forward. Or the quarterback keeps it and runs himself.</span></div>
+    <div><b>A pass</b><span>The quarterback throws the ball forward to a teammate, who has to catch it before it touches the ground.</span></div>
+  </div>
+  <p style="margin-top:18px">Episode 1 tested "You have to establish the run": the belief that a team that runs the ball a lot early in a game goes on to win. To measure it, the site uses rush share, a team's runs divided by its runs plus passes. A team that ran 30 times and passed 30 times has a rush share of 50 percent.</p>
+</section>
+
+<section id="formation" data-nav="Under center">
+  <h2>Where the quarterback stands</h2>
+  <p>The quarterback takes the snap from one of two places. <a class="term" href="#term-under-center" data-def="The quarterback stands right behind the center and takes the ball from his hands. In the data: shotgun is 0.">Under center</a>, he stands right behind the center, hands under him, and the ball comes straight back into them. In the <a class="term" href="#term-shotgun" data-def="The quarterback stands a few yards back and the ball is snapped to him through the air. In the data: shotgun is 1.">shotgun</a>, he stands a few yards back and the ball is snapped to him through the air. The data has one column for this, named <code>shotgun</code>: 1 for shotgun and 0 otherwise. It is the only detail the data carries about where anyone lined up.</p>
+  <p>With a yard or less to go, a team often calls a quarterback sneak. The quarterback takes the snap under center and pushes straight ahead behind the center.</p>
+  <p>The tush push is a sneak with teammates lined up behind the quarterback who push him forward. The Philadelphia Eagles made it famous, and fans also call it the brotherly shove, after Philadelphia's nickname, the City of Brotherly Love. In May 2025 the team owners voted on a proposal to ban it: 22 for and 10 against. A rule change needs 24 of the 32 votes, so the ban failed and the play stayed legal.</p>
+  <p>The play-by-play descriptions never name it, and that is episode 2's whole problem. The agent has to define the play from the columns it has: who carried the ball, the yards to go, shotgun or not, and the down. No column says who pushed. <a href="episode-2/definitions.html">Five definitions</a> shows which parts of a fan's definition the data can see.</p>
+</section>
+
+<section id="converting" data-nav="Converting">
+  <h2>Converting</h2>
+  <p>A short-yardage play is one with a yard or two to go. On such a play, <a class="term" href="#term-conversion" data-def="A play converted when it gained the first down or scored. The rate is converted plays divided by plays.">converted</a> means the play gained the first down or scored a touchdown. The conversion rate is converted plays divided by plays, so 70 conversions in 100 plays is a rate of 70 percent.</p>
+  <p>To compare two groups of plays, the site subtracts one group's rate from the other's and calls the result the gap, in points. Here "points" means percentage points: a rate of 70 percent against a rate of 60 percent is a gap of 10 points. That is not a gap of 10 percent, since 10 is one sixth of 60.</p>
+</section>
+
+<section id="kicking" data-nav="Kicking">
+  <h2>Kicking</h2>
+  <p>Episode 3 takes on "Kickers are too good now." Four kinds of kick come up.</p>
+  <div class="rows">
+    <div><b>Field goal</b><span>The ball is snapped to a holder kneeling about 7 yards behind the line of scrimmage, who sets it upright on the ground for the kicker. The distance runs from the spot of the kick to the goal posts at the back of the end zone, so with the line of scrimmage at the 30-yard line the kick is about 47 yards.</span></div>
+    <div><b>Extra point</b><span>After a touchdown, the same kind of kick with the snap from the 15-yard line, about 33 yards, for 1 point.</span></div>
+    <div><b>Kickoff</b><span>It starts each half and follows every touchdown and field goal: one team kicks the ball off a tee, deep to the other, which catches it and runs it back.</span></div>
+    <div><b>Punt</b><span>On fourth down, the punter drops the ball and kicks it before it lands, to send it far down the field.</span></div>
+  </div>
+</section>
+
+<section id="season" data-nav="The season">
+  <h2>The season</h2>
+  <p>The NFL has 32 teams. Each plays 17 regular-season games over 18 weeks, with one week off, from September to early January. Then 14 teams, seven from each of the league's two conferences, play a knockout tournament, the playoffs, which ends with the Super Bowl in February. A season is named for the year it starts, so the 2025 season's Super Bowl was played in February 2026.</p>
+  <p>The site's data holds the seasons 2021 to 2025, all complete, and the 2026 season so far. The 2026 numbers change as games are played. The <code>week</code> column is the schedule week: 1 to 18 in the regular season, and 19 to 22 for the four rounds of the playoffs. The <code>season_type</code> column says regular season or playoffs, and the agent can filter on it.</p>
+</section>
+
+<section id="who" data-nav="Who is who">
+  <h2>Who is who</h2>
+  <div class="rows">
+    <div><b>Quarterback</b><span>Takes the snap, throws the passes, and runs the offense. The data has no position column, so the site treats the <a class="term" href="#term-primary-passer" data-def="The player with the most pass attempts for his team in that game: the quarterback, as the data can see him.">primary passer</a>, the player with the most pass attempts for his team in that game, as the quarterback.</span></div>
+    <div><b>Running backs</b><span>Line up behind the quarterback and carry the ball on most runs.</span></div>
+    <div><b>Offensive line</b><span>The five players at the front who block, with the center in the middle.</span></div>
+    <div><b>Receivers</b><span>Wide receivers and tight ends, who run down the field to catch passes. Tight ends also block.</span></div>
+    <div><b>The defense</b><span>Eleven players whose job is to tackle the ball carrier, stop passes, and take the ball away.</span></div>
+    <div><b>Head coach</b><span>Runs the team on game day and makes the big calls, among them whether to punt, kick a field goal, or go for it on fourth down.</span></div>
+    <div><b>Referee</b><span>Leads the officials, who place the ball after each play, measure for first downs, and call penalties.</span></div>
+  </div>
+</section>
+
+<section id="row" data-nav="One row">
+  <h2>The data, in one row</h2>
+  <p>The nflverse project publishes every NFL play as one row with 372 columns. Each episode keeps only the columns its question needs, 18 in episode 1 and 31 in episode 2, and none of the betting columns. Here is one real row from episode 2's file, with 17 of its 31 columns: the Eagles at the Kansas City Chiefs, week 2 of the 2025 regular season.</p>
+  <div class="onerow">
+    <table>
+      <thead><tr><th>Column</th><th>Value</th><th>What it says</th></tr></thead>
+      <tbody>
+        <tr><td><code>season</code></td><td>2025</td><td>The season, named for the year it started.</td></tr>
+        <tr><td><code>season_type</code></td><td>REG</td><td>Regular season, not playoffs.</td></tr>
+        <tr><td><code>week</code></td><td>2</td><td>The schedule week.</td></tr>
+        <tr><td><code>home_team</code></td><td>KC</td><td>The home team, the Chiefs.</td></tr>
+        <tr><td><code>away_team</code></td><td>PHI</td><td>The visiting team, the Eagles.</td></tr>
+        <tr><td><code>posteam</code></td><td>PHI</td><td>The team with the ball.</td></tr>
+        <tr><td><code>qtr</code></td><td>1</td><td>The first quarter.</td></tr>
+        <tr><td><code>down</code></td><td>3</td><td>Third down.</td></tr>
+        <tr><td><code>ydstogo</code></td><td>1</td><td>One yard to go: third and 1.</td></tr>
+        <tr><td><code>yardline_100</code></td><td>43</td><td>Yards from the end zone the offense is going for.</td></tr>
+        <tr><td><code>shotgun</code></td><td>0</td><td>Not shotgun: the quarterback was under center.</td></tr>
+        <tr><td><code>play_type</code></td><td>run</td><td>A run, not a pass.</td></tr>
+        <tr><td><code>rusher_player_name</code></td><td>J.Hurts</td><td>Who carried the ball: Jalen Hurts, the Eagles' quarterback.</td></tr>
+        <tr><td><code>yards_gained</code></td><td>2</td><td>Two yards, one more than he needed.</td></tr>
+        <tr><td><code>first_down</code></td><td>1</td><td>The play gained a first down, so it converted.</td></tr>
+        <tr><td><code>touchdown</code></td><td>0</td><td>No score.</td></tr>
+        <tr class="desc"><td><code>desc</code></td><td>(3:44) 1-J.Hurts up the middle to KC 41 for 2 yards (35-J.Watson; 27-C.Conner).</td><td>The game clock, the player's jersey number and name, where he ran, where the ball ended up, and, in parentheses, the defenders who made the tackle.</td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p style="margin-top:18px">Read across, the row says: third and 1 at the Chiefs' 43-yard line, the quarterback under center ran up the middle for 2 yards and a first down. That fits every clause of episode 2's definition. Nothing in the row says whether teammates pushed him.</p>
+</section>
+
+<section id="glossary" data-nav="Glossary">
+  <h2>Glossary</h2>
+  <p>The words above, in one place, as this site uses them. The episode pages have their own lists for the words each count uses.</p>
+  <div class="rows">
+    <div id="term-snap"><b>Snap</b><span>The start of every play: the center passes the ball back between his legs to the quarterback.</span></div>
+    <div id="term-down"><b>Down</b><span>One try. The offense gets four downs to gain 10 yards. The <code>down</code> column holds 1 to 4.</span></div>
+    <div id="term-yards-to-go"><b>Yards to go</b><span>The distance from the line of scrimmage to the line to gain. "Third and 2" is third down with 2 yards to go. The column is <code>ydstogo</code>.</span></div>
+    <div id="term-line-to-gain"><b>Line to gain</b><span>The spot the offense has to reach for a new first down, 10 yards from where the current first down started, or the goal line when that is closer.</span></div>
+    <div id="term-first-down"><b>First down</b><span>The first of a new set of four tries. A play that gains the yards to go earns one; the <code>first_down</code> column is 1 when it did.</span></div>
+    <div id="term-conversion"><b>Conversion</b><span>On a short-yardage play, gaining the first down or scoring a touchdown. The conversion rate is converted plays divided by plays.</span></div>
+    <div id="term-rush"><b>Rush</b><span>A run: a player carries the ball forward instead of throwing it.</span></div>
+    <div id="term-pass"><b>Pass</b><span>A forward throw by the quarterback to a teammate, who has to catch it before it touches the ground.</span></div>
+    <div id="term-under-center"><b>Under center</b><span>The quarterback stands right behind the center and takes the ball from his hands. In the data, <code>shotgun</code> is 0.</span></div>
+    <div id="term-shotgun"><b>Shotgun</b><span>The quarterback stands a few yards back and the ball is snapped to him through the air. In the data, <code>shotgun</code> is 1.</span></div>
+    <div id="term-sneak"><b>Sneak</b><span>With a yard or less to go, the quarterback takes the snap under center and pushes straight ahead.</span></div>
+    <div id="term-tush-push"><b>Tush push</b><span>A sneak with teammates behind the quarterback pushing him forward, also called the brotherly shove. The data never names it, so episode 2's agent defines it from the columns.</span></div>
+    <div id="term-quarterback"><b>Quarterback</b><span>The player who takes the snap, throws the passes, and runs the offense.</span></div>
+    <div id="term-primary-passer"><b>Primary passer</b><span>The quarterback as the data can see him: the player with the most pass attempts for his team in that game. The data has no position column.</span></div>
+    <div id="term-touchdown"><b>Touchdown</b><span>The ball carried into the end zone or caught there. Worth 6 points, plus a try for 1 or 2 more.</span></div>
+    <div id="term-field-goal"><b>Field goal</b><span>A kick between the goal posts at the back of the end zone. Worth 3 points.</span></div>
+    <div id="term-punt"><b>Punt</b><span>A kick on fourth down, dropped from the hands, that sends the ball far down the field to the other team.</span></div>
+    <div id="term-turnover"><b>Turnover</b><span>The offense loses the ball to the defense: a pass the defense catches (an interception), or a ball the carrier drops and the defense recovers (a fumble). Failing on fourth down is a turnover on downs.</span></div>
+    <div id="term-halftime"><b>Halftime</b><span>The break after the second quarter. Episode 1 uses the score at halftime as a filter.</span></div>
+    <div id="term-regular-season"><b>Regular season</b><span>The 17 games each team plays over 18 weeks, September to early January. In the data, <code>season_type</code> is REG.</span></div>
+    <div id="term-playoffs"><b>Playoffs</b><span>The knockout tournament of 14 teams after the regular season, ending with the Super Bowl in February. In the data, <code>season_type</code> is POST.</span></div>
+    <div id="term-week"><b>Week</b><span>The schedule week: 1 to 18 in the regular season, 19 to 22 in the playoffs.</span></div>
+  </div>
+</section>
+
+<section id="next" data-nav="Where next">
+  <h2>Where to go next</h2>
+  <p>The <a href="./">series page</a> lists all eight arguments. <a href="episode-1/">Episode 1</a> tests "You have to establish the run," and <a href="episode-2/">episode 2</a> defines the tush push before it judges it. Every play comes from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, published under a CC BY 4.0 license.</p>
+</section>
+
+<footer><p>The Monday Morning Agent is an O'Reilly live series hosted by Chester Ismay. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0.</p></footer>
+
+</main>
+</body>
+</html>

@@ -1,0 +1,14 @@
+{
+  "name": "tush-push",
+  "written": "2026-10-26",
+  "by": "the analyst, episode 2",
+  "plainWords": "The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down.",
+  "rules": {
+    "rusher": "primary-passer",
+    "yardsToGoMax": 1,
+    "formation": "under-center",
+    "downs": "any"
+  },
+  "comparedWith": "every other rush with the same yards to go",
+  "cannotSee": "who pushed the runner or whether anyone pushed at all, so it counts every under-center quarterback sneak, pushed or not, and it cannot tell a sneak from a designed quarterback run off tackle"
+}

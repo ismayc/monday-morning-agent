@@ -1,0 +1,263 @@
+$ ./run-analyst.sh "Ban the tush push."
+run-analyst.sh: claim: Ban the tush push.
+run-analyst.sh: dictionary: .../dictionary (0 entries)
+
+==============================================================================
+[0:07] TOOL CALL 1
+  node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 31 of 372 columns kept, no betting columns                         265,845
+   1. seasons: 2021-2026                                                                       265,845
+   2. season type: regular season and playoffs                                                 265,845
+   3. weeks: all                                                                               265,845
+
+  1,530 games in the plays kept (latest game 2026-10-25; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22; 2026: 1-7)
+RESULT
+  season   plays searched   descriptions containing "tush push"
+  2021             49,922            0
+  2022             49,434            0
+  2023             49,665            0
+  2024             49,492            0
+  2025             48,771            0
+  2026             18,561            0
+  all             265,845            0
+
+  NO MATCH: not one of the 265,845 descriptions contains "tush push".
+
+==============================================================================
+[0:07] TOOL CALL 2
+  node ./query-plays.mjs --play tush-push --seasons 2021-2025
+------------------------------------------------------------------------------
+  REFUSED OR FAILED: Exit code 65
+
+==============================================================================
+[0:14] WRITE 3: wrote dictionary/tush-push.json
+------------------------------------------------------------------------------
+{
+  "name": "tush-push",
+  "written": "2026-10-26",
+  "by": "the analyst, episode 2",
+  "plainWords": "The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down.",
+  "rules": {
+    "rusher": "primary-passer",
+    "yardsToGoMax": 1,
+    "formation": "under-center",
+    "downs": "any"
+  },
+  "comparedWith": "every other rush with the same yards to go",
+  "cannotSee": "who pushed the runner or whether anyone pushed at all, so it counts every under-center quarterback sneak, pushed or not, and it cannot tell a sneak from a designed quarterback run off tackle"
+}
+
+==============================================================================
+[0:15] TOOL CALL 4
+  node ./query-plays.mjs --play tush-push --seasons 2021-2025
+------------------------------------------------------------------------------
+DEFINITION, FROM THE DICTIONARY
+  dictionary/tush-push.json, written 2026-10-26 by the analyst, episode 2
+  "The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down."
+  rules: the runner is the team's primary passer that game (the player with its most pass attempts); not from shotgun; any down; 1 or fewer yards to go
+  compared with: every other rush with the same yards to go
+  cannot see: who pushed the runner or whether anyone pushed at all, so it counts every under-center quarterback sneak, pushed or not, and it cannot tell a sneak from a designed quarterback run off tackle
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 31 of 372 columns kept, no betting columns                         265,845
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. team with the ball: any                                                                  247,284
+   5. downs: any                                                                               247,284
+   6. a rush by a team with the ball (passes, kicks, punts, penalties that wiped the play out, kneel-downs, and two-point tries out)    74,608
+   7. yards to go: 1 or fewer (the definition's distance)                                        7,754
+   8. goal to go: any                                                                            7,754
+
+  1,424 games in the plays kept (latest game 2026-02-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22)
+  1,472 plays match the definition; 6,282 are every other rush in the same situation
+RESULT
+  group                            plays   converted       rate
+  1  the defined play               1,472       1,152      78.3%
+  2  other short-yardage rushes     6,282       4,396      70.0%
+  gap, the defined play minus the others: 8.3 points
+
+==============================================================================
+[0:18] TOOL CALL 5
+  node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by team
+------------------------------------------------------------------------------
+DEFINITION, FROM THE DICTIONARY
+  dictionary/tush-push.json, written 2026-10-26 by the analyst, episode 2
+  "The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down."
+  rules: the runner is the team's primary passer that game (the player with its most pass attempts); not from shotgun; any down; 1 or fewer yards to go
+  compared with: every other rush with the same yards to go
+  cannot see: who pushed the runner or whether anyone pushed at all, so it counts every under-center quarterback sneak, pushed or not, and it cannot tell a sneak from a designed quarterback run off tackle
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 31 of 372 columns kept, no betting columns                         265,845
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. team with the ball: any                                                                  247,284
+   5. downs: any                                                                               247,284
+   6. a rush by a team with the ball (passes, kicks, punts, penalties that wiped the play out, kneel-downs, and two-point tries out)    74,608
+   7. yards to go: 1 or fewer (the definition's distance)                                        7,754
+   8. goal to go: any                                                                            7,754
+
+  1,424 games in the plays kept (latest game 2026-02-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22)
+  1,472 plays match the definition; 6,282 are every other rush in the same situation
+RESULT
+  group                            plays   converted       rate
+  1  the defined play               1,472       1,152      78.3%
+  2  other short-yardage rushes     6,282       4,396      70.0%
+  gap, the defined play minus the others: 8.3 points
+
+BY TEAM (teams with 10 or more plays matching the definition)
+  team      defined plays   rate      other rushes   rate        gap
+  PHI                 173    80.9%            148    65.5%     15.4
+  BUF                 128    82.8%            174    72.4%     10.4
+  SF                   74    90.5%            209    69.9%     20.7
+  DEN                  72    86.1%            168    64.9%     21.2
+  LAC                  59    79.7%            191    61.8%     17.9
+  NYG                  59    81.4%            155    71.6%      9.7
+  NE                   58    75.9%            180    69.4%      6.4
+  JAX                  57    77.2%            197    65.5%     11.7
+  LV                   52    76.9%            169    62.7%     14.2
+  CIN                  52    78.8%            189    68.8%     10.1
+  PIT                  51    82.4%            190    73.2%      9.2
+  CHI                  45    73.3%            165    72.7%      0.6
+  CLE                  45    77.8%            192    69.3%      8.5
+  NYJ                  43    65.1%            145    69.7%     -4.5
+  MIN                  42    83.3%            164    64.0%     19.3
+  TEN                  40    92.5%            170    74.1%     18.4
+  DAL                  39    74.4%            227    74.4%     -0.1
+  ARI                  38    60.5%            225    71.1%    -10.6
+  IND                  37    75.7%            217    71.4%      4.2
+  NO                   36    69.4%            189    70.4%     -0.9
+  HOU                  33    81.8%            182    65.9%     15.9
+  LA                   29    72.4%            236    72.0%      0.4
+  SEA                  29    72.4%            174    74.1%     -1.7
+  CAR                  27    74.1%            186    68.3%      5.8
+  BAL                  25    76.0%            242    76.4%     -0.4
+  WAS                  25    64.0%            264    69.3%     -5.3
+  ATL                  24    62.5%            216    65.3%     -2.8
+  GB                   22    81.8%            212    72.2%      9.6
+  TB                   20    85.0%            229    71.2%     13.8
+  DET                  17    70.6%            228    71.9%     -1.3
+  MIA                  13    46.2%            189    66.7%    -20.5
+
+==============================================================================
+[0:18] TOOL CALL 6
+  node ./query-plays.mjs --play tush-push --seasons 2026
+------------------------------------------------------------------------------
+DEFINITION, FROM THE DICTIONARY
+  dictionary/tush-push.json, written 2026-10-26 by the analyst, episode 2
+  "The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down."
+  rules: the runner is the team's primary passer that game (the player with its most pass attempts); not from shotgun; any down; 1 or fewer yards to go
+  compared with: every other rush with the same yards to go
+  cannot see: who pushed the runner or whether anyone pushed at all, so it counts every under-center quarterback sneak, pushed or not, and it cannot tell a sneak from a designed quarterback run off tackle
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 31 of 372 columns kept, no betting columns                         265,845
+   1. seasons: 2026                                                                             18,561
+   2. season type: regular season and playoffs                                                  18,561
+   3. weeks: all                                                                                18,561
+   4. team with the ball: any                                                                   18,561
+   5. downs: any                                                                                18,561
+   6. a rush by a team with the ball (passes, kicks, punts, penalties that wiped the play out, kneel-downs, and two-point tries out)     5,488
+   7. yards to go: 1 or fewer (the definition's distance)                                          605
+   8. goal to go: any                                                                              605
+
+  106 games in the plays kept (latest game 2026-10-25; weeks 2026: 1-7)
+  128 plays match the definition; 477 are every other rush in the same situation
+RESULT
+  group                            plays   converted       rate
+  1  the defined play                 128         105      82.0%
+  2  other short-yardage rushes       477         323      67.7%
+  gap, the defined play minus the others: 14.3 points
+
+==============================================================================
+[0:22] TOOL CALL 7
+  node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI
+------------------------------------------------------------------------------
+DEFINITION, FROM THE DICTIONARY
+  dictionary/tush-push.json, written 2026-10-26 by the analyst, episode 2
+  "The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down."
+  rules: the runner is the team's primary passer that game (the player with its most pass attempts); not from shotgun; any down; 1 or fewer yards to go
+  compared with: every other rush with the same yards to go
+  cannot see: who pushed the runner or whether anyone pushed at all, so it counts every under-center quarterback sneak, pushed or not, and it cannot tell a sneak from a designed quarterback run off tackle
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 31 of 372 columns kept, no betting columns                         265,845
+   1. seasons: 2021-2025                                                                       247,284
+   2. season type: regular season and playoffs                                                 247,284
+   3. weeks: all                                                                               247,284
+   4. team with the ball: every team but PHI                                                   225,829
+   5. downs: any                                                                               225,829
+   6. a rush by a team with the ball (passes, kicks, punts, penalties that wiped the play out, kneel-downs, and two-point tries out)    71,649
+   7. yards to go: 1 or fewer (the definition's distance)                                        7,433
+   8. goal to go: any                                                                            7,433
+
+  1,424 games in the plays kept (latest game 2026-02-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22)
+  1,299 plays match the definition; 6,134 are every other rush in the same situation
+RESULT
+  group                            plays   converted       rate
+  1  the defined play               1,299       1,012      77.9%
+  2  other short-yardage rushes     6,134       4,299      70.1%
+  gap, the defined play minus the others: 7.8 points
+
+==============================================================================
+RULING
+==============================================================================
+**The claim:** Whether the tush push should be legal is a question about safety, fairness, and the game people want to watch, and the plays cannot settle it. The question I tested is whether the play converts so much more often than other short-yardage rushes that it is a different kind of play. For that to hold, the defined play would need a large conversion gap over other rushes at the same distance, and the gap would need to survive without the team that runs it most.
+
+**Definition used:** I wrote `tush-push` in this run, at `dictionary/tush-push.json`, "written 2026-10-26 by the analyst, episode 2". No entry was on file before it. A search for "tush push" across 2021-2026 (265,845 descriptions, regular season and playoffs) found 0 matches, so the play has no name in the data and the entry has to define it by situation.
+
+**Five seasons:** For 2021-2025, regular season and playoffs, all teams and downs, 1 or fewer yards to go: the defined play converted 78.3% of 1,472 plays vs other short-yardage rushes 70.0% of 6,282 plays, gap 8.3 points.
+The read that could prove it wrong is every team but PHI, because PHI ran the defined play most (173 plays). That gives 77.9% of 1,299 plays vs 70.1% of 6,134 plays, gap 7.8 points. The gap stays almost the same without the heaviest user.
+
+**This season:** For 2026, weeks 1-7, with the same filters: the defined play converted 82.0% of 128 plays vs other short-yardage rushes 67.7% of 477 plays, gap 14.3 points. The tool did not print a SMALL SAMPLE warning. But 128 plays is about a tenth of the five-season group, so a small number of conversions either way can move that rate by several points.
+
+**The gap between the two answers:** The 2026 gap (14.3 points on 128 plays) is larger than the five-season gap (8.3 points on 1,472 plays), but seven weeks of data cannot show that the difference is real and not chance.
+
+**Ruling:** The claim does not hold in its strong form: the defined play converted more often than other short-yardage rushes, by 8.3 points over five seasons and by 7.8 points without PHI, which is a real edge but not the size of gap that makes it a different kind of play.
+
+**What these plays cannot tell you:** They cannot show who pushed the runner or whether anyone pushed at all, so this entry counts every under-center sneak by the primary passer at 1 yard or less, and it cannot explain why the play converts.
+
+**Commands run:**
+node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+node ./query-plays.mjs --play tush-push --seasons 2021-2025
+node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by team
+node ./query-plays.mjs --play tush-push --seasons 2026
+node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI
+==============================================================================
+7 tool calls, 1 refused or failed, 31 seconds
+run-analyst.sh: ruling at rulings/ruling-2026-10-26-082753.md (425 words above the commands, limit 400)
+run-analyst.sh: OVER LIMIT: 425 words, the policy allows 400. Sending the ruling back once: shorten it.
+
+==============================================================================
+RULING
+==============================================================================
+**The claim:** Whether the tush push should be legal is a question about safety, fairness, and the game people want to watch, and the plays cannot settle it. I tested whether the play converts so much more often than other short-yardage rushes that it is a different kind of play. For that to hold, the defined play needs a large conversion gap over other rushes at the same distance, and the gap must survive without the team that runs it most.
+
+**Definition used:** I wrote `tush-push` in this run, at `dictionary/tush-push.json`, "written 2026-10-26 by the analyst, episode 2", and no entry was on file before it. A search for "tush push" across 2021-2026 (265,845 descriptions, regular season and playoffs) found 0 matches, so the play has no name in the data and the entry defines it by situation.
+
+**Five seasons:** For 2021-2025, regular season and playoffs, all teams and downs, 1 or fewer yards to go: the defined play converted 78.3% of 1,472 plays vs other short-yardage rushes 70.0% of 6,282 plays, gap 8.3 points.
+The read that could prove the claim wrong drops PHI, which ran the defined play most (173 plays): 77.9% of 1,299 plays vs 70.1% of 6,134 plays, gap 7.8 points, almost unchanged.
+
+**This season:** For 2026, weeks 1-7, with the same filters: the defined play converted 82.0% of 128 plays vs other short-yardage rushes 67.7% of 477 plays, gap 14.3 points. The tool printed no SMALL SAMPLE warning, but 128 plays is about a tenth of the five-season group, so a few conversions either way can move that rate by several points.
+
+**The gap between the two answers:** The 2026 gap (14.3 points on 128 plays) is larger than the five-season gap (8.3 points on 1,472 plays), but seven weeks of data cannot show that the difference is more than chance.
+
+**Ruling:** The claim does not hold in its strong form: the defined play converted 8.3 points more often than other short-yardage rushes over five seasons and 7.8 points more without PHI, which is a real edge but not a gap that makes it a different kind of play.
+
+**What these plays cannot tell you:** They cannot show who pushed the runner or whether anyone pushed at all, so this entry counts every under-center sneak by the primary passer at 1 yard or less, and it cannot explain why the play converts.
+
+**Commands run:**
+node ./query-plays.mjs --search "tush push" --seasons 2021-2026
+node ./query-plays.mjs --play tush-push --seasons 2021-2025
+node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by team
+node ./query-plays.mjs --play tush-push --seasons 2026
+node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI
+==============================================================================
+7 tool calls, 1 refused or failed, 17 seconds
+run-analyst.sh: shortened to 397 words above the commands, within the limit of 400; the first ruling is at rulings/ruling-2026-10-26-082753-first.md
+run-analyst.sh: NEW ENTRY: dictionary/tush-push.json, written by this run and accepted by the tool.
+run-analyst.sh: run page at rulings/run-2026-10-26-082753.html

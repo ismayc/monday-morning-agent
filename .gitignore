@@ -8,13 +8,6 @@ episode-*/data/espn*-slim.csv
 # what your own runs produce
 episode-*/rulings/
 episode-*/rehearsal-runs/
-# episode 2: held back until the episode has aired on October 26, 2026 (they give the
-# answer away); the after-show list in the private folder removes these lines
-episode-2/examples/04-run-on-screen.txt
-episode-2/examples/05-ruling.md
-episode-2/examples/06-ruling-declined-ban-and-prediction.md
-episode-2/examples/07-the-entry-as-written.json
-dictionary/*.json
 # the rehearsal walkthrough (the script as captions over the pages); built by the private
 # folder, never published
 docs/episode-2/walkthrough/
