@@ -1,0 +1,13 @@
+{
+  "name": "field-goal",
+  "kind": "kick",
+  "written": "2026-10-26",
+  "by": "Chester, before episode 3",
+  "plainWords": "Any field goal attempt, from the shortest on file to the longest.",
+  "rules": {
+    "distanceMin": 18,
+    "distanceMax": 70
+  },
+  "comparedWith": "nothing; every field goal attempt is in the defined group, so the other group is empty",
+  "cannotSee": "the wind, the surface, the snap and the hold, or whether a timeout was called to ice the kicker"
+}

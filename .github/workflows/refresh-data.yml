@@ -69,9 +69,14 @@ jobs:
       - name: Episode 2, measure every definition the explorer page can build
         run: cd episode-2 && node ./build-explorer-data.mjs
 
+      - name: Episode 3, rebuild its file from the same downloads
+        # Episode 3 reads 35 columns, episode 2's plus four about kicks, from the same
+        # raw files; nothing is downloaded twice.
+        run: cd episode-3 && node ./slim-data.mjs
+
       - name: Commit if the plays changed
         run: |
-          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json episode-2/data docs/episode-2/explorer-data.json; then
+          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json episode-2/data docs/episode-2/explorer-data.json episode-3/data; then
             echo "Nothing new since the last commit; nothing to push."
             exit 0
           fi
@@ -80,6 +85,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add episode-1/data/plays-slim.csv episode-1/data/plays-slim.meta.json docs/episode-1/explorer-data.json docs/episode-1/plays-data.json
           git add episode-2/data/plays.csv episode-2/data/plays.meta.json docs/episode-2/explorer-data.json
+          git add episode-3/data/plays.csv episode-3/data/plays.meta.json
           git commit -m "data: 2026 through $through"
           git pull --rebase origin main
           git push origin HEAD:main

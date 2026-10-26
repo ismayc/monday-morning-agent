@@ -1,0 +1,8 @@
+{
+  "name": "bad-chart",
+  "written": "2026-10-26",
+  "by": "Chester, for the refusal on air",
+  "question": "Are kickers making more of their long field goals than they used to?",
+  "tool": "episode-3/query-plays.mjs",
+  "command": "--trend field-goal --seasons 2023-2026"
+}
