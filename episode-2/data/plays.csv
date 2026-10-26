@@ -264511,6 +264511,166 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,7,2026_07_IND_MIN,2026-10-25,MIN,IND,MIN,IND,4,1,10,0,41,qb_kneel,1,0,1,0,0,0,0,00-0035228,K.Murray,,,-1,0,0,6,(1:08) 1-K.Murray kneels to IND 42 for -1 yards.
 2026,REG,7,2026_07_IND_MIN,2026-10-25,MIN,IND,MIN,IND,4,2,11,0,42,qb_kneel,1,0,1,0,0,0,0,00-0035228,K.Murray,,,-1,0,0,6,(:34) 1-K.Murray kneels to IND 43 for -1 yards.
 2026,REG,7,2026_07_IND_MIN,2026-10-25,MIN,IND,MIN,IND,4,,0,0,,,,,0,0,0,0,0,,,,,,,,6,END GAME
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,1,,0,0,,,,,0,0,0,0,0,,,,,,,,,GAME
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,5-J.Myers kicks 57 yards from SEA 35 to KC 8. 10-E.Johnson to KC 27 for 19 yards (24-R.Thomas; 85-I.Charles).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,1,10,0,73,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,6,0,0,0,(14:53) 15-P.Mahomes pass short right to 9-K.Walker to KC 33 for 6 yards (0-D.Lawrence).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,2,4,0,67,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,18,1,0,0,(14:18) (Shotgun) 15-P.Mahomes pass short left to 13-C.Allen to SEA 49 for 18 yards (39-T.Okada).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,1,10,0,49,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,2,0,0,0,(13:47) (Shotgun) 9-K.Walker up the middle to SEA 47 for 2 yards (91-B.Murphy; 0-D.Lawrence).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,2,8,0,47,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,1,0,0,0,"(13:11) (Shotgun) 52-C.Humphrey to KC 49 for -4 yards. FUMBLES, recovered by KC-15-P.Mahomes at KC 49. 15-P.Mahomes to KC 46 for -3 yards. Handoff to 9-K.Walker to SEA 46 for 8 yards (99-L.Williams; 29-J.Jobe). The penalty was assisted by replay."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,3,7,0,46,no_play,0,0,0,0,0,1,0,,,,,0,0,0,0,"(12:39) (Shotgun) 15-P.Mahomes pass short left to 9-K.Walker pushed ob at SEA 34 for 12 yards (13-E.Jones). PENALTY on KC-87-T.Kelce, Illegal Shift, 5 yards, enforced at SEA 46 - No Play."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,3,12,0,51,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,0,(12:09) (Shotgun) 15-P.Mahomes pass incomplete deep left to 87-T.Kelce.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,4,12,0,51,punt,0,0,0,0,0,0,0,,,,,0,0,0,0,"(12:04) 14-M.Araiza punts 37 yards to SEA 14, Center-41-J.Winchester, fair catch by 22-R.Shaheed."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,1,10,0,86,run,1,0,0,0,0,0,0,00-0038543,J.Smith-Njigba,,,5,0,0,0,(11:57) 11-J.Smith-Njigba right end to SEA 19 for 5 yards (20-N.Williams; 27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,2,5,0,81,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,0,0,0,0,(11:22) (Shotgun) 14-S.Darnold pass incomplete short middle to 11-J.Smith-Njigba (30-C.Roland-Wallace).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,3,5,0,81,pass,0,1,0,0,0,1,1,,,00-0034869,S.Darnold,9,1,0,0,"(11:17) (No Huddle, Shotgun) 14-S.Darnold pass short middle to 11-J.Smith-Njigba to SEA 28 for 9 yards (38-L.Sneed)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,1,10,0,72,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,5,0,0,0,(10:46) 23-E.Wilson left end to SEA 33 for 5 yards (32-N.Bolton; 56-G.Karlaftis).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,2,5,0,67,run,1,0,0,0,0,1,0,00-0038797,E.Wilson,,,4,0,0,0,(10:02) (Shotgun) 23-E.Wilson up the middle to SEA 37 for 4 yards (32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,3,1,0,63,run,1,0,0,0,0,0,0,00-0039793,A.Barner,,,2,1,0,0,(9:23) 74-J.Jones and 55-O.Oluwatimi reported in as eligible. Direct snap to 88-A.Barner. 88-A.Barner up the middle to SEA 39 for 2 yards (23-D.Tranquill).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,1,10,0,61,run,1,0,0,0,0,0,0,00-0039299,G.Holani,,,4,0,0,0,(8:40) 36-G.Holani up the middle to SEA 43 for 4 yards (43-J.Cochrane).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,2,6,0,57,run,1,0,0,0,0,0,0,00-0039299,G.Holani,,,-1,0,0,0,(8:02) 36-G.Holani right guard to SEA 42 for -1 yards (97-A.Gillotte).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,3,7,0,58,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,0,0,0,0,(7:22) (Shotgun) 14-S.Darnold pass incomplete short middle to 15-T.Horton (5-M.Delane).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,4,7,0,58,punt,0,0,0,0,0,0,0,,,,,0,0,0,0,"(7:18) 4-M.Dickson punts 48 yards to KC 10, Center-41-C.Stoll, fair catch by 81-N.Remigio."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,1,10,0,90,run,1,0,0,0,0,0,0,00-0038134,K.Walker,,,4,0,0,0,(7:12) 9-K.Walker right guard to KC 14 for 4 yards (91-B.Murphy; 90-J.Reed).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,2,6,0,86,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,7,1,0,0,(6:33) 15-P.Mahomes pass short left to 84-J.Watson to KC 21 for 7 yards (3-N.Emmanwori; 21-D.Witherspoon).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,1,10,0,79,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,6,0,0,0,(5:50) (Shotgun) 15-P.Mahomes pass short left to 83-N.Gray to KC 27 for 6 yards (13-E.Jones; 48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,2,4,0,73,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,7,1,0,0,(5:13) (Shotgun) 9-K.Walker left guard to KC 34 for 7 yards (90-J.Reed; 48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,1,10,0,66,run,1,0,0,0,0,0,0,00-0038134,K.Walker,,,-1,0,0,0,(4:37) 9-K.Walker right guard to KC 33 for -1 yards (48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,2,11,0,67,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,19,1,0,0,(4:00) (Shotgun) 15-P.Mahomes pass deep right to 83-N.Gray to SEA 48 for 19 yards (39-T.Okada).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,1,10,0,48,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,4,0,0,0,(3:19) (Shotgun) 9-K.Walker up the middle to SEA 44 for 4 yards (95-B.Pili; 48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,2,6,0,44,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,2,0,0,0,(2:43) (Shotgun) 15-P.Mahomes pass short right to 1-X.Worthy to SEA 42 for 2 yards (29-J.Jobe).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,3,4,0,42,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,0,(1:59) (Shotgun) 15-P.Mahomes pass incomplete deep right to 1-X.Worthy [58-D.Hall].
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,1,4,4,0,42,punt,0,0,0,0,0,0,0,,,,,0,0,0,0,"(1:54) 14-M.Araiza punts 35 yards to SEA 7, Center-41-J.Winchester, fair catch by 22-R.Shaheed."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,1,10,0,93,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,14,1,0,0,(1:48) 14-S.Darnold pass short left to 88-A.Barner to SEA 21 for 14 yards (43-J.Cochrane; 5-M.Delane).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,1,10,0,79,run,1,0,0,0,0,0,0,00-0037745,V.Jones,,,3,0,0,0,(1:09) 33-V.Jones left tackle to SEA 24 for 3 yards (97-A.Gillotte).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,2,7,0,76,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,0,(:26) 23-E.Wilson up the middle to SEA 27 for 3 yards (43-J.Cochrane).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,1,,0,0,,,,,0,0,0,0,0,,,,,,,,0,END QUARTER 1
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,4,0,73,no_play,0,0,0,0,0,1,0,,,,,0,0,0,0,"(15:00) (Shotgun) PENALTY on SEA-76-G.Zabel, False Start, 5 yards, enforced at SEA 27 - No Play."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,9,0,78,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,11,1,0,0,(15:00) (Shotgun) 14-S.Darnold pass short middle to 10-C.Kupp to SEA 33 for 11 yards (20-N.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,67,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,0,(14:28) 23-E.Wilson up the middle to SEA 36 for 3 yards (92-K.Tonga).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,7,0,64,no_play,0,0,0,0,0,1,0,,,,,0,0,0,0,"(13:53) (Shotgun) PENALTY on SEA-75-A.Bradford, False Start, 5 yards, enforced at SEA 36 - No Play."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,12,0,69,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,3,0,0,0,(13:35) (Shotgun) 14-S.Darnold pass short left to 22-R.Shaheed pushed ob at SEA 34 for 3 yards (5-M.Delane; 17-A.Gilman). The penalty was assisted by replay.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,9,0,66,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,10,1,0,0,(13:09) (Shotgun) 14-S.Darnold pass short right to 11-J.Smith-Njigba to SEA 44 for 10 yards (20-N.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,56,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,-2,0,0,0,(12:35) (Shotgun) 14-S.Darnold pass short left to 22-R.Shaheed to SEA 42 for -2 yards (30-C.Roland-Wallace).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,12,0,58,run,1,0,0,0,0,1,0,00-0038797,E.Wilson,,,5,0,0,0,(11:59) (Shotgun) 23-E.Wilson right guard to SEA 47 for 5 yards (32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,7,0,53,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,33,1,0,0,(11:19) (Shotgun) 14-S.Darnold pass short middle to 11-J.Smith-Njigba to KC 20 for 33 yards (20-N.Williams; 17-A.Gilman).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,20,run,1,0,0,0,0,0,0,00-0037745,V.Jones,,,11,1,0,0,(10:33) 33-V.Jones right end pushed ob at KC 9 for 11 yards (20-N.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,9,1,9,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,0,(9:54) 23-E.Wilson left guard to KC 6 for 3 yards (92-K.Tonga; 23-D.Tranquill).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,6,1,6,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,-1,0,0,0,"(9:14) (Shotgun) 14-S.Darnold pass short middle to 88-A.Barner to KC 7 for -1 yards (17-A.Gilman, 32-N.Bolton)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,7,1,7,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,0,0,0,0,(8:30) (Shotgun) 14-S.Darnold pass incomplete short middle to 11-J.Smith-Njigba [56-G.Karlaftis].
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,4,7,1,7,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,0,"(8:24) 5-J.Myers 25 yard field goal is GOOD, Center-41-C.Stoll, Holder-4-M.Dickson."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-3,5-J.Myers kicks 67 yards from SEA 35 to KC -2. 81-N.Remigio pushed ob at KC 42 for 44 yards (38-B.Russell).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,1,10,0,58,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,5,0,0,-3,(8:16) 15-P.Mahomes pass short left to 9-K.Walker to KC 47 for 5 yards (21-D.Witherspoon; 13-E.Jones).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,2,5,0,53,run,1,0,0,0,0,0,0,00-0038134,K.Walker,,,4,0,0,-3,(7:34) 9-K.Walker left end to SEA 49 for 4 yards (3-N.Emmanwori).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by KC at 06:53.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,3,1,0,49,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,0,0,0,-3,(6:53) 15-P.Mahomes pass incomplete short right to 9-K.Walker.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,4,1,0,49,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,3,1,0,-3,(6:49) (Shotgun) 9-K.Walker up the middle to SEA 46 for 3 yards (13-E.Jones; 3-N.Emmanwori).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,1,10,0,46,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-3,(6:13) (Shotgun) 15-P.Mahomes pass incomplete short right to 87-T.Kelce [99-L.Williams].
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,2,10,0,46,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-3,(6:09) (Shotgun) 15-P.Mahomes pass short left intended for 11-J.Royals INTERCEPTED by 39-T.Okada [3-N.Emmanwori] at SEA 34. 39-T.Okada to SEA 34 for no gain (11-J.Royals).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,66,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,6,0,0,3,(6:00) 23-E.Wilson right guard to SEA 40 for 6 yards (23-D.Tranquill; 32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,4,0,60,run,1,0,0,0,0,1,0,00-0038543,J.Smith-Njigba,,,8,1,0,3,(5:23) (Shotgun) 11-J.Smith-Njigba left end pushed ob at SEA 48 for 8 yards (21-J.Hicks).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,52,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,-3,0,0,3,(4:50) 23-E.Wilson up the middle to SEA 45 for -3 yards (92-K.Tonga).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,13,0,55,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,15,1,0,3,(4:08) (Shotgun) 14-S.Darnold pass short left to 23-E.Wilson ran ob at KC 40 for 15 yards (27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,40,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,-1,0,0,3,"(3:31) 23-E.Wilson up the middle to KC 41 for -1 yards (56-G.Karlaftis, 30-C.Roland-Wallace)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,11,0,41,run,1,0,0,0,0,1,0,00-0039299,G.Holani,,,5,0,0,3,(2:50) (Shotgun) 36-G.Holani right end to KC 36 for 5 yards (23-D.Tranquill; 20-N.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,6,0,36,run,1,0,0,0,1,1,1,00-0034869,S.Darnold,,,7,1,0,3,"(2:23) (No Huddle, Shotgun) 14-S.Darnold scrambles left end to KC 29 for 7 yards (5-M.Delane)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,29,run,1,0,0,0,0,0,0,00-0037745,V.Jones,,,1,0,0,3,(2:00) 33-V.Jones left end to KC 28 for 1 yard (32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by KC at 01:54.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,9,0,28,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,0,0,0,3,(1:54) 14-S.Darnold pass incomplete short right to 88-A.Barner (56-G.Karlaftis).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,9,0,28,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,28,1,1,3,"(1:49) (Shotgun) 14-S.Darnold pass deep left to 11-J.Smith-Njigba pushed ob at KC 1 for 27 yards (5-M.Delane). The Replay Official reviewed the runner was out of bounds ruling, and the play was REVERSED. (Shotgun) 14-S.Darnold pass deep left to 11-J.Smith-Njigba for 28 yards, TOUCHDOWN."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,9,"5-J.Myers extra point is GOOD, Center-41-C.Stoll, Holder-4-M.Dickson."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-10,"5-J.Myers kicks 65 yards from SEA 35 to end zone, Touchback to the KC 35."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,1,10,0,65,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-10,(1:44) (Shotgun) 15-P.Mahomes pass incomplete short right to 11-J.Royals.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,2,10,0,65,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-10,(1:41) (Shotgun) 15-P.Mahomes pass incomplete short middle to 87-T.Kelce.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,3,10,0,65,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,5,0,0,-10,(1:38) (Shotgun) 15-P.Mahomes pass short middle to 10-E.Johnson to KC 40 for 5 yards (91-B.Murphy).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by SEA at 01:29.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,4,5,0,60,punt,0,0,0,0,0,0,0,,,,,0,0,0,-10,"(1:29) 14-M.Araiza punts 56 yards to SEA 4, Center-41-J.Winchester. 22-R.Shaheed pushed ob at SEA 36 for 32 yards (83-N.Gray; 10-E.Johnson)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,64,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,21,1,0,10,(1:16) (Shotgun) 14-S.Darnold pass short middle to 11-J.Smith-Njigba to KC 43 for 21 yards (27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,43,pass,0,1,0,0,0,1,1,,,00-0034869,S.Darnold,9,0,0,10,"(:53) (No Huddle, Shotgun) 14-S.Darnold pass short left to 10-C.Kupp to KC 34 for 9 yards (38-L.Sneed). The penalty was assisted by replay. 10-second runoff."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,1,0,34,run,1,0,0,0,0,1,0,00-0039299,G.Holani,,,4,1,0,10,(:39) (Shotgun) 36-G.Holani right guard to KC 30 for 4 yards (23-D.Tranquill).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by SEA at 00:35.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,30,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,28,1,0,10,(:35) (Shotgun) 14-S.Darnold pass deep left to 11-J.Smith-Njigba ran ob at KC 2 for 28 yards.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,2,1,2,run,1,0,0,0,0,0,0,00-0039299,G.Holani,,,-1,0,0,10,"(:30) 36-G.Holani left guard to KC 3 for -1 yards (5-M.Delane, 23-D.Tranquill)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #3 by SEA at 00:23.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,3,1,3,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,0,0,0,10,(:23) (Shotgun) 14-S.Darnold pass short middle intended for 22-R.Shaheed INTERCEPTED by 20-N.Williams [56-G.Karlaftis] at KC -9. 20-N.Williams to SEA 44 for 65 yards (67-C.Cross).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,1,10,0,44,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,4,0,0,-10,(:07) (Shotgun) 9-K.Walker right end to SEA 40 for 4 yards (3-N.Emmanwori).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #3 by KC at 00:01.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,2,2,6,0,40,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,-10,"(:01) 7-H.Butker 58 yard field goal is No Good, Short, Center-41-J.Winchester, Holder-14-M.Araiza."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,2,,0,0,,,,,0,0,0,0,0,,,,,,,,,END QUARTER 2
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,10,7-H.Butker kicks 62 yards from KC 35 to SEA 3. 15-T.Horton to SEA 26 for 23 yards (31-J.Bassa).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,1,10,0,74,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,17,1,0,10,(14:54) 14-S.Darnold pass short right to 81-E.Saubert to SEA 43 for 17 yards (17-A.Gilman; 27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,1,10,0,57,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,2,0,0,10,(14:16) 23-E.Wilson up the middle to SEA 45 for 2 yards (97-A.Gillotte; 92-K.Tonga).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,2,8,0,55,run,1,0,0,0,0,1,0,00-0037745,V.Jones,,,-1,0,0,10,"(13:36) (Shotgun) 33-V.Jones right end to SEA 44 for -1 yards (20-N.Williams, 30-C.Roland-Wallace)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,3,9,0,56,run,1,0,0,0,1,1,0,00-0034869,S.Darnold,,,10,1,0,10,(12:55) (Shotgun) 14-S.Darnold scrambles right end to KC 46 for 10 yards (32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,1,10,0,46,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,0,0,0,10,(12:07) 14-S.Darnold pass incomplete short middle.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,2,10,0,46,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,0,0,0,10,(12:04) (Shotgun) 14-S.Darnold pass incomplete short left to 11-J.Smith-Njigba (5-M.Delane).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,3,10,0,46,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,12,1,0,10,(12:00) (Shotgun) 14-S.Darnold pass short right to 36-G.Holani to KC 34 for 12 yards (30-C.Roland-Wallace).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,1,10,0,34,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,10,(11:19) 23-E.Wilson right end to KC 31 for 3 yards (23-D.Tranquill; 32-N.Bolton). KC-32-N.Bolton was injured during the play.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,2,7,0,31,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,19,1,0,10,(10:46) 14-S.Darnold pass short left to 88-A.Barner to KC 12 for 19 yards (43-J.Cochrane; 27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,1,10,0,12,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,6,0,0,10,(10:03) 23-E.Wilson right tackle to KC 6 for 6 yards (23-D.Tranquill; 17-A.Gilman). ** Injury Update: KC-32-N.Bolton has returned to the game.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,2,4,0,6,run,1,0,0,0,0,0,0,00-0037745,V.Jones,,,-6,0,0,10,"(9:22) 33-V.Jones left end to KC 12 for -6 yards (32-N.Bolton, 5-M.Delane)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,3,10,0,12,no_play,0,0,0,0,0,1,0,,,,,0,0,0,10,"(8:37) (Shotgun) PENALTY on SEA, Delay of Game, 5 yards, enforced at KC 12 - No Play."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,3,15,0,17,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,0,0,0,10,(8:17) (Shotgun) 14-S.Darnold pass incomplete short left to 36-G.Holani.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,4,15,0,17,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,10,"(8:12) 5-J.Myers 35 yard field goal is GOOD, Center-41-C.Stoll, Holder-4-M.Dickson."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-13,5-J.Myers kicks 62 yards from SEA 35 to KC 3. 10-E.Johnson to KC 24 for 21 yards (52-P.O'Connell; 38-B.Russell).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,1,10,0,76,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,7,0,0,-13,(8:00) (Shotgun) 15-P.Mahomes pass short right to 1-X.Worthy pushed ob at KC 31 for 7 yards (20-J.Love).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,2,3,0,69,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,4,1,0,-13,(7:37) (Shotgun) 15-P.Mahomes pass short right to 87-T.Kelce to KC 35 for 4 yards (48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,1,10,0,65,run,1,0,0,0,0,0,0,00-0038134,K.Walker,,,2,0,0,-13,(7:03) 9-K.Walker right tackle to KC 37 for 2 yards (99-L.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,2,8,0,63,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-13,(6:25) (Shotgun) 15-P.Mahomes pass incomplete short left to 85-A.Armstrong. The incomplete pass was assisted by replay.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,3,8,0,63,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,7,0,0,-13,(6:22) (Shotgun) 15-P.Mahomes pass short right to 9-K.Walker pushed ob at KC 44 for 7 yards (39-T.Okada; 29-J.Jobe).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,3,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by SEA at 05:48.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,4,1,0,56,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,2,1,0,-13,(5:48) (Shotgun) 15-P.Mahomes pass short left to 1-X.Worthy to KC 46 for 2 yards (13-E.Jones).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,1,10,0,54,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,3,0,0,-13,(5:14) 15-P.Mahomes pass short right to 9-K.Walker pushed ob at KC 49 for 3 yards (21-D.Witherspoon).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,2,7,0,51,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-13,(4:40) (Shotgun) 15-P.Mahomes pass incomplete deep left to 1-X.Worthy [94-M.Morris].
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,3,7,0,51,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,18,1,0,-13,(4:35) (Shotgun) 15-P.Mahomes pass short right to 87-T.Kelce to SEA 33 for 18 yards (21-D.Witherspoon).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,1,10,0,33,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,2,0,0,-13,(4:00) (Shotgun) 9-K.Walker left end to SEA 31 for 2 yards (13-E.Jones).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,2,8,0,31,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,1,0,0,-13,(3:23) (Shotgun) 9-K.Walker up the middle to SEA 30 for 1 yard (48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,3,7,0,30,no_play,,,0,0,0,1,0,,,,,,,,-13,"(2:46) (Shotgun) 15-P.Mahomes pass short right to 9-K.Walker ran ob at SEA 15 for 15 yards (3-N.Emmanwori). Penalty on KC-73-J.Ezeudu, Offensive Holding, offsetting, enforced at SEA 30 - No Play. Penalty on SEA-7-U.Nwosu, Horse Collar Tackle, offsetting."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,3,7,0,30,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,-2,0,0,-13,"(2:16) (Shotgun) 15-P.Mahomes sacked at SEA 32 for -2 yards (58-D.Hall). FUMBLES (58-D.Hall) [58-D.Hall], touched at SEA 27, and recovers at SEA 32."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,3,4,9,0,32,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,-13,"(1:47) 7-H.Butker 50 yard field goal is GOOD, Center-41-J.Winchester, Holder-14-M.Araiza."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,10,7-H.Butker kicks 58 yards from KC 35 to SEA 7. 15-T.Horton to SEA 44 for 37 yards (7-H.Butker; 10-E.Johnson).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,1,10,0,56,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,10,(1:35) 23-E.Wilson right guard to SEA 47 for 3 yards (94-B.Eason; 56-G.Karlaftis).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,2,7,0,53,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,5,0,0,10,(1:01) (Shotgun) 14-S.Darnold pass short right to 11-J.Smith-Njigba to KC 48 for 5 yards (21-J.Hicks).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,3,2,0,48,no_play,0,0,0,0,0,1,0,,,,,0,0,0,10,"(:17) (Shotgun) PENALTY on SEA-61-J.Sundell, False Start, 5 yards, enforced at KC 48 - No Play."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,3,,0,0,,,,,0,0,0,0,0,,,,,,,,10,END QUARTER 3
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,3,7,0,53,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,2,0,0,10,(15:00) (Shotgun) 14-S.Darnold pass short right to 11-J.Smith-Njigba pushed ob at SEA 49 for 2 yards (51-R.Thomas).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,4,5,0,51,punt,0,0,0,0,0,0,0,,,,,0,0,0,10,"(14:23) 4-M.Dickson punts 38 yards to KC 13, Center-41-C.Stoll, fair catch by 81-N.Remigio."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,1,10,0,87,run,1,0,0,0,0,0,0,00-0038134,K.Walker,,,-1,0,0,-10,"(14:17) 9-K.Walker right tackle to KC 12 for -1 yards (99-L.Williams, 58-D.Hall)."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,2,11,0,88,run,1,0,0,0,1,1,0,00-0033873,P.Mahomes,,,5,0,0,-10,(13:43) (Shotgun) 15-P.Mahomes scrambles right end pushed ob at KC 17 for 5 yards (58-D.Hall).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,3,6,0,83,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,19,1,0,-10,(13:11) (Shotgun) 15-P.Mahomes pass short middle to 87-T.Kelce to KC 36 for 19 yards (13-E.Jones).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,1,10,0,64,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,19,1,0,-10,(12:27) 15-P.Mahomes pass deep middle to 83-N.Gray to SEA 45 for 19 yards (39-T.Okada; 48-T.Knight).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,1,10,0,45,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-10,(11:50) (Shotgun) 15-P.Mahomes pass incomplete deep right to 1-X.Worthy.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,2,10,0,45,no_play,0,0,0,0,0,1,0,,,,,0,0,0,-10,"(11:44) (Shotgun) 9-K.Walker left tackle to SEA 39 for 6 yards (7-U.Nwosu). PENALTY on KC-76-K.Suamataia, Offensive Holding, 10 yards, enforced at SEA 45 - No Play."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,2,20,0,55,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,12,0,0,-10,(11:22) (Shotgun) 15-P.Mahomes pass short right to 10-E.Johnson to SEA 43 for 12 yards (13-E.Jones).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,3,8,0,43,run,1,0,0,0,1,1,0,00-0033873,P.Mahomes,,,9,1,0,-10,(10:34) (Shotgun) 15-P.Mahomes scrambles left end ran ob at SEA 34 for 9 yards (28-N.Pritchett).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,1,10,0,34,run,1,0,0,0,0,1,0,00-0038134,K.Walker,,,4,0,0,-10,(9:58) (Shotgun) 9-K.Walker right tackle to SEA 30 for 4 yards (13-E.Jones; 39-T.Okada).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,2,6,0,30,pass,0,1,0,0,0,0,0,,,00-0033873,P.Mahomes,3,0,0,-10,(9:22) 15-P.Mahomes pass short right to 85-A.Armstrong pushed ob at SEA 27 for 3 yards (48-T.Knight) [56-D.Fowler].
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,3,3,0,27,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-10,(8:41) (Shotgun) 15-P.Mahomes pass incomplete short middle to 13-C.Allen (99-L.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,4,3,0,27,field_goal,0,0,0,0,0,0,0,,,,,0,0,0,-10,"(8:38) 7-H.Butker 45 yard field goal is No Good, Wide Right, Center-41-J.Winchester, Holder-14-M.Araiza."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,1,10,0,65,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,14,1,0,10,(8:33) 14-S.Darnold pass short right to 11-J.Smith-Njigba to SEA 49 for 14 yards (30-C.Roland-Wallace).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,1,10,0,51,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,6,0,0,10,(7:53) 23-E.Wilson up the middle to KC 45 for 6 yards (21-J.Hicks).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,2,4,0,45,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,10,(7:12) 23-E.Wilson right guard to KC 42 for 3 yards (92-K.Tonga; 32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,3,1,0,42,run,1,0,0,0,0,0,0,00-0039793,A.Barner,,,1,1,0,10,(6:30) Direct snap to 88-A.Barner. 88-A.Barner up the middle to KC 41 for 1 yard (23-D.Tranquill).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,1,10,0,41,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,4,0,0,10,(5:50) 23-E.Wilson up the middle to KC 37 for 4 yards (20-N.Williams; 97-A.Gillotte).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,2,6,0,37,pass,0,1,0,0,0,0,0,,,00-0034869,S.Darnold,10,1,0,10,(5:02) 14-S.Darnold pass short right to 88-A.Barner to KC 27 for 10 yards (23-D.Tranquill; 20-N.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by KC at 04:48.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,1,10,0,27,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,10,(4:48) 23-E.Wilson up the middle to KC 24 for 3 yards (32-N.Bolton).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #2 by KC at 04:35.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,2,7,0,24,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,10,(4:35) 23-E.Wilson left end to KC 21 for 3 yards (21-J.Hicks).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,3,4,0,21,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,21,1,1,10,"(3:52) 23-E.Wilson left tackle for 21 yards, TOUCHDOWN."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,16,"5-J.Myers extra point is GOOD, Center-41-C.Stoll, Holder-4-M.Dickson."
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,-17,5-J.Myers kicks 64 yards from SEA 35 to KC 1. 10-E.Johnson to KC 42 for 41 yards (27-A.Smith; 52-P.O'Connell).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,1,10,0,58,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-17,(3:36) (Shotgun) 15-P.Mahomes pass incomplete short right to 10-E.Johnson.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,2,10,0,58,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-17,(3:31) (Shotgun) 15-P.Mahomes pass incomplete short left [91-B.Murphy].
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,3,10,0,58,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,0,0,0,-17,(3:26) (Shotgun) 15-P.Mahomes pass incomplete short right to 87-T.Kelce.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,KC,SEA,4,4,10,0,58,pass,0,1,0,0,0,1,0,,,00-0033873,P.Mahomes,3,0,0,-17,(3:19) (Shotgun) 15-P.Mahomes pass short right to 87-T.Kelce to KC 45 for 3 yards (13-E.Jones).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,1,10,0,45,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,17,(3:13) 23-E.Wilson up the middle to KC 42 for 3 yards (97-A.Gillotte).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,,,4,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #3 by KC at 03:08.
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,2,7,0,42,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,9,1,0,17,(3:08) 23-E.Wilson up the middle to KC 33 for 9 yards (27-C.Conner; 23-D.Tranquill).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,1,10,0,33,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,4,0,0,17,(2:28) 23-E.Wilson up the middle to KC 29 for 4 yards (92-K.Tonga; 27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,2,6,0,29,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,3,0,0,17,(2:00) 23-E.Wilson up the middle to KC 26 for 3 yards (43-J.Cochrane; 20-N.Williams).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,3,3,0,26,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,2,0,0,17,(1:16) 23-E.Wilson up the middle to KC 24 for 2 yards (23-D.Tranquill).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,4,1,0,24,run,1,0,0,0,0,0,0,00-0039793,A.Barner,,,1,1,0,17,(:38) Direct snap to 88-A.Barner. 88-A.Barner up the middle to KC 23 for 1 yard (43-J.Cochrane).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,4,,0,0,,,,,0,0,0,0,0,,,,,,,,17,END GAME
 2026,REG,7,2026_07_LA_LV,2026-10-25,LV,LA,,,1,,0,0,,,,,0,0,0,0,0,,,,,,,,,GAME
 2026,REG,7,2026_07_LA_LV,2026-10-25,LV,LA,LV,LA,1,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,0,19-B.McManus kicks 63 yards from LA 35 to LV 2. 23-D.Laube to LV 38 for 36 yards (37-Q.Lake).
 2026,REG,7,2026_07_LA_LV,2026-10-25,LV,LA,LV,LA,1,1,10,0,62,run,1,0,0,0,0,1,0,00-0040122,A.Jeanty,,,3,0,0,0,(14:52) (Shotgun) 2-A.Jeanty up the middle to LV 41 for 3 yards (48-O.Speights).
