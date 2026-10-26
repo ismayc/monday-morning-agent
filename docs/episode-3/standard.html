@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The chart standard, one rule per keypress: the Monday Morning Agent, episode 3</title>
+<meta name="description" content="The eight rules every chart the agent draws has to follow, one per keypress, each with the picture it prevents. At the end, the spec the renderer refused on air.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="The chart standard, one rule per keypress">
+<meta property="og:description" content="Eight written rules for every chart the agent draws: the window, the axes, the counts, the colors, the title, the source, what may appear, and the template. Each with the picture it prevents.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-3/standard.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-3/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kickers are too good now. Two charts of the same five numbers: one with a cut axis and a late start that climbs a mountain, one under the standard, from zero, flat.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The chart standard, one rule per keypress">
+<meta name="twitter:description" content="Eight written rules for every chart the agent draws, each with the picture it prevents.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-3/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<style>
+  /* One rule per keypress. Each card is a rule with the picture it prevents on the left
+     (pink, what the renderer refuses or the template makes impossible) and the picture
+     under the standard on the right (yellow). The last card is the refusal from the show. */
+  .how { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; font-size: 15.5px; color: var(--soft); }
+  .how kbd { font-family: var(--code); font-size: 13px; border: 2px solid var(--ink); background: #fff; padding: 1px 7px; color: var(--ink); }
+  .how #where { font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); background: var(--yellow); padding: 2px 10px; }
+  .how button { font-family: var(--display); font-weight: 700; font-size: 20px; background: var(--ink); color: var(--yellow); border: 2px solid var(--ink); padding: 4px 16px; cursor: pointer; }
+  #cards { margin-top: 18px; cursor: pointer; }
+  .card { display: grid; grid-template-columns: 64px 1fr; gap: 0 18px; padding: 18px 0 22px; border-top: 2px solid var(--ink); align-items: start; }
+  .card .n { font-family: var(--display); font-weight: 700; font-size: 58px; line-height: .85; }
+  .card h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 3.4vw, 36px); line-height: 1.02; }
+  .card .rule { margin-top: 6px; font-size: 17.5px; max-width: 72ch; }
+  .card .held { margin-top: 8px; font-size: 14.5px; color: var(--soft); }
+  .card .held em { font-style: normal; font-family: var(--display); font-weight: 600; font-size: 14px; padding: 1px 8px; border: 2px solid var(--ink); color: var(--ink); }
+  .card .held em.check { background: var(--pink); } .card .held em.fix { background: var(--blue); } .card .held em.built { background: var(--yellow); }
+  .pics { margin-top: 12px; display: grid; grid-template-columns: 1fr 1fr; gap: 14px; max-width: 900px; }
+  .pics figure { border: 2px solid var(--ink); background: #fff; padding: 10px 12px 8px; }
+  .pics figure.no { background: #fff6f8; }
+  .pics figcaption { font-family: var(--display); font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+  .pics figure.no figcaption::before { content: "Without the rule"; background: var(--pink); padding: 0 6px; margin-right: 8px; }
+  .pics figure.ok figcaption::before { content: "Under the rule"; background: var(--yellow); padding: 0 6px; margin-right: 8px; }
+  .pics svg { width: 100%; height: auto; display: block; }
+  .pics .say { font-size: 14px; color: var(--soft); margin-top: 4px; }
+  @media (max-width: 700px) { .pics { grid-template-columns: 1fr; } .card { grid-template-columns: 44px 1fr; } .card .n { font-size: 40px; } }
+  .js .card:not(.on) { display: none; }
+  .refusal { border: 2px solid var(--ink); background: var(--faint); padding: 14px 16px; margin-top: 12px; max-width: 900px; }
+  .refusal pre { font-family: var(--code); font-size: 13.5px; white-space: pre-wrap; margin-top: 8px; }
+  .refusal pre.out { background: var(--pink); padding: 10px 12px; border: 2px solid var(--ink); }
+  .refusal p { max-width: none; font-size: 15.5px; }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 3</a><a href="standard.html" aria-current="page">The standard</a><a href="vote.html">The vote</a><a href="./#terms">Terms</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/charts">The charts</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<header>
+  <h1>The chart standard, one rule per keypress.</h1>
+  <p class="lead">Eight rules for every chart the agent draws, written once in <code>charts/STANDARD.md</code> and enforced by the <a class="term" href="./#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a>. Each card is one rule, with the picture it prevents and the picture it makes. The last card is the <a class="term" href="./#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> the renderer refused on air. Every number in the pictures is the tool's: the <a class="term" href="./#term-rate" data-def="Made divided by attempts, to one decimal. A blocked kick counts as a miss.">make rate</a> of every field goal, season by season.</p>
+  <div class="how"><span id="where">Nothing shown yet</span><button id="next" type="button">Next</button><span><kbd>Space</kbd> or <kbd>&rarr;</kbd> next, <kbd>&larr;</kbd> back, <kbd>R</kbd> start over. Or click a card.</span></div>
+</header>
+
+<div id="cards">
+
+<div class="card">
+  <div class="n">1</div>
+  <div>
+    <h2>Every season on file.</h2>
+    <p class="rule">A <a class="term" href="./#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> runs from 2021, the first season on file, through the current season, with no season skipped and no narrowing to a few weeks. The window is not a choice.</p>
+    <p class="held">Held by: <em class="check">the renderer checks</em> the command's <code>--seasons</code> must be <code>2021-2026</code> this season, and <code>--weeks</code> is refused.</p>
+    <div class="pics">
+      <figure class="no"><figcaption>the window starts where it helps</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="Two seasons only, 2024 and 2025, drawn as a rise"><rect width="440" height="150" fill="#fff6f8"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><polyline points="140,105 330,45" fill="none" stroke="#ffe14d" stroke-width="6" stroke-linecap="round"/><circle cx="140" cy="105" r="7" fill="#ffe14d" stroke="#14171a" stroke-width="2"/><circle cx="330" cy="45" r="7" fill="#ffe14d" stroke="#14171a" stroke-width="2"/><g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="15" fill="#14171a" text-anchor="middle"><text x="140" y="142">2024</text><text x="330" y="142">2025</text></g></svg>
+        <p class="say">84.2 to 85.6: a climb, if the chart begins in 2024.</p></figure>
+      <figure class="ok"><figcaption>2021 through the season <a class="term" href="./#term-in-progress" data-def="The tool's flag on the season still being played, with its weeks: a partial season, drawn gray and dashed.">in progress</a></figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="Six seasons, 2021 through 2026, a flat line"><rect width="440" height="150" fill="#fff"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><polyline points="80,74 146,73 212,70 278,82 344,72 410,82" fill="none" stroke="#ffe14d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#ffe14d" stroke="#14171a" stroke-width="2"><circle cx="80" cy="74" r="6"/><circle cx="146" cy="73" r="6"/><circle cx="212" cy="70" r="6"/><circle cx="278" cy="82" r="6"/><circle cx="344" cy="72" r="6"/><circle cx="410" cy="82" r="6" fill="#c9ccd1" stroke-dasharray="3 2"/></g><g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="15" fill="#14171a" text-anchor="middle"><text x="80" y="142">2021</text><text x="146" y="142">2022</text><text x="212" y="142">2023</text><text x="278" y="142">2024</text><text x="344" y="142">2025</text><text x="410" y="142" fill="#4a5058">2026*</text></g></svg>
+        <p class="say">The same two points, with the four before them and the one after. Nothing climbs.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">2</div>
+  <div>
+    <h2>Axes start at zero.</h2>
+    <p class="rule">A rate axis runs from 0 to 100 percent. A count axis starts at 0. No axis is cut to make a flat line look steep.</p>
+    <p class="held">Held by: <em class="fix">the template</em> the spec has no key for an axis, so there is nothing to cut.</p>
+    <div class="pics">
+      <figure class="no"><figcaption>the axis starts at 84</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="Five seasons on an axis from 84 to 86 percent, a jagged mountain range"><rect width="440" height="150" fill="#fff6f8"/><g font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#4a5058"><text x="44" y="124" text-anchor="end">84%</text><text x="44" y="78" text-anchor="end">85%</text><text x="44" y="32" text-anchor="end">86%</text></g><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><line x1="50" x2="420" y1="74" y2="74" stroke="#c9ccd1"/><line x1="50" x2="420" y1="28" y2="28" stroke="#c9ccd1"/><polyline points="90,60 165,56 240,37 315,111 390,46" fill="none" stroke="#ffe14d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><g fill="#ffe14d" stroke="#14171a" stroke-width="2"><circle cx="90" cy="60" r="7"/><circle cx="165" cy="56" r="7"/><circle cx="240" cy="37" r="7"/><circle cx="315" cy="111" r="7"/><circle cx="390" cy="46" r="7"/></g></svg>
+        <p class="say">85.3, 85.4, 85.8, 84.2, 85.6: a collapse in 2024 and a recovery, on an axis two points tall.</p></figure>
+      <figure class="ok"><figcaption>0 to 100</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="The same five seasons on an axis from 0 to 100 percent, a flat line near 85"><rect width="440" height="150" fill="#fff"/><g font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#4a5058"><text x="44" y="124" text-anchor="end">0%</text><text x="44" y="78" text-anchor="end">50%</text><text x="44" y="32" text-anchor="end">100%</text></g><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><line x1="50" x2="420" y1="74" y2="74" stroke="#c9ccd1"/><line x1="50" x2="420" y1="28" y2="28" stroke="#c9ccd1"/><polyline points="90,41.5 165,41.4 240,41.1 315,42.5 390,41.2" fill="none" stroke="#ffe14d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#ffe14d" stroke="#14171a" stroke-width="2"><circle cx="90" cy="41.5" r="6"/><circle cx="165" cy="41.4" r="6"/><circle cx="240" cy="41.1" r="6"/><circle cx="315" cy="42.5" r="6"/><circle cx="390" cy="41.2" r="6"/></g></svg>
+        <p class="say">The same five numbers. The 2024 "collapse" is 1.6 points.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">3</div>
+  <div>
+    <h2>The count under every point.</h2>
+    <p class="rule">Each rate is drawn with the number of plays behind it, so a rate from 9 kicks does not look like a rate from 900.</p>
+    <p class="held">Held by: <em class="fix">the template</em> every point prints "of N" beneath it, from the tool's row.</p>
+    <div class="pics">
+      <figure class="no"><figcaption>two rates, no counts</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="Two points at 44 percent and 85 percent with no counts"><rect width="440" height="150" fill="#fff6f8"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><circle cx="150" cy="80" r="9" fill="#ffe14d" stroke="#14171a" stroke-width="2"/><circle cx="300" cy="42" r="9" fill="#8ad4ff" stroke="#14171a" stroke-width="2"/><g font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="15" fill="#14171a" text-anchor="middle"><text x="150" y="64">44.4%</text><text x="300" y="26">85.3%</text></g></svg>
+        <p class="say">Two rates that look like two facts of the same weight.</p></figure>
+      <figure class="ok"><figcaption>"of 9" and "of 1,076"</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="The same two points with their counts: 44.4 percent of 9 kicks, 85.3 percent of 1,076"><rect width="440" height="150" fill="#fff"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><circle cx="150" cy="80" r="9" fill="#ffe14d" stroke="#14171a" stroke-width="2"/><circle cx="300" cy="42" r="9" fill="#8ad4ff" stroke="#14171a" stroke-width="2"/><g font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="15" fill="#14171a" text-anchor="middle"><text x="150" y="64">44.4%</text><text x="300" y="26">85.3%</text></g><g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#4a5058" text-anchor="middle"><text x="150" y="104">of 9</text><text x="300" y="66">of 1,076</text></g></svg>
+        <p class="say">One kick moves the left point by 11 points. One kick moves the right one by a tenth of a point.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">4</div>
+  <div>
+    <h2>Two colors, and gray.</h2>
+    <p class="rule">The broadcast's two lines: yellow for the thing the claim is about, blue for what it is compared with. Gray marks the current season while it is still being played, labeled with its last week on file. No third series, no third color.</p>
+    <p class="held">Held by: <em class="fix">the template</em> the renderer has three colors and no key to add one.</p>
+    <div class="pics">
+      <figure class="no"><figcaption>five lines, five colors</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="Five lines in five colors tangled across the chart"><rect width="440" height="150" fill="#fff6f8"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><polyline points="70,60 160,40 250,70 340,30 410,55" fill="none" stroke="#e53935" stroke-width="4"/><polyline points="70,90 160,80 250,95 340,70 410,100" fill="none" stroke="#43a047" stroke-width="4"/><polyline points="70,40 160,65 250,35 340,60 410,30" fill="none" stroke="#8e24aa" stroke-width="4"/><polyline points="70,75 160,95 250,55 340,100 410,80" fill="none" stroke="#fb8c00" stroke-width="4"/><polyline points="70,50 160,52 250,48 340,51 410,47" fill="none" stroke="#1e88e5" stroke-width="4"/></svg>
+        <p class="say">Which line is the claim about? The legend knows. The eye does not.</p></figure>
+      <figure class="ok"><figcaption>yellow, blue, and gray for the season in progress</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="A yellow line, a blue line above it, and gray dashed points for the season in progress"><rect width="440" height="150" fill="#fff"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><polyline points="80,40 146,39 212,37 278,41 344,36 410,38" fill="none" stroke="#8ad4ff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><polyline points="80,84 146,80 212,80 278,78 344,81 410,82" fill="none" stroke="#ffe14d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><g stroke="#14171a" stroke-width="2"><circle cx="80" cy="40" r="6" fill="#8ad4ff"/><circle cx="146" cy="39" r="6" fill="#8ad4ff"/><circle cx="212" cy="37" r="6" fill="#8ad4ff"/><circle cx="278" cy="41" r="6" fill="#8ad4ff"/><circle cx="344" cy="36" r="6" fill="#8ad4ff"/><circle cx="410" cy="38" r="6" fill="#c9ccd1" stroke-dasharray="3 2"/><circle cx="80" cy="84" r="6" fill="#ffe14d"/><circle cx="146" cy="80" r="6" fill="#ffe14d"/><circle cx="212" cy="80" r="6" fill="#ffe14d"/><circle cx="278" cy="78" r="6" fill="#ffe14d"/><circle cx="344" cy="81" r="6" fill="#ffe14d"/><circle cx="410" cy="82" r="6" fill="#c9ccd1" stroke-dasharray="3 2"/></g></svg>
+        <p class="say">Yellow is the <a class="term" href="./#term-kick" data-def="Every field goal attempt whose distance falls inside the dictionary entry's range. A blocked kick is a miss.">defined kick</a>, the line to gain. Blue is every other kick, where the field starts. Gray is this season, not finished.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">5</div>
+  <div>
+    <h2>The title is the question.</h2>
+    <p class="rule">The chart's title is the question the agent tested, in words a fan would say, ending in a question mark, with no number in it other than a season's year. A title that states the answer is a caption, not a title. The subtitle names the <a class="term" href="./#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, its file and date, and the <a class="term" href="./#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>.</p>
+    <p class="held">Held by: <em class="check">the renderer checks</em> no question mark, or a number that is not a year, and the spec is refused.</p>
+    <div class="pics">
+      <figure class="no"><figcaption>the title is the verdict</figcaption>
+        <svg viewBox="0 0 440 70" role="img" aria-label="A title that reads: Kickers up 12 percent, the best ever"><rect width="440" height="70" fill="#fff6f8"/><text x="18" y="44" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="30" fill="#14171a">Kickers up 12%, the best ever</text></svg>
+        <p class="say">The reader is told what to see before seeing it. Refused: a number, and no question.</p></figure>
+      <figure class="ok"><figcaption>the question tested</figcaption>
+        <svg viewBox="0 0 440 70" role="img" aria-label="A title that reads: Are kickers making more of their long field goals than they did in 2021?"><rect width="440" height="70" fill="#fff"/><text x="18" y="32" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="24" fill="#14171a">Are kickers making more of their long</text><text x="18" y="58" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="24" fill="#14171a">field goals than they did in 2021?</text></svg>
+        <p class="say">The numbers go in the <a class="term" href="./#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>. A year is the one number a title may carry, because rule 1 fixes the window anyway.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">6</div>
+  <div>
+    <h2>The source line is the command.</h2>
+    <p class="rule">Under the chart, the exact tool command that produced the rows, with the plays and seasons it read, so a reader can rerun it.</p>
+    <p class="held">Held by: <em class="fix">the template</em> the line is printed from the spec's command and the tool's coverage, never typed.</p>
+    <div class="refusal">
+      <p>What the bottom of every chart says, with this episode's spec:</p>
+      <pre>Source: node episode-3/query-plays.mjs --trend long-field-goal --seasons 2021-2026  (1,530 games, latest 2026-10-25)
+Drawn under charts/STANDARD.md, version 1 (October 26, 2026), from the spec long-field-goal-trend.json, written 2026-11-09.</pre>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">7</div>
+  <div>
+    <h2>Nothing the tool did not print.</h2>
+    <p class="rule">No trend line, no annotation, no second axis, no number typed in by hand. The renderer runs the command and draws what comes back, and that is all it can draw.</p>
+    <p class="held">Held by: <em class="built">by construction</em> the renderer takes a command, not numbers. The agent cannot hand it a value.</p>
+    <div class="pics">
+      <figure class="no"><figcaption>a trend line and a note the data never said</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="A flat line with a steep dashed trend line drawn over it and a note reading: new kicking era"><rect width="440" height="150" fill="#fff6f8"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><polyline points="80,74 146,73 212,70 278,82 344,72" fill="none" stroke="#ffe14d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><line x1="70" x2="400" y1="100" y2="30" stroke="#e53935" stroke-width="3" stroke-dasharray="8 6"/><text x="250" y="24" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="18" fill="#e53935">new kicking era &rarr;</text></svg>
+        <p class="say">The dashed line is an opinion. The note is a second one.</p></figure>
+      <figure class="ok"><figcaption>the rows, and only the rows</figcaption>
+        <svg viewBox="0 0 440 150" role="img" aria-label="The same flat line with nothing drawn over it"><rect width="440" height="150" fill="#fff"/><line x1="50" x2="420" y1="120" y2="120" stroke="#14171a" stroke-width="2"/><polyline points="80,74 146,73 212,70 278,82 344,72" fill="none" stroke="#ffe14d" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/><g fill="#ffe14d" stroke="#14171a" stroke-width="2"><circle cx="80" cy="74" r="6"/><circle cx="146" cy="73" r="6"/><circle cx="212" cy="70" r="6"/><circle cx="278" cy="82" r="6"/><circle cx="344" cy="72" r="6"/></g></svg>
+        <p class="say">If the renderer cannot get it from the tool, it cannot draw it.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">8</div>
+  <div>
+    <h2>The same template every week.</h2>
+    <p class="rule">One shape per question. A trend is a line chart of rates by season over a bar chart of attempts per game, laid out the same way every episode, so a reader of episode 5 recognizes episode 3's chart.</p>
+    <p class="held">Held by: <em class="built">by construction</em> the SVG carries <a class="term" href="./#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a>'s version, and there is one template to draw with.</p>
+    <div class="pics">
+      <figure class="ok"><figcaption>the two panels, every time</figcaption>
+        <svg viewBox="0 0 440 190" role="img" aria-label="A sketch of the template: a line panel of rates over a bar panel of tries per game, with a title, a subtitle, a legend, and a source line"><rect width="440" height="190" fill="#fff"/><rect x="16" y="10" width="220" height="10" fill="#14171a"/><rect x="16" y="26" width="300" height="5" fill="#c9ccd1"/><rect x="16" y="38" width="22" height="8" fill="#ffe14d" stroke="#14171a"/><rect x="60" y="38" width="22" height="8" fill="#8ad4ff" stroke="#14171a"/><rect x="104" y="38" width="22" height="8" fill="#c9ccd1" stroke="#14171a"/><line x1="40" x2="420" y1="100" y2="100" stroke="#14171a" stroke-width="2"/><polyline points="70,62 140,61 210,60 280,63 350,61 410,62" fill="none" stroke="#8ad4ff" stroke-width="4"/><polyline points="70,80 140,78 210,78 280,77 350,79 410,79" fill="none" stroke="#ffe14d" stroke-width="4"/><line x1="40" x2="420" y1="165" y2="165" stroke="#14171a" stroke-width="2"/><g fill="#ffe14d" stroke="#14171a" stroke-width="1.5"><rect x="58" y="140" width="24" height="25"/><rect x="128" y="134" width="24" height="31"/><rect x="198" y="133" width="24" height="32"/><rect x="268" y="126" width="24" height="39"/><rect x="338" y="127" width="24" height="38"/><rect x="398" y="121" width="24" height="44" fill="#c9ccd1" stroke-dasharray="3 2"/></g><rect x="16" y="176" width="380" height="5" fill="#c9ccd1"/></svg>
+        <p class="say">Title, subtitle, legend; the rates; the <a class="term" href="./#term-per-game" data-def="The defined kick's attempts divided by the games kept that season, to two decimals.">tries per game</a>; the source. Episode 5's chart will look like this one.</p></figure>
+      <figure class="no"><figcaption>a new look each week</figcaption>
+        <svg viewBox="0 0 440 190" role="img" aria-label="Three mismatched small charts: a pie, a 3D bar chart, and a dual-axis line chart"><rect width="440" height="190" fill="#fff6f8"/><circle cx="80" cy="95" r="48" fill="#8ad4ff" stroke="#14171a" stroke-width="2"/><path d="M80 95 L80 47 A48 48 0 0 1 126 110 Z" fill="#ffe14d" stroke="#14171a" stroke-width="2"/><g stroke="#14171a" stroke-width="2"><rect x="170" y="90" width="26" height="55" fill="#ffe14d"/><polygon points="170,90 180,80 206,80 196,90" fill="#e6c800"/><polygon points="196,90 206,80 206,135 196,145" fill="#c9ab00"/><rect x="214" y="60" width="26" height="85" fill="#8ad4ff"/><polygon points="214,60 224,50 250,50 240,60" fill="#6fb8e6"/><polygon points="240,60 250,50 250,135 240,145" fill="#5a9ccc"/></g><line x1="290" x2="420" y1="145" y2="145" stroke="#14171a" stroke-width="2"/><line x1="290" x2="290" y1="40" y2="145" stroke="#14171a" stroke-width="2"/><line x1="420" x2="420" y1="40" y2="145" stroke="#e53935" stroke-width="2"/><polyline points="300,120 340,60 380,110 415,50" fill="none" stroke="#e53935" stroke-width="3"/><polyline points="300,90 340,95 380,85 415,92" fill="none" stroke="#ffe14d" stroke-width="3"/></svg>
+        <p class="say">A pie, a 3D bar, a second axis in red. Three charts, three new things to learn to read.</p></figure>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="n">&#10007;</div>
+  <div>
+    <h2>The spec the renderer refused on air.</h2>
+    <p class="rule">Before the agent runs, a spec that breaks rule 1 is handed to the renderer by hand: the same question, with the trend starting in 2023. It is the chart crime of picking the window, and it is <code>episode-3/bad-chart.json</code> in the repo.</p>
+    <div class="refusal">
+      <pre>{
+  "name": "bad-chart",
+  "question": "Are kickers making more of their long field goals than they used to?",
+  "tool": "episode-3/query-plays.mjs",
+  "command": "--trend field-goal --seasons 2023-2026"
+}</pre>
+      <p style="margin-top:10px">What came back, exit code 65, and no file written:</p>
+      <pre class="out">render-chart: REFUSED by rule 1: the command says --seasons 2023-2026; a trend starts at 2021, the first season on file, and ends at 2026, the current one: --seasons 2021-2026. The window is not a choice. Nothing was drawn. The rules are in charts/STANDARD.md, version 1 (October 26, 2026).</pre>
+      <p style="margin-top:10px">The agent gets the same sentence when it breaks a rule, fixes what the sentence names, and runs the renderer again. A refusal is a sentence, not a crash.</p>
+    </div>
+  </div>
+</div>
+
+</div>
+
+<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. Episode 3 airs November 9, 2026. The rules are <a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/STANDARD.md"><code>charts/STANDARD.md</code></a>, version 1; the <a class="term" href="./#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/render-chart.mjs"><code>charts/render-chart.mjs</code></a>. The rates in the pictures are the tool's: every field goal, 2021 through the 2026 games of October 25, regular season and playoffs.</p></footer>
+
+</main>
+<script>
+(function () {
+  var body = document.body, cards = Array.prototype.slice.call(document.querySelectorAll('.card'));
+  var where = document.getElementById('where'), LAST = cards.length, stage = 0;
+  var box = document.getElementById('cards');
+  body.className = 'js';
+  // #3 opens the page with the first three rules shown; #9 with the refusal.
+  var fromHash = parseInt(location.hash.slice(1), 10);
+  if (fromHash >= 0 && fromHash <= LAST) stage = fromHash;
+  function paint() {
+    cards.forEach(function (c, i) { c.classList.toggle('on', stage >= i + 1); });
+    where.textContent = stage === 0 ? 'Nothing shown yet' : stage < LAST ? 'Rule ' + stage + ' of 8' : 'The refusal';
+    if (stage > 0) { var last = cards[stage - 1]; if (last && stage > 1) last.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+  }
+  function step(d) { stage = Math.max(0, Math.min(LAST, stage + d)); paint(); }
+  document.getElementById('next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
+  document.addEventListener('keydown', function (e) {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    var k = e.key;
+    if (k === ' ' || k === 'Enter' || k === 'ArrowRight' || k === 'ArrowDown' || k === 'PageDown') { e.preventDefault(); step(1); }
+    else if (k === 'Backspace' || k === 'ArrowLeft' || k === 'ArrowUp' || k === 'PageUp') { e.preventDefault(); step(-1); }
+    else if (k === 'r' || k === 'R' || k === 'Home') { e.preventDefault(); stage = 0; paint(); window.scrollTo(0, 0); }
+  });
+  box.addEventListener('click', function (e) { if (e.target.closest('a')) return; step(1); });
+  paint();
+})();
+</script>
+</body>
+</html>

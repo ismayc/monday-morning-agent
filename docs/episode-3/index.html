@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Kickers are too good now." Episode 3 of The Monday Morning Agent</title>
+<meta name="description" content="A claim about a trend needs a picture, and a picture is a set of choices. How an AI agent draws its charts under eight written rules, from rows its own tool printed, so the same question gets the same picture every week.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="&quot;Kickers are too good now.&quot; Same numbers, two pictures.">
+<meta property="og:description" content="The NFL field goal went through 84 to 86 percent of the time in every season since 2021. Start the chart where it helps and cut the axis, and it climbs a mountain. So the agent gets eight written rules for its charts, and a renderer that refuses to break them. By Chester Ismay.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-3/">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-3/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kickers are too good now. Two charts of the same five numbers: one with a cut axis and a late start that climbs a mountain, one under the standard, from zero, flat.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="&quot;Kickers are too good now.&quot; Same numbers, two pictures.">
+<meta name="twitter:description" content="A claim about a trend needs a picture, and a picture is a set of choices. The agent's charts follow eight written rules, drawn only from rows its tool printed.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-3/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  /* The hook: the same five numbers drawn twice. The left chart is the crime (a late
+     start, a cut axis); the right is the standard. Pink marks what the renderer refuses. */
+  .twice { margin-top: 30px; display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 2px solid var(--ink); background: #fff; }
+  .twice > figure { padding: 14px 18px 12px; min-width: 0; }
+  .twice > figure:first-child { border-right: 2px solid var(--ink); background: #fff6f8; }
+  .twice h3 { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1; display: flex; align-items: baseline; gap: 10px; }
+  .twice h3 small { font-family: var(--text); font-weight: 500; font-size: 13.5px; padding: 1px 7px; border: 2px solid var(--ink); }
+  .twice h3 small.no { background: var(--pink); } .twice h3 small.ok { background: var(--yellow); }
+  .twice svg { width: 100%; height: auto; display: block; margin-top: 8px; }
+  .twice figcaption { font-size: 14.5px; color: var(--soft); margin-top: 6px; }
+  @media (max-width: 760px) { .twice { grid-template-columns: 1fr; } .twice > figure:first-child { border-right: 0; border-bottom: 2px solid var(--ink); } }
+  .said { margin-top: 22px; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.04; max-width: 24ch; }
+
+  /* The eight rules, as the agent reads them. */
+  .rules { margin-top: 20px; counter-reset: r; border: 2px solid var(--ink); background: #fff; }
+  .rules > div { counter-increment: r; display: grid; grid-template-columns: 56px 1fr auto; gap: 6px 14px; padding: 12px 16px 13px; border-bottom: 1px solid var(--rule); align-items: start; }
+  .rules > div:last-child { border-bottom: 0; }
+  .rules > div::before { content: counter(r); font-family: var(--display); font-weight: 700; font-size: 40px; line-height: .9; }
+  .rules b { font-family: var(--display); font-weight: 700; font-size: 23px; line-height: 1.1; display: block; }
+  .rules span { font-size: 16px; display: block; margin-top: 2px; }
+  .rules em { font-style: normal; font-family: var(--display); font-weight: 600; font-size: 14px; padding: 2px 8px; border: 2px solid var(--ink); white-space: nowrap; align-self: start; }
+  .rules em.check { background: var(--pink); } .rules em.fix { background: var(--blue); } .rules em.built { background: var(--yellow); }
+  @media (max-width: 640px) { .rules > div { grid-template-columns: 44px 1fr; } .rules em { grid-column: 2; justify-self: start; } }
+
+  /* How it fits together: the sheet's cells, read top to bottom. */
+  .chain { margin-top: 22px; max-width: 780px; border: 2px solid var(--ink); background: #fff; }
+  .chain > div { padding: 13px 18px; border-bottom: 2px solid var(--ink); display: grid; grid-template-columns: 190px 1fr; gap: 4px 20px; align-items: baseline; }
+  .chain > div:last-child { border-bottom: 0; }
+  .chain b { font-family: var(--display); font-weight: 700; font-size: 25px; line-height: 1.1; }
+  .chain span { font-size: 16.5px; }
+  .chain .written { background: var(--yellow); }
+  .chain .via { padding: 5px 18px; background: var(--faint); font-size: 14.5px; color: var(--soft); display: block; }
+  .chain .checks { background: var(--faint); border-top: 2px solid var(--ink); }
+  @media (max-width: 640px) { .chain > div { grid-template-columns: 1fr; } }
+
+  .run { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 18px; }
+  @media (max-width: 900px) { .run { grid-template-columns: 1fr; } }
+  .run ol { list-style: none; counter-reset: s; border-top: 2px solid var(--ink); }
+  .run li { counter-increment: s; position: relative; padding: 12px 0 12px 50px; border-bottom: 1px solid var(--rule); font-size: 17px; }
+  .run li::before { content: counter(s); position: absolute; left: 0; top: 7px; font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; width: 36px; text-align: center; }
+  .run li.judge::before { background: var(--yellow); }
+  .held { border: 2px dashed var(--ink); background: var(--faint); padding: 20px 22px; }
+  .held b { font-family: var(--display); font-weight: 700; font-size: 24px; display: block; margin-bottom: 6px; }
+  .held p { max-width: none; font-size: 16px; }
+  .cap { font-size: 14.5px; color: var(--soft); margin-top: 10px; }
+
+  .carry { margin-top: 18px; columns: 2; column-gap: 44px; border-top: 2px solid var(--ink); padding-top: 4px; }
+  .carry > div { break-inside: avoid; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .carry b { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.15; display: block; margin-bottom: 3px; }
+  .carry span { font-size: 16.5px; }
+  @media (max-width: 760px) { .carry { columns: 1; } }
+
+  .go { display: inline-block; margin-top: 18px; font-family: var(--display); font-weight: 700; font-size: 26px; background: var(--yellow); border: 2px solid var(--ink); padding: 8px 18px; text-decoration: none; }
+  .go:hover { background: var(--ink); color: var(--yellow); }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./" aria-current="page">Episode 3</a><a href="standard.html">The standard</a><a href="vote.html">The vote</a><a href="#terms">Terms</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/charts">The charts</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<header>
+  <h1>"Kickers are too good now."</h1>
+
+  <p class="said">Same five numbers. Two pictures.</p>
+  <div class="twice">
+    <figure>
+      <h3>Drawn to make a point <small class="no">refused</small></h3>
+      <svg viewBox="0 0 520 250" role="img" aria-label="The field goal make rate for 2024 and 2025 only, 84.2 and 85.6 percent, on an axis that runs from 84 to 86, so the line climbs steeply">
+        <rect width="520" height="250" fill="#fff6f8"/>
+        <text x="20" y="26" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="20" fill="#14171a">Kickers are better than ever</text>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#4a5058">
+          <text x="60" y="214" text-anchor="end">84%</text><line x1="68" x2="500" y1="210" y2="210" stroke="#14171a" stroke-width="2"/>
+          <text x="60" y="130" text-anchor="end">85%</text><line x1="68" x2="500" y1="126" y2="126" stroke="#c9ccd1"/>
+          <text x="60" y="46" text-anchor="end">86%</text><line x1="68" x2="500" y1="42" y2="42" stroke="#c9ccd1"/>
+        </g>
+        <polyline points="150,193 420,75" fill="none" stroke="#ffe14d" stroke-width="7" stroke-linecap="round"/>
+        <circle cx="150" cy="193" r="9" fill="#ffe14d" stroke="#14171a" stroke-width="2"/>
+        <circle cx="420" cy="75" r="9" fill="#ffe14d" stroke="#14171a" stroke-width="2"/>
+        <g font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="15" fill="#14171a">
+          <text x="150" y="178" text-anchor="middle">84.2%</text><text x="420" y="60" text-anchor="middle">85.6%</text>
+        </g>
+        <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="17" fill="#14171a">
+          <text x="150" y="236" text-anchor="middle">2024</text><text x="420" y="236" text-anchor="middle">2025</text>
+        </g>
+      </svg>
+      <figcaption>The window starts where it helps, and the axis starts at 84. Rules 1 and 2, both broken. The <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> names the rule and draws nothing.</figcaption>
+    </figure>
+    <figure>
+      <h3>Drawn under the standard <small class="ok">rule by rule</small></h3>
+      <svg viewBox="0 0 520 250" role="img" aria-label="The field goal make rate for every season from 2021 through 2026 on an axis from 0 to 100 percent: 85.3, 85.4, 85.8, 84.2, 85.6, and 84.2 so far, a flat line, with the count of attempts under each point">
+        <rect width="520" height="250" fill="#fff"/>
+        <text x="20" y="26" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="700" font-size="20" fill="#14171a">Are kickers making more of their field goals?</text>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#4a5058">
+          <text x="60" y="214" text-anchor="end">0%</text><line x1="68" x2="500" y1="210" y2="210" stroke="#14171a" stroke-width="2"/>
+          <text x="60" y="130" text-anchor="end">50%</text><line x1="68" x2="500" y1="126" y2="126" stroke="#c9ccd1"/>
+          <text x="60" y="46" text-anchor="end">100%</text><line x1="68" x2="500" y1="42" y2="42" stroke="#c9ccd1"/>
+        </g>
+        <polyline points="100,66.7 170,66.5 240,65.9 310,68.5 380,66.2 450,68.5" fill="none" stroke="#ffe14d" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+        <g stroke="#14171a" stroke-width="2" fill="#ffe14d">
+          <circle cx="100" cy="66.7" r="7"/><circle cx="170" cy="66.5" r="7"/><circle cx="240" cy="65.9" r="7"/><circle cx="310" cy="68.5" r="7"/><circle cx="380" cy="66.2" r="7"/><circle cx="450" cy="68.5" r="7" fill="#c9ccd1" stroke-dasharray="3 2"/>
+        </g>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="11" fill="#4a5058" text-anchor="middle">
+          <text x="100" y="92">of 1,076</text><text x="170" y="92">of 1,105</text><text x="240" y="92">of 1,107</text><text x="310" y="92">of 1,166</text><text x="380" y="92">of 1,140</text><text x="450" y="92">of 444</text>
+        </g>
+        <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="16" fill="#14171a" text-anchor="middle">
+          <text x="100" y="236">2021</text><text x="170" y="236">2022</text><text x="240" y="236">2023</text><text x="310" y="236">2024</text><text x="380" y="236">2025</text><text x="450" y="236" fill="#4a5058">2026*</text>
+        </g>
+      </svg>
+      <figcaption>Every season on file, the axis from zero, the count under every point, the title a question, the season <a class="term" href="#term-in-progress" data-def="The tool's flag on the season still being played, with its weeks: a partial season, drawn gray and dashed.">in progress</a> in gray. Flat: 85.3, 85.4, 85.8, 84.2, 85.6, and 84.2 so far.</figcaption>
+    </figure>
+  </div>
+
+  <p class="lead">Every NFL field goal in six seasons went through the uprights 84 to 86 percent of the time, and a chart can make that climb a mountain or lie flat, depending on where it starts. The argument this episode is about the long ones, the kicks from 50 yards and beyond that seem to go in every week now, and a claim about a <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> needs a picture. A picture is a set of choices: which seasons, where the axis begins, which line gets the bright color. So this episode the agent gets written rules for its charts, and it does not draw. It writes down the question and the command, and a renderer draws the rows the tool printed, the same way every week.</p>
+  <p style="margin-top:22px">This page is how that is set up, for someone who has never built an agent. The eight rules are the <a href="standard.html">chart standard</a>, a file at the root of the repo that every later episode inherits, as episode 2's <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a> is. New to football? <a href="../football.html">The game, explained</a> has what you need. The room votes during this episode's Q&amp;A on the claim episode 4 audits: <a href="vote.html">the four candidates</a>.</p>
+  <a class="go" href="standard.html">Read the eight rules, one per keypress</a>
+</header>
+
+<section id="minute" data-nav="The setup">
+  <h2>The setup in one minute</h2>
+  <p>You hand the agent a claim. It turns the claim into a question and asks one small tool to measure. Since episode 2 the tool will not measure a play until the play is written down in the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a>, and this episode the dictionary learns a second shape: a kick, from one distance to another. The tool learns a third question, a <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a>: season by season, how often the <a class="term" href="#term-kick" data-def="Every field goal attempt whose distance falls inside the dictionary entry's range. A blocked kick is a miss.">defined kick</a> was made, against <a class="term" href="#term-other-kicks" data-def="The attempts outside the entry's distances: what the defined kick is measured against.">every other field goal attempt</a>, and how often it was <a class="term" href="#term-per-game" data-def="The defined kick's attempts divided by the games kept that season, to two decimals.">tried per game</a>. Then the new part. The agent writes a <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">chart spec</a>, one small file naming the question and the command, and runs the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a>, which draws the rows under <a class="term" href="#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a> or refuses with the rule named. The <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> <a class="term" href="#term-cite" data-def="Name the entry and the chart a ruling rests on, by file and date. The runner checks both.">cites</a> the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> and the chart.</p>
+  <p>On the registration page this episode's capability is called consistent visualizations: the same chart shape week to week, from rules written down once, so a reader of episode 5 recognizes episode 3's chart. The standard is quoted in full below. This is episode 3 of <a href="../">an eight-episode O'Reilly live series</a>, and every number on this page is real. The long-kick numbers, and the chart the agent draws from them, arrive after the show on November 9, 2026.</p>
+</section>
+
+<section id="terms" data-nav="The words">
+  <h2>The words on these pages</h2>
+  <p>Every number on the site comes from the same tool, and the tool uses a few words in a fixed way. Here they are, roughly in the order the tool applies them. Wherever one of these words appears on a page with a dotted underline, hovering shows its definition and clicking brings you here.</p>
+  <div class="rows glossary">
+    <div id="term-play"><b>Play</b><span>One snap in the data, with its one-line description. A search reads every play: 265,845 descriptions from 2021 through the 2026 games of October 25. "Field goal" is in 6,251 of them, so the kick, unlike the tush push, has a name in the data. What the description does not carry on its own is a distance band.</span></div>
+    <div id="term-kick"><b>Field goal attempt, the defined kick</b><span>A play with a field goal attempt and a result on file: made, missed, or blocked, with its distance in yards. A blocked kick counts as a miss. The defined kick is every attempt whose distance falls inside the dictionary entry's range. Six seasons hold 6,038 attempts.</span></div>
+    <div id="term-other-kicks"><b>Every other field goal attempt</b><span>The attempts outside the entry's distances. It is what the defined kick is measured against. An entry that covers every distance, like <code>field-goal</code>, has an empty comparison group, and the tool says so.</span></div>
+    <div id="term-rate"><b>Made, make rate</b><span>A kick was made when the result is "made." The make rate is made divided by attempts, printed to one decimal place.</span></div>
+    <div id="term-per-game"><b>Tried per game</b><span>The defined kick's attempts divided by the games kept that season, to two decimals. A rate can hold still while this number moves, which is why the chart carries both.</span></div>
+    <div id="term-trend"><b>Trend</b><span>The tool's third question: one row per season, with the defined kick's attempts, made, rate, and tries per game, every other attempt's rate, and the gap. A trend runs over every season on file, and the season still being played is marked in progress.</span></div>
+    <div id="term-band"><b>Distance band</b><span>The standard's four bands: under 40 yards, 40 to 49, 50 to 59, and 60 and over. With <code>--bands</code> the tool splits the defined kicks by band, so one distance cannot hide behind the others.</span></div>
+    <div id="term-in-progress"><b>In progress</b><span>The tool's flag on the last season on file while it is still being played, with its weeks: a partial season, drawn in gray with a dashed edge and never read as a full year.</span></div>
+    <div id="term-dictionary"><b>Dictionary, entry</b><span>The folder <code>dictionary/</code> at the root of the repo, one JSON file per entry. Since this episode an entry is one of two shapes: a rush (episode 2's) or a kick, with a distance from and a distance to, 18 to 70 yards. <code>field-goal</code>, every distance, was committed before the show; the long kick's entry is written by the agent on air. The agent may add an entry, never change one.</span></div>
+    <div id="term-standard"><b>The chart standard</b><span>The file <code>charts/STANDARD.md</code>: eight rules for every chart the agent draws, about the window, the axes, the counts, the colors, the title, the source line, what may appear, and the template. Written once, enforced by the renderer, inherited by every later episode.</span></div>
+    <div id="term-spec"><b>Chart spec</b><span>The file the agent writes instead of drawing: <code>charts/NAME.json</code>, with a name, a date, the question as the title, the tool, and the command. Nothing about colors, axes, or labels, because those are the standard's.</span></div>
+    <div id="term-renderer"><b>Renderer</b><span><code>charts/render-chart.mjs</code>. It reads a spec, runs the spec's command itself with <code>--json</code>, and draws the rows that come back as one SVG under the standard. It checks the window and the title, fixes everything else by its template, and refuses a spec that breaks a rule with the rule named. It cannot draw a number the tool did not print.</span></div>
+    <div id="term-cite"><b>Cite</b><span>Name the entry and the chart a ruling rests on, by file and date. Every ruling that measures a play carries a "Definition used" line; every ruling that measures a trend carries a "Chart" line. The runner checks both.</span></div>
+    <div id="term-filter"><b>Filter</b><span>A rule that drops plays before anything is counted: which seasons, which weeks, which team is kicking, a field goal attempt with a result and a distance. The tool prints every filter in order with the number of plays left after it. Nothing is dropped that is not printed.</span></div>
+    <div id="term-small-sample"><b>Small sample</b><span>The tool's warning when fewer than 50 kicks match the definition in a season. Then one kick moves that season's rate by 100 divided by the count: at 9 kicks, by 11.1 points.</span></div>
+    <div id="term-policy"><b>Policy</b><span>The file written for this agent, <code>analyst.md</code>: a job description that says how to turn a claim into a question, how to use the dictionary and the charts, what to show, and what it may not say.</span></div>
+    <div id="term-ruling"><b>Ruling</b><span>The agent's answer, in nine parts: the claim as a question, the definition used, the chart, the five complete seasons, this season, how far apart they are, one sentence of judgment, what the plays cannot tell you, and the exact commands it ran. Under 500 words.</span></div>
+  </div>
+</section>
+
+<section id="existed" data-nav="What existed">
+  <h2>What already existed</h2>
+  <p>None of this was made by the agent. Two pieces are new since episode 2: <a class="term" href="#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a>, and the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> that enforces it.</p>
+  <div class="rows">
+    <div><b>Public play-by-play</b><span>Every NFL play, published by the nflverse community under a CC BY 4.0 license. 372 columns per play, refreshed during the season.</span></div>
+    <div><b>A cut to 35 columns</b><span>Episode 2 kept 31. This one adds four about kicks: whether the play was a field goal attempt, how it ended, how long it was, and who kicked it. Episode 2's agent could search the descriptions for "field goal" and count them; it could not tell a 30-yard kick from a 60-yard kick, and the argument is about distance. Still no betting column.</span></div>
+    <div><b>One read-only tool</b><span><code>query-plays.mjs</code>, extended for this episode. It answers three shapes of question now: a search, episode 2's comparison, and the <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a>. It prints every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a> in order and the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> it applied, quoted. It changes nothing.</span></div>
+    <div><b>The dictionary, with a second shape</b><span><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary"><code>dictionary/</code></a> holds episode 2's <code>tush-push</code>, untouched, and <code>field-goal</code>, every attempt from 18 to 70 yards, committed before the show as page one of the kick shape. The entry for the long kick is written by the agent on air.</span></div>
+    <div><b>The chart standard</b><span><a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/STANDARD.md"><code>charts/STANDARD.md</code></a>, eight rules, version 1, dated October 26, 2026. Quoted in full below. A change is a new version, and every chart carries the version it was drawn under.</span></div>
+    <div><b>The renderer</b><span><a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/render-chart.mjs"><code>charts/render-chart.mjs</code></a>, about 200 lines. One <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> in, one SVG out, or a refusal with the rule named. It runs the tool itself for the rows.</span></div>
+    <div><b>Claude Code</b><span>One command reads a prompt, calls only the tools it is allowed to call, and exits. There is no server to write.</span></div>
+  </div>
+</section>
+
+<section id="standard" data-nav="The standard">
+  <h2>The standard, in eight rules</h2>
+  <p>As the agent reads it, appended to its <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> before every run. Each rule says how it is held: the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> checks it on every <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a>, the template fixes it so there is no way to break it, or it holds by how the renderer is built. <a href="standard.html">The same rules, one per keypress, with the pictures.</a></p>
+  <div class="rules">
+    <div><div><b>Every season on file</b><span>A <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> runs from 2021, the first season on file, through the current season, with no season skipped and no narrowing to a few weeks. The window is not a choice.</span></div><em class="check">renderer checks</em></div>
+    <div><div><b>Axes start at zero</b><span>A rate axis runs from 0 to 100 percent. A count axis starts at 0. No axis is cut to make a flat line look steep.</span></div><em class="fix">template</em></div>
+    <div><div><b>The count under every point</b><span>Each rate is drawn with the number of plays behind it, so a rate from 9 kicks does not look like a rate from 900.</span></div><em class="fix">template</em></div>
+    <div><div><b>Two colors, and gray</b><span>The broadcast's two lines: yellow for the thing the claim is about, blue for what it is compared with. Gray marks the current season while it is still being played, labeled with its last week on file. No third series, no third color.</span></div><em class="fix">template</em></div>
+    <div><div><b>The title is the question</b><span>The chart's title is the question the agent tested, in words a fan would say, ending in a question mark, with no number in it other than a season's year. A title that states the answer is a caption, not a title.</span></div><em class="check">renderer checks</em></div>
+    <div><div><b>The source line is the command</b><span>Under the chart, the exact tool command that produced the rows, with the plays and seasons it read, so a reader can rerun it.</span></div><em class="fix">template</em></div>
+    <div><div><b>Nothing the tool did not print</b><span>No trend line, no annotation, no second axis, no number typed in by hand. The renderer runs the command and draws what comes back, and that is all it can draw.</span></div><em class="built">by construction</em></div>
+    <div><div><b>The same template every week</b><span>One shape per question. A trend is a line chart of rates by season over a bar chart of attempts per game, laid out the same way every episode, so a reader of episode 5 recognizes episode 3's chart.</span></div><em class="built">by construction</em></div>
+  </div>
+</section>
+
+<section id="shape" data-nav="How it fits">
+  <h2>How it fits together</h2>
+  <p>Two kinds of work, kept apart, as in episodes 1 and 2. Counting plays has one right answer, so a small tool does it the same way every time. Deciding what to count is judgment, and since episode 2 the definition lives in a file. What is new is that drawing is taken out of the agent's hands too: it chooses the question and the command, which are judgment, and a <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> makes every other choice the same way every week. The yellow cells are the parts written with care: the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> and <a class="term" href="#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a> by hand, the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> and the <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> by the agent.</p>
+  <div class="chain">
+    <div><b>A claim</b><span>"Kickers are too good now."</span></div>
+    <div class="written"><b>The policy</b><span><code>analyst.md</code>, ten sections, one of them new: "Your charts"</span></div>
+    <div class="written"><b>The standard</b><span><code>charts/STANDARD.md</code>, eight rules, appended to the policy before every run</span></div>
+    <div><b>The agent</b><span>Claude Code, allowed to run exactly two scripts and to write one kind of file in each of two folders</span></div>
+    <span class="via">It writes a definition and a spec, then names both in the <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>.</span>
+    <div class="written"><b>The dictionary</b><span><code>dictionary/long-field-goal.json</code>, the entry it writes on air, beside the two already there</span></div>
+    <div class="written"><b>The spec</b><span><code>charts/NAME.json</code>: the question, the tool, and the command, and nothing about how to draw it</span></div>
+    <span class="via">The renderer reads the spec and runs the command itself.</span>
+    <div><b>The tool</b><span><code>query-plays.mjs</code> prints the definition, every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a>, then one row per season</span></div>
+    <span class="via">It reads, and only reads.</span>
+    <div><b>The plays</b><span>265,845 plays, 35 columns, a one-line description each, no betting lines</span></div>
+    <span class="via">The rows go to the renderer, which draws them or refuses.</span>
+    <div><b>The chart</b><span><code>charts/NAME.svg</code>, under the standard: the window, the axes, the counts, the colors, the title, and the source line, none of them chosen by the agent</span></div>
+    <div><b>One ruling</b><span>The entry and the chart it rests on, by file and date; five seasons, this season, and the exact commands it ran, the render included</span></div>
+    <div class="checks"><b>The runner's checks</b><span>The <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a> and the standard appended before the run. The <a class="term" href="#term-cite" data-def="Name the entry and the chart a ruling rests on, by file and date. The runner checks both.">citations</a> required after it: the entry, and for a <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> the chart. Any entry or spec that was on file and changed, put back, and the run failed. A new spec the renderer refuses fails the run too.</span></div>
+  </div>
+</section>
+
+<section id="run" data-nav="One run">
+  <h2>What one run looks like</h2>
+  <div class="run">
+    <ol>
+      <li><strong>The claim goes in</strong> as one sentence. The runner adds the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a>, <a class="term" href="#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a>, and the <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">specs</a> on file to the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a>. Before the show the specs read "none."</li>
+      <li class="judge"><strong>The agent splits the claim.</strong> Whether kickers are "too good" is a judgment about the game people want to watch; the plays cannot settle it. Whether they make more of their long kicks than they did, by enough that the kick is a different play, they can. It searches the descriptions: "field goal" is in thousands, "long field goal" in none.</li>
+      <li><strong>The tool refuses.</strong> The agent asks for the <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> of <code>long-field-goal</code>. With no <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> of that name, the tool stops with exit code 65 and prints the kick shape.</li>
+      <li class="judge"><strong>It writes the entry</strong>, <code>dictionary/long-field-goal.json</code>: a field goal attempt from 50 yards or more, compared with <a class="term" href="#term-other-kicks" data-def="The attempts outside the entry's distances: what the defined kick is measured against.">every other attempt</a>, with what the rules cannot see in its last line: the wind, the surface, the hold, whether a timeout iced the kicker.</li>
+      <li class="judge"><strong>Two reads with that entry.</strong> The trend over every season on file, then the same trend by <a class="term" href="#term-band" data-def="The standard's four bands: under 40, 40 to 49, 50 to 59, and 60 and over. --bands splits the defined kicks by band.">distance band</a>, the read it chooses because one rate can hide a change at one distance.</li>
+      <li class="judge"><strong>It writes the spec</strong>, <code>charts/NAME.json</code>, with the question as its title and the trend command. Then it runs the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a>, which runs that command again and draws the rows, or refuses with the rule named.</li>
+      <li><strong>One ruling</strong>, citing the entry and the chart. The runner checks both <a class="term" href="#term-cite" data-def="Name the entry and the chart a ruling rests on, by file and date. The runner checks both.">citations</a>, checks that the new entry is one the tool can use and the new spec one the renderer accepts, and saves the <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>. The agent can write nothing else.</li>
+    </ol>
+    <div>
+      <div class="held">
+        <b>The ruling and the chart arrive after the show</b>
+        <p>Monday, November 9, 2026, 8:00 a.m. Pacific. The agent runs on air with the dictionary as it stands, writes the long kick's entry and the chart spec, and rules. This box then holds the ruling as it gave it and the chart as the renderer drew it, both committed to the repo exactly as written. Until then the page carries no long-kick number, so the room sees the answer when the agent does.</p>
+      </div>
+      <p class="cap">The steps on the left are from the rehearsal runs of October 26, 2026, eight claims in parallel into scratch folders: the same path every time, about 30 seconds and seven tool calls. The yellow steps mark where the agent is using judgment; the rest is mechanical.</p>
+    </div>
+  </div>
+</section>
+
+<section id="policy" data-nav="The policy">
+  <h2>The policy, in ten sections</h2>
+  <p>The <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> is a Markdown file of about 1,700 words, written like a job description. It is episode 2's nine sections with one added, fourth, right after the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a>: the charts. Three other sections changed, and the table says where.</p>
+  <div class="rows marked">
+    <div><b>Job description</b><span>Not a pundit, no opinions about teams. The person in the room who went back and counted. New: it draws charts, and every chart follows a written standard.</span></div>
+    <div><b>Your one tool</b><span>Three shapes of question now: a search, a defined rush against every other rush, and a <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> of a <a class="term" href="#term-kick" data-def="Every field goal attempt whose distance falls inside the dictionary entry's range. A blocked kick is a miss.">defined kick</a>, season by season, with <code>--bands</code> for the four distances. The printout is the truth about what was measured. Never open the data file, the dictionary folder, or the charts folder directly.</span></div>
+    <div class="hl"><b>Your dictionary</b><span>Two shapes, a rush and a kick. Rules 1 to 3 as before: search by name first; use an <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> on file unchanged; write one if there is none. Rule 4, new: if neither shape can express the play the claim names, a jet sweep, a screen, a draw, say so in the <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>, write no entry, and report no number for it. "A count from the nearest rules is not the play."</span></div>
+    <div class="hl"><b>Your charts</b><span>New. You do not draw. Write a <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> in the shape the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> prints, naming the question and the command, and run the renderer; if it refuses, fix what it names. One chart per trend, <a class="term" href="#term-cite" data-def="Name the entry and the chart a ruling rests on, by file and date. The runner checks both.">cited</a> by file and date. The title is the question, with a question mark and no number in it; the numbers go in the ruling. Name the spec for the question, because a later episode may redraw it.</span></div>
+    <div><b>Turn the claim into a question</b><span>Whether kickers are too good is not a data question: say so in one sentence and set it aside. Test the claim underneath, that they make more of their kicks now, especially the long ones. Then run the read that could prove it wrong: the <a class="term" href="#term-per-game" data-def="The defined kick's attempts divided by the games kept that season, to two decimals.">tries per game</a>, or the rate by <a class="term" href="#term-band" data-def="The standard's four bands: under 40, 40 to 49, 50 to 59, and 60 and over. --bands splits the defined kicks by band.">distance band</a>.</span></div>
+    <div><b>Answer it across the seasons</b><span>The five complete seasons as the baseline, then this season's in-progress row, from one command, so the same <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a> and the same entry apply to both. Repeat the small-sample and in-progress warnings in your own words.</span></div>
+    <div><b>Show every filter</b><span>Each number comes with its filters and its entry. End with the exact commands, the search and the render included. Never report a number the tool did not print; rates to one decimal, tries per game to two.</span></div>
+    <div><b>What you may not say</b><span>No predictions, no view on what the rule should be, no advice to a team, a bettor, or a fantasy player, and no claim about why a kick was made or why a coach chose to try.</span></div>
+    <div class="hl"><b>The output contract</b><span>One ruling, under 500 words, in nine parts. The new one is "Chart," right after "Definition used," and it is why the limit went up from 400.</span></div>
+    <div class="hl"><b>Tools you may use</b><span>Four lines: the tool, the renderer, writing a new <code>.json</code> file in the dictionary folder, and writing a new <code>.json</code> file in the charts folder. No reading files, no writing anywhere else, no network.</span></div>
+  </div>
+</section>
+
+<section id="lessons" data-nav="What carries">
+  <h2>What carries to your own agent</h2>
+  <div class="carry">
+    <div><b>Write the taste down, once</b><span>Where the axis starts, which seasons are in, which line is bright: each is a choice that can make the same numbers say two things. The standard makes each choice once, in a file, with the reason. After that a chart is not a matter of taste, and a reader can check it against the rules.</span></div>
+    <div><b>Let the agent choose the question, not the pixels</b><span>The <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> holds what is judgment: which question, which command. Everything else is the template's. A spec cannot carry a color or an axis, so there is no way to be persuaded into a prettier lie.</span></div>
+    <div><b>The renderer runs the tool itself</b><span>The agent never hands the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> a number. The renderer takes the spec's command, runs it with <code>--json</code>, and draws what comes back. Rule 7, nothing the tool did not print, holds by construction, not by asking nicely.</span></div>
+    <div><b>Refuse with the rule named</b><span>A spec that starts the <a class="term" href="#term-trend" data-def="The tool's third question: one row per season, the defined kick against every other attempt, with tries per game and the gap.">trend</a> in 2023 is refused as rule 1, with the window the rule wants printed in the message. The agent fixes what the message names, the same loop as the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a>'s missing <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>. A refusal is a sentence, not a crash.</span></div>
+    <div><b>Check the citation, not the promise</b><span>The runner reads the saved run for every trend the agent measured and every render that succeeded, and checks that the <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> names the chart. Missing, the ruling goes back once; still missing, the run fails. The same shape as episode 2's entry check.</span></div>
+    <div><b>Mark the partial season every time</b><span>The tool flags the season still being played, the renderer draws it gray and dashed with its last week, and the <a class="term" href="#term-policy" data-def="analyst.md, the job description the agent follows.">policy</a> makes the agent repeat the warning. A seven-week season is never read as a year, because three places refuse to let it be.</span></div>
+  </div>
+</section>
+
+<section id="try" data-nav="Try it">
+  <h2>Try it yourself</h2>
+  <p>To run the agent, you need a Mac or Linux machine with Node, git, and the Claude Code CLI signed in. The data is already in the repo. The <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> needs only Node.</p>
+<pre class="cmd"><span class="c"># get the kit</span>
+git clone https://github.com/ismayc/monday-morning-agent.git
+cd monday-morning-agent/episode-3
+
+<span class="c"># the trend of every field goal, by distance band: the entry committed before the show</span>
+node ./query-plays.mjs --trend field-goal --seasons 2021-2026 --bands
+
+<span class="c"># a kick with no entry: the tool stops and prints the kick shape</span>
+node ./query-plays.mjs --trend no-such-kick --seasons 2021-2026
+
+<span class="c"># a spec that starts the trend in 2023: the renderer names rule 1 and draws nothing</span>
+node ../charts/render-chart.mjs ./bad-chart.json
+
+<span class="c"># the whole agent, into scratch folders so your copy of the real ones stays as it is</span>
+ANALYST_DICT_DIR=$(mktemp -d) ANALYST_CHART_DIR=$(mktemp -d) ./run-analyst.sh "Kickers are too good now."</pre>
+  <p style="margin-top:14px">Leave out the two variables and the agent reads and writes the repo's own <code>dictionary/</code> and <code>charts/</code>. After the show those folders hold the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> and the <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> written on air, so the agent reads them and measures with them. In scratch folders it starts from the two entries on file and writes its own.</p>
+  <div class="rows">
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent">The repository</a></b><span>The kit for each episode, the data, the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a>, the charts, and the examples from real runs.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/STANDARD.md">The chart standard</a></b><span>The eight rules as a file, with the version and the reasons. <a href="https://github.com/ismayc/monday-morning-agent/tree/main/charts">The charts folder</a> holds the renderer, the README with the shape of a spec, and, after the show, the spec and the SVG written on air.</span></div>
+    <div><b><a href="standard.html">The standard, one rule per keypress</a></b><span>The eight rules with a picture for each, and at the end the spec the renderer refused on air.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a></b><span>The README with both shapes, the rush and the kick, and the rules for adding an entry. Two entries on file before the show.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-3/analyst.md">The policy file</a></b><span>All ten sections, as the agent reads them. <a href="https://github.com/ismayc/monday-morning-agent/compare/d03afe9...main#files_bucket">What changed since episode 2</a>, line by line.</span></div>
+    <div><b><a href="vote.html">The vote for episode 4</a></b><span>Four claims pundits make, one page, no numbers. The room picks one during this episode's Q&amp;A, and the fact-checker audits it on November 23.</span></div>
+    <div><b><a href="../football.html">The game, explained</a></b><span>Just enough football to follow the arguments and the data: a drive, a down, a field goal, and the words the pages use.</span></div>
+    <div><b><a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">The live series</a></b><span>Eight episodes on O'Reilly, every other Monday.</span></div>
+  </div>
+</section>
+
+<section id="series" data-nav="The series">
+  <h2>The rest of the series</h2>
+  <p>This is episode 3 of eight. Each episode settles one argument and takes away one piece of human oversight, replacing it with something written down. Here it is the picture: from now on every chart the agent draws follows <a class="term" href="#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a>. <a href="../episode-1/">Episode 1, "You have to establish the run,"</a> showed the tool's <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>. <a href="../episode-2/">Episode 2, "Ban the tush push,"</a> gave the agent a <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, in two shapes since this episode: a rush and a kick.">dictionary</a> it must <a class="term" href="#term-cite" data-def="Name the entry and the chart a ruling rests on, by file and date. The runner checks both.">cite</a>. <a href="../">All eight arguments are on the series page.</a> Next, on November 23, 2026: the pundit audit, with a second agent that checks the first, on the claim this room votes for.</p>
+</section>
+
+<section id="appendix" data-nav="Appendix">
+  <h2>Appendix: the season sheets</h2>
+  <p>Two pages for after the show, to go over at any time, published once the agent has written its <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> on air. Each asks the tool six situations with that entry, one row per season: every game, the regular season, the playoffs, the four <a class="term" href="#term-band" data-def="The standard's four bands: under 40, 40 to 49, 50 to 59, and 60 and over. --bands splits the defined kicks by band.">distance bands</a>, every field goal at any distance, and the five teams that tried the long kick most. Each carries the chart drawn by the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> under <a class="term" href="#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer.">the standard</a>, and prints a verdict by a rule stated on the page. The first ends with the <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> the agent gave on air.</p>
+</section>
+
+<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. Episode 3 airs November 9, 2026. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0. Every number on this page is the tool's; the long-kick numbers and the agent's <a class="term" href="#term-ruling" data-def="The agent's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> are added after the show.</p></footer>
+
+</main>
+</body>
+</html>

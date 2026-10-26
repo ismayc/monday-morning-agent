@@ -19,7 +19,7 @@ the tool, the data, the runner, and real output. One page folder per episode und
 |---|---|---|---|---|---|
 | 1 | "You have to establish the run." | October 12, 2026 (aired; [recording and recap](https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/), [Substack](https://oreillyradar.substack.com/p/building-an-ai-analyst-one-football)) | Transparent queries | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
 | 2 | "Ban the tush push." | October 26, 2026 | Shared data definitions as durable memory | A dictionary the agent writes and must cite from then on, and every later episode inherits | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
-| 3 | "Kickers are too good now." | November 9, 2026 | Consistent visualizations | Written rules for its charts | with the episode |
+| 3 | "Kickers are too good now." | November 9, 2026 | Consistent visualizations | Written rules for its charts: a standard the renderer enforces, drawn only from rows the tool printed, and every later episode inherits | [`episode-3/`](episode-3/), [page](https://ismayc.github.io/monday-morning-agent/episode-3/) |
 | 4 | The pundit audit, claim chosen by the room | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room votes on the claim in episode 3's Q&A | with the episode |
 | 5 | "Coaches are cowards on fourth down." | December 7, 2026 | Operational boundaries | A written line it describes up to and declines to cross: no predictions | with the episode |
 | 6 | The mailbag, from the previous Q&A | January 11, 2027 | Request triage | Working a queue of vague requests it did not choose, from episode 5's Q&A | with the episode |
@@ -285,12 +285,86 @@ air, so the episode page carries them as an appendix. The tool's numbers for 54
 definitions of the play, this one among them, are on
 [the explorer page](https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html).
 
+## Episode 3: "Kickers are too good now."
+
+Every field goal in six seasons went through 84 to 86 percent of the time, and a chart
+can make that climb a mountain or lie flat, depending on where it starts. A claim about
+a trend needs a picture, and a picture is a set of choices: which seasons, where the axis
+begins, which line gets the bright color. So this episode the agent gets written rules
+for its charts, in a standard at the root of this repo, and it does not draw: it writes
+a spec naming the question and the command, and a renderer draws the rows the tool
+printed, under the standard, or refuses with the rule named. The dictionary gains a
+second shape, a kick, and the tool a third question, a trend. Everything else is in
+`episode-3/`.
+
+### The pages
+
+- **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-3/
+- **The chart standard, one rule per keypress, with the pictures:** https://ismayc.github.io/monday-morning-agent/episode-3/standard.html
+- **The vote for episode 4, four claims and no numbers:** https://ismayc.github.io/monday-morning-agent/episode-3/vote.html
+- **The words (the defined kick, the trend, the spec, the renderer, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-3/#terms
+- **The chart standard as a file, and the renderer:** [`charts/`](charts/)
+- **The dictionary, both shapes:** [`dictionary/`](dictionary/)
+- **Appendix, the season sheets:** published after the show, with the entry the agent writes on air
+
+### The kit
+
+| File | What it is |
+|---|---|
+| `analyst.md` | The policy: ten sections, about 1,700 words. Episode 2's nine plus "Your charts," fourth, and rule 4 in "Your dictionary" for plays neither shape can express. The ruling has nine parts, the new one **Chart**, under 500 words above the commands |
+| `analyst-outline.md` | The ten headings, one line each |
+| `query-plays.mjs` | The one tool. Episode 2's `--search` and `--play`, plus `--trend NAME --seasons ...`, which reads a kick entry and prints one row per season: the defined kick's attempts, made, rate, and tries per game, every other attempt's rate, and the gap; `--bands` adds the four distance bands; the season still being played is flagged IN PROGRESS. `node ./query-plays.mjs --help` lists every flag |
+| `run-analyst.sh` | The runner: `claude -p` with your claim; the policy, the dictionary, the standard, and the specs on file as the system prompt; and a four-line allowlist (the tool, the renderer, `Edit(//<repo>/dictionary/*.json)`, `Edit(//<repo>/charts/*.json)`). Episode 2's checks, plus: a run that measured a trend must cite a chart that was drawn (exit 72 after one retry); specs are snapshotted and restored like entries (70); a new spec the renderer refuses fails the run (71). `ANALYST_DICT_DIR` and `ANALYST_CHART_DIR` point it at other folders |
+| `show-run.mjs`, `render-run.mjs` | The live view and the run page. The page shows a spec written, the render call with the rules it checked and the chart inline, and a trend's season table |
+| `season-sheet.mjs` | The appendix: six situations as season tables, the chart drawn by the renderer, and a verdict by a rule printed on the page. The 2026 sheet reads this season against the five-season baseline |
+| `bad-chart.json` | The spec the renderer refuses on air: the same question with the trend starting in 2023, rule 1 |
+| `data/plays.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published, 35 columns, four of them about kicks |
+| `slim-data.mjs`, `fetch-data.sh` | How that file is made, from the raw seasons episode 1 downloads |
+| `rehearse.sh` | `entry`, `tool`, `claims`, `verify`, `freeze`, `reset`: the rehearsal beats, all writing into `rehearsal-runs/`, never into `../dictionary` or `../charts` |
+| `show.sh` | The on-air commands, one word each: `search`, `trend`, `refuse`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"` |
+
+### The chart standard
+
+[`charts/`](charts/) holds [`STANDARD.md`](charts/STANDARD.md), eight rules for every
+chart the agent draws (the window, the axes, the counts, the colors, the title, the
+source line, what may appear, and the template), and [`render-chart.mjs`](charts/render-chart.mjs),
+which draws one SVG from one spec. The spec is a small JSON file the agent writes: a
+name, a date, the question as the title, the tool, and the command, and nothing about
+how to draw it. The renderer runs the command itself with `--json` and draws what comes
+back, so a chart cannot carry a number the tool did not print; it checks the window
+(rule 1) and the title (rule 5), fixes the rest by its template, and refuses a spec
+that breaks a rule with the rule named, exit 65. It sits at the root because every
+later episode's charts follow it. The [README](charts/README.md) gives the shape of a
+spec. Specs written on air are committed after the show, with their SVGs.
+
+### Run it
+
+```
+cd monday-morning-agent/episode-3
+
+# the trend of every field goal, by distance band: the entry committed before the show
+node ./query-plays.mjs --trend field-goal --seasons 2021-2026 --bands
+
+# a kick with no entry: the tool stops and prints the kick shape
+node ./query-plays.mjs --trend no-such-kick --seasons 2021-2026
+
+# a spec that starts the trend in 2023: the renderer names rule 1 and draws nothing
+node ../charts/render-chart.mjs ./bad-chart.json
+
+# the agent, into scratch folders so your copies of the real ones stay as they are
+ANALYST_DICT_DIR=$(mktemp -d) ANALYST_CHART_DIR=$(mktemp -d) ./run-analyst.sh "Kickers are too good now."
+```
+
+A run takes about half a minute: it searches by name, gets the tool's refusal, writes
+the entry, reads the trend and the bands, writes the spec, renders it, and cites both.
+The long-kick numbers and the ruling go here after the show.
+
 ## Across the episodes
 
 ### What this agent does not do
 
 No predictions, no odds, no wagering analysis, and no fantasy advice. That is a design
-decision. The public data carries betting-line columns; neither episode's
+decision. The public data carries betting-line columns; no episode's
 `slim-data.mjs` keeps them, so no file the agent can reach has one.
 
 ### A scheduled workflow commits to `main`
@@ -298,8 +372,8 @@ decision. The public data carries betting-line columns; neither episode's
 `.github/workflows/refresh-data.yml` is scheduled three times a night (GitHub starts
 scheduled workflows hours late, so one slot is not enough; the file says why). It
 re-downloads the seasons once, rebuilds episode 1's slim file, explorer answers, and
-plays-page data, then episode 2's plays file and explorer answers from the same
-downloads, and commits when the plays changed. Pull before you push.
+plays-page data, then episode 2's plays file and explorer answers and episode 3's plays
+file from the same downloads, and commits when the plays changed. Pull before you push.
 
 ### Data
 

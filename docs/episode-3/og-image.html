@@ -1,0 +1,66 @@
+<!doctype html><meta charset="utf-8"><title>Link preview source</title>
+<!-- Source for og-image.png (1200x630), episode 3's link preview. Re-render: serve docs/
+     locally (python3 -m http.server 8793), then with a throwaway profile:
+       "/Applications/Google Chrome.app/Contents/MacOS/Google Chrome" --headless=new --user-data-dir=/tmp/og-profile \
+         --window-size=1200,630 --hide-scrollbars --screenshot=og-image.png http://127.0.0.1:8793/episode-3/og-image.html
+     Needs the network once, for the Barlow fonts. The numbers are the make rate of every
+     field goal, season by season, from episode-3/query-plays.mjs (--trend field-goal
+     --seasons 2021-2026, run October 26, 2026): 85.3, 85.4, 85.8, 84.2, 85.6, and 84.2 so
+     far in 2026. No long-kick numbers: the answer is held back until the episode airs on
+     November 9, 2026. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<style>
+  html,body{margin:0}
+  body{width:1200px;height:630px;overflow:hidden;position:relative}
+  .pad{position:absolute;inset:0;padding:34px 60px}
+  .who{font-family:var(--display);font-weight:600;font-size:30px;border-bottom:4px solid var(--ink);padding-bottom:8px;display:flex;justify-content:space-between}
+  .who span:last-child{font-weight:500}
+  h1{margin-top:18px;font-size:104px;max-width:none;line-height:.9;white-space:nowrap}
+  .said{margin-top:14px;font-family:var(--display);font-weight:600;font-size:40px;line-height:1.04;max-width:none}
+  .twice{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--ink);background:#fff}
+  .twice>figure{margin:0;padding:12px 18px 10px;min-width:0}
+  .twice>figure:first-child{border-right:3px solid var(--ink);background:#fff6f8}
+  .twice h3{font-family:var(--display);font-weight:700;font-size:26px;line-height:1;display:flex;gap:12px;align-items:baseline}
+  .twice h3 small{font-family:var(--text);font-weight:500;font-size:15px;padding:1px 8px;border:2px solid var(--ink)}
+  .twice h3 small.no{background:var(--pink)} .twice h3 small.ok{background:var(--yellow)}
+  .twice svg{width:100%;height:auto;display:block;margin-top:6px}
+</style>
+<div class="pad">
+  <div class="who"><span>The Monday Morning Agent</span><span>Episode 3, November 9, 2026</span></div>
+  <h1>"Kickers are too good now."</h1>
+  <p class="said">Same five numbers. Two pictures. So the agent gets written rules for its charts.</p>
+  <div class="twice">
+    <figure>
+      <h3>Drawn to make a point <small class="no">refused</small></h3>
+      <svg viewBox="0 0 520 200">
+        <rect width="520" height="200" fill="#fff6f8"/>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#4a5058">
+          <text x="60" y="168" text-anchor="end">84%</text><line x1="68" x2="500" y1="164" y2="164" stroke="#14171a" stroke-width="2"/>
+          <text x="60" y="100" text-anchor="end">85%</text><line x1="68" x2="500" y1="96" y2="96" stroke="#c9ccd1"/>
+          <text x="60" y="32" text-anchor="end">86%</text><line x1="68" x2="500" y1="28" y2="28" stroke="#c9ccd1"/>
+        </g>
+        <polyline points="150,150 420,55" fill="none" stroke="#ffe14d" stroke-width="8" stroke-linecap="round"/>
+        <circle cx="150" cy="150" r="10" fill="#ffe14d" stroke="#14171a" stroke-width="2"/>
+        <circle cx="420" cy="55" r="10" fill="#ffe14d" stroke="#14171a" stroke-width="2"/>
+        <g font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="17" fill="#14171a" text-anchor="middle"><text x="150" y="134">84.2%</text><text x="420" y="39">85.6%</text></g>
+        <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="19" fill="#14171a" text-anchor="middle"><text x="150" y="192">2024</text><text x="420" y="192">2025</text></g>
+      </svg>
+    </figure>
+    <figure>
+      <h3>Drawn under the standard <small class="ok">rule by rule</small></h3>
+      <svg viewBox="0 0 520 200">
+        <rect width="520" height="200" fill="#fff"/>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#4a5058">
+          <text x="60" y="168" text-anchor="end">0%</text><line x1="68" x2="500" y1="164" y2="164" stroke="#14171a" stroke-width="2"/>
+          <text x="60" y="100" text-anchor="end">50%</text><line x1="68" x2="500" y1="96" y2="96" stroke="#c9ccd1"/>
+          <text x="60" y="32" text-anchor="end">100%</text><line x1="68" x2="500" y1="28" y2="28" stroke="#c9ccd1"/>
+        </g>
+        <polyline points="100,48 170,48 240,47 310,50 380,48 450,50" fill="none" stroke="#ffe14d" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+        <g stroke="#14171a" stroke-width="2" fill="#ffe14d"><circle cx="100" cy="48" r="8"/><circle cx="170" cy="48" r="8"/><circle cx="240" cy="47" r="8"/><circle cx="310" cy="50" r="8"/><circle cx="380" cy="48" r="8"/><circle cx="450" cy="50" r="8" fill="#c9ccd1" stroke-dasharray="3 2"/></g>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="12" fill="#4a5058" text-anchor="middle"><text x="100" y="74">of 1,076</text><text x="170" y="74">of 1,105</text><text x="240" y="74">of 1,107</text><text x="310" y="74">of 1,166</text><text x="380" y="74">of 1,140</text><text x="450" y="74">of 444</text></g>
+        <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="19" fill="#14171a" text-anchor="middle"><text x="100" y="192">2021</text><text x="170" y="192">2022</text><text x="240" y="192">2023</text><text x="310" y="192">2024</text><text x="380" y="192">2025</text><text x="450" y="192" fill="#4a5058">2026*</text></g>
+      </svg>
+    </figure>
+  </div>
+</div>

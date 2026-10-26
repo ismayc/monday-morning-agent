@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The vote for episode 4: which pundit's claim gets audited?</title>
+<meta name="description" content="Four claims pundits make about the NFL. The room picks one during episode 3's Q&A, and in episode 4 a second agent audits the first agent's work on it. No numbers on this page; the numbers would decide the vote.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="The vote for episode 4: which pundit's claim gets audited?">
+<meta property="og:description" content="Four claims pundits make. The room picks one during episode 3's Q&A, and a second agent audits the first agent's work on it in episode 4.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-3/vote.html">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-3/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Kickers are too good now. Two charts of the same five numbers: one with a cut axis and a late start that climbs a mountain, one under the standard, from zero, flat.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The vote for episode 4: which pundit's claim gets audited?">
+<meta name="twitter:description" content="Four claims pundits make. The room picks one during episode 3's Q&A.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-3/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<style>
+  /* Four cards, lettered, big enough to read from the back of the room, and one page
+     when printed: the same page the O'Reilly producers enter into the ON24 poll. */
+  .ballot { margin-top: 26px; display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .c { border: 2px solid var(--ink); background: #fff; display: grid; grid-template-columns: 84px 1fr; min-height: 190px; }
+  .c > b { font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1; background: var(--yellow); border-right: 2px solid var(--ink); display: flex; align-items: center; justify-content: center; }
+  .c > div { padding: 16px 20px 18px; }
+  .c h2 { font-family: var(--display); font-weight: 700; font-size: clamp(26px, 3vw, 34px); line-height: 1.04; }
+  .c p { font-size: 16.5px; margin-top: 8px; max-width: none; }
+  .c .who { font-size: 14.5px; color: var(--soft); margin-top: 8px; }
+  @media (max-width: 700px) { .ballot { grid-template-columns: 1fr; } }
+  .ask { margin-top: 26px; border: 2px solid var(--ink); background: var(--ink); color: var(--yellow); padding: 16px 20px; font-family: var(--display); font-weight: 700; font-size: clamp(24px, 3vw, 34px); line-height: 1.1; }
+  .ask small { display: block; font-family: var(--text); font-weight: 400; font-size: 16px; color: #fcfcfa; margin-top: 6px; }
+  .no { margin-top: 18px; font-size: 15.5px; color: var(--soft); border-left: 4px solid var(--ink); padding-left: 12px; max-width: 70ch; }
+  @media print {
+    @page { size: landscape; margin: 12mm; }
+    .top, footer, .no, .lead a { display: none !important; }
+    body { font-size: 15px; }
+    h1 { font-size: 44px; margin-top: 0; }
+    .ballot { gap: 10px; }
+    .c { min-height: 0; break-inside: avoid; }
+    .c > b { font-size: 48px; }
+    .ask { background: #fff; color: #000; border: 3px solid #000; }
+    .ask small { color: #000; }
+  }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./">Episode 3</a><a href="standard.html">The standard</a><a href="vote.html" aria-current="page">The vote</a><a href="./#terms">Terms</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/charts">The charts</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<header>
+  <h1>Which pundit's claim gets audited?</h1>
+  <p class="lead">Episode 4 on November 23, 2026 is the pundit audit: a second agent joins as a standing fact-checker, so the agent that does the analysis is never the agent that grades it. The claim it works on is chosen here, by this room, in the poll during episode 3's Q&amp;A. Four claims pundits make every autumn. Pick the one you most want checked.</p>
+</header>
+
+<div class="ask">Which claim should the agent check, with a second agent checking the first?<small>Vote in the poll on your screen. One choice. The result is read aloud before we close.</small></div>
+
+<div class="ballot">
+  <div class="c"><b>A</b><div>
+    <h2>"Icing the kicker works."</h2>
+    <p>Call a timeout just before the kick and the kicker misses more often. The audit would compare kicks that followed a defensive timeout with kicks that did not, at the same distances, and say whether a timeout changes anything.</p>
+    <p class="who">A pundit's claim since the 1990s, and analytics folk wisdom says the opposite, so one side is wrong.</p>
+  </div></div>
+  <div class="c"><b>B</b><div>
+    <h2>"Home-field advantage is dead."</h2>
+    <p>Crowds do not matter the way they did. The audit would count how often the home team wins and by how much, season by season, and say whether the edge is gone, smaller, or the same.</p>
+    <p class="who">Said after every upset on the road. The older baseline the claim compares against is before the data this show can see, and the agent would have to say so.</p>
+  </div></div>
+  <div class="c"><b>C</b><div>
+    <h2>"Win the turnover battle, win the game."</h2>
+    <p>The team that gives the ball away less wins. The audit would count it, then ask the harder question: do turnovers cause the win, or does trailing cause the turnovers? The same question episode 1 asked about running the ball.</p>
+    <p class="who">The claim is in every broadcast. The audit is about what the number can and cannot say.</p>
+  </div></div>
+  <div class="c"><b>D</b><div>
+    <h2>"The new kickoff brought the return back."</h2>
+    <p>The league redesigned the kickoff in 2024 to get returns back into the game. The audit would count returns and touchbacks season by season and say which rule change moved the number, and when.</p>
+    <p class="who">Two rule changes in two years, so the claim has a date in it, and the <a class="term" href="./#term-standard" data-def="charts/STANDARD.md: eight rules for every chart the agent draws, enforced by the renderer and inherited by every later episode.">chart standard</a>'s rule 1 is about to matter.</p>
+  </div></div>
+</div>
+
+<p class="no"><strong>No numbers on this page, on purpose.</strong> The audit's point is that the first agent's number gets checked by a second agent before anyone reads it. Showing the numbers now would decide the vote and spoil the audit. Every one of the four can be settled from the plays on file; what differs is how interesting the honest answer is.</p>
+
+<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. The vote is taken in episode 3, November 9, 2026; the audit airs in episode 4, November 23, 2026. This page prints as one landscape sheet, the same four choices the poll shows.</p></footer>
+
+</main>
+</body>
+</html>
