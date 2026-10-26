@@ -41,15 +41,25 @@
   .ask small { display: block; font-family: var(--text); font-weight: 400; font-size: 16px; color: #fcfcfa; margin-top: 6px; }
   .no { margin-top: 18px; font-size: 15.5px; color: var(--soft); border-left: 4px solid var(--ink); padding-left: 12px; max-width: 70ch; }
   @media print {
-    @page { size: landscape; margin: 12mm; }
-    .top, footer, .no, .lead a { display: none !important; }
-    body { font-size: 15px; }
-    h1 { font-size: 44px; margin-top: 0; }
-    .ballot { gap: 10px; }
-    .c { min-height: 0; break-inside: avoid; }
-    .c > b { font-size: 48px; }
-    .ask { background: #fff; color: #000; border: 3px solid #000; }
-    .ask small { color: #000; }
+    /* one landscape sheet, the slide the producers enter into ON24: the question and
+       the four claims, each with its one-paragraph gloss; the "who says it" lines,
+       the nav, the note, and the footer stay on the web page */
+    @page { size: landscape; margin: 10mm 12mm; }
+    .top, footer, .no, .lead a, .c .who { display: none !important; }
+    html, body { background: #fff; }
+    body { font-size: 16px; }
+    main { max-width: none; width: 100%; padding: 0; margin: 0; }
+    header { margin: 0; }
+    h1 { font-size: 50px; line-height: 1; margin: 0 0 8px; max-width: none; }
+    .lead { font-size: 17px; line-height: 1.35; margin: 0; max-width: none; }
+    .ask { margin-top: 14px; padding: 12px 18px; font-size: 30px; background: #fff; color: #000; border: 3px solid #000; }
+    .ask small { color: #000; font-size: 15px; margin-top: 4px; }
+    .ballot { margin-top: 14px; gap: 14px; }
+    .c { min-height: 0; break-inside: avoid; grid-template-columns: 76px 1fr; }
+    .c > b { font-size: 54px; }
+    .c > div { padding: 14px 18px 16px; }
+    .c h2 { font-size: 29px; }
+    .c p { font-size: 16.5px; margin-top: 8px; line-height: 1.38; }
   }
 </style>
 </head>
