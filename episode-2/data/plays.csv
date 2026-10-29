@@ -262125,7 +262125,7 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,2,10,0,51,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,7,0,0,10,(7:41) (Shotgun) 10-J.Love pass short middle to 22-P.Strong to DAL 44 for 7 yards (50-S.James).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,3,3,0,44,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,0,0,0,10,(6:59) (Shotgun) 10-J.Love pass incomplete deep right to 0-M.Golden (25-J.Porter).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,,,3,,0,0,,no_play,0,0,0,0,0,0,0,,,,,0,0,0,,Timeout #1 by GB at 06:52.
-2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,4,3,0,44,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,14,1,0,10,(6:52) (Shotgun) 10-J.Love pass short left to 85-T.Kraft to DAL 30 for 14 yards (13-C.Downs).
+2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,4,3,0,44,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,14,1,0,10,(6:52) (Shotgun) 10-J.Love pass short left to 85-T.Kraft to DAL 30 for 14 yards (13-C.Downs) [92-Q.Williams].
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,1,10,0,30,run,1,0,0,0,0,1,0,00-0039811,M.Lloyd,,,4,0,0,10,(6:06) (Shotgun) 32-M.Lloyd right tackle to DAL 26 for 4 yards (6-D.Ezeiruaku).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,2,6,0,26,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,0,0,0,10,(5:21) (Shotgun) 10-J.Love pass incomplete deep middle to 9-C.Watson (57-M.Lawrence).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,3,6,0,26,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,0,0,0,10,(5:13) (Shotgun) 10-J.Love pass incomplete short left to 85-T.Kraft (92-Q.Williams).
@@ -262137,7 +262137,7 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,DAL,GB,3,3,7,0,54,pass,0,1,0,0,0,1,0,,,00-0033077,D.Prescott,0,0,0,-13,(3:39) (Shotgun) 4-D.Prescott pass incomplete short middle to 3-G.Pickens [33-E.Williams].
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,DAL,GB,3,4,7,0,54,no_play,0,0,0,0,0,0,0,,,,,0,0,0,-13,"(3:35) (Punt formation) PENALTY on DAL, Delay of Game, 5 yards, enforced at DAL 46 - No Play."
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,DAL,GB,3,4,12,0,59,punt,0,0,0,0,0,0,0,,,,,0,0,0,-13,"(3:35) 5-B.Anger punts 53 yards to GB 6, Center-44-T.Sieg, fair catch by 13-C.Owen."
-2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,1,10,0,94,run,1,0,0,0,0,0,0,00-0039811,M.Lloyd,,,2,0,0,13,(3:29) 32-M.Lloyd left guard to GB 8 for 2 yards (91-O.Ogbonnia).
+2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,1,10,0,94,run,1,0,0,0,0,0,0,00-0039811,M.Lloyd,,,2,0,0,13,(3:29) 32-M.Lloyd left guard to GB 8 for 2 yards (91-O.Ogbonnia; 7-R.Gary).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,2,8,0,92,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,6,0,0,13,(2:47) (Shotgun) 10-J.Love pass short middle to 85-T.Kraft to GB 14 for 6 yards (28-S.Revel).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,3,2,0,86,pass,0,1,0,0,0,1,0,,,00-0036264,J.Love,-10,0,0,13,(2:08) (Shotgun) 10-J.Love sacked at GB 4 for -10 yards (97-K.Clark).
 2026,REG,6,2026_06_DAL_GB,2026-10-18,GB,DAL,GB,DAL,3,4,12,0,96,punt,0,0,0,0,0,0,0,,,,,0,0,0,13,"(1:23) 19-D.Whelan punts 55 yards to DAL 41, Center-42-M.Orzech. 18-J.Mingo to DAL 45 for 4 yards (59-T.Hopper; 87-J.Sturdivant). PENALTY on DAL-28-S.Revel, Offensive Holding, 10 yards, enforced at DAL 41."
@@ -263611,7 +263611,7 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,WAS,SF,3,2,1,1,1,pass,0,1,0,0,0,1,0,,,00-0039910,J.Daniels,1,1,1,-20,"(:18) (Shotgun) 5-J.Daniels pass short left to 3-S.Diggs for 1 yard, TOUCHDOWN [6-M.Mustapha]."
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,WAS,SF,3,,0,0,15,extra_point,0,0,0,0,0,0,0,,,,,0,0,0,-14,"19-D.Stevens extra point is GOOD, Center-69-T.Ott, Holder-10-T.Way."
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,SF,WAS,3,,0,0,35,kickoff,0,0,0,0,0,0,0,,,,,0,0,0,13,"19-D.Stevens kicks 65 yards from WAS 35 to end zone, Touchback to the SF 35."
-2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,SF,WAS,3,1,10,0,65,pass,0,1,0,0,0,0,0,,,00-0037834,B.Purdy,-9,0,0,13,(:14) 13-B.Purdy sacked at SF 26 for -9 yards (96-S.Tuttle).
+2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,SF,WAS,3,1,10,0,65,pass,0,1,0,0,0,0,0,,,00-0037834,B.Purdy,-9,0,0,13,(:15) 13-B.Purdy sacked at SF 26 for -9 yards (96-S.Tuttle).
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,SF,WAS,3,,0,0,,,,,0,0,0,0,0,,,,,,,,13,END QUARTER 3
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,SF,WAS,4,2,19,0,74,pass,0,1,0,0,0,1,0,,,00-0037834,B.Purdy,8,0,0,13,(15:00) (Shotgun) 13-B.Purdy pass short right to 23-C.McCaffrey to SF 34 for 8 yards (2-A.Robertson; 52-S.Styles).
 2026,REG,6,2026_06_WAS_SF,2026-10-19,SF,WAS,SF,WAS,4,3,11,0,66,pass,0,1,0,0,0,1,0,,,00-0037834,B.Purdy,0,0,0,13,(14:20) (Shotgun) 13-B.Purdy pass incomplete short left to 85-G.Kittle (39-J.Reaves).
