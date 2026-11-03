@@ -110,7 +110,7 @@ function rulingHtml(md) {
   }
   return out.join('\n')
 }
-const rulingBlock = RULING ? `<section class="ruling"><h2>What the agent ruled on air</h2>${rulingHtml(readFileSync(RULING, 'utf8'))}<p class="from">From <code>${esc(RULING)}</code>.</p></section>` : ''
+const rulingBlock = RULING ? `<section class="ruling"><h2>What the agent ruled on air</h2>${rulingHtml(readFileSync(RULING, 'utf8'))}<p class="from">From <code>${esc(RULING)}</code>. The agent ruled with the tool as it was on October 26, 2026. That tool counted 195 two-point tries as failed conversions, so the ruling's numbers differ from the corrected ones above (fixed November 3, 2026).</p></section>` : ''
 
 function rowHtml(a) {
   const d = a.out.result.defined, o = a.out.result.other

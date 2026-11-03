@@ -268,22 +268,34 @@ does not hold in its strong form: the defined play converted 8.3 points more oft
 other short-yardage rushes over five seasons and 7.8 points more without PHI, which is a
 real edge but not a gap that makes it a different kind of play."
 
+**Corrected November 3, 2026.** The tool as aired counted 195 two-point tries as failed
+conversions, although its filter line said they were out. The aired 8.3 and 7.8 points
+are 10.1 and 9.7 with them removed, and the verdict does not change. The table, the
+sheets, and the explorer use the corrected plays. The ruling above and the files in
+`episode-2/examples/` are kept as they were. [The full account](https://sunbirds.ai/blog/tush-push/).
+
 | 2021 to 2025 | The defined play | Every other rush at that distance | Gap |
 |---|---|---|---|
-| All downs | 78.3% of 1,472 | 70.0% of 6,282 | 8.3 points |
+| All downs | 81.6% of 1,412 | 71.5% of 6,147 | 10.1 points |
 | Third and fourth down | 82.9% of 1,149 | 70.1% of 3,515 | 12.8 |
-| Every team but the Eagles | 77.9% of 1,299 | 70.1% of 6,134 | 7.8 |
-| The Eagles only | 80.9% of 173 | 65.5% of 148 | 15.4 |
+| Every team but the Eagles | 81.2% of 1,246 | 71.6% of 6,007 | 9.7 |
+| The Eagles only | 84.3% of 166 | 69.3% of 140 | 15.1 |
 
 All nine situations, with a verdict by a rule printed on the page, are on the
 [five-season sheet](https://ismayc.github.io/monday-morning-agent/episode-2/season-sheet-2021-2025.html),
 which ends with the ruling, and the
 [2026 sheet](https://ismayc.github.io/monday-morning-agent/episode-2/season-sheet-2026.html)
-asks the same questions of this season (through the October 25 games: 82.0% of 128
-against 67.7% of 477, a gap of 14.3 points). The episode did not reach the sheets on
+asks the same questions of this season (through the October 25 games: 82.7% of 127
+against 68.4% of 472, a gap of 14.2 points). The episode did not reach the sheets on
 air, so the episode page carries them as an appendix. The tool's numbers for 54
 definitions of the play, this one among them, are on
 [the explorer page](https://ismayc.github.io/monday-morning-agent/episode-2/explorer.html).
+
+## The data science articles
+
+[`analysis/`](analysis/) rebuilds episodes 1 and 2 in Python and in R, with intervals,
+adjustment, and a check of the definition against human charting. The articles are
+[on the Sunbird Insights blog](https://sunbirds.ai/blog/).
 
 ## Episode 3: "Kickers are too good now."
 

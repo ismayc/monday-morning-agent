@@ -105,8 +105,8 @@
 <h1>This season so far: 2026, through October 25, 2026</h1>
 <p class="lead">The same questions as the five-season sheet, asked of this season alone: weeks 1-7, through the games of October 25, 2026. The groups are small and the tool says so wherever it matters.</p>
 <div class="verdict"><b>Holds, as a steady edge</b><div>
-<p class="vtext">Over 2026, the defined play converted 82.0% of 128 plays, every other rush with the same yards to go 67.7% of 477, a gap of 14.3 points. Take away the Eagles and the gap is 14.5 points, so it is not one team's play. The play converts about ten points more often than everything else at that distance, season after season. Whether that is grounds for a ban is a judgment about safety and fairness, and no number on this sheet settles it.</p>
-<div class="evidence"><div><b>0</b><span>of 18,561 play descriptions name the play</span></div><div><b>14.3</b><span>points: the gap, all downs</span></div><div><b>14.5</b><span>points: the gap without the Eagles</span></div></div>
+<p class="vtext">Over 2026, the defined play converted 82.7% of 127 plays, every other rush with the same yards to go 68.4% of 472, a gap of 14.2 points. Take away the Eagles and the gap is 14.4 points, so it is not one team's play. The play converts about ten points more often than everything else at that distance, season after season. Whether that is grounds for a ban is a judgment about safety and fairness, and no number on this sheet settles it.</p>
+<div class="evidence"><div><b>0</b><span>of 18,561 play descriptions name the play</span></div><div><b>14.2</b><span>points: the gap, all downs</span></div><div><b>14.4</b><span>points: the gap without the Eagles</span></div></div>
 <p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it. It reads the all-downs gap: under 100 plays matching the definition is too few to rule; a gap of 8 points or more that stays at 5 or more without the Eagles holds, as a steady edge; a gap under 4 does not hold as stated; between the two is mixed. Whether the play should be legal is not on this sheet. This is the page's rule, not the agent's. Every number is the tool's.</p>
 </div></div>
 <p class="not season"><strong>This season is not like the last five.</strong> Jalen Hurts, the Eagles' quarterback, is expected to miss the rest of the 2026 season after week 5 (blood clots, reported October 19, 2026); Tanner McKee started from week 6. The Eagles' plays on this sheet are from the games before that, so this season is no test of the Eagles' version of the play, and every Eagles row here will stay small. The five complete seasons are the evidence.</p>
@@ -118,9 +118,9 @@
 <div class="qs">
 <div class="q">
 <div class="qhead"><h3>All downs</h3><p>Every rush with one yard or less to go, the defined play against the rest.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="All downs: the defined play converted 82.0%, other short-yardage rushes 67.7%">
-<div class="gap" style="left:67.71%;width:14.32%"></div>
-<div class="mk least" style="left:67.71%"><b>67.7%</b></div><div class="mk most" style="left:82.03%"><b>82.0%</b></div></div><p class="numbers"><span class="y">82.0%</span> the defined play, 128 plays; <span class="b">67.7%</span> every other rush at that distance, 477 plays; a gap of <b>14.3 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="All downs: the defined play converted 82.7%, other short-yardage rushes 68.4%">
+<div class="gap" style="left:68.43%;width:14.24%"></div>
+<div class="mk least" style="left:68.43%"><b>68.4%</b></div><div class="mk most" style="left:82.68%"><b>82.7%</b></div></div><p class="numbers"><span class="y">82.7%</span> the defined play, 127 plays; <span class="b">68.4%</span> every other rush at that distance, 472 plays; a gap of <b>14.2 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Third and fourth down</h3><p>When the drive is on the line.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --downs 3,4</code></div>
@@ -136,9 +136,9 @@
 </div>
 <div class="q">
 <div class="qhead"><h3>One yard to go</h3><p>The shortest distance, where the play is most used.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --yards-to-go 1</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="One yard to go: the defined play converted 82.0%, other short-yardage rushes 67.7%">
-<div class="gap" style="left:67.71%;width:14.32%"></div>
-<div class="mk least" style="left:67.71%"><b>67.7%</b></div><div class="mk most" style="left:82.03%"><b>82.0%</b></div></div><p class="numbers"><span class="y">82.0%</span> the defined play, 128 plays; <span class="b">67.7%</span> every other rush at that distance, 477 plays; a gap of <b>14.3 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="One yard to go: the defined play converted 82.7%, other short-yardage rushes 68.4%">
+<div class="gap" style="left:68.43%;width:14.24%"></div>
+<div class="mk least" style="left:68.43%"><b>68.4%</b></div><div class="mk most" style="left:82.68%"><b>82.7%</b></div></div><p class="numbers"><span class="y">82.7%</span> the defined play, 127 plays; <span class="b">68.4%</span> every other rush at that distance, 472 plays; a gap of <b>14.2 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Goal to go</h3><p>At the goal line, where a conversion is a touchdown.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --goal-to-go</code></div>
@@ -148,9 +148,9 @@
 </div>
 <div class="q">
 <div class="qhead"><h3>Every team but the Eagles</h3><p>Take away the team the play is named for.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --not-team PHI</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="Every team but the Eagles: the defined play converted 82.4%, other short-yardage rushes 67.9%">
-<div class="gap" style="left:67.95%;width:14.45%"></div>
-<div class="mk least" style="left:67.95%"><b>67.9%</b></div><div class="mk most" style="left:82.40%"><b>82.4%</b></div></div><p class="numbers"><span class="y">82.4%</span> the defined play, 125 plays; <span class="b">67.9%</span> every other rush at that distance, 468 plays; a gap of <b>14.5 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="Every team but the Eagles: the defined play converted 83.1%, other short-yardage rushes 68.7%">
+<div class="gap" style="left:68.68%;width:14.38%"></div>
+<div class="mk least" style="left:68.68%"><b>68.7%</b></div><div class="mk most" style="left:83.06%"><b>83.1%</b></div></div><p class="numbers"><span class="y">83.1%</span> the defined play, 124 plays; <span class="b">68.7%</span> every other rush at that distance, 463 plays; a gap of <b>14.4 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>The Eagles only</h3><p>The team that made it an argument.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --team PHI</code></div>
@@ -160,9 +160,9 @@
 </div>
 <div class="q">
 <div class="qhead"><h3>Regular season only</h3><p>Leave the playoffs out.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --type REG</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="Regular season only: the defined play converted 82.0%, other short-yardage rushes 67.7%">
-<div class="gap" style="left:67.71%;width:14.32%"></div>
-<div class="mk least" style="left:67.71%"><b>67.7%</b></div><div class="mk most" style="left:82.03%"><b>82.0%</b></div></div><p class="numbers"><span class="y">82.0%</span> the defined play, 128 plays; <span class="b">67.7%</span> every other rush at that distance, 477 plays; a gap of <b>14.3 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="Regular season only: the defined play converted 82.7%, other short-yardage rushes 68.4%">
+<div class="gap" style="left:68.43%;width:14.24%"></div>
+<div class="mk least" style="left:68.43%"><b>68.4%</b></div><div class="mk most" style="left:82.68%"><b>82.7%</b></div></div><p class="numbers"><span class="y">82.7%</span> the defined play, 127 plays; <span class="b">68.4%</span> every other rush at that distance, 472 plays; a gap of <b>14.2 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Playoffs only</h3><p>Thirteen games a season.</p><code>node ./query-plays.mjs --play tush-push --seasons 2026 --type POST</code></div>
@@ -170,7 +170,7 @@
 </div>
 </div>
 <div class="tables">
-<div><h2>By season</h2><code>node ./query-plays.mjs --play tush-push --seasons 2026 --by season</code><table><thead><tr><th>Season</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>2026</td><td class="num">128</td><td class="num"><span class="y">82.0%</span></td><td class="num">477</td><td class="num"><span class="b">67.7%</span></td><td class="num">14.3</td></tr></tbody></table></div>
+<div><h2>By season</h2><code>node ./query-plays.mjs --play tush-push --seasons 2026 --by season</code><table><thead><tr><th>Season</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>2026</td><td class="num">127</td><td class="num"><span class="y">82.7%</span></td><td class="num">472</td><td class="num"><span class="b">68.4%</span></td><td class="num">14.2</td></tr></tbody></table></div>
 <div><h2>By team</h2><code>node ./query-plays.mjs --play tush-push --seasons 2026 --by team</code><table><thead><tr><th>Team</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>ARI</td><td class="num">15</td><td class="num"><span class="y">80.0%</span></td><td class="num">5</td><td class="num"><span class="b">40.0%</span></td><td class="num">40.0</td></tr>
 <tr><td>BUF</td><td class="num">12</td><td class="num"><span class="y">100.0%</span></td><td class="num">7</td><td class="num"><span class="b">71.4%</span></td><td class="num">28.6</td></tr>
 <tr><td>IND</td><td class="num">10</td><td class="num"><span class="y">90.0%</span></td><td class="num">17</td><td class="num"><span class="b">76.5%</span></td><td class="num">13.5</td></tr>
@@ -179,7 +179,7 @@
 
 <p class="not"><strong>Not on this sheet: why, and whether.</strong> Every gap here is how often each kind of play converted in the plays kept. It does not say why the play converts, who pushed, or whether anyone was hurt, and it does not say what the rule should be.</p>
 
-<footer><p>Made October 26, 2026 at 8:58 AM by season-sheet.mjs, which ran query-plays.mjs 12 times (the command under each question) and wrote down what it printed. Seasons on file: 2026: 1-7. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
+<footer><p>Made November 3, 2026 at 9:59 AM by season-sheet.mjs, which ran query-plays.mjs 12 times (the command under each question) and wrote down what it printed. Seasons on file: 2026: 1-7. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
 </main>
 </body>
 </html>

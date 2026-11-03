@@ -289,7 +289,9 @@ for (const p of plays) {
 const primary = new Map()
 for (const [k, m] of passes) primary.set(k, [...m.entries()].sort((a, b) => b[1] - a[1])[0][0])
 step('a rush by a team with the ball (passes, kicks, punts, penalties that wiped the play out, kneel-downs, and two-point tries out)',
-  p => !blank(p[col.posteam]) && p[col.rush_attempt] === '1' && p[col.play_type] === 'run')
+  // A two-point try has no down. Before November 3, 2026 this filter did not check, so 195
+  // tries from 2021 to 2025 stayed in, and all of them counted as not converted.
+  p => !blank(p[col.posteam]) && p[col.rush_attempt] === '1' && p[col.play_type] === 'run' && !blank(p[col.down]))
 const ytg = yardsToGo === null ? R.yardsToGoMax : yardsToGo
 step(`yards to go: ${ytg} or fewer${yardsToGo === null ? " (the definition's distance)" : ` (the flag; the definition says ${R.yardsToGoMax})`}`,
   p => !blank(p[col.ydstogo]) && +p[col.ydstogo] <= ytg)

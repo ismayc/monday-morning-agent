@@ -105,8 +105,8 @@
 <h1>&quot;Ban the tush push.&quot; Five seasons, 2021 to 2025.</h1>
 <p class="lead">Nine situations, each answered by the one tool from every play of 2021 through 2025, measuring with the definition below. Yellow is the defined play, blue is every other rush with the same yards to go, and the hatched stretch between them is the gap in how often each converted.</p>
 <div class="verdict"><b>Holds, as a steady edge</b><div>
-<p class="vtext">Over 2021 to 2025, the defined play converted 78.3% of 1,472 plays, every other rush with the same yards to go 70.0% of 6,282, a gap of 8.3 points. Take away the Eagles and the gap is 7.8 points, so it is not one team's play. The play converts about ten points more often than everything else at that distance, season after season. Whether that is grounds for a ban is a judgment about safety and fairness, and no number on this sheet settles it.</p>
-<div class="evidence"><div><b>0</b><span>of 247,284 play descriptions name the play</span></div><div><b>8.3</b><span>points: the gap, all downs</span></div><div><b>7.8</b><span>points: the gap without the Eagles</span></div></div>
+<p class="vtext">Over 2021 to 2025, the defined play converted 81.6% of 1,412 plays, every other rush with the same yards to go 71.5% of 6,147, a gap of 10.1 points. Take away the Eagles and the gap is 9.7 points, so it is not one team's play. The play converts about ten points more often than everything else at that distance, season after season. Whether that is grounds for a ban is a judgment about safety and fairness, and no number on this sheet settles it.</p>
+<div class="evidence"><div><b>0</b><span>of 247,284 play descriptions name the play</span></div><div><b>10.1</b><span>points: the gap, all downs</span></div><div><b>9.7</b><span>points: the gap without the Eagles</span></div></div>
 <p class="rule">The verdict follows a rule written in season-sheet.mjs, so you can disagree with it. It reads the all-downs gap: under 100 plays matching the definition is too few to rule; a gap of 8 points or more that stays at 5 or more without the Eagles holds, as a steady edge; a gap under 4 does not hold as stated; between the two is mixed. Whether the play should be legal is not on this sheet. This is the page's rule, not the agent's. Every number is the tool's.</p>
 </div></div>
 
@@ -118,9 +118,9 @@
 <div class="qs">
 <div class="q">
 <div class="qhead"><h3>All downs</h3><p>Every rush with one yard or less to go, the defined play against the rest.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="All downs: the defined play converted 78.3%, other short-yardage rushes 70.0%">
-<div class="gap" style="left:69.98%;width:8.28%"></div>
-<div class="mk least" style="left:69.98%"><b>70.0%</b></div><div class="mk most" style="left:78.26%"><b>78.3%</b></div></div><p class="numbers"><span class="y">78.3%</span> the defined play, 1,472 plays; <span class="b">70.0%</span> every other rush at that distance, 6,282 plays; a gap of <b>8.3 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="All downs: the defined play converted 81.6%, other short-yardage rushes 71.5%">
+<div class="gap" style="left:71.51%;width:10.07%"></div>
+<div class="mk least" style="left:71.51%"><b>71.5%</b></div><div class="mk most" style="left:81.59%"><b>81.6%</b></div></div><p class="numbers"><span class="y">81.6%</span> the defined play, 1,412 plays; <span class="b">71.5%</span> every other rush at that distance, 6,147 plays; a gap of <b>10.1 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Third and fourth down</h3><p>When the drive is on the line.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --downs 3,4</code></div>
@@ -136,9 +136,9 @@
 </div>
 <div class="q">
 <div class="qhead"><h3>One yard to go</h3><p>The shortest distance, where the play is most used.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --yards-to-go 1</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="One yard to go: the defined play converted 78.3%, other short-yardage rushes 70.0%">
-<div class="gap" style="left:69.98%;width:8.28%"></div>
-<div class="mk least" style="left:69.98%"><b>70.0%</b></div><div class="mk most" style="left:78.26%"><b>78.3%</b></div></div><p class="numbers"><span class="y">78.3%</span> the defined play, 1,472 plays; <span class="b">70.0%</span> every other rush at that distance, 6,282 plays; a gap of <b>8.3 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="One yard to go: the defined play converted 81.6%, other short-yardage rushes 71.5%">
+<div class="gap" style="left:71.51%;width:10.07%"></div>
+<div class="mk least" style="left:71.51%"><b>71.5%</b></div><div class="mk most" style="left:81.59%"><b>81.6%</b></div></div><p class="numbers"><span class="y">81.6%</span> the defined play, 1,412 plays; <span class="b">71.5%</span> every other rush at that distance, 6,147 plays; a gap of <b>10.1 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Goal to go</h3><p>At the goal line, where a conversion is a touchdown.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --goal-to-go</code></div>
@@ -148,101 +148,101 @@
 </div>
 <div class="q">
 <div class="qhead"><h3>Every team but the Eagles</h3><p>Take away the team the play is named for.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="Every team but the Eagles: the defined play converted 77.9%, other short-yardage rushes 70.1%">
-<div class="gap" style="left:70.08%;width:7.82%"></div>
-<div class="mk least" style="left:70.08%"><b>70.1%</b></div><div class="mk most" style="left:77.91%"><b>77.9%</b></div></div><p class="numbers"><span class="y">77.9%</span> the defined play, 1,299 plays; <span class="b">70.1%</span> every other rush at that distance, 6,134 plays; a gap of <b>7.8 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="Every team but the Eagles: the defined play converted 81.2%, other short-yardage rushes 71.6%">
+<div class="gap" style="left:71.57%;width:9.65%"></div>
+<div class="mk least" style="left:71.57%"><b>71.6%</b></div><div class="mk most" style="left:81.22%"><b>81.2%</b></div></div><p class="numbers"><span class="y">81.2%</span> the defined play, 1,246 plays; <span class="b">71.6%</span> every other rush at that distance, 6,007 plays; a gap of <b>9.7 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>The Eagles only</h3><p>The team that made it an argument.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --team PHI</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="The Eagles only: the defined play converted 80.9%, other short-yardage rushes 65.5%">
-<div class="gap" style="left:65.54%;width:15.38%"></div>
-<div class="mk least" style="left:65.54%"><b>65.5%</b></div><div class="mk most" style="left:80.92%"><b>80.9%</b></div></div><p class="numbers"><span class="y">80.9%</span> the defined play, 173 plays; <span class="b">65.5%</span> every other rush at that distance, 148 plays; a gap of <b>15.4 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="The Eagles only: the defined play converted 84.3%, other short-yardage rushes 69.3%">
+<div class="gap" style="left:69.29%;width:15.05%"></div>
+<div class="mk least" style="left:69.29%"><b>69.3%</b></div><div class="mk most" style="left:84.34%"><b>84.3%</b></div></div><p class="numbers"><span class="y">84.3%</span> the defined play, 166 plays; <span class="b">69.3%</span> every other rush at that distance, 140 plays; a gap of <b>15.1 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Regular season only</h3><p>Leave the playoffs out.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --type REG</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="Regular season only: the defined play converted 78.0%, other short-yardage rushes 69.8%">
-<div class="gap" style="left:69.77%;width:8.25%"></div>
-<div class="mk least" style="left:69.77%"><b>69.8%</b></div><div class="mk most" style="left:78.01%"><b>78.0%</b></div></div><p class="numbers"><span class="y">78.0%</span> the defined play, 1,378 plays; <span class="b">69.8%</span> every other rush at that distance, 5,990 plays; a gap of <b>8.2 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="Regular season only: the defined play converted 81.3%, other short-yardage rushes 71.3%">
+<div class="gap" style="left:71.34%;width:9.92%"></div>
+<div class="mk least" style="left:71.34%"><b>71.3%</b></div><div class="mk most" style="left:81.25%"><b>81.3%</b></div></div><p class="numbers"><span class="y">81.3%</span> the defined play, 1,323 plays; <span class="b">71.3%</span> every other rush at that distance, 5,858 plays; a gap of <b>9.9 points</b>.</p></div>
 </div>
 <div class="q">
 <div class="qhead"><h3>Playoffs only</h3><p>Thirteen games a season.</p><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --type POST</code></div>
-<div class="qbody"><div class="field" role="img" aria-label="Playoffs only: the defined play converted 81.9%, other short-yardage rushes 74.3%">
-<div class="gap" style="left:74.32%;width:7.60%"></div>
-<div class="mk least" style="left:74.32%"><b>74.3%</b></div><div class="mk most" style="left:81.91%"><b>81.9%</b></div></div><p class="numbers"><span class="y">81.9%</span> the defined play, 94 plays; <span class="b">74.3%</span> every other rush at that distance, 292 plays; a gap of <b>7.6 points</b>.</p></div>
+<div class="qbody"><div class="field" role="img" aria-label="Playoffs only: the defined play converted 86.5%, other short-yardage rushes 75.1%">
+<div class="gap" style="left:75.09%;width:11.43%"></div>
+<div class="mk least" style="left:75.09%"><b>75.1%</b></div><div class="mk most" style="left:86.52%"><b>86.5%</b></div></div><p class="numbers"><span class="y">86.5%</span> the defined play, 89 plays; <span class="b">75.1%</span> every other rush at that distance, 289 plays; a gap of <b>11.4 points</b>.</p></div>
 </div>
 </div>
 <div class="tables">
-<div><h2>By season</h2><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by season</code><table><thead><tr><th>Season</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>2021</td><td class="num">258</td><td class="num"><span class="y">74.0%</span></td><td class="num">1,327</td><td class="num"><span class="b">71.3%</span></td><td class="num">2.7</td></tr>
-<tr><td>2022</td><td class="num">313</td><td class="num"><span class="y">82.7%</span></td><td class="num">1,246</td><td class="num"><span class="b">69.7%</span></td><td class="num">13.0</td></tr>
-<tr><td>2023</td><td class="num">320</td><td class="num"><span class="y">75.0%</span></td><td class="num">1,157</td><td class="num"><span class="b">70.1%</span></td><td class="num">4.9</td></tr>
-<tr><td>2024</td><td class="num">291</td><td class="num"><span class="y">80.4%</span></td><td class="num">1,239</td><td class="num"><span class="b">68.8%</span></td><td class="num">11.6</td></tr>
-<tr><td>2025</td><td class="num">290</td><td class="num"><span class="y">78.6%</span></td><td class="num">1,313</td><td class="num"><span class="b">69.8%</span></td><td class="num">8.8</td></tr></tbody></table></div>
-<div><h2>By team</h2><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by team</code><table><thead><tr><th>Team</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>PHI</td><td class="num">173</td><td class="num"><span class="y">80.9%</span></td><td class="num">148</td><td class="num"><span class="b">65.5%</span></td><td class="num">15.4</td></tr>
-<tr><td>BUF</td><td class="num">128</td><td class="num"><span class="y">82.8%</span></td><td class="num">174</td><td class="num"><span class="b">72.4%</span></td><td class="num">10.4</td></tr>
-<tr><td>SF</td><td class="num">74</td><td class="num"><span class="y">90.5%</span></td><td class="num">209</td><td class="num"><span class="b">69.9%</span></td><td class="num">20.7</td></tr>
-<tr><td>DEN</td><td class="num">72</td><td class="num"><span class="y">86.1%</span></td><td class="num">168</td><td class="num"><span class="b">64.9%</span></td><td class="num">21.2</td></tr>
-<tr><td>LAC</td><td class="num">59</td><td class="num"><span class="y">79.7%</span></td><td class="num">191</td><td class="num"><span class="b">61.8%</span></td><td class="num">17.9</td></tr>
-<tr><td>NYG</td><td class="num">59</td><td class="num"><span class="y">81.4%</span></td><td class="num">155</td><td class="num"><span class="b">71.6%</span></td><td class="num">9.7</td></tr>
-<tr><td>NE</td><td class="num">58</td><td class="num"><span class="y">75.9%</span></td><td class="num">180</td><td class="num"><span class="b">69.4%</span></td><td class="num">6.4</td></tr>
-<tr><td>JAX</td><td class="num">57</td><td class="num"><span class="y">77.2%</span></td><td class="num">197</td><td class="num"><span class="b">65.5%</span></td><td class="num">11.7</td></tr>
-<tr><td>LV</td><td class="num">52</td><td class="num"><span class="y">76.9%</span></td><td class="num">169</td><td class="num"><span class="b">62.7%</span></td><td class="num">14.2</td></tr>
-<tr><td>CIN</td><td class="num">52</td><td class="num"><span class="y">78.8%</span></td><td class="num">189</td><td class="num"><span class="b">68.8%</span></td><td class="num">10.1</td></tr>
-<tr><td>PIT</td><td class="num">51</td><td class="num"><span class="y">82.4%</span></td><td class="num">190</td><td class="num"><span class="b">73.2%</span></td><td class="num">9.2</td></tr>
-<tr><td>CHI</td><td class="num">45</td><td class="num"><span class="y">73.3%</span></td><td class="num">165</td><td class="num"><span class="b">72.7%</span></td><td class="num">0.6</td></tr>
-<tr><td>CLE</td><td class="num">45</td><td class="num"><span class="y">77.8%</span></td><td class="num">192</td><td class="num"><span class="b">69.3%</span></td><td class="num">8.5</td></tr>
-<tr><td>NYJ</td><td class="num">43</td><td class="num"><span class="y">65.1%</span></td><td class="num">145</td><td class="num"><span class="b">69.7%</span></td><td class="num">-4.5</td></tr>
-<tr><td>MIN</td><td class="num">42</td><td class="num"><span class="y">83.3%</span></td><td class="num">164</td><td class="num"><span class="b">64.0%</span></td><td class="num">19.3</td></tr>
-<tr><td>TEN</td><td class="num">40</td><td class="num"><span class="y">92.5%</span></td><td class="num">170</td><td class="num"><span class="b">74.1%</span></td><td class="num">18.4</td></tr>
-<tr><td>DAL</td><td class="num">39</td><td class="num"><span class="y">74.4%</span></td><td class="num">227</td><td class="num"><span class="b">74.4%</span></td><td class="num">-0.1</td></tr>
-<tr><td>ARI</td><td class="num">38</td><td class="num"><span class="y">60.5%</span></td><td class="num">225</td><td class="num"><span class="b">71.1%</span></td><td class="num">-10.6</td></tr>
-<tr><td>IND</td><td class="num">37</td><td class="num"><span class="y">75.7%</span></td><td class="num">217</td><td class="num"><span class="b">71.4%</span></td><td class="num">4.2</td></tr>
-<tr><td>NO</td><td class="num">36</td><td class="num"><span class="y">69.4%</span></td><td class="num">189</td><td class="num"><span class="b">70.4%</span></td><td class="num">-0.9</td></tr>
-<tr><td>HOU</td><td class="num">33</td><td class="num"><span class="y">81.8%</span></td><td class="num">182</td><td class="num"><span class="b">65.9%</span></td><td class="num">15.9</td></tr>
-<tr><td>LA</td><td class="num">29</td><td class="num"><span class="y">72.4%</span></td><td class="num">236</td><td class="num"><span class="b">72.0%</span></td><td class="num">0.4</td></tr>
-<tr><td>SEA</td><td class="num">29</td><td class="num"><span class="y">72.4%</span></td><td class="num">174</td><td class="num"><span class="b">74.1%</span></td><td class="num">-1.7</td></tr>
-<tr><td>CAR</td><td class="num">27</td><td class="num"><span class="y">74.1%</span></td><td class="num">186</td><td class="num"><span class="b">68.3%</span></td><td class="num">5.8</td></tr>
-<tr><td>BAL</td><td class="num">25</td><td class="num"><span class="y">76.0%</span></td><td class="num">242</td><td class="num"><span class="b">76.4%</span></td><td class="num">-0.4</td></tr>
-<tr><td>WAS</td><td class="num">25</td><td class="num"><span class="y">64.0%</span></td><td class="num">264</td><td class="num"><span class="b">69.3%</span></td><td class="num">-5.3</td></tr>
-<tr><td>ATL</td><td class="num">24</td><td class="num"><span class="y">62.5%</span></td><td class="num">216</td><td class="num"><span class="b">65.3%</span></td><td class="num">-2.8</td></tr>
-<tr><td>GB</td><td class="num">22</td><td class="num"><span class="y">81.8%</span></td><td class="num">212</td><td class="num"><span class="b">72.2%</span></td><td class="num">9.6</td></tr>
-<tr><td>TB</td><td class="num">20</td><td class="num"><span class="y">85.0%</span></td><td class="num">229</td><td class="num"><span class="b">71.2%</span></td><td class="num">13.8</td></tr>
-<tr><td>DET</td><td class="num">17</td><td class="num"><span class="y">70.6%</span></td><td class="num">228</td><td class="num"><span class="b">71.9%</span></td><td class="num">-1.3</td></tr>
+<div><h2>By season</h2><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by season</code><table><thead><tr><th>Season</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>2021</td><td class="num">243</td><td class="num"><span class="y">78.6%</span></td><td class="num">1,296</td><td class="num"><span class="b">73.0%</span></td><td class="num">5.6</td></tr>
+<tr><td>2022</td><td class="num">304</td><td class="num"><span class="y">85.2%</span></td><td class="num">1,223</td><td class="num"><span class="b">71.1%</span></td><td class="num">14.1</td></tr>
+<tr><td>2023</td><td class="num">304</td><td class="num"><span class="y">78.9%</span></td><td class="num">1,126</td><td class="num"><span class="b">72.0%</span></td><td class="num">6.9</td></tr>
+<tr><td>2024</td><td class="num">281</td><td class="num"><span class="y">83.3%</span></td><td class="num">1,211</td><td class="num"><span class="b">70.4%</span></td><td class="num">12.8</td></tr>
+<tr><td>2025</td><td class="num">280</td><td class="num"><span class="y">81.4%</span></td><td class="num">1,291</td><td class="num"><span class="b">71.0%</span></td><td class="num">10.4</td></tr></tbody></table></div>
+<div><h2>By team</h2><code>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by team</code><table><thead><tr><th>Team</th><th class="num">Defined plays</th><th class="num">Rate</th><th class="num">Other rushes</th><th class="num">Rate</th><th class="num">Gap</th></tr></thead><tbody><tr><td>PHI</td><td class="num">166</td><td class="num"><span class="y">84.3%</span></td><td class="num">140</td><td class="num"><span class="b">69.3%</span></td><td class="num">15.1</td></tr>
+<tr><td>BUF</td><td class="num">125</td><td class="num"><span class="y">84.8%</span></td><td class="num">172</td><td class="num"><span class="b">73.3%</span></td><td class="num">11.5</td></tr>
+<tr><td>SF</td><td class="num">74</td><td class="num"><span class="y">90.5%</span></td><td class="num">207</td><td class="num"><span class="b">70.5%</span></td><td class="num">20.0</td></tr>
+<tr><td>DEN</td><td class="num">72</td><td class="num"><span class="y">86.1%</span></td><td class="num">162</td><td class="num"><span class="b">67.3%</span></td><td class="num">18.8</td></tr>
+<tr><td>LAC</td><td class="num">57</td><td class="num"><span class="y">82.5%</span></td><td class="num">187</td><td class="num"><span class="b">63.1%</span></td><td class="num">19.4</td></tr>
+<tr><td>NE</td><td class="num">56</td><td class="num"><span class="y">78.6%</span></td><td class="num">177</td><td class="num"><span class="b">70.6%</span></td><td class="num">7.9</td></tr>
+<tr><td>NYG</td><td class="num">56</td><td class="num"><span class="y">85.7%</span></td><td class="num">151</td><td class="num"><span class="b">73.5%</span></td><td class="num">12.2</td></tr>
+<tr><td>JAX</td><td class="num">55</td><td class="num"><span class="y">80.0%</span></td><td class="num">192</td><td class="num"><span class="b">67.2%</span></td><td class="num">12.8</td></tr>
+<tr><td>LV</td><td class="num">52</td><td class="num"><span class="y">76.9%</span></td><td class="num">163</td><td class="num"><span class="b">65.0%</span></td><td class="num">11.9</td></tr>
+<tr><td>CIN</td><td class="num">52</td><td class="num"><span class="y">78.8%</span></td><td class="num">184</td><td class="num"><span class="b">70.7%</span></td><td class="num">8.2</td></tr>
+<tr><td>PIT</td><td class="num">51</td><td class="num"><span class="y">82.4%</span></td><td class="num">189</td><td class="num"><span class="b">73.5%</span></td><td class="num">8.8</td></tr>
+<tr><td>CHI</td><td class="num">45</td><td class="num"><span class="y">73.3%</span></td><td class="num">162</td><td class="num"><span class="b">74.1%</span></td><td class="num">-0.7</td></tr>
+<tr><td>MIN</td><td class="num">42</td><td class="num"><span class="y">83.3%</span></td><td class="num">160</td><td class="num"><span class="b">65.6%</span></td><td class="num">17.7</td></tr>
+<tr><td>CLE</td><td class="num">41</td><td class="num"><span class="y">85.4%</span></td><td class="num">185</td><td class="num"><span class="b">71.9%</span></td><td class="num">13.5</td></tr>
+<tr><td>TEN</td><td class="num">40</td><td class="num"><span class="y">92.5%</span></td><td class="num">167</td><td class="num"><span class="b">75.4%</span></td><td class="num">17.1</td></tr>
+<tr><td>NYJ</td><td class="num">38</td><td class="num"><span class="y">73.7%</span></td><td class="num">138</td><td class="num"><span class="b">73.2%</span></td><td class="num">0.5</td></tr>
+<tr><td>DAL</td><td class="num">36</td><td class="num"><span class="y">80.6%</span></td><td class="num">220</td><td class="num"><span class="b">76.8%</span></td><td class="num">3.7</td></tr>
+<tr><td>IND</td><td class="num">35</td><td class="num"><span class="y">80.0%</span></td><td class="num">213</td><td class="num"><span class="b">72.8%</span></td><td class="num">7.2</td></tr>
+<tr><td>NO</td><td class="num">34</td><td class="num"><span class="y">73.5%</span></td><td class="num">184</td><td class="num"><span class="b">72.3%</span></td><td class="num">1.2</td></tr>
+<tr><td>ARI</td><td class="num">32</td><td class="num"><span class="y">71.9%</span></td><td class="num">217</td><td class="num"><span class="b">73.7%</span></td><td class="num">-1.9</td></tr>
+<tr><td>LA</td><td class="num">29</td><td class="num"><span class="y">72.4%</span></td><td class="num">234</td><td class="num"><span class="b">72.6%</span></td><td class="num">-0.2</td></tr>
+<tr><td>HOU</td><td class="num">29</td><td class="num"><span class="y">93.1%</span></td><td class="num">179</td><td class="num"><span class="b">67.0%</span></td><td class="num">26.1</td></tr>
+<tr><td>SEA</td><td class="num">29</td><td class="num"><span class="y">72.4%</span></td><td class="num">173</td><td class="num"><span class="b">74.6%</span></td><td class="num">-2.2</td></tr>
+<tr><td>CAR</td><td class="num">25</td><td class="num"><span class="y">80.0%</span></td><td class="num">179</td><td class="num"><span class="b">70.9%</span></td><td class="num">9.1</td></tr>
+<tr><td>ATL</td><td class="num">23</td><td class="num"><span class="y">65.2%</span></td><td class="num">211</td><td class="num"><span class="b">66.8%</span></td><td class="num">-1.6</td></tr>
+<tr><td>BAL</td><td class="num">22</td><td class="num"><span class="y">86.4%</span></td><td class="num">241</td><td class="num"><span class="b">76.8%</span></td><td class="num">9.6</td></tr>
+<tr><td>GB</td><td class="num">21</td><td class="num"><span class="y">85.7%</span></td><td class="num">208</td><td class="num"><span class="b">73.6%</span></td><td class="num">12.2</td></tr>
+<tr><td>TB</td><td class="num">20</td><td class="num"><span class="y">85.0%</span></td><td class="num">224</td><td class="num"><span class="b">72.8%</span></td><td class="num">12.2</td></tr>
+<tr><td>WAS</td><td class="num">20</td><td class="num"><span class="y">80.0%</span></td><td class="num">258</td><td class="num"><span class="b">70.9%</span></td><td class="num">9.1</td></tr>
+<tr><td>DET</td><td class="num">16</td><td class="num"><span class="y">75.0%</span></td><td class="num">223</td><td class="num"><span class="b">73.5%</span></td><td class="num">1.5</td></tr>
 <tr><td>MIA</td><td class="num">13</td><td class="num"><span class="y">46.2%</span></td><td class="num">189</td><td class="num"><span class="b">66.7%</span></td><td class="num">-20.5</td></tr></tbody></table><p style="margin-top:8px;font-size:14px;color:var(--soft)">Teams with 10 or more plays matching the definition, most first.</p></div>
 </div>
 <div class="teams"><h2>Who ran it, season by season</h2>
 <code>node ./query-plays.mjs --play tush-push --seasons 2021 --by team (and each season to 2025)</code>
 <p>One row per team, one column per season: the plays that matched the definition. Each season's most is in yellow; the first row is every team together. The tool lists a team once it has 10 matching plays in a season, so a smaller count reads "under 10". Teams in order of the five-season column.</p>
-<table id="teamgrid"><thead><tr><th>Team</th><th class="num">2021</th><th class="num">2022</th><th class="num">2023</th><th class="num">2024</th><th class="num">2025</th><th class="num sum">2021 to 2025</th></tr></thead><tbody><tr class="all"><td>Every team</td><td class="num">258</td><td class="num">313</td><td class="num">320</td><td class="num">291</td><td class="num">290</td><td class="num sum">1,472</td></tr>
-<tr><td>PHI</td><td class="num">15</td><td class="num"><span class="y">43</span></td><td class="num"><span class="y">37</span></td><td class="num"><span class="y">51</span></td><td class="num">27</td><td class="num sum">173</td></tr>
-<tr><td>BUF</td><td class="num">15</td><td class="num">16</td><td class="num">29</td><td class="num">37</td><td class="num"><span class="y">31</span></td><td class="num sum">128</td></tr>
+<table id="teamgrid"><thead><tr><th>Team</th><th class="num">2021</th><th class="num">2022</th><th class="num">2023</th><th class="num">2024</th><th class="num">2025</th><th class="num sum">2021 to 2025</th></tr></thead><tbody><tr class="all"><td>Every team</td><td class="num">243</td><td class="num">304</td><td class="num">304</td><td class="num">281</td><td class="num">280</td><td class="num sum">1,412</td></tr>
+<tr><td>PHI</td><td class="num">15</td><td class="num"><span class="y">40</span></td><td class="num"><span class="y">36</span></td><td class="num"><span class="y">48</span></td><td class="num">27</td><td class="num sum">166</td></tr>
+<tr><td>BUF</td><td class="num">13</td><td class="num">15</td><td class="num">29</td><td class="num">37</td><td class="num"><span class="y">31</span></td><td class="num sum">125</td></tr>
 <tr><td>SF</td><td class="num">11</td><td class="num">18</td><td class="num">13</td><td class="num">13</td><td class="num">19</td><td class="num sum">74</td></tr>
 <tr><td>DEN</td><td class="num">11</td><td class="num few">under 10</td><td class="num">25</td><td class="num">14</td><td class="num">13</td><td class="num sum">72</td></tr>
-<tr><td>LAC</td><td class="num few">under 10</td><td class="num">13</td><td class="num">10</td><td class="num">11</td><td class="num">16</td><td class="num sum">59</td></tr>
-<tr><td>NYG</td><td class="num few">under 10</td><td class="num">16</td><td class="num">10</td><td class="num">14</td><td class="num">10</td><td class="num sum">59</td></tr>
-<tr><td>NE</td><td class="num"><span class="y">17</span></td><td class="num few">under 10</td><td class="num">13</td><td class="num few">under 10</td><td class="num">17</td><td class="num sum">58</td></tr>
-<tr><td>JAX</td><td class="num few">under 10</td><td class="num">15</td><td class="num few">under 10</td><td class="num">15</td><td class="num">17</td><td class="num sum">57</td></tr>
+<tr><td>LAC</td><td class="num few">under 10</td><td class="num">13</td><td class="num">10</td><td class="num">10</td><td class="num">15</td><td class="num sum">57</td></tr>
+<tr><td>NE</td><td class="num"><span class="y">17</span></td><td class="num few">under 10</td><td class="num">12</td><td class="num few">under 10</td><td class="num">16</td><td class="num sum">56</td></tr>
+<tr><td>NYG</td><td class="num few">under 10</td><td class="num">16</td><td class="num">10</td><td class="num">13</td><td class="num">10</td><td class="num sum">56</td></tr>
+<tr><td>JAX</td><td class="num few">under 10</td><td class="num">14</td><td class="num few">under 10</td><td class="num">15</td><td class="num">16</td><td class="num sum">55</td></tr>
 <tr><td>LV</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">15</td><td class="num">10</td><td class="num">12</td><td class="num sum">52</td></tr>
 <tr><td>CIN</td><td class="num few">under 10</td><td class="num">18</td><td class="num">10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">52</td></tr>
 <tr><td>PIT</td><td class="num few">under 10</td><td class="num">16</td><td class="num">17</td><td class="num">13</td><td class="num few">under 10</td><td class="num sum">51</td></tr>
 <tr><td>CHI</td><td class="num few">under 10</td><td class="num">12</td><td class="num">16</td><td class="num few">under 10</td><td class="num">10</td><td class="num sum">45</td></tr>
-<tr><td>CLE</td><td class="num few">under 10</td><td class="num">18</td><td class="num">10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">45</td></tr>
-<tr><td>NYJ</td><td class="num">11</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">17</td><td class="num sum">43</td></tr>
 <tr><td>MIN</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">15</td><td class="num">13</td><td class="num few">under 10</td><td class="num sum">42</td></tr>
+<tr><td>CLE</td><td class="num few">under 10</td><td class="num">18</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">41</td></tr>
 <tr><td>TEN</td><td class="num">10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">16</td><td class="num few">under 10</td><td class="num sum">40</td></tr>
-<tr><td>DAL</td><td class="num few">under 10</td><td class="num">13</td><td class="num">10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">39</td></tr>
-<tr><td>ARI</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">11</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">38</td></tr>
-<tr><td>IND</td><td class="num">11</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">12</td><td class="num sum">37</td></tr>
-<tr><td>NO</td><td class="num">12</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">11</td><td class="num sum">36</td></tr>
-<tr><td>HOU</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">12</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">33</td></tr>
+<tr><td>NYJ</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">15</td><td class="num sum">38</td></tr>
+<tr><td>DAL</td><td class="num few">under 10</td><td class="num">13</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">36</td></tr>
+<tr><td>IND</td><td class="num">10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">12</td><td class="num sum">35</td></tr>
+<tr><td>NO</td><td class="num">12</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">34</td></tr>
+<tr><td>ARI</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">32</td></tr>
 <tr><td>LA</td><td class="num">11</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">29</td></tr>
+<tr><td>HOU</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num">10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">29</td></tr>
 <tr><td>SEA</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">29</td></tr>
-<tr><td>CAR</td><td class="num">16</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">27</td></tr>
-<tr><td>BAL</td><td class="num few">under 10</td><td class="num">12</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">25</td></tr>
-<tr><td>WAS</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">25</td></tr>
-<tr><td>ATL</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">24</td></tr>
-<tr><td>GB</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">22</td></tr>
+<tr><td>CAR</td><td class="num">15</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">25</td></tr>
+<tr><td>ATL</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">23</td></tr>
+<tr><td>BAL</td><td class="num few">under 10</td><td class="num">11</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">22</td></tr>
+<tr><td>GB</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">21</td></tr>
 <tr><td>TB</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">20</td></tr>
-<tr><td>DET</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">17</td></tr>
+<tr><td>WAS</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">20</td></tr>
+<tr><td>DET</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">16</td></tr>
 <tr><td>MIA</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num few">under 10</td><td class="num sum">13</td></tr></tbody></table></div>
 <p class="not"><strong>Not on this sheet: why, and whether.</strong> Every gap here is how often each kind of play converted in the plays kept. It does not say why the play converts, who pushed, or whether anyone was hurt, and it does not say what the rule should be.</p>
 <section class="ruling"><h2>What the agent ruled on air</h2><p><b>The claim:</b> Whether the tush push should be legal is a question about safety, fairness, and the game people want to watch, and the plays cannot settle it. I tested whether the play converts so much more often than other short-yardage rushes that it is a different kind of play. For that to hold, the defined play needs a large conversion gap over other rushes at the same distance, and the gap must survive without the team that runs it most.</p>
@@ -258,8 +258,8 @@
 <p>node ./query-plays.mjs --play tush-push --seasons 2021-2025</p>
 <p>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --by team</p>
 <p>node ./query-plays.mjs --play tush-push --seasons 2026</p>
-<p>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI</p><p class="from">From <code>rulings/ruling-2026-10-26-082753.md</code>.</p></section>
-<footer><p>Made October 26, 2026 at 8:58 AM by season-sheet.mjs, which ran query-plays.mjs 17 times (the command under each question) and wrote down what it printed. Seasons on file: 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
+<p>node ./query-plays.mjs --play tush-push --seasons 2021-2025 --not-team PHI</p><p class="from">From <code>rulings/ruling-2026-10-26-082753.md</code>. The agent ruled with the tool as it was on October 26, 2026. That tool counted 195 two-point tries as failed conversions, so the ruling's numbers differ from the corrected ones above (fixed November 3, 2026).</p></section>
+<footer><p>Made November 3, 2026 at 9:58 AM by season-sheet.mjs, which ran query-plays.mjs 17 times (the command under each question) and wrote down what it printed. Seasons on file: 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22. Play-by-play data from nflverse, CC BY 4.0. Part of The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay.</p></footer>
 </main>
 </body>
 </html>
