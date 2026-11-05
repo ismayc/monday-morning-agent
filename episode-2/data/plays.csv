@@ -264097,7 +264097,7 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,1,10,0,72,pass,0,1,0,0,0,0,0,,,00-0038400,T.McKee,0,0,0,-6,(14:13) 16-T.McKee pass incomplete short right.
 2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,2,10,0,72,pass,0,1,0,0,0,1,0,,,00-0038400,T.McKee,5,0,0,-6,(14:06) (Shotgun) 16-T.McKee pass short right to 88-D.Goedert to PHI 33 for 5 yards (50-S.James).
 2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,3,5,0,67,pass,0,1,0,0,0,1,0,,,00-0038400,T.McKee,19,1,0,-6,(13:25) (Shotgun) 16-T.McKee pass short right to 0-M.Brown to DAL 48 for 19 yards (24-M.Hooker).
-2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,1,10,0,48,run,1,0,0,0,0,0,0,00-0037258,D.Pierce,,,-2,0,0,-6,"(12:42) 39-D.Pierce left end to 50 for -2 yards (0-D.Overshown, 14-M.Bell)."
+2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,1,10,0,48,run,1,0,0,0,0,0,0,00-0037258,D.Pierce,,,-2,0,0,-6,"(12:42) 39-D.Pierce left end to 50 for -2 yards (14-M.Bell, 7-R.Gary)."
 2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,2,12,0,50,pass,0,1,0,0,0,1,0,,,00-0038400,T.McKee,2,0,0,-6,(12:00) (Shotgun) 16-T.McKee pass short right to 19-E.Moore to DAL 48 for 2 yards (50-S.James).
 2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,3,10,0,48,pass,0,1,0,0,0,1,0,,,00-0038400,T.McKee,9,0,0,-6,(11:14) (Shotgun) 16-T.McKee pass short left to 9-M.Lemon to DAL 39 for 9 yards (0-D.Overshown).
 2026,REG,7,2026_07_DAL_PHI,2026-10-26,PHI,DAL,PHI,DAL,3,4,1,0,39,pass,0,1,0,0,0,0,0,,,00-0038400,T.McKee,15,1,0,-6,(10:34) 16-T.McKee pass short left to 9-M.Lemon pushed ob at DAL 24 for 15 yards (14-M.Bell).
@@ -264746,7 +264746,7 @@ season,season_type,week,game_id,game_date,home_team,away_team,posteam,defteam,qt
 2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,66,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,6,0,0,3,(6:00) 23-E.Wilson right guard to SEA 40 for 6 yards (23-D.Tranquill; 32-N.Bolton).
 2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,4,0,60,run,1,0,0,0,0,1,0,00-0038543,J.Smith-Njigba,,,8,1,0,3,(5:23) (Shotgun) 11-J.Smith-Njigba left end pushed ob at SEA 48 for 8 yards (21-J.Hicks).
 2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,52,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,-3,0,0,3,(4:50) 23-E.Wilson up the middle to SEA 45 for -3 yards (92-K.Tonga).
-2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,13,0,55,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,15,1,0,3,(4:08) (Shotgun) 14-S.Darnold pass short left to 23-E.Wilson ran ob at KC 40 for 15 yards (27-C.Conner).
+2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,13,0,55,pass,0,1,0,0,0,1,0,,,00-0034869,S.Darnold,15,1,0,3,(4:08) (Shotgun) 14-S.Darnold pass short left to 23-E.Wilson pushed ob at KC 40 for 15 yards (27-C.Conner).
 2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,1,10,0,40,run,1,0,0,0,0,0,0,00-0038797,E.Wilson,,,-1,0,0,3,"(3:31) 23-E.Wilson up the middle to KC 41 for -1 yards (56-G.Karlaftis, 30-C.Roland-Wallace)."
 2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,2,11,0,41,run,1,0,0,0,0,1,0,00-0039299,G.Holani,,,5,0,0,3,(2:50) (Shotgun) 36-G.Holani right end to KC 36 for 5 yards (23-D.Tranquill; 20-N.Williams).
 2026,REG,7,2026_07_KC_SEA,2026-10-25,SEA,KC,SEA,KC,2,3,6,0,36,run,1,0,0,0,1,1,1,00-0034869,S.Darnold,,,7,1,0,3,"(2:23) (No Huddle, Shotgun) 14-S.Darnold scrambles left end to KC 29 for 7 yards (5-M.Delane)."
