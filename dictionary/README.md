@@ -14,7 +14,7 @@ The agent's tool (`episode-2/query-plays.mjs`, and from episode 3 on
 `--trend NAME` reads `dictionary/NAME.json`, applies the rules written there, and
 prints them at the top of its output, quoted, with the file's name and date. There
 is no flag for a definition made up on the spot: with no entry of that name the
-tool stops and prints the template for an entry. Every ruling that measures a play
+tool stops and prints an example entry. Every ruling that measures a play
 cites the entry it used, and the runner checks that the citation is there.
 
 An entry is one of two kinds. A **rush** (episode 2's kind, below) is measured
