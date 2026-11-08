@@ -59,11 +59,18 @@
      blue. The two colors mean what they mean on the charts: blue is where the line started,
      yellow is the line to gain. On a narrow screen the same piles run as rows. */
   .stairs { margin-top: 22px; }
-  .steps { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0 10px; align-items: end; border-bottom: 4px solid var(--ink); }
-  .step { display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
+  /* Two shared rows (the stack, then the caption) so every caption row is the height of
+     the tallest caption and every stack stands on the same floor. Without this, a
+     caption that wraps to three lines (episode 2's) lifted its own column by accident. */
+  .steps { display: grid; grid-template-columns: repeat(8, 1fr); grid-template-rows: auto auto; gap: 0 10px; border-bottom: 4px solid var(--ink); }
+  .step { display: grid; grid-template-rows: subgrid; grid-row: span 2; min-width: 0; }
+  .step .stack { align-self: end; }
+  .step .cap { align-self: start; }
   /* The current episode's column stands on its own plinth, a step above the shared
      baseline. Move the class to the next column after each show. */
-  .step.now { margin-bottom: 16px; border-bottom: 4px solid var(--ink); }
+  .step.now { transform: translateY(-16px); border-bottom: 4px solid var(--ink); }
+  /* The script below moves .now to the current episode: the latest column whose
+     day-before-airing has arrived, Pacific time. The class in the HTML is the fallback. */
   .stack { display: flex; flex-direction: column-reverse; }
   .t { border: 2px solid var(--ink); margin-bottom: -2px; background: var(--blue); font-family: var(--display); font-weight: 600; font-size: 15px; line-height: 1.1; padding: 6px 7px 7px; min-height: 46px; display: flex; align-items: center; }
   /* Carried rules are tinted by age: the oldest (the base, at the bottom) deepest, each
@@ -87,8 +94,8 @@
   .stairs figcaption .b { background: var(--blue); color: var(--ink); padding: 0 5px; }
   @media (max-width: 860px) {
     .steps { display: block; border-bottom: 0; border-top: 2px solid var(--ink); }
-    .step { display: grid; grid-template-columns: 150px 1fr; gap: 0 14px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--rule); }
-    .step.now { margin-bottom: 0; border-bottom: 1px solid var(--rule); background: #fff8d6; }
+    .step { display: grid; grid-template-columns: 150px 1fr; grid-template-rows: auto; grid-row: auto; gap: 0 14px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+    .step.now { transform: none; border-bottom: 1px solid var(--rule); background: #fff8d6; }
     .step .cap { order: -1; padding: 0; }
     .stack { flex-direction: row; flex-wrap: wrap; gap: 6px; align-content: flex-start; }
     .t { margin: 0; min-height: 0; padding: 4px 8px; }
@@ -172,40 +179,40 @@
   <p style="margin-top:12px">Nothing is taken away between episodes. Each one adds a written rule on top of the ones before, so the stack is taller every two weeks.</p>
   <figure class="stairs" aria-label="What each episode adds, and what it keeps from the episodes before. Yellow is the rule added in that episode; blue is a rule carried from an earlier one.">
     <div class="steps">
-      <div class="step">
+      <div class="step" data-air="2026-10-12">
         <div class="stack"><div class="t new">A policy, one tool, a one-line allowlist</div></div>
         <div class="cap"><a href="episode-1/">1</a><b>Transparent queries</b><span>October 12</span></div>
       </div>
-      <div class="step">
+      <div class="step" data-air="2026-10-26">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t new">A dictionary it must cite</div></div>
         <div class="cap"><a href="episode-2/">2</a><b>Shared data definitions as durable memory</b><span>October 26</span></div>
       </div>
-      <div class="step now">
+      <div class="step now" data-air="2026-11-09">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t new">Rules for its charts</div></div>
         <div class="cap"><a href="episode-3/">3</a><b>Consistent visualizations</b><span>November 9</span></div>
       </div>
-      <div class="step">
+      <div class="step" data-air="2026-11-23">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t new">A second agent that checks it</div></div>
         <div class="cap"><i>4</i><b>Independent fact-checking</b><span>November 23</span></div>
       </div>
-      <div class="step">
+      <div class="step" data-air="2026-12-07">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t new">A line it will not cross</div></div>
         <div class="cap"><i>5</i><b>Operational boundaries</b><span>December 7</span></div>
       </div>
-      <div class="step">
+      <div class="step" data-air="2027-01-11">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t">A line it will not cross</div><div class="t new">A queue it did not choose</div></div>
         <div class="cap"><i>6</i><b>Request triage</b><span>January 11</span></div>
       </div>
-      <div class="step">
+      <div class="step" data-air="2027-01-25">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t">A line it will not cross</div><div class="t">A queue it did not choose</div><div class="t new">Its own questions, checked</div></div>
         <div class="cap"><i>7</i><b>Self-directed analysis</b><span>January 25</span></div>
       </div>
-      <div class="step">
+      <div class="step" data-air="2027-02-08">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t">Rules for its charts</div><div class="t">A second agent that checks it</div><div class="t">A line it will not cross</div><div class="t">A queue it did not choose</div><div class="t">Its own questions, checked</div><div class="t new">A schedule, nobody watching</div></div>
         <div class="cap"><i>8</i><b>Scheduled autonomy</b><span>February 8</span></div>
       </div>
     </div>
-    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode, deeper the older the rule, so each one reads as a band across the season. The same two colors as the charts: blue is where the line started, yellow is the line to gain. The column that stands a step higher is this Monday's episode.</figcaption>
+    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode, deeper the older the rule, so each one reads as a band across the season. The same two colors as the charts: blue is where the line started, yellow is the line to gain. The column that stands a step higher (the tinted row, on a phone) is the current episode, from the day before it airs.</figcaption>
   </figure>
   <div class="rows">
     <div><b>A written policy</b><span>A plain-language job description the agent follows. It grows a section at a time across the season.</span></div>
@@ -234,5 +241,22 @@
 <footer><p>The Monday Morning Agent is an O'Reilly live series hosted by Chester Ismay. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0.</p></footer>
 
 </main>
+<script>
+(function () {
+  // Lift the current episode's column on the staircase: the latest episode whose
+  // day-before-airing has arrived, by the Pacific calendar. ?today=YYYY-MM-DD overrides
+  // the date, for checking the page ahead of time.
+  var q = /[?&]today=(\d{4}-\d{2}-\d{2})/.exec(location.search);
+  var today = q ? q[1] : new Intl.DateTimeFormat('en-CA', { timeZone: 'America/Los_Angeles' }).format(new Date());
+  var steps = document.querySelectorAll('.steps .step[data-air]'), current = null;
+  for (var i = 0; i < steps.length; i++) {
+    var d = new Date(steps[i].getAttribute('data-air') + 'T12:00:00Z');
+    d.setUTCDate(d.getUTCDate() - 1);
+    if (d.toISOString().slice(0, 10) <= today) current = steps[i];
+  }
+  if (!current) return;
+  for (var j = 0; j < steps.length; j++) steps[j].classList.toggle('now', steps[j] === current);
+})();
+</script>
 </body>
 </html>
