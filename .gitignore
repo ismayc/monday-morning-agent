@@ -12,3 +12,5 @@ episode-*/rehearsal-runs/
 # folder, never published
 docs/episode-2/walkthrough/
 docs/episode-3/walkthrough/
+# the browser shell writes zsh completion caches beside its .zshrc
+episode-*/browser-shell/zsh/.zcompdump*

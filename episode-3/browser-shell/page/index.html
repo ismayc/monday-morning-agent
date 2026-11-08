@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Shell</title>
+<style>
+  /* Positron's Light 2026 chrome: the workbench gray around a white panel.
+     The box is the terminal; ttyd fits its columns and rows to the frame. */
+  :root {
+    --bg: #F0F0F3;
+    --panel: #FAFAFD;
+    --border: #D8D8D8;
+    --ink: #202020;
+    --muted: #606060;
+    --accent: #005FB8;
+    /* about 96 columns at the 24 px font: the trend table's widest row fits */
+    --box-w: min(92vw, 1420px);
+    --box-h: min(80vh, 820px);
+  }
+  html, body { height: 100%; margin: 0; }
+  body {
+    background: var(--bg);
+    color: var(--ink);
+    font: 14px/1.4 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    display: grid; place-items: center;
+  }
+  .panel {
+    width: var(--box-w); height: var(--box-h);
+    background: var(--panel);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: 0 8px 30px rgba(0,0,0,.10);
+    display: grid; grid-template-rows: 36px 1fr;
+    overflow: hidden;
+  }
+  .bar {
+    display: flex; align-items: center; gap: 18px;
+    padding: 0 10px 0 16px;
+    border-bottom: 1px solid var(--border);
+    background: #FFFFFF;
+    font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted);
+  }
+  .bar .on { color: var(--ink); border-bottom: 2px solid var(--accent); line-height: 34px; }
+  .bar .right { margin-left: auto; text-transform: none; letter-spacing: 0; font-size: 12px; display: flex; align-items: center; gap: 8px; }
+  .bar button {
+    font: 13px/1 -apple-system, "Segoe UI", Helvetica, Arial, sans-serif;
+    color: var(--ink); background: #F3F3F6; border: 1px solid var(--border); border-radius: 5px;
+    min-width: 30px; height: 24px; padding: 0 8px; cursor: pointer;
+  }
+  .bar button:hover { background: #E6E6EB; }
+  .bar button:focus-visible { outline: 2px solid var(--accent); outline-offset: 1px; }
+  .bar .size { min-width: 34px; text-align: center; color: var(--muted); }
+  /* the text size: the frame is drawn larger or smaller and scaled to fit the
+     box, so ttyd (another origin, out of reach from here) refits its columns */
+  .frame { position: relative; overflow: hidden; }
+  iframe {
+    position: absolute; left: 0; top: 0; border: 0; display: block; background: var(--panel);
+    transform-origin: 0 0;
+  }
+</style>
+</head>
+<body>
+  <div class="panel">
+    <div class="bar">
+      <span class="on">Terminal</span>
+      <span class="right">
+        <span>zsh, episode-3</span>
+        <button id="smaller" type="button" title="Smaller text" aria-label="Smaller text">A&minus;</button>
+        <span class="size" id="size" aria-live="polite">100%</span>
+        <button id="larger" type="button" title="Larger text" aria-label="Larger text">A+</button>
+      </span>
+    </div>
+    <div class="frame"><iframe id="term" src="http://127.0.0.1:7681/" title="shell" allow="clipboard-read; clipboard-write"></iframe></div>
+  </div>
+  <script>
+    var t = document.getElementById('term');
+    var q = new URLSearchParams(location.search);
+    if (q.get('ttyd')) t.src = 'http://127.0.0.1:' + q.get('ttyd') + '/';   // a test against another ttyd
+
+    // the text size, in steps of 10% from 60% to 200%, kept in this browser
+    var STEPS = [60, 70, 80, 90, 100, 110, 120, 130, 140, 150, 160, 180, 200];
+    var step = 4;
+    try { var s = parseInt(localStorage.getItem('mma3-shell-size'), 10); if (STEPS.indexOf(s) >= 0) step = STEPS.indexOf(s); } catch (e) {}
+    function apply() {
+      var pct = STEPS[step], k = pct / 100;
+      t.style.width = (100 / k) + '%';
+      t.style.height = (100 / k) + '%';
+      t.style.transform = 'scale(' + k + ')';
+      document.getElementById('size').textContent = pct + '%';
+      document.getElementById('smaller').disabled = step === 0;
+      document.getElementById('larger').disabled = step === STEPS.length - 1;
+      try { localStorage.setItem('mma3-shell-size', String(pct)); } catch (e) {}
+      focus();
+    }
+    // a press never takes the keyboard away from the terminal: the mousedown
+    // is cancelled, so focus stays in the frame (the parent page cannot put it
+    // back into the terminal itself, which is another origin)
+    ['smaller', 'larger'].forEach(function (id) {
+      document.getElementById(id).addEventListener('mousedown', function (e) { e.preventDefault(); });
+    });
+    document.getElementById('smaller').addEventListener('click', function () { if (step > 0) { step--; apply(); } });
+    document.getElementById('larger').addEventListener('click', function () { if (step < STEPS.length - 1) { step++; apply(); } });
+
+    // the keyboard goes to the terminal as soon as the page is up, and after any click outside the box
+    function focus() { try { t.contentWindow.focus(); } catch (e) {} }
+    t.addEventListener('load', focus);
+    document.body.addEventListener('click', function (e) { if (e.target.tagName !== 'BUTTON') focus(); });
+    apply();
+  </script>
+</body>
+</html>

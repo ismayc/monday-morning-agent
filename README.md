@@ -334,6 +334,7 @@ second shape, a kick, and the tool a third question, a trend. Everything else is
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made, from the raw seasons episode 1 downloads |
 | `rehearse.sh` | `entry`, `tool`, `claims`, `verify`, `freeze`, `reset`: the rehearsal beats, all writing into `rehearsal-runs/`, never into `../dictionary` or `../charts` |
 | `show.sh` | The on-air commands, one word each: `search`, `trend`, `refuse`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"` |
+| `browser-shell/` | The shell in a browser tab, used on air from this episode on so the show stays in one window instead of switching between a browser and an editor. `terminal.sh` starts [ttyd](https://github.com/tsl0922/ttyd) on 127.0.0.1 only (nothing on your network can reach it), serving your own zsh in a box with A− and A+ for the text size and Ctrl+L to put the prompt at the top. `terminal.sh --stop` ends it. macOS with Homebrew: `brew install ttyd zsh-syntax-highlighting zsh-autosuggestions` |
 
 ### The chart standard
 
@@ -365,6 +366,9 @@ node ../charts/render-chart.mjs ./bad-chart.json
 
 # the agent, into scratch folders so your copies of the real ones stay as they are
 ANALYST_DICT_DIR=$(mktemp -d) ANALYST_CHART_DIR=$(mktemp -d) ./run-analyst.sh "Kickers are too good now."
+
+# optional: the same shell in a browser tab, as on air (http://127.0.0.1:7682/)
+./browser-shell/terminal.sh
 ```
 
 A run takes about half a minute: it searches by name, gets the tool's refusal, writes
