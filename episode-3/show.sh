@@ -62,6 +62,9 @@ case "${1:-}" in
       node ./query-plays.mjs --trend field-goal --seasons 2021-2026 --bands
     ;;
   refuse)
+    # the spec first, so the room sees the command line with --seasons 2023-2026
+    # before the renderer refuses it (Chester, November 8, 2026)
+    show 'cat ./bad-chart.json' cat ./bad-chart.json
     show 'node ../charts/render-chart.mjs ./bad-chart.json' \
       node ../charts/render-chart.mjs ./bad-chart.json
     st=$?
