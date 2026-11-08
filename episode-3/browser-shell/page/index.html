@@ -66,6 +66,7 @@
       <span class="on">Terminal</span>
       <span class="right">
         <span>zsh, episode-3</span>
+        <button id="clear" type="button" title="A fresh shell: the screen is cleared and a new zsh starts in episode-3">Clear</button>
         <button id="smaller" type="button" title="Smaller text" aria-label="Smaller text">A&minus;</button>
         <span class="size" id="size" aria-live="polite">100%</span>
         <button id="larger" type="button" title="Larger text" aria-label="Larger text">A+</button>
@@ -96,9 +97,14 @@
     // a press never takes the keyboard away from the terminal: the mousedown
     // is cancelled, so focus stays in the frame (the parent page cannot put it
     // back into the terminal itself, which is another origin)
-    ['smaller', 'larger'].forEach(function (id) {
+    ['clear', 'smaller', 'larger'].forEach(function (id) {
       document.getElementById(id).addEventListener('mousedown', function (e) { e.preventDefault(); });
     });
+    // Clear: back to the start. The terminal is another origin, so the page cannot
+    // clear its screen; reloading the frame opens a new ttyd connection, which is a
+    // new zsh in episode-3 with an empty screen (ttyd runs with no client limit, so
+    // the reload always gets one). The old shell ends with its connection.
+    document.getElementById('clear').addEventListener('click', function () { t.src = t.src; });
     document.getElementById('smaller').addEventListener('click', function () { if (step > 0) { step--; apply(); } });
     document.getElementById('larger').addEventListener('click', function () { if (step < STEPS.length - 1) { step++; apply(); } });
 

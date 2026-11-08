@@ -42,6 +42,9 @@ grep -q '<title>Shell</title>' "$page" && ok "page title is Shell" || bad "page 
 grep -q 'iframe id="term" src="http://127.0.0.1:7681/"' "$page" \
   && ok "page frames ttyd at 127.0.0.1:7681 (terminal.sh's default port)" \
   || bad "page iframe does not point at http://127.0.0.1:7681/"
+grep -q 'id="clear"' "$page" && grep -q "getElementById('clear').addEventListener('click', function () { t.src = t.src; })" "$page" \
+  && ok "page has a Clear button that reloads the frame (a fresh shell)" \
+  || bad "page has no Clear button, or it does not reload the frame"
 
 # 3. a missing dependency: exit 69 -------------------------------------------
 out="$(env -i HOME="$T/home" TMPDIR="$T/tmp" PATH=/usr/bin:/bin "$HERE/terminal.sh" --no-open 2>&1)"; rc=$?
