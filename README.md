@@ -334,7 +334,7 @@ second shape, a kick, and the tool a third question, a trend. Everything else is
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made, from the raw seasons episode 1 downloads |
 | `rehearse.sh` | `entry`, `tool`, `claims`, `verify`, `freeze`, `reset`: the rehearsal beats, all writing into `rehearsal-runs/`, never into `../dictionary` or `../charts` |
 | `show.sh` | The on-air commands, one word each: `search`, `trend`, `refuse`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"` |
-| `browser-shell/` | The shell in a browser tab, used on air from this episode on so the show stays in one window instead of switching between a browser and an editor. `terminal.sh` starts [ttyd](https://github.com/tsl0922/ttyd) on 127.0.0.1 only (nothing on your network can reach it), serving your own zsh in a box with A− and A+ for the text size and Ctrl+L to put the prompt at the top. `terminal.sh --stop` ends it. macOS with Homebrew: `brew install ttyd zsh-syntax-highlighting zsh-autosuggestions` |
+| `browser-shell/` | The shell in a browser tab, used on air from this episode on so the show stays in one window instead of switching between a browser and an editor. `terminal.sh` starts [ttyd](https://github.com/tsl0922/ttyd) on 127.0.0.1 only (nothing on your network can reach it), serving your own zsh in a box with A− and A+ for the text size and Ctrl+L to put the prompt at the top. `terminal.sh --stop` ends it. `test.sh` checks it on spare ports without touching a running shell: loopback only, the refusals, and Ctrl+L keeping keys typed early. macOS with Homebrew: `brew install ttyd zsh-syntax-highlighting zsh-autosuggestions` |
 
 ### The chart standard
 

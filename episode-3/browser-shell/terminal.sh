@@ -21,8 +21,9 @@
 # changes the folder). Your everyday shell is untouched.
 set -euo pipefail
 
-PORT=7681          # ttyd, the terminal itself
-PAGE_PORT=7682     # the page that frames it in a box (show-page/index.html)
+PORT="${MMA_PORT:-7681}"            # ttyd, the terminal itself
+PAGE_PORT="${MMA_PAGE_PORT:-7682}"  # the page that frames it in a box (page/index.html,
+                                    # whose iframe points at 7681: change the two only for test.sh)
 HERE="$(cd "$(dirname "$0")" && pwd)"
 ZDOT="$HERE/zsh"
 PAGE_DIR="$HERE/page"
