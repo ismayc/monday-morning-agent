@@ -70,6 +70,11 @@
   .run li::before { content: counter(s); position: absolute; left: 0; top: 7px; font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; width: 36px; text-align: center; }
   .run li.judge::before { background: var(--yellow); }
   .held { border: 2px dashed var(--ink); background: var(--faint); padding: 20px 22px; }
+  /* the refusal from the show: the spec, then the renderer's one sentence in pink */
+  .refusal { border: 2px solid var(--ink); background: var(--faint); padding: 14px 16px; margin-top: 12px; max-width: 900px; }
+  .refusal pre { font-family: var(--code); font-size: 13.5px; white-space: pre-wrap; margin-top: 8px; }
+  .refusal pre.out { background: var(--pink); padding: 10px 12px; border: 2px solid var(--ink); }
+  .refusal p { max-width: none; font-size: 15.5px; }
   .held b { font-family: var(--display); font-weight: 700; font-size: 24px; display: block; margin-bottom: 6px; }
   .held p { max-width: none; font-size: 16px; }
   .cap { font-size: 14.5px; color: var(--soft); margin-top: 10px; }
@@ -205,6 +210,22 @@
     <div><div><b>The source line is the command</b><span>Under the chart, the exact tool command that produced the rows, with the plays and seasons it read, so a reader can rerun it.</span></div><em class="fix">template</em></div>
     <div><div><b>Nothing the tool did not print</b><span>No trend line, no annotation, no second axis, no number typed in by hand. The renderer runs the command and draws what comes back, and that is all it can draw.</span></div><em class="built">by construction</em></div>
     <div><div><b>The same template every week</b><span>One shape per question. A trend is a line chart of rates by season over a bar chart of attempts per game, laid out the same way every episode, so a reader of episode 5 recognizes episode 3's chart.</span></div><em class="built">by construction</em></div>
+  </div>
+</section>
+
+<section id="refusal" data-nav="The refusal">
+  <h2>The spec the renderer refused on air</h2>
+  <p>Before the agent runs, a <a class="term" href="#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> that breaks rule 1 is handed to the <a class="term" href="#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> by hand: the same question, with the trend starting in 2023. It is the chart crime of picking the window, and it is <code>episode-3/bad-chart.json</code> in the repo.</p>
+  <div class="refusal">
+    <pre>{
+  "name": "bad-chart",
+  "question": "Are kickers making more of their long field goals than they used to?",
+  "tool": "episode-3/query-plays.mjs",
+  "command": "--trend field-goal --seasons 2023-2026"
+}</pre>
+    <p style="margin-top:10px">What came back, exit code 65, and no file written:</p>
+    <pre class="out">render-chart: REFUSED by rule 1: the command says --seasons 2023-2026; a trend starts at 2021, the first season on file, and ends at 2026, the current one: --seasons 2021-2026. The window is not a choice. Nothing was drawn. The rules are in charts/STANDARD.md, version 1 (October 26, 2026).</pre>
+    <p style="margin-top:10px">The agent gets the same sentence when it breaks a rule, fixes what the sentence names, and runs the renderer again. A refusal is a sentence, not a crash.</p>
   </div>
 </section>
 

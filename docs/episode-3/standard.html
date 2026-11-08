@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>The chart standard, one rule per keypress: the Monday Morning Agent, episode 3</title>
-<meta name="description" content="The eight rules every chart the agent draws has to follow, one per keypress, each with the picture it prevents. At the end, the spec the renderer refused on air.">
+<meta name="description" content="The eight rules every chart the agent draws has to follow, one per keypress, each with the picture it prevents.">
 <meta name="author" content="Chester Ismay">
 <link rel="icon" href="../favicon.svg" type="image/svg+xml">
 <link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
@@ -29,7 +29,8 @@
 <style>
   /* One rule per keypress. Each card is a rule with the picture it prevents on the left
      (pink, what the renderer refuses or the template makes impossible) and the picture
-     under the standard on the right (yellow). The last card is the refusal from the show. */
+     under the standard on the right (yellow). Eight cards and no more: the refusal from
+     the show lives on the episode page, so a ninth press on air reveals nothing. */
   .how { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 8px 18px; align-items: center; font-size: 15.5px; color: var(--soft); }
   .how kbd { font-family: var(--code); font-size: 13px; border: 2px solid var(--ink); background: #fff; padding: 1px 7px; color: var(--ink); }
   .how #where { font-family: var(--display); font-weight: 600; font-size: 18px; color: var(--ink); background: var(--yellow); padding: 2px 10px; }
@@ -52,10 +53,7 @@
   .pics .say { font-size: 14px; color: var(--soft); margin-top: 4px; }
   @media (max-width: 700px) { .pics { grid-template-columns: 1fr; } .card { grid-template-columns: 44px 1fr; } .card .n { font-size: 40px; } }
   .js .card:not(.on) { display: none; }
-  .refusal { border: 2px solid var(--ink); background: var(--faint); padding: 14px 16px; margin-top: 12px; max-width: 900px; }
-  .refusal pre { font-family: var(--code); font-size: 13.5px; white-space: pre-wrap; margin-top: 8px; }
-  .refusal pre.out { background: var(--pink); padding: 10px 12px; border: 2px solid var(--ink); }
-  .refusal p { max-width: none; font-size: 15.5px; }
+  .after { font-size: 15.5px; color: var(--soft); }
 </style>
 </head>
 <body>
@@ -68,7 +66,7 @@
 
 <header>
   <h1>The chart standard, one rule per keypress.</h1>
-  <p class="lead">Eight rules for every chart the agent draws, written once in <code>charts/STANDARD.md</code> and enforced by the <a class="term" href="./#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a>. Each card is one rule, with the picture it prevents and the picture it makes. The last card is the <a class="term" href="./#term-spec" data-def="charts/NAME.json, the file the agent writes instead of drawing: a name, a date, the question, the tool, and the command.">spec</a> the renderer refused on air. Every number in the pictures is the tool's: the <a class="term" href="./#term-rate" data-def="Made divided by attempts, to one decimal. A blocked kick counts as a miss.">make rate</a> of every field goal, season by season.</p>
+  <p class="lead">Eight rules for every chart the agent draws, written once in <code>charts/STANDARD.md</code> and enforced by the <a class="term" href="./#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a>. Each card is one rule, with the picture it prevents and the picture it makes. Every number in the pictures is the tool's: the <a class="term" href="./#term-rate" data-def="Made divided by attempts, to one decimal. A blocked kick counts as a miss.">make rate</a> of every field goal, season by season.</p>
   <div class="how"><span id="where">Nothing shown yet</span><button id="next" type="button">Next</button><span><kbd>Space</kbd> or <kbd>&rarr;</kbd> next, <kbd>&larr;</kbd> back, <kbd>R</kbd> start over. Or click a card.</span></div>
 </header>
 
@@ -207,26 +205,9 @@ Drawn under charts/STANDARD.md, version 1 (October 26, 2026), from the spec long
   </div>
 </div>
 
-<div class="card">
-  <div class="n">&#10007;</div>
-  <div>
-    <h2>The spec the renderer refused on air.</h2>
-    <p class="rule">Before the agent runs, a spec that breaks rule 1 is handed to the renderer by hand: the same question, with the trend starting in 2023. It is the chart crime of picking the window, and it is <code>episode-3/bad-chart.json</code> in the repo.</p>
-    <div class="refusal">
-      <pre>{
-  "name": "bad-chart",
-  "question": "Are kickers making more of their long field goals than they used to?",
-  "tool": "episode-3/query-plays.mjs",
-  "command": "--trend field-goal --seasons 2023-2026"
-}</pre>
-      <p style="margin-top:10px">What came back, exit code 65, and no file written:</p>
-      <pre class="out">render-chart: REFUSED by rule 1: the command says --seasons 2023-2026; a trend starts at 2021, the first season on file, and ends at 2026, the current one: --seasons 2021-2026. The window is not a choice. Nothing was drawn. The rules are in charts/STANDARD.md, version 1 (October 26, 2026).</pre>
-      <p style="margin-top:10px">The agent gets the same sentence when it breaks a rule, fixes what the sentence names, and runs the renderer again. A refusal is a sentence, not a crash.</p>
-    </div>
-  </div>
 </div>
 
-</div>
+<p class="after" style="margin-top:22px">The spec the renderer refused on air, and the sentence it printed, are on <a href="./#refusal">the episode page</a>.</p>
 
 <footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. Episode 3 airs November 9, 2026. The rules are <a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/STANDARD.md"><code>charts/STANDARD.md</code></a>, version 1; the <a class="term" href="./#term-renderer" data-def="charts/render-chart.mjs: runs the spec's command itself and draws the rows under the standard, or refuses with the rule named.">renderer</a> is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/render-chart.mjs"><code>charts/render-chart.mjs</code></a>. The rates in the pictures are the tool's: every field goal, 2021 through the 2026 games of October 25, regular season and playoffs.</p></footer>
 
@@ -237,12 +218,14 @@ Drawn under charts/STANDARD.md, version 1 (October 26, 2026), from the spec long
   var where = document.getElementById('where'), LAST = cards.length, stage = 0;
   var box = document.getElementById('cards');
   body.className = 'js';
-  // #3 opens the page with the first three rules shown; #9 with the refusal.
+  // #3 opens the page with the first three rules shown; #8 with all eight. The
+  // ninth press does nothing: the refusal from the show is on the episode page,
+  // so one press too many on air shows nothing the room has not reached.
   var fromHash = parseInt(location.hash.slice(1), 10);
-  if (fromHash >= 0 && fromHash <= LAST) stage = fromHash;
+  if (fromHash >= 0) stage = Math.min(fromHash, LAST);   // #9 and beyond: all eight
   function paint() {
     cards.forEach(function (c, i) { c.classList.toggle('on', stage >= i + 1); });
-    where.textContent = stage === 0 ? 'Nothing shown yet' : stage < LAST ? 'Rule ' + stage + ' of 8' : 'The refusal';
+    where.textContent = stage === 0 ? 'Nothing shown yet' : 'Rule ' + stage + ' of ' + LAST;
     if (stage > 0) { var last = cards[stage - 1]; if (last && stage > 1) last.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
   }
   function step(d) { stage = Math.max(0, Math.min(LAST, stage + d)); paint(); }
