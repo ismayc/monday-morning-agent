@@ -47,10 +47,12 @@
   /* The recording strip under the lead: the latest episode's recording, one link, the
      label in the ink-and-yellow tag the explorer uses for the reference definition. */
   .aired { margin-top: 22px; display: grid; grid-template-columns: auto 1fr; align-items: stretch; gap: 0 18px; border: 2px solid var(--ink); background: #fff; color: inherit; text-decoration: none; }
-  .aired b { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; background: var(--ink); color: var(--yellow); padding: 14px 18px; display: flex; align-items: center; white-space: nowrap; }
+  .aired > a { display: flex; color: inherit; text-decoration: none; }
+  .aired b { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1; background: var(--ink); color: var(--yellow); padding: 14px 18px; display: flex; align-items: center; white-space: nowrap; flex: 1; }
   .aired span { font-size: 16.5px; line-height: 1.4; padding: 11px 16px 12px 0; align-self: center; }
-  .aired span u { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--yellow); }
-  .aired:hover b { background: var(--yellow); color: var(--ink); }
+  .aired span a { color: inherit; text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: 3px; text-decoration-color: var(--yellow); }
+  .aired span a:hover { background: var(--yellow); }
+  .aired > a:hover b { background: var(--yellow); color: var(--ink); }
   @media (max-width: 600px) { .aired { grid-template-columns: 1fr; gap: 0; } .aired b { padding: 10px 14px; } .aired span { padding: 10px 14px 12px; } }
   /* The stairs: what each episode adds, stacked on what it keeps. Eight columns, each a
      pile of written rules growing bottom-up, the newest on top in yellow and the rest in
@@ -59,6 +61,9 @@
   .stairs { margin-top: 22px; }
   .steps { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0 10px; align-items: end; border-bottom: 4px solid var(--ink); }
   .step { display: flex; flex-direction: column; justify-content: flex-end; min-width: 0; }
+  /* The current episode's column stands on its own plinth, a step above the shared
+     baseline. Move the class to the next column after each show. */
+  .step.now { margin-bottom: 16px; border-bottom: 4px solid var(--ink); }
   .stack { display: flex; flex-direction: column-reverse; }
   .t { border: 2px solid var(--ink); margin-bottom: -2px; background: var(--blue); font-family: var(--display); font-weight: 600; font-size: 15px; line-height: 1.1; padding: 6px 7px 7px; min-height: 46px; display: flex; align-items: center; }
   /* Carried rules are tinted by age: the oldest (the base, at the bottom) deepest, each
@@ -83,6 +88,7 @@
   @media (max-width: 860px) {
     .steps { display: block; border-bottom: 0; border-top: 2px solid var(--ink); }
     .step { display: grid; grid-template-columns: 150px 1fr; gap: 0 14px; align-items: start; padding: 12px 0; border-bottom: 1px solid var(--rule); }
+    .step.now { margin-bottom: 0; border-bottom: 1px solid var(--rule); background: #fff8d6; }
     .step .cap { order: -1; padding: 0; }
     .stack { flex-direction: row; flex-wrap: wrap; gap: 6px; align-content: flex-start; }
     .t { margin: 0; min-height: 0; padding: 4px 8px; }
@@ -106,14 +112,14 @@
   <h1>An agent that checks the tape.</h1>
   <p class="lead">Everybody knows the Monday morning quarterback, the person who second-guesses every coaching decision after the fact. This one goes back and counts. Every other Monday, live on O'Reilly, an AI agent takes one argument NFL fans cannot stop having and settles it from about a quarter of a million real plays, with every step of its work on screen.</p>
   <p style="margin-top:14px">Each episode gets a page here once it is built: how the agent was set up, in plain language, with something you can try yourself. New to American football? <a href="football.html">The game, explained</a> gives you just enough of it to follow the arguments and the data.</p>
-  <a class="aired" href="https://www.oreilly.com/radar/the-monday-morning-agent-defining-the-tush-push/">
-    <b>Watch episode 2</b>
-    <span>"Ban the tush push" aired Monday, October 26, 2026. The recording and a recap are on <u>O'Reilly Radar</u>.</span>
-  </a>
-  <a class="aired" href="https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/">
-    <b>Watch episode 1</b>
-    <span>"You have to establish the run" aired Monday, October 12, 2026. The recording and a recap are on <u>O'Reilly Radar</u>.</span>
-  </a>
+  <div class="aired">
+    <a href="https://www.oreilly.com/radar/the-monday-morning-agent-defining-the-tush-push/"><b>Watch episode 2</b></a>
+    <span>"Ban the tush push" aired Monday, October 26, 2026. The recording and a recap are on <a href="https://www.oreilly.com/radar/the-monday-morning-agent-defining-the-tush-push/">O'Reilly Radar</a>. Chester's write-up, from the data side: <a href="https://sunbirds.ai/blog/tush-push/">How do you measure a play the data cannot name?</a></span>
+  </div>
+  <div class="aired">
+    <a href="https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/"><b>Watch episode 1</b></a>
+    <span>"You have to establish the run" aired Monday, October 12, 2026. The recording and a recap are on <a href="https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/">O'Reilly Radar</a>. Chester's write-up, from the data side: <a href="https://sunbirds.ai/blog/establish-the-run/">Does establishing the run win football games?</a></span>
+  </div>
 </header>
 
 <div class="season">
@@ -174,7 +180,7 @@
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t new">A dictionary it must cite</div></div>
         <div class="cap"><a href="episode-2/">2</a><b>Shared data definitions as durable memory</b><span>October 26</span></div>
       </div>
-      <div class="step">
+      <div class="step now">
         <div class="stack"><div class="t">A policy, one tool, a one-line allowlist</div><div class="t">A dictionary it must cite</div><div class="t new">Rules for its charts</div></div>
         <div class="cap"><a href="episode-3/">3</a><b>Consistent visualizations</b><span>November 9</span></div>
       </div>
@@ -199,7 +205,7 @@
         <div class="cap"><i>8</i><b>Scheduled autonomy</b><span>February 8</span></div>
       </div>
     </div>
-    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode, deeper the older the rule, so each one reads as a band across the season. The same two colors as the charts: blue is where the line started, yellow is the line to gain.</figcaption>
+    <figcaption><span class="y">Yellow</span> is the rule that episode adds. <span class="b">Blue</span> is a rule it keeps from an earlier episode, deeper the older the rule, so each one reads as a band across the season. The same two colors as the charts: blue is where the line started, yellow is the line to gain. The column that stands a step higher is this Monday's episode.</figcaption>
   </figure>
   <div class="rows">
     <div><b>A written policy</b><span>A plain-language job description the agent follows. It grows a section at a time across the season.</span></div>
