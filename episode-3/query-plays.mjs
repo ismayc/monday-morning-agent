@@ -277,7 +277,7 @@ if (args.search) {
   const words = String(args.search).trim()
   const needle = words.toLowerCase()
   const bySeason = {}
-  const examples = []
+  const matches = []
   let hits = 0
   for (const p of plays) {
     const s = p[col.season]
@@ -285,9 +285,21 @@ if (args.search) {
     b.searched++
     if (p[col.desc].toLowerCase().includes(needle)) {
       b.matched++; hits++
-      if (examples.length < 5) examples.push({ season: s, week: p[col.week], game: p[col.game_id], desc: p[col.desc] })
+      matches.push({ season: s, week: p[col.week], game: p[col.game_id], desc: p[col.desc] })
     }
   }
+  // Five examples from across the matches, not the first five on file (which were all
+  // week 1 of 2021). The sample is fixed, not random: each match is ranked by a hash of
+  // the words searched plus its game and text, and the five lowest are shown, so the
+  // same search prints the same five every time, and a new week of plays rarely moves
+  // them. Printed in season and week order.
+  const rank = (m) => {
+    let h = 0x811c9dc5
+    for (const ch of `${needle}|${m.game}|${m.desc}`) { h ^= ch.charCodeAt(0); h = Math.imul(h, 0x01000193) >>> 0 }
+    return h
+  }
+  const examples = matches.map((m) => [rank(m), m]).sort((a, b) => a[0] - b[0]).slice(0, 5).map((x) => x[1])
+    .sort((a, b) => (a.season - b.season) || (a.week - b.week))
   const out = {
     question: `How many play descriptions contain the words "${words}"?`,
     definition: 'a description matches when it contains the words, in any case, anywhere in the text',
@@ -305,7 +317,7 @@ if (args.search) {
   L.push(`  season   plays searched   descriptions containing "${words}"`)
   for (const [s, b] of Object.entries(out.bySeason)) L.push(`  ${s}     ${fmt(b.searched).padStart(14)}   ${fmt(b.matched).padStart(10)}`)
   L.push(`  all      ${fmt(plays.length).padStart(14)}   ${fmt(hits).padStart(10)}`)
-  if (examples.length) { L.push('', `  examples (up to 5):`); for (const e of examples) L.push(`    ${e.season} week ${e.week}, ${e.game}: ${e.desc}`) }
+  if (examples.length) { L.push('', `  examples (${examples.length} of ${fmt(hits)}, a fixed sample from across the matches):`); for (const e of examples) L.push(`    ${e.season} week ${e.week}, ${e.game}: ${e.desc}`) }
   else L.push('', `  NO MATCH: not one of the ${fmt(plays.length)} descriptions contains "${words}".`)
   L.push('', 'NOT IN THIS OUTPUT', `  ${out.notInThisOutput}`)
   console.log(L.join('\n'))
