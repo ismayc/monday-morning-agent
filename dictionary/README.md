@@ -1,7 +1,7 @@
 # The dictionary
 
 The written definitions this show's agent measures with. One file per entry,
-`NAME.json`, in a fixed shape. It started in episode 2, "Ban the tush push,"
+`NAME.json`, in a fixed format. It started in episode 2, "Ban the tush push,"
 because the play everybody argues about has no name in the play-by-play data: not
 one of 260,927 play descriptions from 2021 through the 2026 season contains the
 words "tush push." Before the agent could judge the play it had to say, in rules
@@ -14,10 +14,10 @@ The agent's tool (`episode-2/query-plays.mjs`, and from episode 3 on
 `--trend NAME` reads `dictionary/NAME.json`, applies the rules written there, and
 prints them at the top of its output, quoted, with the file's name and date. There
 is no flag for a definition made up on the spot: with no entry of that name the
-tool stops and prints the shape an entry takes. Every ruling that measures a play
+tool stops and prints the template for an entry. Every ruling that measures a play
 cites the entry it used, and the runner checks that the citation is there.
 
-An entry is one of two shapes. A **rush** (episode 2's shape, below) is measured
+An entry is one of two kinds. A **rush** (episode 2's kind, below) is measured
 with `--play`: how often the defined play converted against every other rush with
 the same yards to go. A **kick** (added for episode 3, "Kickers are too good now")
 is measured with `--trend`: season by season, how often the defined field goal was
@@ -34,7 +34,7 @@ existing entry a run altered and fails the run. Entries written on air are commi
 after the episode; a rehearsal writes into a scratch copy of this folder
 (`ANALYST_DICT_DIR`), so nothing here is a rehearsal.
 
-## The shape
+## The format of a rush entry
 
 ```json
 {
@@ -66,7 +66,7 @@ after the episode; a rehearsal writes into a scratch copy of this folder
 | `comparedWith` | What the defined play is measured against, in words. |
 | `cannotSee` | What the fan's meaning includes that these rules cannot see. Optional, and worth writing. |
 
-### The kick shape
+### The format of a kick entry
 
 ```json
 {
@@ -98,7 +98,7 @@ these choices, and says which. A rejected entry is not a definition.
 | Entry | Written | Plain words |
 |---|---|---|
 | [`tush-push`](tush-push.json) | 2026-10-26, by the analyst, episode 2, on air | The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down. |
-| [`field-goal`](field-goal.json) | 2026-10-26, by Chester, before episode 3 | Any field goal attempt, from the shortest on file to the longest (18 to 70 yards). The first kick entry, page one of the kick shape, so the trend of every kick can be read by hand before the agent writes its own entry on air. |
+| [`field-goal`](field-goal.json) | 2026-10-26, by Chester, before episode 3 | Any field goal attempt, from the shortest on file to the longest (18 to 70 yards). The first kick entry, so the trend of every kick can be read by hand before the agent writes its own entry on air. |
 
 The entry is committed exactly as the agent wrote it on air on October 26, 2026,
 in the run `episode-2/examples/04-run-on-screen.txt` shows. Three rehearsal runs

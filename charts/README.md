@@ -1,7 +1,7 @@
 # The charts
 
 The charts this show's agent draws, and the one standard they are drawn under. One spec
-file per chart, `NAME.json`, in a fixed shape, and beside it the SVG the renderer drew,
+file per chart, `NAME.json`, in a fixed format, and beside it the SVG the renderer drew,
 `NAME.svg`. It started in episode 3, "Kickers are too good now," because a claim about a
 trend needs a picture, and a picture made on the spot is a matter of taste. The rules are
 in `STANDARD.md`; the renderer is `render-chart.mjs`.
@@ -21,7 +21,7 @@ a rule is refused with the rule named, and nothing is drawn.
 Specs written on air are committed after the episode, with their SVGs. A rehearsal writes
 into a scratch copy of this folder (`ANALYST_CHART_DIR`), so nothing here is a rehearsal.
 
-## The shape
+## The format of a spec
 
 ```json
 {
