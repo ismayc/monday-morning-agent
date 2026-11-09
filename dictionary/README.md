@@ -9,20 +9,25 @@ the data can apply, what it was going to count as one. That definition is page o
 
 ## How an entry is used
 
-The agent's tool (`episode-2/query-plays.mjs`, and from episode 3 on
-`episode-3/query-plays.mjs`) only speaks this dictionary. `--play NAME` or
-`--trend NAME` reads `dictionary/NAME.json`, applies the rules written there, and
-prints them at the top of its output, quoted, with the file's name and date. There
+The agent's tool (`episode-2/query-plays.mjs`, then `episode-3/query-plays.mjs`, and
+from episode 4 on `episode-4/query-plays.mjs`) only speaks this dictionary. `--play NAME`,
+`--trend NAME`, `--battle NAME`, or `--split NAME` reads `dictionary/NAME.json`, applies
+the rules written there, and prints them at the top of its output, quoted, with the
+file's name and date. There
 is no flag for a definition made up on the spot: with no entry of that name the
 tool stops and prints an example entry. Every ruling that measures a play
 cites the entry it used, and the runner checks that the citation is there.
 
-An entry is one of two kinds. A **rush** (episode 2's kind, below) is measured
+An entry is one of three kinds. A **rush** (episode 2's kind, below) is measured
 with `--play`: how often the defined play converted against every other rush with
 the same yards to go. A **kick** (added for episode 3, "Kickers are too good now")
 is measured with `--trend`: season by season, how often the defined field goal was
 made against every other field goal attempt, and how often it was tried per game. An
-entry with no `kind` is a rush, so episode 2's entry did not change.
+**event** (added for episode 4, "Win the turnover battle, win the game") is a thing a
+team is charged with on a play, measured with `--battle`: season by season, in the
+games where one team was charged with fewer, how often that team won; and with
+`--split`: how often it happened per 100 plays, by the score at the snap. An entry
+with no `kind` is a rush, so episode 2's entry did not change.
 
 ## How an entry is made
 
@@ -90,6 +95,31 @@ after the episode; a rehearsal writes into a scratch copy of this folder
 | `rules.distanceMin`, `rules.distanceMax` | The kick's distance in yards, from the first to the second, both included. Whole numbers from 18 to 70. A field goal attempt with a result (made, missed, or blocked; a blocked kick is a miss) and a distance on file is a kick. |
 | `comparedWith` | What the defined kick is measured against: every field goal attempt outside its distances. An entry that covers every distance has an empty comparison group, and says so. |
 
+### The format of an event entry
+
+```json
+{
+  "name": "turnover",
+  "kind": "event",
+  "written": "2026-11-09",
+  "by": "Chester, before episode 4",
+  "plainWords": "A turnover: an interception, or a fumble the other team recovered.",
+  "rules": {
+    "flags": ["interception", "fumble_lost"],
+    "charge": "team-with-the-ball"
+  },
+  "comparedWith": "the other team in the same game, by its own count of the same event",
+  "cannotSee": "whether the fumble was forced or dropped, or a turnover on downs"
+}
+```
+
+| Key | What it is |
+|---|---|
+| `kind` | `"event"`. |
+| `rules.flags` | Which play columns count as the event: `"interception"`, `"fumble_lost"`, or both. A play with any listed flag set is one event. |
+| `rules.charge` | Who the event is charged to: `"team-with-the-ball"` (the offense on the play, `posteam`), or `"fumbling-team"` (the team that fumbled, `fumbled_1_team`, which on a muffed punt is the return team; an interception is always the team with the ball). |
+| `comparedWith` | What the count is measured against: the other team in the same game. A battle is decided when the two counts differ and the game was not drawn. |
+
 The tool rejects an entry with a missing key, an unknown key, or a value outside
 these choices, and says which. A rejected entry is not a definition.
 
@@ -100,6 +130,7 @@ these choices, and says which. A rejected entry is not a definition.
 | [`tush-push`](tush-push.json) | 2026-10-26, by the analyst, episode 2, on air | The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down. |
 | [`field-goal`](field-goal.json) | 2026-10-26, by Chester, before episode 3 | Any field goal attempt, from the shortest on file to the longest (18 to 70 yards). The first kick entry, so the trend of every kick can be read by hand before the agent writes its own entry on air. |
 | [`long-field-goal`](long-field-goal.json) | 2026-11-09, by the analyst, episode 3, on air | The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file. Compared with every other attempt, 18 to 49 yards. |
+| [`turnover`](turnover.json) | 2026-11-09, by Chester, before episode 4 | A turnover: the team with the ball gave it away, by a pass the other team intercepted or by a fumble the other team recovered, charged to the team that had the ball. The first event entry, so the turnover battle can be read by hand before the agents run. |
 
 The entry is committed exactly as the agent wrote it on air on October 26, 2026,
 in the run `episode-2/examples/04-run-on-screen.txt` shows. Three rehearsal runs

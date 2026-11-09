@@ -1,0 +1,13 @@
+{
+  "name": "turnover",
+  "kind": "event",
+  "written": "2026-11-09",
+  "by": "Chester, before episode 4",
+  "plainWords": "A turnover: the team with the ball gave it away, by a pass the other team intercepted or by a fumble the other team recovered. Each one is charged to the team that had the ball on the play.",
+  "rules": {
+    "flags": ["interception", "fumble_lost"],
+    "charge": "team-with-the-ball"
+  },
+  "comparedWith": "the other team in the same game, by its own count of the same event",
+  "cannotSee": "whether a fumble was forced or dropped, a turnover on downs (not a flag here), what happened after the ball changed hands, or that a muffed punt is charged to the punting team because it had the ball"
+}

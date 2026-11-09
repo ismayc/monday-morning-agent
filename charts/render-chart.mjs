@@ -29,15 +29,16 @@ const TEXT = '"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif'
 const MONO = 'ui-monospace, "SF Mono", Menlo, Consolas, monospace'
 
 export const SPEC_SHAPE = `{
-  "name": "long-field-goal-trend",          the file is charts/<name>.json; lowercase letters, digits, hyphens
-  "written": "2026-11-09",                  the day it was written, YYYY-MM-DD
-  "by": "the analyst, episode 3",           who wrote it (optional)
-  "question": "Are kickers making more of their long field goals than they did in 2021?",
+  "name": "turnover-battle-trend",          the file is charts/<name>.json; lowercase letters, digits, hyphens
+  "written": "2026-11-23",                  the day it was written, YYYY-MM-DD
+  "by": "the analyst, episode 4",           who wrote it (optional)
+  "question": "Does the team that wins the turnover battle win the game?",
                                             the title: the question tested, ending in "?", no number in it but a year (rule 5)
-  "tool": "episode-3/query-plays.mjs",      the tool that prints the rows, relative to the repo root
-  "command": "--trend long-field-goal --seasons 2021-2026 --type REG"
-                                            the tool command, exactly as you would type it after "node ./query-plays.mjs";
-                                            a trend covers every season on file, 2021 through the current one (rule 1)
+  "tool": "episode-4/query-plays.mjs",      the tool that prints the rows, relative to the repo root (this episode's)
+  "command": "--battle turnover --seasons 2021-2026"
+                                            the tool command, exactly as you would type it after "node ./query-plays.mjs":
+                                            --trend NAME (a kick) or --battle NAME (an event), and every season on file,
+                                            2021 through the current one (rule 1)
 }`
 const KEYS = { name: 1, written: 1, by: 0, question: 1, tool: 1, command: 1 }
 
@@ -89,7 +90,12 @@ if (q.length < 12 || q.length > 140) refuse(5, `the title is ${q.length} charact
 const cmd = spec.command.trim()
 if (/[;&|`$<>'"\\]/.test(cmd)) fail('the command holds a shell character; write the flags and their values only, separated by spaces')
 const args = cmd.split(/\s+/)
-if (args[0] !== '--trend') refuse(8, `this template draws a trend, and the command must begin with --trend NAME; it begins with "${args[0]}".`)
+// A trend by season: a kick's make rate (--trend, episode 3) or a game's winner by the
+// turnover count (--battle, episode 4). Both print one row per season with a rate and a
+// per-game count, and the template draws them the same way; the panel titles and the
+// legend's words come from the tool's output (its "labels"), so a chart never carries a
+// label the tool did not print either.
+if (args[0] !== '--trend' && args[0] !== '--battle') refuse(8, `this template draws a trend by season, and the command must begin with --trend NAME or --battle NAME; it begins with "${args[0]}".`)
 if (args.includes('--json')) fail('leave --json out of the command; the renderer adds it')
 if (args.includes('--weeks')) refuse(1, 'a trend covers whole seasons; the command narrows them with --weeks.')
 const si = args.indexOf('--seasons')
@@ -105,9 +111,10 @@ try {
   const msg = (err.stderr || err.message || '').toString().trim().split('\n')[0]
   fail(`the tool refused the command: ${msg}`, 65)
 }
-if (!rowsOut.rows || !rowsOut.dictionary) fail('the tool\'s output has no rows; the renderer draws --trend output only', 65)
+if (!rowsOut.rows || !rowsOut.dictionary) fail('the tool\'s output has no rows; the renderer draws --trend and --battle output only', 65)
 const rows = rowsOut.rows
 const D = rowsOut.dictionary
+const LABELS = { defined: `${D.name}: the defined kick`, rateTitle: 'Made, as a share of attempts', perGameTitle: 'Tried, per game', ...(rowsOut.labels || {}) }
 const pct = (x) => x === null ? 'n/a' : (100 * x).toFixed(1) + '%'
 const fmt = (n) => n.toLocaleString('en-US')
 
@@ -138,7 +145,7 @@ parts.push(`<text x="${L}" y="80" font-family='${TEXT}' font-size="16" fill="${S
 parts.push(`<text x="${L}" y="100" font-family='${TEXT}' font-size="16" fill="${SOFT}">${esc(filters.length ? `Filters: ${filters.join('; ')}.` : 'Filters: every season, every week, every team.')}</text>`)
 // Legend (rule 4)
 let lx = L
-parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${YELLOW}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(D.name)}: the defined kick</text>`)
+parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${YELLOW}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(LABELS.defined)}</text>`)
 lx += 300
 if (hasOther) { parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${BLUE}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(D.comparedWith)}</text>`); lx += 320 }
 if (inProg) parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${GRAY}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(inProg.season)} so far, through week ${esc(String(inProg.weeks).split(/[-,]/).pop())}</text>`)
@@ -146,7 +153,7 @@ if (inProg) parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${G
 // Panel A: rates, 0 to 100 (rule 2), counts under the points (rule 3)
 const aTop = 170, aBot = 450
 const ay = (rate) => aBot - (aBot - aTop) * rate
-parts.push(`<text x="${L}" y="${aTop - 12}" font-family='${DISPLAY}' font-weight="600" font-size="20" fill="${INK}">Made, as a share of attempts</text>`)
+parts.push(`<text x="${L}" y="${aTop - 12}" font-family='${DISPLAY}' font-weight="600" font-size="20" fill="${INK}">${esc(LABELS.rateTitle)}</text>`)
 for (const t of [0, 25, 50, 75, 100]) {
   const y = ay(t / 100)
   parts.push(`<line x1="${L}" x2="${W - Rm}" y1="${y}" y2="${y}" stroke="${t === 0 ? INK : RULE}" stroke-width="${t === 0 ? 2 : 1}"/>`)
@@ -184,7 +191,7 @@ const bTop = 530, bBot = 670
 const maxPg = Math.max(0.5, ...rows.map(r => r.defined.perGame || 0))
 const bMax = Math.ceil(maxPg * 2) / 2
 const by = (v) => bBot - (bBot - bTop) * (v / bMax)
-parts.push(`<text x="${L}" y="${bTop - 12}" font-family='${DISPLAY}' font-weight="600" font-size="20" fill="${INK}">Tried, per game</text>`)
+parts.push(`<text x="${L}" y="${bTop - 12}" font-family='${DISPLAY}' font-weight="600" font-size="20" fill="${INK}">${esc(LABELS.perGameTitle)}</text>`)
 for (let t = 0; t <= bMax + 1e-9; t += bMax <= 1 ? 0.25 : 0.5) {
   const y = by(t)
   parts.push(`<line x1="${L}" x2="${W - Rm}" y1="${y}" y2="${y}" stroke="${t === 0 ? INK : RULE}" stroke-width="${t === 0 ? 2 : 1}"/>`)
@@ -196,7 +203,7 @@ rows.forEach((r, i) => {
   const y = by(r.defined.perGame)
   parts.push(`<rect x="${xs[i] - bw / 2}" y="${y}" width="${bw}" height="${bBot - y}" fill="${r.inProgress ? GRAY : YELLOW}" stroke="${INK}" stroke-width="2"${r.inProgress ? ' stroke-dasharray="4 3"' : ''}/>`)
   parts.push(`<text x="${xs[i]}" y="${y - 8}" text-anchor="middle" font-family='${MONO}' font-weight="700" font-size="15" fill="${INK}">${r.defined.perGame.toFixed(2)}</text>`)
-  parts.push(`<text x="${xs[i]}" y="${bBot + 20}" text-anchor="middle" font-family='${MONO}' font-size="12" fill="${SOFT}">${fmt(r.defined.attempts)} in ${fmt(r.games)} games</text>`)
+  parts.push(`<text x="${xs[i]}" y="${bBot + 20}" text-anchor="middle" font-family='${MONO}' font-size="12" fill="${SOFT}">${fmt(r.defined.perGameCount ?? r.defined.attempts)} in ${fmt(r.games)} games</text>`)
 })
 // Footnote for the partial season, and the source line (rule 6)
 let fy = 722

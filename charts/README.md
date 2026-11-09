@@ -13,8 +13,11 @@ folder and to `.json` files in it (`Edit(//<repo>/charts/*.json)` on the runner'
 allowlist), then runs the renderer on it (`Bash(node ../charts/render-chart.mjs:*)`). The
 renderer runs the tool command the spec names, with `--json`, and draws the rows the tool
 returns, so a chart can never carry a number the tool did not print. The template fixes
-the axes, the colors, the counts under every point, and the source line. The renderer
-checks the two things the template cannot fix: that the trend covers every season on
+the axes, the colors, the counts under every point, and the source line. From episode 4
+the same template also draws a battle by season (`--battle`, the turnover battle): the
+panel titles and the legend's words come from the tool's output, so the chart carries no
+label the tool did not print either. The renderer checks the two things the template
+cannot fix: that the trend covers every season on
 file, and that the title is the question tested, with no number in it. A spec that breaks
 a rule is refused with the rule named, and nothing is drawn.
 
