@@ -226,7 +226,15 @@ Drawn under charts/STANDARD.md, version 1 (October 26, 2026), from the spec long
   function paint() {
     cards.forEach(function (c, i) { c.classList.toggle('on', stage >= i + 1); });
     where.textContent = stage === 0 ? 'Nothing shown yet' : 'Rule ' + stage + ' of ' + LAST;
-    if (stage > 0) { var last = cards[stage - 1]; if (last && stage > 1) last.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+    if (stage > 1) show(cards[stage - 1]);
+  }
+  // Scroll a card to just under the sticky site bar (.top in sheet.css). A plain
+  // scrollIntoView puts it at the window's top edge, under the bar, which hid the
+  // rule's number and title. The bar wraps on a narrow window, so measure it each time.
+  var bar = document.querySelector('.top');
+  function show(card) {
+    var y = card.getBoundingClientRect().top + window.scrollY - (bar ? bar.offsetHeight : 0) - 12;
+    window.scrollTo({ top: Math.max(0, y), behavior: 'smooth' });
   }
   function step(d) { stage = Math.max(0, Math.min(LAST, stage + d)); paint(); }
   document.getElementById('next').addEventListener('click', function (e) { e.stopPropagation(); step(1); });
