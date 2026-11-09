@@ -74,9 +74,14 @@ jobs:
         # raw files; nothing is downloaded twice.
         run: cd episode-3 && node ./slim-data.mjs
 
+      - name: Episode 4, rebuild its file from the same downloads
+        # Episode 4 reads 40 columns, episode 3's plus five about turnovers and the final
+        # margin, from the same raw files; nothing is downloaded twice.
+        run: cd episode-4 && node ./slim-data.mjs
+
       - name: Commit if the plays changed
         run: |
-          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json episode-2/data docs/episode-2/explorer-data.json episode-3/data; then
+          if git diff --quiet -- episode-1/data docs/episode-1/explorer-data.json docs/episode-1/plays-data.json episode-2/data docs/episode-2/explorer-data.json episode-3/data episode-4/data; then
             echo "Nothing new since the last commit; nothing to push."
             exit 0
           fi
@@ -86,6 +91,7 @@ jobs:
           git add episode-1/data/plays-slim.csv episode-1/data/plays-slim.meta.json docs/episode-1/explorer-data.json docs/episode-1/plays-data.json
           git add episode-2/data/plays.csv episode-2/data/plays.meta.json docs/episode-2/explorer-data.json
           git add episode-3/data/plays.csv episode-3/data/plays.meta.json
+          git add episode-4/data/plays.csv episode-4/data/plays.meta.json
           git commit -m "data: 2026 through $through"
           git pull --rebase origin main
           git push origin HEAD:main
