@@ -24,7 +24,9 @@ SEASONS=("$@")
 
 for y in "${SEASONS[@]}"; do
   echo "fetch-data: $y"
-  curl -fsSL -o "pbp$y.csv.gz" \
+  # GitHub's release download sometimes answers 504 for a moment; that alone failed the
+  # daily refresh on November 8 and 9, 2026. Try up to four more times, 15 s apart.
+  curl -fsSL --retry 4 --retry-delay 15 --retry-all-errors -o "pbp$y.csv.gz" \
     "https://github.com/nflverse/nflverse-data/releases/download/pbp/play_by_play_$y.csv.gz"
   gunzip -f "pbp$y.csv.gz"
 done
