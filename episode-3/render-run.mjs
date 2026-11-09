@@ -28,7 +28,9 @@ export function describeCall(part) {
   const inp = part.input || {}
   const short = (p) => String(p || '').split('/').slice(-2).join('/')
   const what = (p) => /\/charts\/[^/]+\.json$/.test(String(p || '')) ? 'spec' : 'entry'
-  if (part.name === 'Bash') return { tool: 'Bash', command: inp.command || JSON.stringify(inp), render: /render-chart\.mjs/.test(String(inp.command || '')) }
+  // render: the renderer called WITH a spec path. Called with no argument it only prints the
+  // spec template and draws nothing, so that call is a plain tool call (seen November 8, 2026).
+  if (part.name === 'Bash') return { tool: 'Bash', command: inp.command || JSON.stringify(inp), render: /render-chart\.mjs\s+\S/.test(String(inp.command || '')) }
   if (part.name === 'Write') return { tool: 'Write', command: `wrote ${short(inp.file_path)}`, path: inp.file_path, what: what(inp.file_path), content: inp.content || '' }
   if (part.name === 'Edit' || part.name === 'MultiEdit') return { tool: 'Edit', command: `edited ${short(inp.file_path)}`, path: inp.file_path, what: what(inp.file_path), content: inp.new_string || JSON.stringify(inp.edits || inp, null, 2) }
   return { tool: part.name || 'tool', command: `${part.name}: ${JSON.stringify(inp)}` }
