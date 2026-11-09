@@ -1,0 +1,13 @@
+{
+  "name": "long-field-goal",
+  "kind": "kick",
+  "written": "2026-11-09",
+  "by": "the analyst, episode 3",
+  "plainWords": "The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file.",
+  "rules": {
+    "distanceMin": 50,
+    "distanceMax": 70
+  },
+  "comparedWith": "every other field goal attempt, from 18 to 49 yards",
+  "cannotSee": "the wind, the surface, the snap and the hold, whether a timeout was called to ice the kicker, or the kicks a coach decided not to try, so a rising make rate can come from coaches picking their spots as well as from kickers' legs"
+}

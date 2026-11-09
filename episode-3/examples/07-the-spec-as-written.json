@@ -1,0 +1,8 @@
+{
+  "name": "long-field-goal-trend",
+  "written": "2026-11-09",
+  "by": "the analyst, episode 3",
+  "question": "Are kickers making more of their long field goals than they did in 2021?",
+  "tool": "episode-3/query-plays.mjs",
+  "command": "--trend long-field-goal --seasons 2021-2026"
+}

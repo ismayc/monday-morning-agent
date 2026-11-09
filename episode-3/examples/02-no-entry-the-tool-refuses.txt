@@ -1,0 +1,15 @@
+query-plays: no entry named "long-field-goal" in .../dictionary. The tool only speaks the dictionary: write .../dictionary/long-field-goal.json first, in this shape:
+{
+  "name": "long-field-goal",                the file is dictionary/<name>.json; lowercase letters, digits, hyphens
+  "kind": "kick",                           this entry defines a kick (an entry with no "kind" defines a rush)
+  "written": "2026-11-09",                  the day it was written, YYYY-MM-DD
+  "by": "the analyst, episode 3",           who wrote it (optional)
+  "plainWords": "A field goal attempt from 50 yards or more.",
+  "rules": {
+    "distanceMin": 50,                      the kick's distance in yards, from this one ...
+    "distanceMax": 70                       ... to this one; whole numbers, 18 to 70
+  },
+  "comparedWith": "every other field goal attempt",
+  "cannotSee": "the wind, the surface, or whether a timeout was called to ice the kicker"   (optional)
+}
+Entries on file: field-goal, tush-push

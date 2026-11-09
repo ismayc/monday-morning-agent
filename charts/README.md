@@ -49,4 +49,4 @@ Nothing about colors, axes, or labels: those are the standard's, not the agent's
 
 | Chart | Written | Question |
 |---|---|---|
-| (none yet; episode 3's is written on air, Monday, November 9, 2026) | | |
+| [`long-field-goal-trend`](long-field-goal-trend.json), [SVG](long-field-goal-trend.svg) | 2026-11-09, by the analyst, episode 3, on air | Are kickers making more of their long field goals than they did in 2021? |

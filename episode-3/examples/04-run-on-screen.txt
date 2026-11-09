@@ -1,0 +1,214 @@
+
+[0:13] AGENT
+I will search the plays for the kick by name, then check what the tool prints for a trend entry named for the long kick.
+
+==============================================================================
+[0:14] TOOL CALL 1
+  node ./query-plays.mjs --search "field goal" --seasons 2021-2026
+------------------------------------------------------------------------------
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 35 of 372 columns kept, no betting columns                         270,931
+   1. seasons: 2021-2026                                                                       270,931
+   2. season type: regular season and playoffs                                                 270,931
+   3. weeks: all                                                                               270,931
+
+  1,559 games in the plays kept (latest game 2026-11-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22; 2026: 1-9)
+RESULT
+  season   plays searched   descriptions containing "field goal"
+  2021             49,922        1,116
+  2022             49,434        1,144
+  2023             49,665        1,146
+  2024             49,492        1,205
+  2025             48,771        1,180
+  2026             23,647          588
+  all             270,931        6,379
+
+  examples (5 of 6,379, a fixed sample from across the matches):
+    2021 week 2, 2021_02_TEN_SEA: (1:09) 14-R.Bullock 24 yard field goal is GOOD, Center-46-M.Cox, Holder-6-B.Kern.
+    2021 week 12, 2021_12_LA_GB: (2:32) 2-M.Crosby 29 yard field goal is GOOD, Center-46-S.Wirtel, Holder-7-C.Bojorquez.
+    2024 week 13, 2024_13_CHI_DET: (3:15) 39-J.Bates 48 yard field goal is GOOD, Center-49-H.Hatten, Holder-3-J.Fox.
+    2025 week 1, 2025_01_MIA_IND: (2:28) 3-S.Shrader 48 yard field goal is GOOD, Center-46-L.Rhodes, Holder-8-R.Sanchez.
+    2025 week 8, 2025_08_MIA_ATL: (8:41) 47-R.Patterson 36 yard field goal is GOOD, Center-49-J.Cardona, Holder-16-J.Bailey.
+
+==============================================================================
+[0:14] TOOL CALL 2
+  node ./query-plays.mjs --trend long-field-goal --seasons 2021-2026
+------------------------------------------------------------------------------
+  REFUSED OR FAILED: Exit code 65
+
+[0:20] AGENT
+The search found the kick by name in every season. Next I write the long-field-goal entry and get the chart spec shape, in parallel.
+
+==============================================================================
+[0:25] WRITE 3: wrote dictionary/long-field-goal.json
+------------------------------------------------------------------------------
+{
+  "name": "long-field-goal",
+  "kind": "kick",
+  "written": "2026-11-09",
+  "by": "the analyst, episode 3",
+  "plainWords": "The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file.",
+  "rules": {
+    "distanceMin": 50,
+    "distanceMax": 70
+  },
+  "comparedWith": "every other field goal attempt, from 18 to 49 yards",
+  "cannotSee": "the wind, the surface, the snap and the hold, whether a timeout was called to ice the kicker, or the kicks a coach decided not to try, so a rising make rate can come from coaches picking their spots as well as from kickers' legs"
+}
+
+==============================================================================
+[0:25] TOOL CALL 4
+  node ../charts/render-chart.mjs
+------------------------------------------------------------------------------
+A chart spec is one JSON file in this shape:
+{
+  "name": "long-field-goal-trend",          the file is charts/<name>.json; lowercase letters, digits, hyphens
+  "written": "2026-11-09",                  the day it was written, YYYY-MM-DD
+  "by": "the analyst, episode 3",           who wrote it (optional)
+  "question": "Are kickers making more of their long field goals than they did in 2021?",
+                                            the title: the question tested, ending in "?", no number in it but a year (rule 5)
+  "tool": "episode-3/query-plays.mjs",      the tool that prints the rows, relative to the repo root
+  "command": "--trend long-field-goal --seasons 2021-2026 --type REG"
+                                            the tool command, exactly as you would type it after "node ./query-plays.mjs";
+                                            a trend covers every season on file, 2021 through the current one (rule 1)
+}
+
+[0:33] AGENT
+Now I run the trend, run the distance-band read that could prove it wrong, and write the chart spec, all independent.
+
+==============================================================================
+[0:34] TOOL CALL 5
+  node ./query-plays.mjs --trend long-field-goal --seasons 2021-2026
+------------------------------------------------------------------------------
+DEFINITION, FROM THE DICTIONARY
+  dictionary/long-field-goal.json, written 2026-11-09 by the analyst, episode 3
+  "The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file."
+  rules: a field goal attempt of 50 to 70 yards
+  compared with: every other field goal attempt, from 18 to 49 yards
+  cannot see: the wind, the surface, the snap and the hold, whether a timeout was called to ice the kicker, or the kicks a coach decided not to try, so a rising make rate can come from coaches picking their spots as well as from kickers' legs
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 35 of 372 columns kept, no betting columns                         270,931
+   1. seasons: 2021-2026                                                                       270,931
+   2. season type: regular season and playoffs                                                 270,931
+   3. weeks: all                                                                               270,931
+   4. team with the ball: any                                                                  270,931
+   5. a field goal attempt with a result (made, missed, or blocked; a blocked kick counts as a miss) and a distance on file     6,164
+
+  1,559 games in the plays kept (latest game 2026-11-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22; 2026: 1-9)
+RESULT
+  season   games   defined kicks   made     rate   per game   other kicks   made     rate      gap
+  2021       285             191    127    66.5%       0.67           885    791    89.4%    -22.9
+  2022       284             229    159    69.4%       0.81           876    785    89.6%    -20.2
+  2023       285             240    167    69.6%       0.84           867    783    90.3%    -20.7
+  2024       285             287    200    69.7%       1.01           879    782    89.0%    -19.3
+  2025       285             278    191    68.7%       0.98           862    785    91.1%    -22.4
+  2026       135             150    101    67.3%       1.11           420    380    90.5%    -23.1   (in progress, weeks 1-9)
+  all      1,559           1,375    945    68.7%       0.88         4,789   4,306    89.9%    -21.2
+  gap = the defined kicks' rate minus the other kicks' rate, in points
+
+  IN PROGRESS: 2026 is still being played (weeks 1-9 on file, latest game 2026-11-08). Its row is a partial season.
+
+==============================================================================
+[0:35] TOOL CALL 6
+  node ./query-plays.mjs --trend long-field-goal --seasons 2021-2026 --bands
+------------------------------------------------------------------------------
+DEFINITION, FROM THE DICTIONARY
+  dictionary/long-field-goal.json, written 2026-11-09 by the analyst, episode 3
+  "The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file."
+  rules: a field goal attempt of 50 to 70 yards
+  compared with: every other field goal attempt, from 18 to 49 yards
+  cannot see: the wind, the surface, the snap and the hold, whether a timeout was called to ice the kicker, or the kicks a coach decided not to try, so a rising make rate can come from coaches picking their spots as well as from kickers' legs
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 35 of 372 columns kept, no betting columns                         270,931
+   1. seasons: 2021-2026                                                                       270,931
+   2. season type: regular season and playoffs                                                 270,931
+   3. weeks: all                                                                               270,931
+   4. team with the ball: any                                                                  270,931
+   5. a field goal attempt with a result (made, missed, or blocked; a blocked kick counts as a miss) and a distance on file     6,164
+
+  1,559 games in the plays kept (latest game 2026-11-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22; 2026: 1-9)
+RESULT
+  season   games   defined kicks   made     rate   per game   other kicks   made     rate      gap
+  2021       285             191    127    66.5%       0.67           885    791    89.4%    -22.9
+  2022       284             229    159    69.4%       0.81           876    785    89.6%    -20.2
+  2023       285             240    167    69.6%       0.84           867    783    90.3%    -20.7
+  2024       285             287    200    69.7%       1.01           879    782    89.0%    -19.3
+  2025       285             278    191    68.7%       0.98           862    785    91.1%    -22.4
+  2026       135             150    101    67.3%       1.11           420    380    90.5%    -23.1   (in progress, weeks 1-9)
+  all      1,559           1,375    945    68.7%       0.88         4,789   4,306    89.9%    -21.2
+  gap = the defined kicks' rate minus the other kicks' rate, in points
+
+BY DISTANCE (the defined kicks, in the chart standard's four bands)
+  season           under 40           40 to 49           50 to 59        60 and over
+  2021                 none               none       67.6% of 182         44.4% of 9
+  2022                 none               none       71.3% of 216        38.5% of 13
+  2023                 none               none       70.1% of 231         55.6% of 9
+  2024                 none               none       72.1% of 272        26.7% of 15
+  2025                 none               none       70.2% of 255        52.2% of 23
+  2026                 none               none       68.8% of 141         44.4% of 9
+  all                  none               none     70.2% of 1,297        43.6% of 78
+
+  IN PROGRESS: 2026 is still being played (weeks 1-9 on file, latest game 2026-11-08). Its row is a partial season.
+
+==============================================================================
+[0:37] WRITE 7: wrote charts/long-field-goal-trend.json
+------------------------------------------------------------------------------
+{
+  "name": "long-field-goal-trend",
+  "written": "2026-11-09",
+  "by": "the analyst, episode 3",
+  "question": "Are kickers making more of their long field goals than they did in 2021?",
+  "tool": "episode-3/query-plays.mjs",
+  "command": "--trend long-field-goal --seasons 2021-2026"
+}
+
+[0:39] AGENT
+The numbers are in. Now I render the chart from the spec.
+
+==============================================================================
+[0:40] TOOL CALL 8
+  node ../charts/render-chart.mjs ../charts/long-field-goal-trend.json
+------------------------------------------------------------------------------
+render-chart: charts/long-field-goal-trend.json
+  rule 1 (every season on file): --seasons 2021-2026, no --weeks                       OK
+  rule 5 (the title is the question): "Are kickers making more of their long field goals than they did in 2021?"  OK
+  rule 6 (the source line is the command): node episode-3/query-plays.mjs --trend long-field-goal --seasons 2021-2026  OK
+  rule 7 (nothing the tool did not print): 6 rows read from the tool's --json output  OK
+  rules 2, 3, 4, 8 (axes from zero, counts under points, two colors and gray, one template): fixed by the template
+  2021   defined  66.5% of   191  0.67 per game   other  89.4% of 885
+  2022   defined  69.4% of   229  0.81 per game   other  89.6% of 876
+  2023   defined  69.6% of   240  0.84 per game   other  90.3% of 867
+  2024   defined  69.7% of   287  1.01 per game   other  89.0% of 879
+  2025   defined  68.7% of   278  0.98 per game   other  91.1% of 862
+  2026*  defined  67.3% of   150  1.11 per game   other  90.5% of 420
+
+==============================================================================
+RULING
+==============================================================================
+**The claim:** Whether kickers are "too good" is a judgment about the game people want to watch, and the plays cannot settle it. The question I tested is whether kickers make more of their long field goals now than they did in 2021, so much more that the long kick is a different play; for that to hold, the long kick's make rate would have to climb season by season, at every distance, and not only because the attempts changed.
+
+**Definition used:** The entry is long-field-goal, from dictionary/long-field-goal.json, written 2026-11-09 by the analyst, episode 3, and I wrote it in this run because the field-goal entry on file puts every attempt in the defined group with nothing to compare against. The search for "field goal" across 2021 through 2026 found 6,379 descriptions, between 1,116 and 1,205 per complete season and 588 so far in 2026, so the play has its name in the data.
+
+**Chart:** The spec is charts/long-field-goal-trend.json, written 2026-11-09, and the chart shows the long kick's make rate holding between 66.5% and 69.7% over 2021 through 2025 while attempts per game climb from 0.67 to 0.98, with 2026 in gray at 67.3% and 1.11 per game.
+
+**Five seasons:** The defined kick 66.5% of 191 attempts in 2021 and 68.7% of 278 in 2025, tried 0.67 and 0.98 times per game, with the other kicks (18 to 49 yards) at 89.4% of 885 and 91.1% of 862. The distance split (--bands) was my check against a rate that only looks like a trend: kicks of 50 to 59 yards went 67.6% of 182 in 2021 and 70.2% of 255 in 2025, and kicks of 60 and over went 44.4% of 9 and 52.2% of 23, groups too small to carry a trend, so no band moved in one direction.
+
+**This season:** The defined kick 67.3% of 150 attempts in 2026, tried 1.11 times per game, with the other kicks at 90.5% of 420. The tool marks 2026 in progress, weeks 1 through 9 with the latest game on 2026-11-08, so this row is a partial season and its per-game count can still move.
+
+**The gap between the two answers:** The 2026 make rate sits inside the five-season range of 66.5% to 69.7%, and the only number outside that range is attempts per game, 1.11 against a high of 1.01, which a partial season cannot support as a change.
+
+**Ruling:** The claim does not hold in these plays: the long kick was made at about the same rate in every season on file, and what rose is how often coaches tried it, not how often it went in.
+
+**What these plays cannot tell you:** They cannot say why a kick was made or missed or why a coach chose to try, because the data does not see the wind, the surface, the snap and hold, an icing timeout, or the long kicks that were never attempted.
+
+**Commands run:**
+node ./query-plays.mjs --search "field goal" --seasons 2021-2026
+node ./query-plays.mjs --trend long-field-goal --seasons 2021-2026
+node ./query-plays.mjs --trend long-field-goal --seasons 2021-2026
+node ./query-plays.mjs --trend long-field-goal --seasons 2021-2026 --bands
+node ../charts/render-chart.mjs
+node ../charts/render-chart.mjs ../charts/long-field-goal-trend.json
+==============================================================================
+8 tool calls, 1 refused or failed, 60 seconds

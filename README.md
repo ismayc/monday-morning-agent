@@ -317,7 +317,7 @@ second shape, a kick, and the tool a third question, a trend. Everything else is
 - **The words (the defined kick, the trend, the spec, the renderer, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-3/#terms
 - **The chart standard as a file, and the renderer:** [`charts/`](charts/)
 - **The dictionary, both shapes:** [`dictionary/`](dictionary/)
-- **Appendix, the season sheets:** published after the show, with the entry the agent writes on air
+- **Appendix, the season sheets, measured with the entry written on air:** [five seasons](https://ismayc.github.io/monday-morning-agent/episode-3/season-sheet-2021-2025.html) and [this season](https://ismayc.github.io/monday-morning-agent/episode-3/season-sheet-2026.html)
 
 ### The kit
 
@@ -348,7 +348,8 @@ back, so a chart cannot carry a number the tool did not print; it checks the win
 (rule 1) and the title (rule 5), fixes the rest by its template, and refuses a spec
 that breaks a rule with the rule named, exit 65. It sits at the root because every
 later episode's charts follow it. The [README](charts/README.md) gives the shape of a
-spec. Specs written on air are committed after the show, with their SVGs.
+spec. The spec written on air, `long-field-goal-trend.json`, is committed with its SVG,
+exactly as the agent wrote it and the renderer drew it on November 9, 2026.
 
 ### Run it
 
@@ -371,9 +372,37 @@ ANALYST_DICT_DIR=$(mktemp -d) ANALYST_CHART_DIR=$(mktemp -d) ./run-analyst.sh "K
 ./browser-shell/terminal.sh
 ```
 
-A run takes about half a minute: it searches by name, gets the tool's refusal, writes
+A run takes about a minute: it searches by name, gets the tool's refusal, writes
 the entry, reads the trend and the bands, writes the spec, renders it, and cites both.
-The long-kick numbers and the ruling go here after the show.
+
+### What the numbers say
+
+The agent ran on air on November 9, 2026, with the dictionary holding `tush-push` and
+`field-goal` and no spec on file: 60 seconds, eight tool calls (four reads, two files
+written, two renders), no retry. It wrote `dictionary/long-field-goal.json` (a field goal
+attempt from 50 yards or more, compared with every other attempt), the spec
+`charts/long-field-goal-trend.json`, and ruled:
+
+> The claim does not hold in these plays: the long kick was made at about the same rate
+> in every season on file, and what rose is how often coaches tried it, not how often it
+> went in.
+
+| Season | Long kicks (50+) tried | Made | Rate | Tried per game | Other kicks (18 to 49) made |
+|---|---|---|---|---|---|
+| 2021 | 191 | 127 | 66.5% | 0.67 | 89.4% |
+| 2022 | 229 | 159 | 69.4% | 0.81 | 89.6% |
+| 2023 | 240 | 167 | 69.6% | 0.84 | 90.3% |
+| 2024 | 287 | 200 | 69.7% | 1.01 | 89.0% |
+| 2025 | 278 | 191 | 68.7% | 0.98 | 91.1% |
+| 2026, weeks 1 to 9 | 150 | 101 | 67.3% | 1.11 | 90.5% |
+
+The make rate sits between 66.5 and 69.7 percent in every complete season; attempts per
+game climbed from 0.67 to about 1. By distance band, kicks of 50 to 59 yards went 67.6
+percent in 2021 and 70.2 in 2025, and kicks of 60 and over were 9 to 23 attempts a
+season, too few to carry a trend. The whole run as it looked on screen is
+`examples/04-run-on-screen.txt`, the ruling is `examples/05-ruling.md`, and the chart as
+drawn is `examples/08-the-chart-as-drawn.svg`. The season sheets in the appendix ask the
+tool six more situations with the same entry.
 
 ## Across the episodes
 

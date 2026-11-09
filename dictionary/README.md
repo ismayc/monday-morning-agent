@@ -99,9 +99,16 @@ these choices, and says which. A rejected entry is not a definition.
 |---|---|---|
 | [`tush-push`](tush-push.json) | 2026-10-26, by the analyst, episode 2, on air | The quarterback takes the snap under center with one yard or less to go and runs straight ahead, with teammates pushing him from behind. In these plays it is any run by the team's primary passer, not from shotgun, with one yard or less to go, on any down. |
 | [`field-goal`](field-goal.json) | 2026-10-26, by Chester, before episode 3 | Any field goal attempt, from the shortest on file to the longest (18 to 70 yards). The first kick entry, so the trend of every kick can be read by hand before the agent writes its own entry on air. |
+| [`long-field-goal`](long-field-goal.json) | 2026-11-09, by the analyst, episode 3, on air | The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file. Compared with every other attempt, 18 to 49 yards. |
 
 The entry is committed exactly as the agent wrote it on air on October 26, 2026,
 in the run `episode-2/examples/04-run-on-screen.txt` shows. Three rehearsal runs
 had chosen two or fewer yards to go; the agent on air chose one yard or less, and
 that is the definition every later ruling cites. A different definition is a new
 entry with a new name.
+
+The `long-field-goal` entry is committed as the agent wrote it on air on November 9,
+2026 (`episode-3/examples/04-run-on-screen.txt`), after the tool refused the trend of
+an entry that did not exist. The agent chose 50 yards as the line, the same line the
+chart standard's third distance band starts at, and named the kicks a coach never
+tried as something the rules cannot see.

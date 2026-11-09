@@ -1,0 +1,32 @@
+QUESTION
+  How many play descriptions contain the words "field goal"?
+  a description matches when it contains the words, in any case, anywhere in the text
+
+FILTERS, IN ORDER (plays left after each)
+   0. file: data/plays.csv, 35 of 372 columns kept, no betting columns                         270,931
+   1. seasons: 2021-2026                                                                       270,931
+   2. season type: regular season and playoffs                                                 270,931
+   3. weeks: all                                                                               270,931
+
+THEN, EVERY DESCRIPTION READ
+  1,559 games in the plays kept (latest game 2026-11-08; weeks 2021: 1-22; 2022: 1-22; 2023: 1-22; 2024: 1-22; 2025: 1-22; 2026: 1-9)
+
+RESULT
+  season   plays searched   descriptions containing "field goal"
+  2021             49,922        1,116
+  2022             49,434        1,144
+  2023             49,665        1,146
+  2024             49,492        1,205
+  2025             48,771        1,180
+  2026             23,647          588
+  all             270,931        6,379
+
+  examples (5 of 6,379, a fixed sample from across the matches):
+    2021 week 2, 2021_02_TEN_SEA: (1:09) 14-R.Bullock 24 yard field goal is GOOD, Center-46-M.Cox, Holder-6-B.Kern.
+    2021 week 12, 2021_12_LA_GB: (2:32) 2-M.Crosby 29 yard field goal is GOOD, Center-46-S.Wirtel, Holder-7-C.Bojorquez.
+    2024 week 13, 2024_13_CHI_DET: (3:15) 39-J.Bates 48 yard field goal is GOOD, Center-49-H.Hatten, Holder-3-J.Fox.
+    2025 week 1, 2025_01_MIA_IND: (2:28) 3-S.Shrader 48 yard field goal is GOOD, Center-46-L.Rhodes, Holder-8-R.Sanchez.
+    2025 week 8, 2025_08_MIA_ATL: (8:41) 47-R.Patterson 36 yard field goal is GOOD, Center-49-J.Cardona, Holder-16-J.Bailey.
+
+NOT IN THIS OUTPUT
+  Anything the descriptions do not say. A play that happened but was written up in other words is not a match, and a description is one line of text, not a film clip.
