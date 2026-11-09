@@ -27,6 +27,29 @@ code { font-family: var(--code); font-size: .88em; background: var(--faint); pad
 .top nav { display: flex; flex-wrap: wrap; gap: 4px 16px; font-weight: 500; font-size: 18px; }
 .top nav a { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
 .top nav a[aria-current="page"] { background: var(--yellow); text-decoration: none; padding: 0 6px; }
+/* "Episodes": one entry in the strip that opens the season's list, so the strip stays one
+   line as episodes are added (eight by February; Chester, November 8, 2026). A details
+   element: it opens on a tap or on Enter with no script; sheet.js, where a page loads it,
+   closes it on a click elsewhere or Escape. The list is written into every page by
+   tools/episodes-menu.mjs from the README's episode table. */
+.top nav details.episodes { position: relative; }
+.top nav details.episodes summary { display: inline; list-style: none; cursor: pointer; text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; }
+.top nav details.episodes summary::-webkit-details-marker { display: none; }
+.top nav details.episodes summary::after { content: " \25BE"; text-decoration: none; display: inline-block; }
+.top nav details.episodes[open] summary { background: var(--yellow); text-decoration: none; padding: 0 6px; }
+.top nav details.episodes .panel { position: absolute; left: -8px; top: calc(100% + 10px); z-index: 30; min-width: 270px; display: grid; background: var(--sheet); border: 2px solid var(--ink); box-shadow: 0 10px 28px rgba(20, 23, 26, .18); padding: 6px 0; }
+.top nav details.episodes .panel a, .top nav details.episodes .panel span { display: flex; justify-content: space-between; align-items: baseline; gap: 22px; padding: 6px 14px; text-decoration: none; white-space: nowrap; }
+.top nav details.episodes .panel a:hover { background: var(--yellow); }
+.top nav details.episodes .panel a.here { background: var(--yellow); }
+.top nav details.episodes .panel span { color: var(--soft); font-weight: 500; opacity: .62; }
+.top nav details.episodes .panel.flip { left: auto; right: -8px; }
+.top nav details.episodes .panel small { font-family: var(--text); font-weight: 400; font-size: 14.5px; color: var(--soft); }
+/* On a phone the open list sits in the strip itself, on its own row, instead of floating
+   past the screen's edge. The strip is taller only while the list is open. */
+@media (max-width: 600px) {
+  .top nav details.episodes[open] { flex-basis: 100%; }
+  .top nav details.episodes[open] .panel { position: static; margin-top: 8px; box-shadow: none; min-width: 0; }
+}
 /* The second row, "On this page": the page's sections, built by sheet.js. One line that
    scrolls sideways on a narrow screen rather than wrapping, so the strip stays short. */
 .top nav.sub { flex-basis: 100%; flex-wrap: nowrap; overflow-x: auto; scrollbar-width: none; gap: 0 14px; margin-top: 2px; padding-top: 6px; border-top: 1px solid var(--rule); font-size: 16px; white-space: nowrap; }

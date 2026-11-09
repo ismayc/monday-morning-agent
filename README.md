@@ -407,7 +407,11 @@ team's runs and passes within three plays, and on rush share within 1.15 points.
 The site is `docs/`: the series page at the root, [the game explained](https://ismayc.github.io/monday-morning-agent/football.html)
 for people who have never watched American football (`docs/football.html`, linked from
 the top of the series page), and one folder per episode
-(`docs/episode-1/`, `docs/episode-2/`), all sharing `docs/sheet.css` and the icons. The link-preview images
+(`docs/episode-1/`, `docs/episode-2/`, `docs/episode-3/`), all sharing `docs/sheet.css` and the icons. The
+strip across the top of every page holds one "Episodes" entry that opens the season's list;
+`node tools/episodes-menu.mjs` writes that list into every page from the episode table above
+(`--check` reports a page whose list is out of date), so run it after adding an episode's row
+or its folder under `docs/`. The link-preview images
 and the icons are rendered from the `og-image.html` beside each image and from
 `docs/apple-touch-icon.html`; each file's first
 comment has the command (serve `docs/` locally first, since the preview source loads

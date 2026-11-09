@@ -5,6 +5,28 @@
 (function () {
   var top = document.querySelector('.top');
   var sections = Array.prototype.slice.call(document.querySelectorAll('main > section[id]'));
+
+  // The "Episodes" list in the strip (a details element) closes on a click elsewhere or
+  // on Escape; without this it stays open until its own summary is clicked again.
+  function closeMenus(except) {
+    Array.prototype.forEach.call(document.querySelectorAll('.top details.episodes[open]'), function (d) {
+      if (d !== except) d.removeAttribute('open');
+    });
+  }
+  document.addEventListener('click', function (e) {
+    closeMenus(e.target.closest ? e.target.closest('.top details.episodes') : null);
+  });
+  document.addEventListener('keydown', function (e) { if (e.key === 'Escape') closeMenus(null); });
+  // An open list that would run past the right edge of the window hangs from its right side.
+  Array.prototype.forEach.call(document.querySelectorAll('.top details.episodes'), function (d) {
+    d.addEventListener('toggle', function () {
+      var panel = d.querySelector('.panel');
+      if (!d.open || !panel) return;
+      panel.classList.remove('flip');
+      if (panel.getBoundingClientRect().right > window.innerWidth - 8) panel.classList.add('flip');
+    });
+  });
+
   if (!top || sections.length < 2) return;
 
   var sub = document.createElement('nav');
