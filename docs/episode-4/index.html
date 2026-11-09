@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>"Win the turnover battle, win the game." Episode 4 of The Monday Morning Agent</title>
+<meta name="description" content="A right number can carry a wrong reason, and the agent that wrote it is the worst reader to catch that. How a second AI agent, with its own policy and only the tool's printouts, checks the first agent's ruling before anyone reads it.">
+<meta name="author" content="Chester Ismay">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="icon" href="../favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="../apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:site_name" content="The Monday Morning Agent">
+<meta property="og:title" content="&quot;Win the turnover battle, win the game.&quot; One ruling, two readers.">
+<meta property="og:description" content="The NFL team charged with fewer turnovers won about three of every four decided games in every season since 2021. A record is not a cause. So a second agent, which never sees the first one's reasoning, checks every number, every direction word, and every reason against the tool's printouts. By Chester Ismay.">
+<meta property="og:url" content="https://ismayc.github.io/monday-morning-agent/episode-4/">
+<meta property="og:image" content="https://ismayc.github.io/monday-morning-agent/episode-4/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Win the turnover battle, win the game. Two readers, the analyst and the fact-checker, over one number line: the team charged with fewer turnovers won 73.9 to 77.8 percent of decided games, 2021 through 2025.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="&quot;Win the turnover battle, win the game.&quot; One ruling, two readers.">
+<meta name="twitter:description" content="The team with fewer turnovers won about three of every four decided games. A second agent checks whether the ruling's numbers, directions, and reasons are the tool's.">
+<meta name="twitter:image" content="https://ismayc.github.io/monday-morning-agent/episode-4/og-image.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600&display=swap">
+<link rel="stylesheet" href="../sheet.css">
+<script src="../sheet.js" defer></script>
+<style>
+  /* The hook: one ruling, two readers. Two columns, what each agent is handed, and under
+     both the same number line. The analyst's column is yellow (it writes); the
+     fact-checker's is blue (it reads). What the fact-checker never sees is struck in pink. */
+  .said { margin-top: 22px; font-family: var(--display); font-weight: 600; font-size: clamp(28px, 3.6vw, 44px); line-height: 1.04; max-width: 24ch; }
+  .readers { margin-top: 28px; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); border: 2px solid var(--ink); background: #fff; }
+  .readers > .who { padding: 16px 20px 18px; min-width: 0; display: flex; flex-direction: column; }
+  .readers > .who:first-child { border-right: 2px solid var(--ink); }
+  .readers h3 { font-family: var(--display); font-weight: 700; font-size: 30px; line-height: 1; display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap; }
+  .readers h3 small { font-family: var(--text); font-weight: 500; font-size: 14px; padding: 1px 8px; border: 2px solid var(--ink); }
+  .readers .a h3 small { background: var(--yellow); } .readers .f h3 small { background: var(--blue); }
+  .readers .sees { margin-top: 8px; font-size: 14.5px; color: var(--soft); }
+  .readers ul { list-style: none; margin-top: 6px; }
+  .readers li { padding: 6px 0 6px 26px; border-bottom: 1px solid var(--rule); position: relative; font-size: 16.5px; }
+  .readers li::before { content: ""; position: absolute; left: 2px; top: 13px; width: 13px; height: 13px; border: 2px solid var(--ink); background: var(--yellow); }
+  .readers .f li::before { background: var(--blue); }
+  .readers li.not { color: var(--soft); }
+  .readers li.not::before { background: var(--pink); }
+  .readers li.not s { text-decoration-color: var(--ink); text-decoration-thickness: 2px; }
+  .readers .slot { margin-top: auto; padding-top: 14px; }
+  .readers .slot p { border: 2px dashed var(--ink); background: var(--faint); padding: 12px 14px; font-size: 15.5px; max-width: none; }
+  .readers .slot b { font-family: var(--display); font-weight: 700; font-size: 18px; display: block; }
+  .readers .line { grid-column: 1 / -1; border-top: 2px solid var(--ink); padding: 14px 20px 14px; background: var(--sheet); }
+  .readers .line h4 { font-family: var(--display); font-weight: 700; font-size: 21px; line-height: 1.1; }
+  .readers .line svg { width: 100%; height: auto; display: block; margin-top: 6px; }
+  .readers .line p { font-size: 14.5px; color: var(--soft); max-width: none; margin-top: 4px; }
+  .readers .line code { overflow-wrap: anywhere; }
+  @media (max-width: 760px) { .readers { grid-template-columns: minmax(0, 1fr); } .readers > .who:first-child { border-right: 0; border-bottom: 2px solid var(--ink); } }
+
+  /* Tables of the tool's rows. */
+  .tbl { margin-top: 16px; max-width: 900px; }
+  .tbl td.y { background: #fff9d6; }
+  .tbl tr.prog td { color: var(--soft); }
+  .tbl caption { caption-side: bottom; text-align: left; font-size: 14.5px; color: var(--soft); padding-top: 8px; }
+  h3.sub { font-family: var(--display); font-weight: 700; font-size: 27px; line-height: 1.1; margin-top: 30px; }
+  .asks { font-size: 16.5px; margin-top: 6px; max-width: 72ch; }
+
+  /* The mock's two sanity tables, side by side. */
+  .pair { margin-top: 16px; display: grid; grid-template-columns: 1fr 1fr; gap: 18px; max-width: 980px; }
+  .pair figure { border: 2px solid var(--ink); background: #fff6f8; padding: 10px 14px 12px; min-width: 0; }
+  .pair figcaption { font-family: var(--display); font-weight: 600; font-size: 19px; margin-bottom: 4px; }
+  .pair table { font-size: 15px; }
+  .pair p { font-size: 14px; color: var(--soft); margin-top: 6px; }
+  @media (max-width: 760px) { .pair { grid-template-columns: 1fr; } }
+
+  /* The checker's policy, quoted in full. */
+  .policy { margin-top: 18px; border: 2px solid var(--ink); background: #fff; padding: 18px 22px 20px; max-width: 900px; }
+  .policy h3 { font-family: var(--display); font-weight: 700; font-size: 26px; line-height: 1.1; margin-top: 18px; }
+  .policy h3:first-child { margin-top: 0; }
+  .policy p, .policy li { font-size: 16px; line-height: 1.5; max-width: 76ch; }
+  .policy p { margin-top: 8px; }
+  .policy ol, .policy ul { margin: 8px 0 0 22px; }
+  .policy li { margin-top: 6px; }
+  .policy pre { font-family: var(--code); font-size: 13.5px; background: var(--faint); padding: 10px 12px; margin-top: 8px; overflow-x: auto; }
+  .policy .src { font-size: 14px; color: var(--soft); margin-top: 0; }
+
+  .run { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: start; margin-top: 18px; }
+  @media (max-width: 900px) { .run { grid-template-columns: 1fr; } }
+  .run ol { list-style: none; counter-reset: s; border-top: 2px solid var(--ink); }
+  .run li { counter-increment: s; position: relative; padding: 12px 0 12px 50px; border-bottom: 1px solid var(--rule); font-size: 17px; }
+  .run li::before { content: counter(s); position: absolute; left: 0; top: 7px; font-family: var(--display); font-weight: 700; font-size: 34px; line-height: 1; width: 36px; text-align: center; }
+  .run li.judge::before { background: var(--yellow); }
+  .run li.reader::before { background: var(--blue); }
+  .run .key { font-size: 14.5px; color: var(--soft); margin-top: 10px; }
+  .run .key i { font-style: normal; display: inline-block; width: 14px; height: 14px; border: 2px solid var(--ink); vertical-align: -2px; margin: 0 4px 0 10px; }
+  .held { border: 2px dashed var(--ink); background: var(--faint); padding: 20px 22px; }
+  .held b { font-family: var(--display); font-weight: 700; font-size: 24px; display: block; margin-bottom: 6px; }
+  .held p { max-width: none; font-size: 16px; }
+  .held p + p { margin-top: 10px; }
+  .checked { border: 2px solid var(--ink); background: var(--blue); padding: 12px 16px; margin-top: 16px; }
+  .checked b { font-family: var(--display); font-weight: 700; font-size: 22px; display: block; }
+  .checked p { font-size: 15.5px; max-width: none; }
+  .cap { font-size: 14.5px; color: var(--soft); margin-top: 10px; }
+
+  .carry { margin-top: 18px; columns: 2; column-gap: 44px; border-top: 2px solid var(--ink); padding-top: 4px; }
+  .carry > div { break-inside: avoid; padding: 13px 0; border-bottom: 1px solid var(--rule); }
+  .carry b { font-family: var(--display); font-weight: 600; font-size: 23px; line-height: 1.15; display: block; margin-bottom: 3px; }
+  .carry span { font-size: 16.5px; }
+  @media (max-width: 760px) { .carry { columns: 1; } }
+
+  .go { display: inline-block; margin-top: 18px; font-family: var(--display); font-weight: 700; font-size: 26px; background: var(--yellow); border: 2px solid var(--ink); padding: 8px 18px; text-decoration: none; }
+  .go:hover { background: var(--ink); color: var(--yellow); }
+</style>
+</head>
+<body>
+<main>
+
+<div class="top">
+  <a href="../">The Monday Morning Agent</a>
+  <nav><a href="./" aria-current="page">Episode 4</a><details class="episodes"><summary>Episodes</summary><div class="panel"><a href="../episode-1/">Episode 1 <small>October 12, 2026</small></a><a href="../episode-2/">Episode 2 <small>October 26, 2026</small></a><a href="../episode-3/">Episode 3 <small>November 9, 2026</small></a><a href="../episode-4/" class="here">Episode 4 <small>November 23, 2026</small></a><span>Episode 5 <small>December 7, 2026</small></span><span>Episode 6 <small>January 11, 2027</small></span><span>Episode 7 <small>January 25, 2027</small></span><span>Episode 8 <small>February 8, 2027</small></span></div></details><a href="checker.html">The four questions</a><a href="#terms">Terms</a><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-4/checker.md">The checker's policy</a><a href="https://github.com/ismayc/monday-morning-agent">The repo</a></nav>
+</div>
+
+<header>
+  <h1>"Win the turnover battle, win the game."</h1>
+
+  <p class="said">One <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>, two readers.</p>
+  <div class="readers">
+    <div class="who a">
+      <h3>The analyst <small>writes the ruling</small></h3>
+      <p class="sees">What it gets to see:</p>
+      <ul>
+        <li>The claim, one sentence</li>
+        <li>The plays, through one read-only tool and nothing else</li>
+        <li>The <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, of three kinds since this episode: a rush, a kick, and an event.">dictionary</a>, with the turnover <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> on file</li>
+        <li>The chart standard, eight rules</li>
+      </ul>
+      <div class="slot"><p><b>Its sentence arrives with the show.</b>The ruling the analyst gives on air, on November 23, 2026, goes here after the show.</p></div>
+    </div>
+    <div class="who f">
+      <h3>The fact-checker <small>reads it cold</small></h3>
+      <p class="sees">What it gets to see:</p>
+      <ul>
+        <li>The claim, the same sentence</li>
+        <li>The ruling, as written</li>
+        <li>Every <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printout</a>, exactly as the tool printed it</li>
+        <li>The files the run wrote</li>
+        <li class="not"><s>The analyst's reasoning, or its instructions</s></li>
+      </ul>
+      <div class="slot"><p><b>Its sentence arrives with the show.</b>The <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a> it gives on air, with its verdict, goes here after the show.</p></div>
+    </div>
+    <div class="line">
+      <h4>The same numbers under both</h4>
+      <svg viewBox="0 0 1000 170" role="img" aria-label="A number line from 0 to 100 percent. The five complete seasons sit close together between 73.9 and 77.8 percent: 77.7 in 2021, 75.4 in 2022, 73.9 in 2023, 77.4 in 2024, and 77.8 in 2025.">
+        <rect width="1000" height="170" fill="#fcfcfa"/>
+        <line x1="40" x2="960" y1="70" y2="70" stroke="#14171a" stroke-width="2"/>
+        <g stroke="#14171a" stroke-width="2"><line x1="40" x2="40" y1="62" y2="78"/><line x1="500" x2="500" y1="62" y2="78"/><line x1="960" x2="960" y1="62" y2="78"/></g>
+        <g font-family="ui-monospace, Menlo, monospace" font-size="13" fill="#4a5058" text-anchor="middle"><text x="40" y="54">0%</text><text x="500" y="54">50%</text><text x="960" y="54">100%</text></g>
+        <rect x="719.9" y="60" width="35.9" height="20" fill="#ffe14d" stroke="#14171a" stroke-width="2"/>
+        <g fill="#14171a"><circle cx="754.8" cy="70" r="3"/><circle cx="733.7" cy="70" r="3"/><circle cx="719.9" cy="70" r="3"/><circle cx="752.1" cy="70" r="3"/><circle cx="755.8" cy="70" r="3"/></g>
+        <g stroke="#4a5058" stroke-width="1"><line x1="560" y1="118" x2="719.9" y2="81"/><line x1="660" y1="118" x2="733.7" y2="81"/><line x1="760" y1="118" x2="752.1" y2="81"/><line x1="860" y1="118" x2="754.8" y2="81"/><line x1="950" y1="118" x2="755.8" y2="81"/></g>
+        <g font-family="ui-monospace, Menlo, monospace" font-weight="700" font-size="16" fill="#14171a" text-anchor="middle"><text x="560" y="138">73.9%</text><text x="660" y="138">75.4%</text><text x="760" y="138">77.4%</text><text x="860" y="138">77.7%</text><text x="950" y="138" text-anchor="end">77.8%</text></g>
+        <g font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="16" fill="#4a5058" text-anchor="middle"><text x="560" y="158">2023</text><text x="660" y="158">2022</text><text x="760" y="158">2024</text><text x="860" y="158">2021</text><text x="950" y="158" text-anchor="end">2025</text></g>
+        <text x="40" y="118" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="17" fill="#14171a">Won by the team charged with fewer turnovers,</text>
+        <text x="40" y="138" font-family="Barlow Condensed, Arial Narrow, sans-serif" font-weight="600" font-size="17" fill="#14171a">as a share of decided games</text>
+      </svg>
+      <p>The team <a class="term" href="#term-charged" data-def="Who a turnover counts against. The entry on file charges the team with the ball on the play.">charged</a> with fewer turnovers won 77.7, 75.4, 73.9, 77.4, and 77.8 percent of <a class="term" href="#term-decided" data-def="A game where the two teams' counts differ and the game was not drawn. Only decided games enter the rate.">decided games</a> in 2021 through 2025: about three of every four. Measured with the committed entry <code>dictionary/turnover.json</code> by <code>node ./query-plays.mjs --battle turnover --seasons 2021-2026</code>. Both readers get these numbers. Only one of them writes the sentence about them.</p>
+    </div>
+  </div>
+
+  <p class="lead">In the NFL games where one team gave the ball away fewer times than the other, that team won about three of every four, in every season since 2021. That is the pundit's whole case, and the plays settle it in one command. But the claim is two claims. The first is a count, and the plays can settle it. The second is a reason, that the turnovers won the game, and a record is not a cause. A team that trails throws more passes and takes more chances, so some turnovers follow the losing. A ruling can carry the right number and the wrong reason, and the agent that wrote it is the worst reader to catch that. So for the first time, the agent that does the analysis is not the agent that grades it.</p>
+  <p style="margin-top:22px">This page is how that is set up, for someone who has never built an agent. The <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a> asks four questions of every ruling, and <a href="checker.html">they have their own page</a>, one per keypress, each with the slip it caught in rehearsal. New to football? <a href="../football.html">The game, explained</a> has what you need, <a href="../football.html#term-turnover">turnovers</a> included. The room chose this claim in episode 3's poll: C, over A and B, tied for second (<a href="../episode-3/vote.html">the four candidates, and the result</a>).</p>
+  <a class="go" href="checker.html">Read the four questions, one per keypress</a>
+</header>
+
+<section id="minute" data-nav="The setup">
+  <h2>The setup in one minute</h2>
+  <p>You hand the analyst a claim. It turns the claim into a question and asks one small tool to measure, by a definition written in the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, of three kinds since this episode: a rush, a kick, and an event.">dictionary</a>. Since episode 3 it does not draw: it writes a chart spec, and a renderer draws the rows the tool printed. This episode the dictionary holds a third kind of <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, an event: a thing a team is <a class="term" href="#term-charged" data-def="Who a turnover counts against. The entry on file charges the team with the ball on the play.">charged</a> with on a play. The entry <code>turnover</code> (an <a class="term" href="#term-interception" data-def="A pass caught by the defense: the interception column is 1.">interception</a> or a <a class="term" href="#term-lost-fumble" data-def="A fumble the other team recovered: the fumble_lost column is 1.">lost fumble</a>, charged to the team with the ball) was committed before the show, so the run spends its minutes on the <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a>, not on writing a definition. The tool learns two questions. The <a class="term" href="#term-battle" data-def="The tool's fourth question, --battle: in the games where one team was charged with fewer, how often that team won, season by season.">turnover battle</a>: season by season, in the games where one team was charged with fewer, how often that team won. And <a class="term" href="#term-split" data-def="The tool's fifth question, --split: turnovers per 100 rushes and passes, by the score at the snap.">the split</a>: how often the event happened per 100 plays, by the score at the snap.</p>
+  <p>Then the new part. When the analyst's <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> is written, the runner hands it to a second agent, the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a>: a second <code>claude -p</code>, with its own <a class="term" href="#term-policy" data-def="A file written for one agent, read like a job description: analyst.md, or checker.md for the fact-checker.">policy</a> file and a one-line allowlist. It reads the claim, the ruling, every <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printout</a> the tool produced in the run, and the files the run wrote. It never sees the analyst's reasoning or its instructions. It may run the tool itself, three commands at most, and it writes a check that ends in one of three verdicts: confirmed, <a class="term" href="#term-verdict" data-def="A verdict: no finding, one or more notes. The ruling stands, and the notes are said.">confirmed with a note</a>, or <a class="term" href="#term-verdict" data-def="A verdict: at least one finding, named. The ruling goes back to the analyst once.">rejected</a>. A rejected ruling goes back to the analyst once, with the check, and is checked again. Rejected twice, the run fails.</p>
+  <p>On the registration page this episode's capability is called independent fact-checking: a second reader that shares the tool and the printouts with the first, and nothing else. This is episode 4 of <a href="../">an eight-episode O'Reilly live series</a>, and every number on this page is real. The numbers were read from the tool on November 9, 2026, with the 2026 season through week 9 (the games of November 8). The analyst's ruling, the fact-checker's check, and the chart come from the run on air on November 23, 2026, and are added here after the show.</p>
+</section>
+
+<section id="terms" data-nav="The words">
+  <h2>The words on these pages</h2>
+  <p>Every number on the site comes from the same tool, and the tool uses a few words in a fixed way. This episode adds the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a>'s words too. Here they are, roughly in the order a run meets them. Wherever one of these words appears on a page with a dotted underline, hovering shows its definition and clicking brings you here.</p>
+  <div class="rows glossary">
+    <div id="term-turnover"><b>Turnover, giveaway</b><span>The team with the ball gives it away: a pass the other team intercepts, or a fumble the other team recovers. The entry <code>dictionary/turnover.json</code> counts those two and nothing else. Six seasons hold 3,937 of them, 2.34 to 2.64 a game (both teams together) in the five complete seasons. A turnover on downs is not one here: it is not a flag in the data.</span></div>
+    <div id="term-interception"><b>Interception</b><span>A pass caught by the defense. The play's <code>interception</code> column is 1.</span></div>
+    <div id="term-lost-fumble"><b>Lost fumble</b><span>The ball carrier drops the ball and the other team recovers it. The play's <code>fumble_lost</code> column is 1. A fumble the offense gets back is not a turnover.</span></div>
+    <div id="term-charged"><b>Charged</b><span>Who a turnover counts against. The entry on file charges it to the team with the ball on the play (<code>team-with-the-ball</code>). An event entry may instead charge a fumble to the team that fumbled (<code>fumbling-team</code>), which differs on a muffed punt: the data puts the ball with the punting team on that play, so the entry on file charges the punting team, and its last line says so, while <code>fumbling-team</code> would charge the returning team, whose player dropped the ball.</span></div>
+    <div id="term-battle"><b>The turnover battle</b><span>The tool's fourth question, <code>--battle NAME</code>, new this episode. For every game it counts each team's events; the team charged with fewer won the battle. Season by season it prints the games, the decided games, how many the team with fewer won, the rate, the equal counts, the drawn games, and the events per game. The winner is always the whole game's.</span></div>
+    <div id="term-decided"><b>Decided game</b><span>A game in which the two teams' counts differ and the game was not drawn. Only decided games enter the rate: 208 to 226 a season in the five complete seasons, 95 so far in 2026.</span></div>
+    <div id="term-equal"><b>Equal count</b><span>Both teams charged with the same number, zero included: no battle to win, so the game is out of the rate. 59 to 77 games a season with every turnover counted.</span></div>
+    <div id="term-half"><b>The first-half cut</b><span><code>--half 1</code>: count only the events of the first half (overtime out), then ask about the whole game's winner. Half the turnovers, so far more equal counts: 113 to 124 a season.</span></div>
+    <div id="term-close"><b>The close-game cut</b><span><code>--close 8</code>: count only the events while the game was within 8 points at the snap, either way. A turnover made while a game was already out of reach drops out.</span></div>
+    <div id="term-split"><b>The split by the score at the snap</b><span><code>--split NAME</code>, the tool's fifth question: season by season, how often the event happened per 100 rushes and passes, for the team with the ball trailing by 9 or more, within 8, or leading by 9 or more. The read for which way the record runs.</span></div>
+    <div id="term-in-progress"><b>In progress</b><span>The tool's flag on the last season on file while it is still being played, with its weeks: 2026, weeks 1 to 9, a partial season, never read as a full year.</span></div>
+    <div id="term-filter"><b>Filter</b><span>A rule that drops plays before anything is counted: which seasons, which weeks, a game with a final score, the event itself, and for a cut the half or the score. The tool prints every filter in order with the number of plays left after it.</span></div>
+    <div id="term-dictionary"><b>Dictionary, entry</b><span>The folder <code>dictionary/</code> at the root of the repo, one JSON file per entry, of three kinds now: a rush (episode 2), a kick (episode 3), and an event. Four entries on file: <code>tush-push</code>, <code>field-goal</code>, <code>long-field-goal</code>, and <code>turnover</code>, written by Chester before this episode, on November 9, 2026. The agent may add an entry, never change one.</span></div>
+    <div id="term-event"><b>Event entry</b><span>The dictionary's third kind of entry, new this episode: a thing a team is charged with on a play. It names the columns that count (<code>interception</code>, <code>fumble_lost</code>, or both) and who is charged. A narrower event, interceptions alone, is a new entry with a new name.</span></div>
+    <div id="term-policy"><b>Policy</b><span>A file written for one agent, read like a job description. The analyst's is <code>analyst.md</code>, ten sections; the fact-checker's is <code>checker.md</code>, six, new this episode and quoted in full below.</span></div>
+    <div id="term-ruling"><b>Ruling</b><span>The analyst's answer, in nine parts: the claim as a question, the definition used, the chart, the five complete seasons, this season, how far apart they are, one sentence of judgment, what the plays cannot tell you, and the exact commands it ran. Under 500 words.</span></div>
+    <div id="term-fact-checker"><b>The fact-checker</b><span>The second agent. A second <code>claude -p</code> with its own policy, <code>checker.md</code>, and a one-line allowlist: the tool, read-only. It reads the claim, the ruling, the printouts, and the files the run wrote, never the analyst's reasoning or instructions. It writes a check, never a ruling of its own, and it does not say whether the claim is true.</span></div>
+    <div id="term-printout"><b>Printout</b><span>What the tool returned for one command, exactly as it came back: the definition, every filter, and the result. The packet the fact-checker reads holds every printout of the run, numbered, the ones the tool refused included and marked.</span></div>
+    <div id="term-check"><b>Check</b><span>The fact-checker's answer, in six parts: numbers, direction, reason, limits, the verdict, and the commands it ran. Under 300 words.</span></div>
+    <div id="term-finding"><b>Finding, note</b><span>A finding rejects a ruling: a number that contradicts a printout, a number in no printout that carries the ruling, a direction or position word against the printed values, or a reason that predicts the opposite of the printed sign. A note does not: loose wording that is true to the printouts, right arithmetic a reader can redo from two printed numbers, or a reason that fits the sign but was never tested.</span></div>
+    <div id="term-verdict"><b>Confirmed, confirmed with a note, rejected</b><span>The check's three verdicts. CONFIRMED: every number traced, every direction word right, no reason the printouts contradict. CONFIRMED WITH A NOTE: no finding, one or more notes. REJECTED: at least one finding, named. <code>check-ruling.sh</code> exits 0 for the first two and 74 for a rejection.</span></div>
+    <div id="term-send-back"><b>Send-back</b><span>A rejected ruling goes back to the analyst once, with the check and no tools: fix only what the check names, and add no number that is not in the first ruling or the check. The rewrite is checked again. Rejected again, or no verdict, and the run fails with exit code 73, with both rulings and both checks saved.</span></div>
+  </div>
+</section>
+
+<section id="existed" data-nav="What existed">
+  <h2>What already existed</h2>
+  <p>None of this was made by the agent. One piece is new since episode 3, the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a>, and it has a section of its own below.</p>
+  <div class="rows">
+    <div><b>The policy</b><span><code>analyst.md</code>, the analyst's job description, in the same ten sections as episode 3's. What changed is <a href="#diff">further down</a>.</span></div>
+    <div><b>Public play-by-play</b><span>Every NFL play, published by the nflverse community under a CC BY 4.0 license. 372 columns per play, refreshed during the season.</span></div>
+    <div><b>One read-only tool</b><span><code>query-plays.mjs</code>, extended for this episode. Five kinds of question now: a search, episode 2's comparison, episode 3's trend, and two for an event, the battle and <a class="term" href="#term-split" data-def="The tool's fifth question, --split: turnovers per 100 rushes and passes, by the score at the snap.">the split</a>. It reads 40 of the 372 columns, no betting column among them, and prints every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a> in order and the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> it applied, quoted. It changes nothing.</span></div>
+    <div><b>The dictionary, with a third kind of entry</b><span><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary"><code>dictionary/</code></a> holds episode 2's <code>tush-push</code> and episode 3's <code>field-goal</code> and <code>long-field-goal</code>, untouched, and <code>turnover</code>, the first event entry, written by Chester on November 9, 2026: an <a class="term" href="#term-interception" data-def="A pass caught by the defense: the interception column is 1.">interception</a> or a <a class="term" href="#term-lost-fumble" data-def="A fumble the other team recovered: the fumble_lost column is 1.">lost fumble</a>, <a class="term" href="#term-charged" data-def="Who a turnover counts against. The entry on file charges the team with the ball on the play.">charged</a> to the team with the ball, compared with the other team in the same game.</span></div>
+    <div><b>The chart standard</b><span><a href="https://github.com/ismayc/monday-morning-agent/blob/main/charts/STANDARD.md"><code>charts/STANDARD.md</code></a>, eight rules, version 1, from episode 3. The renderer's one template draws a battle by season too: the rate the team with fewer won, over the turnovers per game.</span></div>
+    <div><b>Claude Code</b><span>One command reads a prompt, calls only the tools it is allowed to call, and exits. This episode it is called twice, once per agent. There is no server to write.</span></div>
+  </div>
+</section>
+
+<section id="numbers" data-nav="By hand">
+  <h2>The numbers, by hand</h2>
+  <p>Before either agent runs, the tool is asked by hand, with the <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> on file. Every row below is the tool's, from <code>episode-4/query-plays.mjs</code> run on November 9, 2026: 1,559 games, the latest on November 8, 2026, regular season and playoffs.</p>
+  <h3 class="sub">The turnover battle</h3>
+  <p class="asks">In the games where one team was <a class="term" href="#term-charged" data-def="Who a turnover counts against. The entry on file charges the team with the ball on the play.">charged</a> with fewer turnovers, how often did that team win?</p>
+  <div class="scroll tbl"><table>
+    <thead><tr><th>Season</th><th class="num">Games</th><th class="num">Decided</th><th class="num">Fewer won</th><th class="num">Rate</th><th class="num">Equal</th><th class="num">Drawn</th><th class="num">Turnovers</th><th class="num">Per game</th></tr></thead>
+    <tbody>
+      <tr><td>2021</td><td class="num">285</td><td class="num">211</td><td class="num">164</td><td class="num y">77.7%</td><td class="num">73</td><td class="num">1</td><td class="num">738</td><td class="num">2.59</td></tr>
+      <tr><td>2022</td><td class="num">284</td><td class="num">224</td><td class="num">169</td><td class="num y">75.4%</td><td class="num">59</td><td class="num">1</td><td class="num">739</td><td class="num">2.60</td></tr>
+      <tr><td>2023</td><td class="num">285</td><td class="num">226</td><td class="num">167</td><td class="num y">73.9%</td><td class="num">59</td><td class="num">0</td><td class="num">753</td><td class="num">2.64</td></tr>
+      <tr><td>2024</td><td class="num">285</td><td class="num">208</td><td class="num">161</td><td class="num y">77.4%</td><td class="num">77</td><td class="num">0</td><td class="num">689</td><td class="num">2.42</td></tr>
+      <tr><td>2025</td><td class="num">285</td><td class="num">216</td><td class="num">168</td><td class="num y">77.8%</td><td class="num">68</td><td class="num">1</td><td class="num">668</td><td class="num">2.34</td></tr>
+      <tr class="prog"><td>2026, weeks 1 to 9 (<a class="term" href="#term-in-progress" data-def="The tool's flag on the season still being played, with its weeks: a partial season.">in progress</a>)</td><td class="num">135</td><td class="num">95</td><td class="num">74</td><td class="num">77.9%</td><td class="num">39</td><td class="num">1</td><td class="num">350</td><td class="num">2.59</td></tr>
+    </tbody>
+    <caption><code>node ./query-plays.mjs --battle turnover --seasons 2021-2026</code>. Equal: both teams charged with the same count. Drawn: the game ended tied. Per game: turnovers by both teams, divided by games. 2026 is a partial season.</caption>
+  </table></div>
+  <p style="margin-top:14px">That is the record, and it is the end of the pundit's case. The tool's own <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printout</a> ends with the reason it is not the end of this one: "This table counts the events and the winner, not the order they happened in: a team that trails throws more passes, and some of those are intercepted." Three more reads ask about the order.</p>
+
+  <h3 class="sub">The first-half cut</h3>
+  <p class="asks">Count only the turnovers of the first half, before most games are out of reach. Does the team charged with fewer still win the whole game as often?</p>
+  <div class="scroll tbl"><table>
+    <thead><tr><th>Season</th><th class="num">Decided</th><th class="num">Fewer won</th><th class="num">Rate</th><th class="num">Equal</th></tr></thead>
+    <tbody>
+      <tr><td>2021</td><td class="num">162</td><td class="num">105</td><td class="num y">64.8%</td><td class="num">122</td></tr>
+      <tr><td>2022</td><td class="num">169</td><td class="num">103</td><td class="num y">60.9%</td><td class="num">113</td></tr>
+      <tr><td>2023</td><td class="num">165</td><td class="num">105</td><td class="num y">63.6%</td><td class="num">120</td></tr>
+      <tr><td>2024</td><td class="num">163</td><td class="num">100</td><td class="num y">61.3%</td><td class="num">122</td></tr>
+      <tr><td>2025</td><td class="num">160</td><td class="num">98</td><td class="num y">61.3%</td><td class="num">124</td></tr>
+      <tr class="prog"><td>2026, weeks 1 to 9 (in progress)</td><td class="num">76</td><td class="num">41</td><td class="num">53.9%</td><td class="num">58</td></tr>
+    </tbody>
+    <caption><code>node ./query-plays.mjs --battle turnover --seasons 2021-2026 --half 1</code>. 1,807 of the 3,937 turnovers were in a first half. With half the turnovers, more games have an <a class="term" href="#term-equal" data-def="Both teams charged with the same number, zero included: no battle to win, so the game is out of the rate.">equal count</a>, so fewer games are decided.</caption>
+  </table></div>
+
+  <h3 class="sub">The close-game cut</h3>
+  <p class="asks">Count only the turnovers made while the game was within 8 points at the snap, either way. Does the record hold when the turnovers that came after a game was out of reach drop out?</p>
+  <div class="scroll tbl"><table>
+    <thead><tr><th>Season</th><th class="num">Decided</th><th class="num">Fewer won</th><th class="num">Rate</th><th class="num">Equal</th></tr></thead>
+    <tbody>
+      <tr><td>2021</td><td class="num">173</td><td class="num">124</td><td class="num y">71.7%</td><td class="num">111</td></tr>
+      <tr><td>2022</td><td class="num">189</td><td class="num">142</td><td class="num y">75.1%</td><td class="num">94</td></tr>
+      <tr><td>2023</td><td class="num">182</td><td class="num">135</td><td class="num y">74.2%</td><td class="num">103</td></tr>
+      <tr><td>2024</td><td class="num">181</td><td class="num">128</td><td class="num y">70.7%</td><td class="num">104</td></tr>
+      <tr><td>2025</td><td class="num">173</td><td class="num">125</td><td class="num y">72.3%</td><td class="num">111</td></tr>
+      <tr class="prog"><td>2026, weeks 1 to 9 (in progress)</td><td class="num">81</td><td class="num">58</td><td class="num">71.6%</td><td class="num">53</td></tr>
+    </tbody>
+    <caption><code>node ./query-plays.mjs --battle turnover --seasons 2021-2026 --close 8</code>. 2,522 of the 3,937 turnovers were made within 8 points. In 2023 this cut reads higher than the full battle (74.2 against 73.9), so it is not lower in every season.</caption>
+  </table></div>
+
+  <h3 class="sub">The split by the score at the snap</h3>
+  <p class="asks">Which way does it run? How often does a team turn the ball over, per 100 rushes and passes, when it is trailing, close, or leading?</p>
+  <div class="scroll tbl"><table>
+    <thead><tr><th>Season</th><th class="num">Trailing by 9 or more</th><th class="num">Within 8</th><th class="num">Leading by 9 or more</th></tr></thead>
+    <tbody>
+      <tr><td>2021</td><td class="num y">2.84 (228 of 8,022)</td><td class="num">1.81 (409 of 22,630)</td><td class="num">1.39 (71 of 5,114)</td></tr>
+      <tr><td>2022</td><td class="num y">2.56 (175 of 6,843)</td><td class="num">1.88 (460 of 24,425)</td><td class="num">1.51 (63 of 4,162)</td></tr>
+      <tr><td>2023</td><td class="num y">2.56 (183 of 7,146)</td><td class="num">1.99 (476 of 23,915)</td><td class="num">1.30 (59 of 4,539)</td></tr>
+      <tr><td>2024</td><td class="num y">2.55 (181 of 7,093)</td><td class="num">1.77 (413 of 23,334)</td><td class="num">1.28 (59 of 4,623)</td></tr>
+      <tr><td>2025</td><td class="num y">2.61 (185 of 7,096)</td><td class="num">1.72 (399 of 23,140)</td><td class="num">1.21 (53 of 4,396)</td></tr>
+      <tr class="prog"><td>2026, weeks 1 to 9 (in progress)</td><td class="num">2.25 (71 of 3,155)</td><td class="num">1.97 (227 of 11,548)</td><td class="num">1.57 (30 of 1,914)</td></tr>
+    </tbody>
+    <caption><code>node ./query-plays.mjs --split turnover --seasons 2021-2026</code>. Turnovers per 100 rushes and passes, with the turnovers and plays behind each. The score at the snap is the team with the ball's points minus the other team's.</caption>
+  </table></div>
+  <p style="margin-top:14px">In every complete season a team trailing by 9 or more turned the ball over more often per play than a team leading by 9 or more. That fits a team taking more chances to catch up, and it fits a team that was already the worse team that day. The tool's printout says so itself: "these plays cannot separate the two." Which of these reads the analyst runs, and what the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a> does with the answer, is what the show is for.</p>
+</section>
+
+<section id="why" data-nav="Why two agents">
+  <h2>Why a second agent</h2>
+  <p>On October 6, 2026, episode 1's analyst was handed its own claim, "You have to establish the run," on a copy of the plays with every rush and pass secretly swapped. The tool printed every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a>, and the numbers were right for that file: in the second half the teams that ran most won 12.1 percent of the time, against 87.2 for the teams that ran least. In 10 of 10 runs the <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> still explained the result with the familiar story, that teams that are ahead run to use the clock. On that file the story predicts the opposite sign. The number was right and the reason was wrong, and the agent that wrote the reason could not see it.</p>
+  <p>On November 9, 2026, episode 4's analyst took the same kind of test on the turnover claim: 20 runs on two corrupted copies of the plays, the analyst alone. In one copy every turnover was <a class="term" href="#term-charged" data-def="Who a turnover counts against. The entry on file charges the team with the ball on the play.">charged</a> to the other team; in the other the games' final margins were shuffled within each season, so the battle predicts nothing. 19 of the 20 rulings said the claim does not hold in that file, one said it cannot be settled, and none offered a reason against the printed sign. This <a class="term" href="#term-policy" data-def="A file written for one agent, read like a job description: analyst.md, or checker.md for the fact-checker.">policy</a> keeps the count and the reason apart, and that is what the test checks. The mock stays in the kit as <code>episode-4/mock.sh</code> for anyone to run. Before the runs it prints the battle in the corrupted file, so you can see that the corruption took:</p>
+  <div class="pair">
+    <figure><figcaption><code>./mock.sh flip</code>: every turnover charged to the other team</figcaption>
+      <table><thead><tr><th>Season</th><th class="num">Decided</th><th class="num">Fewer won</th><th class="num">Rate</th></tr></thead><tbody>
+        <tr><td>2021</td><td class="num">211</td><td class="num">47</td><td class="num">22.3%</td></tr>
+        <tr><td>2022</td><td class="num">224</td><td class="num">55</td><td class="num">24.6%</td></tr>
+        <tr><td>2023</td><td class="num">226</td><td class="num">59</td><td class="num">26.1%</td></tr>
+        <tr><td>2024</td><td class="num">208</td><td class="num">47</td><td class="num">22.6%</td></tr>
+        <tr><td>2025</td><td class="num">216</td><td class="num">48</td><td class="num">22.2%</td></tr>
+        <tr><td>2026*</td><td class="num">95</td><td class="num">21</td><td class="num">22.1%</td></tr>
+      </tbody></table>
+      <p>About 22 to 26 percent: the record runs the other way. The same file every time.</p></figure>
+    <figure><figcaption><code>./mock.sh shuffle</code>: the games' final margins shuffled</figcaption>
+      <table><thead><tr><th>Season</th><th class="num">Decided</th><th class="num">Fewer won</th><th class="num">Rate</th></tr></thead><tbody>
+        <tr><td>2021</td><td class="num">211</td><td class="num">105</td><td class="num">49.8%</td></tr>
+        <tr><td>2022</td><td class="num">223</td><td class="num">128</td><td class="num">57.4%</td></tr>
+        <tr><td>2023</td><td class="num">226</td><td class="num">116</td><td class="num">51.3%</td></tr>
+        <tr><td>2024</td><td class="num">208</td><td class="num">106</td><td class="num">51.0%</td></tr>
+        <tr><td>2025</td><td class="num">216</td><td class="num">105</td><td class="num">48.6%</td></tr>
+        <tr><td>2026*</td><td class="num">95</td><td class="num">53</td><td class="num">55.8%</td></tr>
+      </tbody></table>
+      <p>About 49 to 57 percent: no record at all. The shuffle is random, so your run reads a little differently.</p></figure>
+  </div>
+  <p class="cap">The sanity tables from the runs of November 9, 2026. * 2026 through week 9, <a class="term" href="#term-in-progress" data-def="The tool's flag on the season still being played, with its weeks: a partial season.">in progress</a>.</p>
+  <p style="margin-top:18px">So in those 20 runs the analyst under this policy did not keep a wrong story on a corrupted file. It still slips, and the slips are smaller. In nine rehearsal runs on November 9 with both agents (six on the real plays, three on the flipped copy), the analyst wrote that this season's rate sat "inside" or "within" the five complete seasons' range when it sat outside it in six. On the real plays that was 77.9 percent called inside 73.9 to 77.8. The <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a> caught it every time. One line was then added to the analyst's contract, to place this season's rate against the range digit by digit, and three more runs on the real plays had no such slip. The fact-checker's first rejection, word for word, is the last card of <a href="checker.html">the four questions</a>.</p>
+</section>
+
+<section id="checker" data-nav="The checker's policy">
+  <h2>The fact-checker's policy, in full</h2>
+  <p>Six sections, about 1,100 words, as the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a> reads it, appended to its prompt before every <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a>. Nothing here is a summary: this is <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-4/checker.md"><code>episode-4/checker.md</code></a> word for word. Its four questions are on <a href="checker.html">their own page</a>, one per keypress.</p>
+  <div class="policy">
+    <h3>Job description: the fact-checker</h3>
+    <p>You are the second reader. My Monday morning analyst has written a <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> on a football claim, from the plays, and you check it before anyone else reads it. You did not watch the analyst work, and that is the point. You see four things, appended below these instructions: the claim; the ruling, as written; every <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printout</a> the analyst's tool produced during the run, exactly as the tool printed it; and the files the run wrote (a <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, of three kinds since this episode: a rush, a kick, and an event.">dictionary</a> <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>, a chart spec). You do not see the analyst's notes, its reasoning, or its instructions. You read what a reader two months from now could read, and you ask whether the ruling stands on the printouts alone.</p>
+    <p>You are not a second analyst. You do not answer the claim. You say whether the ruling's numbers, direction, and reasons are the printouts', and where they are not.</p>
+    <h3>Your one tool</h3>
+    <pre>node ./query-plays.mjs --battle turnover --seasons 2021-2026
+node ./query-plays.mjs --battle turnover --seasons 2021-2026 --half 1
+node ./query-plays.mjs --split turnover --seasons 2021-2026</pre>
+    <p>The same read-only tool the analyst used. You may rerun any command the ruling lists, to see the printout for yourself, and you may run one command the analyst did not, when the claim names a reason and the ruling did not test it: for a battle, the first half only (<code>--half 1</code>), the close games only (<code>--close 8</code>), or the event by the score at the snap (<code>--split NAME</code>). Three commands at most. The tool prints every <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filter</a> it applied and the definition it used, quoted from the dictionary; read that printout, not your memory of it.</p>
+    <p>Do NOT try to open the data file, the dictionary folder, or the charts folder yourself. The printouts below and the tool are everything you have, by design.</p>
+    <h3>What you check, in order</h3>
+    <ol>
+    <li><strong>Numbers.</strong> Every number in the ruling appears in a printout, the ones below or one you reran, with the same filters. A number that appears in no printout is a <a class="term" href="#term-finding" data-def="What rejects a ruling: a number against a printout or in none, a direction word against the values, or a reason against the sign.">finding</a>, however plausible it looks. A number rounded differently from the tool's, or two printouts combined into one number, is a finding. Check the counts behind the rates too (games, attempts, plays), not only the rates.</li>
+    <li><strong>Direction.</strong> Every word of direction in the ruling (more, fewer, higher, lower, up, down, flat, holds, does not hold) matches the sign in the printout it rests on. A ruling that says the record holds over a printout where it runs the other way is <a class="term" href="#term-verdict" data-def="A verdict: at least one finding, named. The ruling goes back to the analyst once.">rejected</a>, whatever the numbers say.</li>
+    <li><strong>Reason.</strong> If the ruling offers a reason for what it found (turnovers win games; teams that are ahead run to use the clock; kickers got stronger), ask two things. Does the reason predict the sign the tool printed? And did a read in the printouts test it, or is it a familiar story laid over the numbers? A reason that predicts the opposite of the printed sign is rejected. A reason that fits the sign but was never tested is a <a class="term" href="#term-finding" data-def="Said, but does not reject: loose but true wording, right arithmetic, or a reason that fits the sign but was never tested.">note</a>: say what read would test it, and run it if you have a command left.</li>
+    <li><strong>Limits.</strong> Anything the ruling asserts that the tool did not measure (why, intent, who is the better team, what will happen next) is a note. A ruling that stays inside the printouts and says what they cannot tell is doing its job.</li>
+    </ol>
+    <p>A finding and a note are different things, and only a finding rejects a ruling. A finding is a number that contradicts a printout, a number that appears in no printout and carries the ruling, a direction or position word against the printed values (a rate called "inside" a range it sits above), or a reason that predicts the opposite of the printed sign. Arithmetic a reader can redo from two printed numbers (one rate minus another, the two ends of a range, a count given as "about") is a note at most when it is right, and a finding only when it is wrong. A sentence that is loosely worded but true to the printouts is a note. "About three of every four" for rates of 73.9 to 77.9 percent is a fair reading, not a finding. Say every note you have, but reject only on a finding.</p>
+    <h3>What you may not do</h3>
+    <p>You write no ruling of your own and you do not say whether the claim is true. You do not predict, advise, or say what a rule should be. You do not rewrite the analyst's sentences; you say what is wrong with them, where, and what the printout says instead. You never type a number that is not in a printout you can name. The public data this show reads carries betting lines; the file the tool reads does not, by design, and you never ask for them.</p>
+    <h3>The output contract</h3>
+    <p>ONE check, under 300 words, in this shape:</p>
+    <ul>
+    <li><strong>Numbers:</strong> one or two sentences. "Every number traced to a printout" or each number that was not, where it stands in the ruling, and what the tool printed instead.</li>
+    <li><strong>Direction:</strong> one sentence.</li>
+    <li><strong>Reason:</strong> one or two sentences. The reason the ruling gives, whether the printouts support it, and the command you ran to test it, with what it printed, if you ran one.</li>
+    <li><strong>Limits:</strong> one sentence.</li>
+    <li><strong>Verdict:</strong> one of three words, then one sentence why. CONFIRMED: every number traced, every direction word right, no reason the printouts contradict. CONFIRMED WITH A NOTE: no finding, with one or more notes on what the ruling should have said or tested. REJECTED: at least one finding, named: a number that contradicts a printout or appears in none and carries the ruling, a direction or position word against the printed values, or a reason that predicts the opposite of what was printed.</li>
+    <li><strong>Commands run:</strong> each on its own line, exactly as you typed it, or "none".</li>
+    </ul>
+    <p>No tables, no headers beyond those labels, no preamble, no offer to do more. The 300 words are everything above <strong>Commands run</strong>.</p>
+    <h3>Tools you may use</h3>
+    <p>Your allowlist is one line:</p>
+    <ul>
+    <li><code>Bash(node ./query-plays.mjs:*)</code>: the data tool, read-only.</li>
+    </ul>
+    <p>You may not read any file, write anywhere, move or delete anything, fetch anything from the network, or run any other command. If the tool fails, say exactly that in one sentence and give your verdict on the printouts you have. Reporting the failure is part of the job; inventing a number to cover it is not.</p>
+  </div>
+</section>
+
+<section id="run" data-nav="One run">
+  <h2>What one run looks like</h2>
+  <div class="run">
+    <div>
+      <ol>
+        <li><strong>The claim goes in</strong> as one sentence. The runner adds the <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, of three kinds since this episode: a rush, a kick, and an event.">dictionary</a> (four <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entries</a>, <code>turnover</code> among them), the chart standard, and the specs on file to the analyst's <a class="term" href="#term-policy" data-def="A file written for one agent, read like a job description: analyst.md, or checker.md for the fact-checker.">policy</a>.</li>
+        <li class="judge"><strong>The analyst splits the claim</strong> into a count the plays can settle and a reason they may not, and searches for the event by name.</li>
+        <li><strong>The battle</strong>, from the entry on file, over every season: <code>--battle turnover --seasons 2021-2026</code>.</li>
+        <li class="judge"><strong>The read that could prove it wrong</strong>, its choice of three: the first half, the close games, or <a class="term" href="#term-split" data-def="The tool's fifth question, --split: turnovers per 100 rushes and passes, by the score at the snap.">the split</a> by the score at the snap.</li>
+        <li class="judge"><strong>The spec and the chart.</strong> A battle by season is a trend, so the analyst writes one spec and the renderer draws the rows.</li>
+        <li><strong>The ruling</strong>, nine parts, under 500 words. The runner's checks from episode 3 run first: the entry cited, the chart cited, the word limit, and no file on record changed.</li>
+        <li><strong>The packet.</strong> <code>check-ruling.sh</code> builds it from the saved run: the claim, the <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>, every <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printout</a> numbered, and every file written. Never the analyst's own text between its tool calls.</li>
+        <li class="reader"><strong>The fact-checker reads it</strong>, runs the tool itself if it chooses (three commands at most), and writes its <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a>: numbers, direction, reason, limits, the verdict, the commands.</li>
+        <li><strong>Confirmed</strong>, with or without a <a class="term" href="#term-finding" data-def="Said, but does not reject: loose but true wording, right arithmetic, or a reason that fits the sign but was never tested.">note</a>: the run page shows a "Checked by" box under the ruling, and the check in full after it. <strong>Rejected</strong>: the <a class="term" href="#term-send-back" data-def="A rejected ruling goes back once, with the check and no tools. Rejected again, the run fails with exit code 73.">send-back</a>, once, then a second check. Rejected again, the run fails with exit code 73, and the page shows both rulings and both checks.</li>
+      </ol>
+      <p class="key">Steps marked <i style="background:var(--yellow)"></i>are the analyst's judgment, <i style="background:var(--blue)"></i>the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a>'s. The rest is mechanical.</p>
+    </div>
+    <div>
+      <div class="held">
+        <b>The ruling, the check, and the chart go here after the show.</b>
+        <p>The analyst's ruling on air, the chart it drew, and the fact-checker's check of that ruling, with its verdict and the command it ran, are held back until the episode airs on November 23, 2026. Then they go here in full, as the run page showed them.</p>
+        <p>In rehearsal both paths happened: a first check that <a class="term" href="#term-verdict" data-def="A verdict: no finding, one or more notes. The ruling stands, and the notes are said.">confirmed with a note</a>, and a first check that <a class="term" href="#term-verdict" data-def="A verdict: at least one finding, named. The ruling goes back to the analyst once.">rejected</a>, a send-back, and a second check that confirmed. Either one on air is the run working.</p>
+      </div>
+      <div class="checked"><b>Checked by</b><p>The run page's box under every ruling the fact-checker read: its verdict sentence, and a link to the check in full. A ruling sent back once says so: checked by the fact-checker, twice.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="diff" data-nav="The policy diff">
+  <h2>What changed in the analyst's policy</h2>
+  <p>The analyst's <a class="term" href="#term-policy" data-def="A file written for one agent, read like a job description: analyst.md, or checker.md for the fact-checker.">policy</a> has the same ten sections as episode 3's. Eight changed and two did not. The highlighted rows carry the new rules; "Answer it across the seasons" only puts the battle beside the trend. Read the changes yourself with <code>diff episode-3/analyst.md episode-4/analyst.md</code>; <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-4/analyst.md">the whole file is on GitHub</a>.</p>
+  <div class="rows marked">
+    <div class="hl"><b>Job description</b><span>New sentences: after the <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> is written, a second agent, the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a>, reads it. It sees the tool outputs and the ruling, not the reasoning, and it may rerun the tool. "Write the ruling so that a reader with only the tool's <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printouts</a> can confirm every number and every word of direction in it."</span></div>
+    <div class="hl"><b>Your one tool</b><span>Five kinds of question, from three: the battle, with <code>--half 1</code> and <code>--close N</code>, and <a class="term" href="#term-split" data-def="The tool's fifth question, --split: turnovers per 100 rushes and passes, by the score at the snap.">the split</a> by the score at the snap. <code>--team</code> and <code>--not-team</code> do not apply to either, since both compare the two teams in a game. The example search is "<a class="term" href="#term-interception" data-def="A pass caught by the defense: the interception column is 1.">interception</a>" now.</span></div>
+    <div class="hl"><b>Your dictionary</b><span>Three kinds of <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>: a rush, a kick, and an event. Rule 4 adds a turnover on downs to the plays no kind can express. Rule 5 is new: an event entry names its columns and who is <a class="term" href="#term-charged" data-def="Who a turnover counts against. The entry on file charges the team with the ball on the play.">charged</a>; the entry on file for a turnover is <code>turnover</code>, used by name; a narrower event is a new entry with a new name.</span></div>
+    <div class="hl"><b>Your charts</b><span>One clause added: "a battle read season by season is a trend," so it gets one chart, cited by file and date.</span></div>
+    <div class="hl"><b>Turn the claim into a question</b><span>Rewritten around the turnover claim. It is two claims, a count and a reason, and "a record is not a cause." "A team that is already losing throws more passes and takes more chances, so some turnovers follow the losing." Keep the count and the reason apart. The reads that could prove it wrong, for a battle: the first half only, the close games only, or the split; and "say what it showed even when it cuts against the claim."</span></div>
+    <div><b>Answer it across the seasons</b><span>The same two periods, five complete seasons and this one. "A trend" becomes "a trend or a battle" in three places.</span></div>
+    <div><b>Show every filter</b><span>Unchanged.</span></div>
+    <div class="hl"><b>What you may not say</b><span>Adds "or why a team gave the ball away," and what the tool cannot see: "whether a fumble was forced, or what the team was thinking." New paragraph: "A record is not a cause: when the claim names a reason, say whether the reads you ran fit that reason, say which direction the evidence leans and why, and stop there. Never offer a reason the tool's printouts do not support, however familiar it sounds."</span></div>
+    <div class="hl"><b>The output contract</b><span>Still nine parts and 500 words. "Five seasons" gets the battle's wording: "the team charged with fewer won X% of N <a class="term" href="#term-decided" data-def="A game where the two teams' counts differ and the game was not drawn. Only decided games enter the rate.">decided games</a> in 2021 and Y% of M in 2025," then the read that could prove it wrong, "with its numbers." "The gap between the two answers" now says how: place this season's printed rate against the five seasons' "digit by digit: inside their range, or above or below it, even by a tenth of a point," and quote both rows instead of subtracting. That line was added after the rehearsal slip described above.</span></div>
+    <div><b>Tools you may use</b><span>Unchanged: four lines. The fact-checker's allowlist is one line, the tool, in its own file.</span></div>
+  </div>
+</section>
+
+<section id="lessons" data-nav="What carries">
+  <h2>What carries to your own agent</h2>
+  <div class="carry">
+    <div><b>The writer is the worst reader of its own reason</b><span>On October 6 the analyst kept a familiar story on numbers that ran the other way, ten times out of ten. A second reader that never saw the story being built reads the sentence against the <a class="term" href="#term-printout" data-def="What the tool returned for one command, exactly as it came back: the definition, every filter, and the result.">printout</a> and nothing else.</span></div>
+    <div><b>Give the checker the evidence, not the reasoning</b><span>The packet holds the claim, the <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>, the printouts, and the files written. The analyst's thinking between tool calls is left out on purpose: a reader who sees the argument tends to be persuaded by it.</span></div>
+    <div><b>A second agent is a second file and a second call</b><span>Its own <a class="term" href="#term-policy" data-def="A file written for one agent, read like a job description: analyst.md, or checker.md for the fact-checker.">policy</a>, its own <code>claude -p</code>, and a one-line allowlist. The two agents share a tool and nothing else, so neither can lean on the other's context.</span></div>
+    <div><b>Separate a finding from a note</b><span>The first version of the checker <a class="term" href="#term-verdict" data-def="A verdict: at least one finding, named. The ruling goes back to the analyst once.">rejected</a> right arithmetic as unsourced, and that would have failed honest runs. Now only a contradiction, a missing number that carries the ruling, a word against the printed values, or a reason against the sign rejects. Everything else is said, and the ruling stands.</span></div>
+    <div><b>Send it back once, then stop</b><span>A rejected ruling goes back with the <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a> and no tools: fix what is named, add nothing new. Rejected twice, the run fails with exit code 73 and keeps both versions. The same retry-once pattern as the word limit and the citations.</span></div>
+    <div><b>Test the checker on data you broke on purpose</b><span><code>mock.sh</code> corrupts a scratch copy of the plays two ways and runs both agents on it. A check you have only seen confirm a correct ruling is a check you have not tested.</span></div>
+  </div>
+</section>
+
+<section id="try" data-nav="Try it">
+  <h2>Try it yourself</h2>
+  <p>To run the agents, you need a Mac or Linux machine with Node, git, and the Claude Code CLI signed in. The data is already in the repo. The tool needs only Node.</p>
+<pre class="cmd"><span class="c"># get the kit</span>
+git clone https://github.com/ismayc/monday-morning-agent.git
+cd monday-morning-agent/episode-4
+
+<span class="c"># the turnover battle, five seasons and this one, from the entry on file</span>
+node ./query-plays.mjs --battle turnover --seasons 2021-2026
+
+<span class="c"># the two cuts: first-half turnovers only, then turnovers within 8 points only</span>
+node ./query-plays.mjs --battle turnover --seasons 2021-2026 --half 1
+node ./query-plays.mjs --battle turnover --seasons 2021-2026 --close 8
+
+<span class="c"># the split by the score at the snap: which way does it run?</span>
+node ./query-plays.mjs --split turnover --seasons 2021-2026
+
+<span class="c"># both agents, into scratch folders so your copies of the real ones stay as they are</span>
+ANALYST_DICT_DIR=$(mktemp -d) ANALYST_CHART_DIR=$(mktemp -d) ./run-analyst.sh "Win the turnover battle, win the game."
+
+<span class="c"># the mock: three analyst runs on plays with every turnover charged to the other team</span>
+./mock.sh flip 3</pre>
+  <p style="margin-top:14px">A scratch <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, of three kinds since this episode: a rush, a kick, and an event.">dictionary</a> starts empty, so in that run the analyst finds no turnover <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a> on file and has to write its own before it measures (rule 3 of its dictionary section). <code>./mock.sh</code> builds its corrupted copy in a temporary folder and never touches the real plays, dictionary, or charts; put <code>CHECKER=1</code> in front of it to run the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a> on each <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> too. <code>ANALYST_NO_CHECK=1</code> runs the analyst alone, as episodes 1 to 3 did.</p>
+  <div class="rows">
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent">The repository</a></b><span>The kit for each episode, the data, the dictionary, the charts, and the examples from real runs.</span></div>
+    <div><b><a href="checker.html">The four questions, one per keypress</a></b><span>Numbers, direction, reason, and limits, each with the slip it catches, and a real rejection from rehearsal at the end.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-4/checker.md">The fact-checker's policy</a></b><span>The file itself, and <a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-4/check-ruling.sh"><code>check-ruling.sh</code></a>, which builds the packet and calls the second agent.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/blob/main/episode-4/analyst.md">The analyst's policy</a></b><span>All ten sections, as the analyst reads them.</span></div>
+    <div><b><a href="https://github.com/ismayc/monday-morning-agent/tree/main/dictionary">The dictionary</a></b><span>The README with all three kinds of entry, and the turnover entry the battle reads.</span></div>
+    <div><b><a href="../football.html">The game, explained</a></b><span>Just enough football to follow the arguments and the data: a drive, a down, a turnover, and the words the pages use.</span></div>
+    <div><b><a href="https://www.oreilly.com/live-events/the-monday-morning-agent/0642572456054/">The live series</a></b><span>Eight episodes on O'Reilly, every other Monday.</span></div>
+  </div>
+</section>
+
+<section id="series" data-nav="The series">
+  <h2>The rest of the series</h2>
+  <p>This is episode 4 of eight. Each episode settles one argument and takes away one piece of human oversight, replacing it with something written down. Here it is the reading: from now on every <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> is checked by a second agent before anyone else reads it. <a href="../episode-1/">Episode 1, "You have to establish the run,"</a> showed the tool's <a class="term" href="#term-filter" data-def="A rule that drops plays before counting. The tool prints each one in order, with the plays left after it.">filters</a>. <a href="../episode-2/">Episode 2, "Ban the tush push,"</a> gave the agent a <a class="term" href="#term-dictionary" data-def="The folder of written definitions, one JSON file per entry, of three kinds since this episode: a rush, a kick, and an event.">dictionary</a> it must cite. <a href="../episode-3/">Episode 3, "Kickers are too good now,"</a> gave it written rules for its charts. <a href="../">All eight arguments are on the series page.</a> Next, on December 7, 2026: "Coaches are cowards on fourth down," and a line the agent describes up to and declines to cross.</p>
+</section>
+
+<section id="appendix" data-nav="Appendix">
+  <h2>Appendix: the season sheets</h2>
+  <p>Two pages to go over at any time, measured with the turnover <a class="term" href="#term-dictionary" data-def="One written definition in the dictionary, dictionary/NAME.json. The agent may add one, never change one.">entry</a>. Each asks the tool the battle in five situations, one row per season (every game, the regular season, the playoffs, first-half turnovers only, and turnovers while the game was close), then <a class="term" href="#term-split" data-def="The tool's fifth question, --split: turnovers per 100 rushes and passes, by the score at the snap.">the split</a> by the score at the snap. Each carries the chart drawn by the renderer under the chart standard and a verdict by a rule stated on the page. They are published here after the show, on November 23, 2026, so they do not give the <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a> away; until then these two links lead nowhere.</p>
+  <div class="rows">
+    <div><b><a href="season-sheet-2021-2025.html">Five seasons, 2021 to 2025</a></b><span>The five complete seasons, ending with the ruling the analyst gives on air and the <a class="term" href="#term-fact-checker" data-def="The second agent: its own policy (checker.md), its own claude -p, and a one-line allowlist. It reads the ruling with only the printouts, never the analyst's reasoning.">fact-checker</a>'s <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a> of it. Published after the show.</span></div>
+    <div><b><a href="season-sheet-2026.html">This season, 2026</a></b><span>This season so far, read against the five-season baseline, a partial season marked <a class="term" href="#term-in-progress" data-def="The tool's flag on the season still being played, with its weeks: a partial season.">in progress</a>. Published after the show.</span></div>
+  </div>
+</section>
+
+<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. Episode 4 airs November 23, 2026. Play-by-play data from <a href="https://github.com/nflverse/nflverse-data">nflverse</a>, licensed CC BY 4.0. Every number on this page is the tool's, read on November 9, 2026; the <a class="term" href="#term-ruling" data-def="The analyst's answer: nine parts, under 500 words, citing its entry and its chart and ending with the commands it ran.">ruling</a>, the <a class="term" href="#term-check" data-def="The fact-checker's answer: numbers, direction, reason, limits, a verdict, and the commands it ran. Under 300 words.">check</a>, and the chart are added from the run on air, committed as written.</p></footer>
+
+</main>
+</body>
+</html>

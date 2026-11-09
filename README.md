@@ -20,7 +20,7 @@ the tool, the data, the runner, and real output. One page folder per episode und
 | 1 | "You have to establish the run." | October 12, 2026 (aired; [recording and recap](https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/), [Substack](https://oreillyradar.substack.com/p/building-an-ai-analyst-one-football)) | Transparent queries | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
 | 2 | "Ban the tush push." | October 26, 2026 (aired; [recording and recap](https://www.oreilly.com/radar/the-monday-morning-agent-defining-the-tush-push/), [Substack](https://oreillyradar.substack.com/p/the-monday-morning-agent-defining)) | Shared data definitions as durable memory | A dictionary the agent writes and must cite from then on, and every later episode inherits | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
 | 3 | "Kickers are too good now." | November 9, 2026 | Consistent visualizations | Written rules for its charts: a standard the renderer enforces, drawn only from rows the tool printed, and every later episode inherits | [`episode-3/`](episode-3/), [page](https://ismayc.github.io/monday-morning-agent/episode-3/) |
-| 4 | The pundit audit: "Win the turnover battle, win the game." | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room chose the claim in episode 3's poll on November 9, 2026 (C, over A and B tied for second) | with the episode |
+| 4 | The pundit audit: "Win the turnover battle, win the game." | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room chose the claim in episode 3's poll on November 9, 2026 (C, over A and B tied for second) | [`episode-4/`](episode-4/), [page](https://ismayc.github.io/monday-morning-agent/episode-4/) |
 | 5 | "Coaches are cowards on fourth down." | December 7, 2026 | Operational boundaries | A written line it describes up to and declines to cross: no predictions | with the episode |
 | 6 | The mailbag, from the previous Q&A | January 11, 2027 | Request triage | Working a queue of vague requests it did not choose, from episode 5's Q&A | with the episode |
 | 7 | The agent writes its own column | January 25, 2027 | Self-directed analysis | Choosing its own questions, checked before it ships | with the episode |
@@ -404,6 +404,107 @@ season, too few to carry a trend. The whole run as it looked on screen is
 drawn is `examples/08-the-chart-as-drawn.svg`. The season sheets in the appendix ask the
 tool six more situations with the same entry.
 
+## Episode 4: "Win the turnover battle, win the game."
+
+The team charged with fewer turnovers won about three of every four decided games in
+every season since 2021. That is the pundit's whole case, and the plays settle it in one
+command. But the claim is two claims, a count and a reason, and a record is not a cause:
+a team that trails throws more passes and takes more chances, so some turnovers follow
+the losing. A ruling can carry the right number and the wrong reason, and the agent that
+wrote it is the worst reader to catch that. So this episode a second agent, the
+fact-checker, reads every ruling with only the tool's printouts in hand, and never the
+analyst's reasoning. The dictionary gains a third kind of entry, an event, and the tool
+two questions, the battle and the split. The room chose this claim in episode 3's poll on
+November 9, 2026. Everything else is in `episode-4/`.
+
+### The pages
+
+- **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-4/
+- **The fact-checker's four questions, one per keypress, with a real rejection at the end:** https://ismayc.github.io/monday-morning-agent/episode-4/checker.html
+- **The words (the turnover battle, decided game, printout, finding and note, send-back, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-4/#terms
+- **The fact-checker's policy:** [`episode-4/checker.md`](episode-4/checker.md)
+- **The dictionary, all three kinds of entry:** [`dictionary/`](dictionary/)
+- **Appendix, the season sheets:** published to `docs/episode-4/` after the show on November 23, 2026
+
+### The kit
+
+| File | What it is |
+|---|---|
+| `analyst.md` | The analyst's policy: the same ten sections as episode 3's. New: the job description says a fact-checker reads the ruling; five kinds of question; three kinds of entry and rule 5 for an event; the claim as two claims, a count and a reason ("a record is not a cause"); no saying why a team gave the ball away; the gap placed "digit by digit". Nine parts, under 500 words above the commands |
+| `analyst-outline.md` | The ten headings, one line each |
+| `checker.md` | The fact-checker's policy, new: what it sees, its one tool, the four checks in order (numbers, direction, reason, limits), a finding against a note, what it may not do, and a check in six parts under 300 words |
+| `check-ruling.sh` | The second agent. Builds the packet from the analyst's saved run and calls a second `claude -p` with `checker.md` and a one-line allowlist. Exit 0 for CONFIRMED or CONFIRMED WITH A NOTE, 74 for REJECTED, 65 for no verdict |
+| `query-plays.mjs` | The one tool. Episode 3's `--search`, `--play`, and `--trend`, plus `--battle NAME` (season by season, in the games where one team was charged with fewer of the event, how often that team won; `--half 1` and `--close N` for the cuts) and `--split NAME` (the event per 100 rushes and passes, by the score at the snap). `node ./query-plays.mjs --help` lists every flag |
+| `run-analyst.sh` | The runner: episode 3's analyst, its four-line allowlist, and its checks, then the fact-checker on the ruling that passed them. A rejected ruling goes back once, with the check; rejected again, or no verdict, the run fails with exit 73. `ANALYST_NO_CHECK=1` runs the analyst alone |
+| `show-run.mjs`, `render-run.mjs` | The live view and the run page. The page shows a battle's and a split's season tables, a "Checked by" box under the ruling, and the check in full, both checks when the ruling was sent back |
+| `mock.sh` | The "right number, wrong reason" test anyone can run: `./mock.sh flip`, `shuffle`, or `real`, with an optional run count N, builds a corrupted scratch copy of the repo and runs the analyst on it N times in parallel; `CHECKER=1` runs the fact-checker too. Never touches the real plays, dictionary, or charts |
+| `mock-data.mjs` | The two corruptions: `flip` charges every turnover to the other team, `shuffle` shuffles the games' final margins within each season |
+| `season-sheet.mjs` | The appendix: the battle in five situations and the split, the chart drawn by the renderer, and a verdict by a rule printed on the page |
+| `data/plays.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published, 40 columns |
+| `slim-data.mjs`, `fetch-data.sh` | How that file is made from the raw seasons |
+| `rehearse.sh` | `tool`, `claims`, `mock`, `verify`, `freeze`, `reset`: the rehearsal beats, all writing into `rehearsal-runs/`, never into `../dictionary` or `../charts` |
+| `show.sh` | The on-air commands, one word each: `search`, `battle`, `split`, `wrong`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"` |
+
+### The fact-checker
+
+When the analyst's ruling has passed episode 3's checks (the entry cited, the chart cited,
+the word limit, no file on record changed), `run-analyst.sh` calls `check-ruling.sh`. It
+builds a packet from the analyst's saved event stream: the claim, the ruling as written,
+every printout the tool returned during the run (numbered, the refused ones marked), and
+every file the run wrote. The analyst's own text between its tool calls and its
+instructions are never in the packet: the two agents share a tool and nothing else. Then
+a second `claude -p` reads the packet, with `checker.md` as its system prompt and a
+one-line allowlist, `Bash(node ./query-plays.mjs:*)`. It may rerun the tool, three
+commands at most, and writes a check that ends in one of three verdicts. A finding (a
+number against a printout or in none, a direction word against the printed values, a
+reason that predicts the opposite sign) rejects; a note does not. `check-ruling.sh`
+exits 0 for CONFIRMED or CONFIRMED WITH A NOTE and 74 for REJECTED. On a rejection the
+runner sends the ruling back to the analyst once, with the check and no tools, and checks
+the rewrite; rejected again, or no verdict, the run fails with exit 73, with both rulings
+and both checks saved.
+
+### Run it
+
+```
+cd monday-morning-agent/episode-4
+
+# the turnover battle, five seasons and this one, from the entry on file
+node ./query-plays.mjs --battle turnover --seasons 2021-2026
+
+# the two cuts: first-half turnovers only, then turnovers within 8 points only
+node ./query-plays.mjs --battle turnover --seasons 2021-2026 --half 1
+node ./query-plays.mjs --battle turnover --seasons 2021-2026 --close 8
+
+# the split by the score at the snap
+node ./query-plays.mjs --split turnover --seasons 2021-2026
+
+# both agents, into scratch folders so your copies of the real ones stay as they are
+ANALYST_DICT_DIR=$(mktemp -d) ANALYST_CHART_DIR=$(mktemp -d) ./run-analyst.sh "Win the turnover battle, win the game."
+
+# the mock: three analyst runs on plays with every turnover charged to the other team
+./mock.sh flip 3
+```
+
+In rehearsal on November 9, 2026, a run with both agents took 74 to 115 seconds.
+
+### What the numbers say
+
+The battle by hand, from `dictionary/turnover.json` (an interception or a lost fumble,
+charged to the team with the ball), regular season and playoffs, read on November 9, 2026:
+
+| Season | Games | Decided | The team with fewer won | Rate | Equal counts | Turnovers per game |
+|---|---|---|---|---|---|---|
+| 2021 | 285 | 211 | 164 | 77.7% | 73 | 2.59 |
+| 2022 | 284 | 224 | 169 | 75.4% | 59 | 2.60 |
+| 2023 | 285 | 226 | 167 | 73.9% | 59 | 2.64 |
+| 2024 | 285 | 208 | 161 | 77.4% | 77 | 2.42 |
+| 2025 | 285 | 216 | 168 | 77.8% | 68 | 2.34 |
+| 2026, weeks 1 to 9 | 135 | 95 | 74 | 77.9% | 39 | 2.59 |
+
+A game is decided when the two teams' counts differ and the game was not drawn. The
+analyst's ruling, the fact-checker's check, and the chart are added here after the show on
+November 23, 2026.
+
 ## Across the episodes
 
 ### What this agent does not do
@@ -436,7 +537,7 @@ team's runs and passes within three plays, and on rush share within 1.15 points.
 The site is `docs/`: the series page at the root, [the game explained](https://ismayc.github.io/monday-morning-agent/football.html)
 for people who have never watched American football (`docs/football.html`, linked from
 the top of the series page), and one folder per episode
-(`docs/episode-1/`, `docs/episode-2/`, `docs/episode-3/`), all sharing `docs/sheet.css` and the icons. The
+(`docs/episode-1/` through `docs/episode-4/`), all sharing `docs/sheet.css` and the icons. The
 strip across the top of every page holds one "Episodes" entry that opens the season's list;
 `node tools/episodes-menu.mjs` writes that list into every page from the episode table above
 (`--check` reports a page whose list is out of date), so run it after adding an episode's row
