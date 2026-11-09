@@ -20,7 +20,7 @@ the tool, the data, the runner, and real output. One page folder per episode und
 | 1 | "You have to establish the run." | October 12, 2026 (aired; [recording and recap](https://www.oreilly.com/radar/building-an-ai-analyst-one-football-argument-at-a-time/), [Substack](https://oreillyradar.substack.com/p/building-an-ai-analyst-one-football)) | Transparent queries | One agent, one read-only tool, every filter on screen | [`episode-1/`](episode-1/), [page](https://ismayc.github.io/monday-morning-agent/episode-1/) |
 | 2 | "Ban the tush push." | October 26, 2026 (aired; [recording and recap](https://www.oreilly.com/radar/the-monday-morning-agent-defining-the-tush-push/), [Substack](https://oreillyradar.substack.com/p/the-monday-morning-agent-defining)) | Shared data definitions as durable memory | A dictionary the agent writes and must cite from then on, and every later episode inherits | [`episode-2/`](episode-2/), [page](https://ismayc.github.io/monday-morning-agent/episode-2/) |
 | 3 | "Kickers are too good now." | November 9, 2026 | Consistent visualizations | Written rules for its charts: a standard the renderer enforces, drawn only from rows the tool printed, and every later episode inherits | [`episode-3/`](episode-3/), [page](https://ismayc.github.io/monday-morning-agent/episode-3/) |
-| 4 | The pundit audit, claim chosen by the room | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room votes on the claim in episode 3's Q&A | with the episode |
+| 4 | The pundit audit: "Win the turnover battle, win the game." | November 23, 2026 | Independent fact-checking | A second agent as a standing fact-checker; the room chose the claim in episode 3's poll on November 9, 2026 (C, over A and B tied for second) | with the episode |
 | 5 | "Coaches are cowards on fourth down." | December 7, 2026 | Operational boundaries | A written line it describes up to and declines to cross: no predictions | with the episode |
 | 6 | The mailbag, from the previous Q&A | January 11, 2027 | Request triage | Working a queue of vague requests it did not choose, from episode 5's Q&A | with the episode |
 | 7 | The agent writes its own column | January 25, 2027 | Self-directed analysis | Choosing its own questions, checked before it ships | with the episode |
@@ -313,7 +313,7 @@ second shape, a kick, and the tool a third question, a trend. Everything else is
 
 - **The short version with no code:** https://ismayc.github.io/monday-morning-agent/episode-3/
 - **The chart standard, one rule per keypress, with the pictures:** https://ismayc.github.io/monday-morning-agent/episode-3/standard.html
-- **The vote for episode 4, four claims and no numbers:** https://ismayc.github.io/monday-morning-agent/episode-3/vote.html
+- **The vote for episode 4, four claims and no numbers (the room chose C, the turnover battle):** https://ismayc.github.io/monday-morning-agent/episode-3/vote.html
 - **The words (the defined kick, the trend, the spec, the renderer, and the rest):** https://ismayc.github.io/monday-morning-agent/episode-3/#terms
 - **The chart standard as a file, and the renderer:** [`charts/`](charts/)
 - **The dictionary, both shapes:** [`dictionary/`](dictionary/)

@@ -39,13 +39,15 @@
   @media (max-width: 700px) { .ballot { grid-template-columns: 1fr; } }
   .ask { margin-top: 26px; border: 2px solid var(--ink); background: var(--ink); color: var(--yellow); padding: 16px 20px; font-family: var(--display); font-weight: 700; font-size: clamp(24px, 3vw, 34px); line-height: 1.1; }
   .ask small { display: block; font-family: var(--text); font-weight: 400; font-size: 16px; color: #fcfcfa; margin-top: 6px; }
+  .result { margin-top: 26px; border: 2px solid var(--ink); background: var(--yellow); padding: 14px 20px; font-family: var(--display); font-weight: 700; font-size: clamp(20px, 2.4vw, 28px); line-height: 1.15; }
+  .result small { display: block; font-family: var(--text); font-weight: 400; font-size: 16px; margin-top: 6px; }
   .no { margin-top: 18px; font-size: 15.5px; color: var(--soft); border-left: 4px solid var(--ink); padding-left: 12px; max-width: 70ch; }
   @media print {
     /* one landscape sheet, the slide the producers enter into ON24: the question and
        the four claims, each with its one-paragraph gloss; the "who says it" lines,
        the nav, the note, and the footer stay on the web page */
     @page { size: landscape; margin: 10mm 12mm; }
-    .top, footer, .no, .lead a, .c .who { display: none !important; }
+    .top, footer, .no, .result, .lead a, .c .who { display: none !important; }
     html, body { background: #fff; }
     body { font-size: 16px; }
     main { max-width: none; width: 100%; padding: 0; margin: 0; }
@@ -73,7 +75,7 @@
 
 <header>
   <h1>Which pundit's claim gets audited?</h1>
-  <p class="lead">Episode 4 on November 23, 2026 is the pundit audit: a second agent joins as a standing fact-checker, so the agent that does the analysis is never the agent that grades it. The claim it works on is chosen here, by this room, in the poll during episode 3's Q&amp;A. Four claims pundits make every autumn. Pick the one you most want checked.</p>
+  <p class="lead">Episode 4 on November 23, 2026 is the pundit audit: a second agent joins as a standing fact-checker, so the agent that does the analysis is never the agent that grades it. The claim it works on was chosen here, by the room, in the poll during episode 3's Q&amp;A. Four claims pundits make every autumn; the result is under the ballot.</p>
 </header>
 
 <div class="ask">Which claim should the agent check, with a second agent checking the first?<small>Vote in the poll on your screen. One choice. The result is read aloud before we close.</small></div>
@@ -101,9 +103,11 @@
   </div></div>
 </div>
 
+<div class="result">The room chose C, "Win the turnover battle, win the game.", on November 9, 2026.<small>A and B were a close second, tied with each other. Episode 4 on November 23, 2026 audits the turnover claim, with the second agent checking the first.</small></div>
+
 <p class="no"><strong>No numbers on this page, on purpose.</strong> The audit's point is that the first agent's number gets checked by a second agent before anyone reads it. Showing the numbers now would decide the vote and spoil the audit. Every one of the four can be settled from the plays on file; what differs is how interesting the honest answer is.</p>
 
-<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. The vote is taken in episode 3, November 9, 2026; the audit airs in episode 4, November 23, 2026. This page prints as one landscape sheet, the same four choices the poll shows.</p></footer>
+<footer><p>The Monday Morning Agent, an O'Reilly live series hosted by Chester Ismay. The vote was taken in episode 3, November 9, 2026, and the room chose C; the audit airs in episode 4, November 23, 2026. This page prints as one landscape sheet, the same four choices the poll shows.</p></footer>
 
 </main>
 </body>
