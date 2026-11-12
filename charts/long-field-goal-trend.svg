@@ -1,11 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="790" viewBox="0 0 1120 790" role="img" data-standard="charts/STANDARD.md, version 1 (October 26, 2026)" data-spec="long-field-goal-trend" aria-labelledby="t">
-<rect width="1120" height="790" fill="#fcfcfa"/>
+<svg xmlns="http://www.w3.org/2000/svg" width="1120" height="830" viewBox="0 0 1120 830" role="img" data-standard="charts/STANDARD.md, version 1 (October 26, 2026)" data-spec="long-field-goal-trend" aria-labelledby="t">
+<rect width="1120" height="830" fill="#fcfcfa"/>
 <text id="t" x="96" y="54" font-family='"Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif' font-weight="700" font-size="34" fill="#14171a">Are kickers making more of their long field goals than they did in 2021?</text>
-<text x="96" y="80" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="16" fill="#4a5058">dictionary/long-field-goal.json, written 2026-11-09 by the analyst, episode 3: “The long field goal, the kick fans mean when they say kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest attempt on file.”</text>
-<text x="96" y="100" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="16" fill="#4a5058">Filters: season type: regular season and playoffs.</text>
-<rect x="96" y="116" width="22" height="12" fill="#ffe14d" stroke="#14171a"/><text x="126" y="127" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="15" fill="#14171a">long-field-goal: the defined kick</text>
-<rect x="396" y="116" width="22" height="12" fill="#8ad4ff" stroke="#14171a"/><text x="426" y="127" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="15" fill="#14171a">every other field goal attempt, from 18 to 49 yards</text>
-<rect x="716" y="116" width="22" height="12" fill="#c9ccd1" stroke="#14171a"/><text x="746" y="127" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="15" fill="#14171a">2026 so far, through week 9</text>
+<text x="96" y="80" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="16" fill="#4a5058">dictionary/long-field-goal.json, written 2026-11-09 by the analyst, episode 3: “The long field goal, the kick fans mean when they say</text>
+<text x="96" y="100" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="16" fill="#4a5058">kickers now make kicks that used to be out of range. In these plays it is any field goal attempt from 50 yards or more, out to the longest</text>
+<text x="96" y="120" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="16" fill="#4a5058">attempt on file.”</text>
+<text x="96" y="140" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="16" fill="#4a5058">Filters: season type: regular season and playoffs.</text>
+<rect x="96" y="156" width="22" height="12" fill="#ffe14d" stroke="#14171a"/><text x="126" y="167" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="15" fill="#14171a">long-field-goal: the defined kick</text>
+<rect x="379.8" y="156" width="22" height="12" fill="#8ad4ff" stroke="#14171a"/><text x="409.8" y="167" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="15" fill="#14171a">every other field goal attempt, from 18 to 49 yards</text>
+<rect x="782.4000000000001" y="156" width="22" height="12" fill="#c9ccd1" stroke="#14171a"/><text x="812.4000000000001" y="167" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="15" fill="#14171a">2026 so far, through week 9</text>
+<g transform="translate(0 40)">
 <text x="96" y="158" font-family='"Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif' font-weight="600" font-size="20" fill="#14171a">Made, as a share of attempts</text>
 <line x1="96" x2="1080" y1="450" y2="450" stroke="#14171a" stroke-width="2"/>
 <text x="86" y="455" text-anchor="end" font-family='ui-monospace, "SF Mono", Menlo, Consolas, monospace' font-size="13" fill="#4a5058">0%</text>
@@ -91,4 +94,5 @@
 <text x="96" y="722" font-family='"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif' font-size="14" fill="#4a5058">* 2026 is still being played: weeks 1-9 on file, 135 games. Its row is a partial season.</text>
 <text x="96" y="742" font-family='ui-monospace, "SF Mono", Menlo, Consolas, monospace' font-size="13" fill="#4a5058">Source: node episode-3/query-plays.mjs --trend long-field-goal --seasons 2021-2026  (1,559 games, latest 2026-11-08)</text>
 <text x="96" y="762" font-family='ui-monospace, "SF Mono", Menlo, Consolas, monospace' font-size="13" fill="#4a5058">Drawn under charts/STANDARD.md, version 1 (October 26, 2026), from the spec long-field-goal-trend.json, written 2026-11-09.</text>
+</g>
 </svg>

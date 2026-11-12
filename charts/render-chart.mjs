@@ -135,20 +135,52 @@ const plotW = W - L - Rm
 const xs = rows.map((_, i) => L + PAD + (rows.length === 1 ? (plotW - 2 * PAD) / 2 : (i * (plotW - 2 * PAD)) / (rows.length - 1)))
 const hasOther = rows.some(r => r.other.rate !== null)
 const inProg = rows.find(r => r.inProgress)
-const parts = []
-parts.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" data-standard="${esc(STANDARD)}" data-spec="${esc(spec.name)}" aria-labelledby="t">`)
-parts.push(`<rect width="${W}" height="${H}" fill="${SHEET}"/>`)
+// The header's text is measured, not placed at fixed offsets: a long definition or legend
+// label used to run off the right edge or under the next legend key (the episode 3 chart,
+// November 12, 2026). Width is estimated per character: Barlow measured about 0.40 em a
+// character in that chart, and 0.44 leaves a margin, so text wraps a little early rather
+// than late. Every extra header line moves the panels down by its height, and the sheet
+// grows by the same amount.
+const textW = (s, size) => String(s).length * size * 0.44
+const wrap = (s, size, width) => {
+  const lines = []
+  let line = ''
+  for (const word of String(s).split(/\s+/)) {
+    const next = line ? `${line} ${word}` : word
+    if (line && textW(next, size) > width) { lines.push(line); line = word } else line = next
+  }
+  if (line) lines.push(line)
+  return lines
+}
+const head = []
 // Title and subtitle (rule 5)
-parts.push(`<text id="t" x="${L}" y="54" font-family='${DISPLAY}' font-weight="700" font-size="34" fill="${INK}">${esc(q)}</text>`)
+head.push(`<text id="t" x="${L}" y="54" font-family='${DISPLAY}' font-weight="700" font-size="34" fill="${INK}">${esc(q)}</text>`)
 const filters = rowsOut.filters.slice(2).map(f => f.filter).filter(f => !/^weeks: all$/.test(f) && !/^team with the ball: any$/.test(f) && !/^a field goal attempt/.test(f))
-parts.push(`<text x="${L}" y="80" font-family='${TEXT}' font-size="16" fill="${SOFT}">${esc(`${D.file}, written ${D.written}${D.by ? ' by ' + D.by : ''}: \u201c${D.plainWords}\u201d`)}</text>`)
-parts.push(`<text x="${L}" y="100" font-family='${TEXT}' font-size="16" fill="${SOFT}">${esc(filters.length ? `Filters: ${filters.join('; ')}.` : 'Filters: every season, every week, every team.')}</text>`)
-// Legend (rule 4)
-let lx = L
-parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${YELLOW}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(LABELS.defined)}</text>`)
-lx += 300
-if (hasOther) { parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${BLUE}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(D.comparedWith)}</text>`); lx += 320 }
-if (inProg) parts.push(`<rect x="${lx}" y="116" width="22" height="12" fill="${GRAY}" stroke="${INK}"/><text x="${lx + 30}" y="127" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(inProg.season)} so far, through week ${esc(String(inProg.weeks).split(/[-,]/).pop())}</text>`)
+const sub = [
+  ...wrap(`${D.file}, written ${D.written}${D.by ? ' by ' + D.by : ''}: \u201c${D.plainWords}\u201d`, 16, plotW),
+  ...wrap(filters.length ? `Filters: ${filters.join('; ')}.` : 'Filters: every season, every week, every team.', 16, plotW),
+]
+let hy = 80
+for (const s of sub) { head.push(`<text x="${L}" y="${hy}" font-family='${TEXT}' font-size="16" fill="${SOFT}">${esc(s)}</text>`); hy += 20 }
+// Legend (rule 4): each key starts after the previous label, and a key that would pass the
+// right edge starts a new row.
+const keys = [[YELLOW, LABELS.defined]]
+if (hasOther) keys.push([BLUE, D.comparedWith])
+if (inProg) keys.push([GRAY, `${inProg.season} so far, through week ${String(inProg.weeks).split(/[-,]/).pop()}`])
+let lx = L, ly = hy - 4
+for (const [fill, label] of keys) {
+  const w = 30 + textW(label, 15)
+  if (lx > L && lx + w > W - Rm) { lx = L; ly += 22 }
+  head.push(`<rect x="${lx}" y="${ly}" width="22" height="12" fill="${fill}" stroke="${INK}"/><text x="${lx + 30}" y="${ly + 11}" font-family='${TEXT}' font-size="15" fill="${INK}">${esc(label)}</text>`)
+  lx += w + 36
+}
+// The fixed layout below was drawn for a two-line subtitle and one legend row (legend at 116).
+const dy = ly - 116
+const parts = []
+parts.push(`<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H + dy}" viewBox="0 0 ${W} ${H + dy}" role="img" data-standard="${esc(STANDARD)}" data-spec="${esc(spec.name)}" aria-labelledby="t">`)
+parts.push(`<rect width="${W}" height="${H + dy}" fill="${SHEET}"/>`)
+parts.push(...head)
+parts.push(`<g transform="translate(0 ${dy})">`)
 
 // Panel A: rates, 0 to 100 (rule 2), counts under the points (rule 3)
 const aTop = 170, aBot = 450
@@ -210,6 +242,7 @@ let fy = 722
 if (inProg) { parts.push(`<text x="${L}" y="${fy}" font-family='${TEXT}' font-size="14" fill="${SOFT}">* ${esc(inProg.season)} is still being played: weeks ${esc(inProg.weeks)} on file, ${fmt(inProg.games)} games. Its row is a partial season.</text>`); fy += 20 }
 parts.push(`<text x="${L}" y="${fy}" font-family='${MONO}' font-size="13" fill="${SOFT}">Source: node ${esc(spec.tool)} ${esc(cmd)}  (${fmt(rowsOut.coverage.games)} games, latest ${esc(rowsOut.coverage.latestGameDate)})</text>`)
 parts.push(`<text x="${L}" y="${fy + 20}" font-family='${MONO}' font-size="13" fill="${SOFT}">Drawn under ${esc(STANDARD)}, from the spec ${esc(spec.name)}.json, written ${esc(spec.written)}.</text>`)
+parts.push('</g>')
 parts.push('</svg>')
 
 const out = join(dirname(specPath), `${spec.name}.svg`)
