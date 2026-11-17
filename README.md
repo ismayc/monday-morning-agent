@@ -293,9 +293,12 @@ definitions of the play, this one among them, are on
 
 ## The data science articles
 
-[`analysis/`](analysis/) rebuilds episodes 1 and 2 in Python and in R, with intervals,
+[`analysis/`](analysis/) rebuilds episodes 1 to 3 in Python and in R, with intervals,
 adjustment, and a check of the definition against human charting. The articles are
-[on the Sunbird Insights blog](https://sunbirds.ai/blog/).
+[on the Sunbird Insights blog](https://sunbirds.ai/blog/):
+[episode 1](https://sunbirds.ai/blog/establish-the-run/),
+[episode 2](https://sunbirds.ai/blog/tush-push/), and
+[episode 3](https://sunbirds.ai/blog/kickers/).
 
 ## Episode 3: "Kickers are too good now."
 
