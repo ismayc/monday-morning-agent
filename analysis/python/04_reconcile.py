@@ -14,7 +14,10 @@ TOL = 1e-9
 
 def main() -> int:
     fails, cells, tables = [], 0, 0
-    for py in sorted(OUT.glob("e[12]_*.csv")):
+    by: dict[str, dict] = {}
+    for py in sorted(OUT.glob("e[123]_*.csv")):
+        ep = by.setdefault(py.stem[:2], {"tables": 0, "cells": 0})
+        before = cells
         if py.stem.endswith("_r"):
             continue
         rf = OUT / f"{py.stem}_r.csv"
@@ -36,10 +39,12 @@ def main() -> int:
                         fails.append(f"{py.name} row {i} {c}: {u} against {v}")
                 elif str(u) != str(v):
                     fails.append(f"{py.name} row {i} {c}: {u!r} against {v!r}")
+        ep["tables"] += 1
+        ep["cells"] += cells - before
     for f in fails[:40]:
         print(f)
     print(f"RECONCILE {'FAILED' if fails else 'PASSED'}: {tables} tables, {cells:,} cells, {len(fails)} differences, tolerance {TOL}")
-    (OUT / "reconcile.json").write_text(json.dumps({"tables": tables, "cells": cells, "differences": len(fails), "tolerance": TOL}) + "\n")
+    (OUT / "reconcile.json").write_text(json.dumps({"tables": tables, "cells": cells, "differences": len(fails), "tolerance": TOL, "by_episode": by}) + "\n")
     return 1 if fails else 0
 
 

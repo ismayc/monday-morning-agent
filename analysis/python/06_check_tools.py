@@ -36,9 +36,17 @@ def main() -> int:
         r = rep[name]
         if t["result"]["defined"]["plays"] != int(r["n1"]) or t["result"]["other"]["converted"] != int(r["k0"]):
             fails.append(f"episode 2 {name}: tool {t['result']} against table {r['n1']}, {r['k0']}")
+    # Episode 3: every season row of the long-kick trend, both arms, and the games behind per game.
+    seasons = {(r["season"], r["arm"]): r for r in csv.DictReader((OUT / "e3_seasons.csv").open())}
+    t = tool("episode-3", "--trend", "long-field-goal")
+    for row in t["rows"]:
+        for arm, key in [("defined", "long"), ("other", "other")]:
+            r = seasons[(row["season"], key)]
+            if (row[arm]["attempts"], row[arm]["made"], row["games"]) != (int(r["attempts"]), int(r["made"]), int(r["games"])):
+                fails.append(f"episode 3 {row['season']} {key}: tool {row[arm]} against table {r['attempts']}, {r['made']}")
     for f in fails:
         print(f)
-    print("TOOLS", "FAILED" if fails else "PASSED: the tables match the show's tools on 6 views")
+    print("TOOLS", "FAILED" if fails else f"PASSED: the tables match the show's tools on 6 views and {len(t['rows'])} kick seasons")
     return 1 if fails else 0
 
 

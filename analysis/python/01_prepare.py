@@ -12,6 +12,8 @@ Output, all under the gitignored data/ folder:
   e1_plays.csv     every play through the cutoff date, in file order
   e2_short.csv     rushes with two or fewer yards to go, in file order
   e2_passers.csv   every play with a passer, in file order (who is the primary passer)
+  e3_kicks.csv     every field goal attempt (../episode-3/data/plays.csv, committed)
+  e3_games.csv     games per season, as the episode 3 tool counts them
 """
 from __future__ import annotations
 
@@ -23,6 +25,7 @@ ROOT = Path(__file__).resolve().parents[1]
 KIT = ROOT.parent
 DATA = ROOT / "data"
 CUTOFF = "2026-11-01"  # 2026 is a holdout, through the games of this date
+E3_CUTOFF = "2026-11-16"  # article 3's holdout, through the games of this date
 NA = ["NA", ""]
 
 
@@ -78,6 +81,21 @@ def main() -> None:
                  "rusher", "yards_gained", "first_down", "touchdown", "epa", "fumble_lost",
                  "is_qb_sneak").write_csv(DATA / "e2_short.csv")
     print(f"e2_short {short.height:,} rows; charted 2022-25 {short['is_qb_sneak'].is_not_null().sum():,}")
+    kicks()
+
+
+def kicks() -> None:
+    """Episode 3: every field goal attempt in the file the show's tool reads, and the
+    games per season the tool counts (every game played, before the kick filter)."""
+    e3 = pl.read_csv(KIT / "episode-3/data/plays.csv", null_values=NA, infer_schema_length=100000,
+                     columns=["season", "season_type", "game_id", "game_date", "posteam", "field_goal_attempt",
+                              "field_goal_result", "kick_distance", "kicker_player_name"])
+    e3 = e3.filter(pl.col("game_date") <= E3_CUTOFF)
+    e3.group_by("season").agg(games=pl.col("game_id").n_unique()).sort("season").write_csv(DATA / "e3_games.csv")
+    k = e3.filter(pl.col("field_goal_attempt") == 1)
+    k.select("season", "season_type", "game_id", "posteam", "kick_distance", "field_goal_result",
+             "kicker_player_name").write_csv(DATA / "e3_kicks.csv")
+    print(f"e3_kicks {k.height:,} rows, latest game {e3['game_date'].max()}")
 
 
 if __name__ == "__main__":

@@ -147,12 +147,62 @@ def tush() -> dict:
     return {"values": v, "charts": charts}
 
 
+def kick() -> dict:
+    v = {}
+    sea = {(r["season"], r["arm"]): r for r in rows("e3_seasons")}
+    years = sorted({s for s, _ in sea})
+    for s in years:
+        for arm, k in [("long", "l"), ("other", "o")]:
+            r = sea[(s, arm)]
+            v |= {f"{k}{s}_n": num(r["attempts"]), f"{k}{s}_m": num(r["made"]), f"{k}{s}_r": pct(r["rate"]),
+                  f"{k}{s}_lo": pct(r["lo"]), f"{k}{s}_hi": pct(r["hi"]), f"{k}{s}_pg": f"{float(r['per_game']):.2f}"}
+        v[f"g{s}"] = num(sea[(s, "long")]["games"])
+    five = [s for s in years if s != "2026"]
+    rates = [float(sea[(s, "long")]["rate"]) for s in five]
+    v |= {"l_min": pct(min(rates)), "l_max": pct(max(rates)),
+          "l_five_n": num(sum(int(sea[(s, "long")]["attempts"]) for s in five))}
+    raw = rows("e3_raw_change")[0]
+    v |= {"raw": signed(raw["diff"]), "raw_lo": signed(raw["lo"]), "raw_hi": signed(raw["hi"]), "raw_hiu": p(raw["hi"]),
+          "raw_lou": p(-float(raw["lo"]))}
+    for r in rows("e3_mix"):
+        s = r["season"]
+        n = int(r["attempts"])
+        v |= {f"md{s}": f"{float(r['mean_distance']):.1f}", f"far{s}": pct((int(r["n_55_59"]) + int(r["n_60_plus"])) / n, 0)}
+        for tag in ("50_54", "55_59", "60_plus"):
+            v |= {f"b{tag}_{s}_n": num(r[f"n_{tag}"]), f"b{tag}_{s}_r": pct(int(r[f"made_{tag}"]) / int(r[f"n_{tag}"]))}
+    ad = {r["estimate"]: r for r in rows("e3_adjusted")}
+    for s in five + ["2026"]:
+        r = ad[f"chance at 55, {s}"] if s != "2026" else ad["holdout: chance at 55, 2026"]
+        v |= {f"a{s}": pct(r["theta"]), f"a{s}_lo": pct(r["lo"]), f"a{s}_hi": pct(r["hi"])}
+    for key, name in [("prim", "primary: 2025 minus 2021"), ("lin", "linear trend: 2025 minus 2021"),
+                      ("mh", "Mantel-Haenszel by yard: 2025 minus 2021"), ("quad", "every attempt, quadratic: 2025 minus 2021"),
+                      ("h21", "holdout: 2026 minus 2021"), ("h25", "holdout: 2026 minus 2025")]:
+        r = ad[name]
+        v |= {key: signed(r["theta"]), f"{key}_lo": signed(r["lo"]), f"{key}_hi": signed(r["hi"]),
+              f"{key}_kickers": num(r["kickers"]), f"{key}_n": num(r["attempts"]),
+              f"{key}_loo_min": signed(r["loo_min"]), f"{key}_loo_max": signed(r["loo_max"])}
+    prim = ad["primary: 2025 minus 2021"]
+    v |= {"prim_rise": p(prim["hi"]), "prim_fall": p(-float(prim["lo"])), "primu": p(prim["theta"])}
+    charts = {
+        "kickchange": [{"label": lab, "est": f100(r["diff"] if "diff" in r else r["theta"]),
+                        "lo": f100(r["lo"]), "hi": f100(r["hi"])}
+                       for lab, r in [("Raw make rate, 50 to 70 yards", raw),
+                                      ("At 55 yards, by season (headline)", prim),
+                                      ("At 55 yards, one linear trend", ad["linear trend: 2025 minus 2021"]),
+                                      ("Yard by yard, no model", ad["Mantel-Haenszel by yard: 2025 minus 2021"]),
+                                      ("At 55 yards, every attempt", ad["every attempt, quadratic: 2025 minus 2021"])]],
+    }
+    return {"values": v, "charts": charts}
+
+
 def main() -> None:
     rec = json.loads((OUT / "reconcile.json").read_text())
-    shared = {"rec_tables": str(rec["tables"]), "rec_cells": f"{rec['cells']:,}"}
-    for name, build in [("establish", establish), ("tush", tush)]:
+    by = rec["by_episode"]
+    # Articles 1 and 2 report their own pair of pipelines; article 3 reports its own.
+    pair = {"tables": by["e1"]["tables"] + by["e2"]["tables"], "cells": by["e1"]["cells"] + by["e2"]["cells"]}
+    for name, build, r in [("establish", establish, pair), ("tush", tush, pair), ("kick", kick, by["e3"])]:
         d = build()
-        d["values"] |= shared
+        d["values"] |= {"rec_tables": str(r["tables"]), "rec_cells": f"{r['cells']:,}"}
         (OUT / f"values_{name}.json").write_text(json.dumps(d, indent=1, ensure_ascii=False) + "\n")
         print(f"values_{name}.json: {len(d['values'])} values, {len(d['charts'])} charts")
 

@@ -1,1 +1,1 @@
-{"tables": 20, "cells": 1314, "differences": 0, "tolerance": 1e-09}
+{"tables": 24, "cells": 1591, "differences": 0, "tolerance": 1e-09, "by_episode": {"e1": {"tables": 6, "cells": 593}, "e2": {"tables": 14, "cells": 721}, "e3": {"tables": 4, "cells": 277}}}

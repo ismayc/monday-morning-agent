@@ -11,6 +11,8 @@ $PY -I python/02_establish.py >/dev/null
 $PY -I python/03_tush.py >/dev/null
 Rscript R/establish.R >/dev/null 2>&1
 Rscript R/tush.R >/dev/null 2>&1
+$PY -I python/07_kick.py >/dev/null
+Rscript R/kick.R >/dev/null 2>&1
 $PY -I python/04_reconcile.py
 $PY -I python/06_check_tools.py
 $PY -I python/05_values.py
