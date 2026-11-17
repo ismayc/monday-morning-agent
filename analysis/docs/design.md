@@ -75,6 +75,56 @@ conversion is the answer. If it excludes zero, the edge is reported as a
 measured association. Nothing here tests a ban, safety, or what a call would
 have done in the same situation.
 
+## Article 3: "Kickers are too good now"
+
+Written November 17, 2026, before any table below was computed. Before this
+section, I had seen only what aired: the episode 3 ruling
+(`episode-3/examples/05-ruling.md`), which gives the long kick's make rate and
+attempts per game by season, and its distance split (50 to 59 yards: 67.6% of
+182 in 2021, 70.2% of 255 in 2025; 60 and over: 44.4% of 9, 52.2% of 23). I had
+also checked that the 6,221 field goal rows have no blank kicker or distance.
+Chester chose the scope on November 17: the distance adjustment and how much
+change the counts can rule out. Weather, surface, kicker effects, and coaches'
+decisions are out of scope for this article.
+
+Data: `episode-3/data/plays.csv`, the file the show's tool reads, with the
+tool's own universe: a field goal attempt with a result (made, missed, or
+blocked; a blocked kick is a miss) and a distance, regular season and playoffs.
+The long kick is the entry `long-field-goal`, 50 to 70 yards. The cluster for
+every interval that needs one is the kicker (`kicker_player_name`), because one
+kicker's attempts are not independent.
+
+1. **Reproduce.** By season, 2021 to 2025: attempts, makes, and the make rate
+   for the long kick and for every other attempt (18 to 49), with Wilson
+   intervals, and attempts per game, games as the tool counts them. The tool
+   recount (`python/06_check_tools.py`) must match these rows.
+2. **What the raw counts can rule out.** The long kick's make rate in 2025
+   minus 2021, with a Newcombe interval. The upper end is the largest rise the
+   raw comparison allows.
+3. **The mix of distances.** By season: the long kick's mean distance, and its
+   attempts at 50 to 54, 55 to 59, and 60 and over.
+4. **The distance adjustment, the primary test.** On long kicks, 2021 to 2025,
+   a logistic model of a make on season (one indicator per season, 2021 as the
+   base) and distance (linear, centered at 55 yards). Report each season's make
+   chance at 55 yards, and 2025 minus 2021 at 55 yards, with a
+   leave-one-kicker-out jackknife interval.
+5. **Checks on the primary.**
+   - The same model with season as one linear term: the change in make chance
+     at 55 yards from 2021 to 2025 that the trend implies, same jackknife.
+   - Without a model: a Mantel-Haenszel difference, 2025 against 2021, within
+     each one-yard distance from 50 to 70, same jackknife.
+   - The model on every attempt from 18 to 70, with distance and its square,
+     both centered at 55: the 2025 minus 2021 difference at 55 yards.
+6. **Holdout.** 2026 through the games of November 16, read after steps 1 to 5
+   are written: the make chance at 55 yards from step 4's model refit with a
+   2026 indicator, against 2025 and 2021.
+
+Decision rule for the headline, set now: step 4's jackknife interval on the
+2025 minus 2021 difference at 55 yards is the answer. If it excludes zero, the
+distance-adjusted make chance changed, in the direction of the estimate. If it
+contains zero, report the largest rise and the largest fall the interval
+allows. Nothing here says why a kick was made or why a coach tried it.
+
 ## Added during the analysis, after the plan above
 
 Each of these was added after results were visible, so read them as exploration.
