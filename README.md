@@ -411,7 +411,7 @@ tool six more situations with the same entry.
 
 The team charged with fewer turnovers won about three of every four decided games in
 every season since 2021. That is the pundit's whole case, and the plays settle it in one
-command. But the claim is two claims, a count and a reason, and a record is not a cause:
+command. But the claim is actually two claims, a count and a reason, and a record is not a cause:
 a team that trails throws more passes and takes more chances, so some turnovers follow
 the losing. A ruling can carry the right number and the wrong reason, and the agent that
 wrote it is the worst reader to catch that. So this episode a second agent, the

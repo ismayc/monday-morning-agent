@@ -17,6 +17,9 @@ import { readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 
 const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]))
+// The agents write Markdown: **bold** and `code`. Escape first, then mark those two, so a
+// file name or a flag in backticks shows as code in the ruling and in the boxes at the top.
+const inline = (s) => esc(s).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>')
 const num = (s) => Number(String(s).replace(/,/g, ''))
 const fmt = (n) => n.toLocaleString('en-US')
 
@@ -197,7 +200,7 @@ function rulingHtml(md) {
     if (!para.length) return
     const p = para.join(' ')
     const cls = /^\*\*(Ruling|Verdict):?\*\*/.test(p) ? ' class="call"' : /^\*\*Definition used:?\*\*/.test(p) ? ' class="cite"' : /^\*\*Chart:?\*\*/.test(p) ? ' class="chart"' : ''
-    out.push(`<p${cls}>${esc(p).replace(/\*\*(.+?)\*\*/g, '<b>$1</b>').replace(/`([^`]+)`/g, '<code>$1</code>')}</p>`)
+    out.push(`<p${cls}>${inline(p)}</p>`)
     para.length = 0
   }
   for (const line of String(md).split('\n')) {
@@ -486,7 +489,7 @@ export function renderRun(run) {
   .ruling p { max-width: 72ch; margin-top: 10px; }
   .ruling p.call { background: var(--yellow); color: var(--black); padding: 8px 12px; }
   .ruling p.cite { border-left: 4px solid var(--blue); padding-left: 10px; }
-  .ruling code { background: var(--faint); padding: 1px 5px; }
+  .ruling code, .verdict > p code { background: var(--faint); padding: 1px 5px; }
   .ruling pre { margin-top: 12px; font-family: var(--code); font-size: 14px; background: var(--faint); padding: 10px 14px; overflow-x: auto; }
   .note .warn { margin-top: 2px; }
   .ruling.first { margin-top: 10px; padding-top: 0; border-top: 0; color: var(--soft); }
@@ -502,10 +505,10 @@ export function renderRun(run) {
 <div class="top"><span><i aria-hidden="true"></i>Under review</span><span>The Monday Morning Agent, episode 4: one run of the analyst</span></div>
 <h1>${claim ? `"${esc(claim)}"` : 'A run of the analyst'}${claimNote}</h1>
 <p class="meta">${meta}</p>
-${verdict ? `<div class="verdict"><b>After review</b><p>${esc(verdict)}<a href="#ruling">Read the full ruling.</a></p></div>` : run.ruling === null ? '<div class="verdict"><b>No ruling</b><p>The run ended before the agent gave one.</p></div>' : ''}
-${cite ? `<div class="verdict cite"><b>Measured with</b><p>${esc(cite)}</p></div>` : ''}
-${chart && !/^none/i.test(chart) ? `<div class="verdict drawn"><b>Drawn as</b><p>${esc(chart)}</p></div>` : ''}
-${run.check ? `<div class="verdict checked${checkCls}"><b>Checked by</b><p>${esc(checkVerdict || 'The fact-checker gave no verdict.')}<a href="#check">Read the check.</a></p></div>` : ''}
+${verdict ? `<div class="verdict"><b>After review</b><p>${inline(verdict)}<a href="#ruling">Read the full ruling.</a></p></div>` : run.ruling === null ? '<div class="verdict"><b>No ruling</b><p>The run ended before the agent gave one.</p></div>' : ''}
+${cite ? `<div class="verdict cite"><b>Measured with</b><p>${inline(cite)}</p></div>` : ''}
+${chart && !/^none/i.test(chart) ? `<div class="verdict drawn"><b>Drawn as</b><p>${inline(chart)}</p></div>` : ''}
+${run.check ? `<div class="verdict checked${checkCls}"><b>Checked by</b><p>${inline(checkVerdict || 'The fact-checker gave no verdict.')}<a href="#check">Read the check.</a></p></div>` : ''}
 <div class="log">
 <h2>What the agent did, in order</h2>
 ${items || '<section class="note"><span class="clock"></span><p>The stream holds no tool calls and no notes.</p></section>'}
