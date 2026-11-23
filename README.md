@@ -435,6 +435,7 @@ November 9, 2026. Everything else is in `episode-4/`.
 |---|---|
 | `analyst.md` | The analyst's policy: the same ten sections as episode 3's. New: the job description says a fact-checker reads the ruling; five kinds of question; three kinds of entry and rule 5 for an event; the claim as two claims, a count and a reason ("a record is not a cause"); no saying why a team gave the ball away; the gap placed "digit by digit". Nine parts, under 500 words above the commands |
 | `analyst-outline.md` | The ten headings, one line each |
+| `claim.txt` | The episode's claim, one line: `run-analyst.sh` reads it when no claim is given, and `mock.sh` runs it |
 | `checker.md` | The fact-checker's policy, new: what it sees, its one tool, the four checks in order (numbers, direction, reason, limits), a finding against a note, what it may not do, and a check in six parts under 300 words |
 | `check-ruling.sh` | The second agent. Builds the packet from the analyst's saved run and calls a second `claude -p` with `checker.md` and a one-line allowlist. Exit 0 for CONFIRMED or CONFIRMED WITH A NOTE, 74 for REJECTED, 65 for no verdict |
 | `query-plays.mjs` | The one tool. Episode 3's `--search`, `--play`, and `--trend`, plus `--battle NAME` (season by season, in the games where one team was charged with fewer of the event, how often that team won; `--half 1` and `--close N` for the cuts) and `--split NAME` (the event per 100 rushes and passes, by the score at the snap). `node ./query-plays.mjs --help` lists every flag |
@@ -446,6 +447,7 @@ November 9, 2026. Everything else is in `episode-4/`.
 | `data/plays.csv` | The plays: 2021 through 2025 complete, 2026 as far as it has been published, 40 columns |
 | `slim-data.mjs`, `fetch-data.sh` | How that file is made from the raw seasons |
 | `rehearse.sh` | `tool`, `claims`, `mock`, `verify`, `freeze`, `reset`: the rehearsal beats, all writing into `rehearsal-runs/`, never into `../dictionary` or `../charts` |
+| `rehearse.sha256` | The frozen hashes of 16 files: the kit's policies, tool, and scripts, plus the chart standard and the renderer. `./rehearse.sh verify` checks each file against it |
 | `show.sh` | The on-air commands, one word each: `search`, `battle`, `split`, `wrong`, `verify`, `run "<claim>"`, `sheets`, `prove "<claim>"` |
 
 ### The fact-checker
@@ -493,7 +495,7 @@ In rehearsal on November 9, 2026, a run with both agents took 74 to 115 seconds.
 ### What the numbers say
 
 The battle by hand, from `dictionary/turnover.json` (an interception or a lost fumble,
-charged to the team with the ball), regular season and playoffs, read on November 9, 2026:
+charged to the team with the ball), regular season and playoffs, read on November 23, 2026:
 
 | Season | Games | Decided | The team with fewer won | Rate | Equal counts | Turnovers per game |
 |---|---|---|---|---|---|---|
@@ -502,7 +504,7 @@ charged to the team with the ball), regular season and playoffs, read on Novembe
 | 2023 | 285 | 226 | 167 | 73.9% | 59 | 2.64 |
 | 2024 | 285 | 208 | 161 | 77.4% | 77 | 2.42 |
 | 2025 | 285 | 216 | 168 | 77.8% | 68 | 2.34 |
-| 2026, weeks 1 to 9 | 135 | 95 | 74 | 77.9% | 39 | 2.59 |
+| 2026, weeks 1 to 11 | 162 | 112 | 86 | 76.8% | 49 | 2.54 |
 
 A game is decided when the two teams' counts differ and the game was not drawn. The
 analyst's ruling, the fact-checker's check, and the chart are added here after the show on
