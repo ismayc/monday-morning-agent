@@ -1,0 +1,14 @@
+{
+  "name": "fourth-down-go",
+  "kind": "choice",
+  "written": "2026-11-23",
+  "by": "Chester, before episode 5",
+  "plainWords": "Going for it on fourth down: with one down left to gain the first down, the offense ran or passed instead of punting or trying a field goal. A fake punt or a fake field goal counts as going, because the play was a rush or a pass.",
+  "rules": {
+    "down": 4,
+    "chose": ["run", "pass"],
+    "yardsToGoMax": "any"
+  },
+  "comparedWith": "every other fourth-down decision: a punt or a field goal attempt",
+  "cannotSee": "whether going was the right call, what a punt or a kick would have been worth instead, who made the call, a try that a penalty wiped out, or a team that lined up to go and then took a delay penalty and punted"
+}

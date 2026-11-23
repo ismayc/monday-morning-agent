@@ -29,15 +29,16 @@ const TEXT = '"Barlow", -apple-system, "Segoe UI", Helvetica, Arial, sans-serif'
 const MONO = 'ui-monospace, "SF Mono", Menlo, Consolas, monospace'
 
 export const SPEC_SHAPE = `{
-  "name": "turnover-battle-trend",          the file is charts/<name>.json; lowercase letters, digits, hyphens
+  "name": "fourth-down-go-trend",           the file is charts/<name>.json; lowercase letters, digits, hyphens
   "written": "2026-11-23",                  the day it was written, YYYY-MM-DD
-  "by": "the analyst, episode 4",           who wrote it (optional)
-  "question": "Does the team that wins the turnover battle win the game?",
+  "by": "the analyst, episode 5",           who wrote it (optional)
+  "question": "Do teams go for it on fourth down more than they used to?",
                                             the title: the question tested, ending in "?", no number in it but a year (rule 5)
-  "tool": "episode-4/query-plays.mjs",      the tool that prints the rows, relative to the repo root (this episode's)
-  "command": "--battle turnover --seasons 2021-2026"
+  "tool": "episode-5/query-plays.mjs",      the tool that prints the rows, relative to the repo root (this episode's)
+  "command": "--choice fourth-down-go --seasons 2021-2026"
                                             the tool command, exactly as you would type it after "node ./query-plays.mjs":
-                                            --trend NAME (a kick) or --battle NAME (an event), and every season on file,
+                                            --trend NAME (a kick), --battle NAME (an event), or --choice NAME (a choice,
+                                            with no --by), and every season on file,
                                             2021 through the current one (rule 1)
 }`
 const KEYS = { name: 1, written: 1, by: 0, question: 1, tool: 1, command: 1 }
@@ -91,11 +92,13 @@ const cmd = spec.command.trim()
 if (/[;&|`$<>'"\\]/.test(cmd)) fail('the command holds a shell character; write the flags and their values only, separated by spaces')
 const args = cmd.split(/\s+/)
 // A trend by season: a kick's make rate (--trend, episode 3) or a game's winner by the
-// turnover count (--battle, episode 4). Both print one row per season with a rate and a
-// per-game count, and the template draws them the same way; the panel titles and the
+// turnover count (--battle, episode 4), or how often a team made a choice (--choice,
+// episode 5). Each prints one row per season with a rate and a per-game count, and the
+// template draws them the same way; the panel titles and the
 // legend's words come from the tool's output (its "labels"), so a chart never carries a
 // label the tool did not print either.
-if (args[0] !== '--trend' && args[0] !== '--battle') refuse(8, `this template draws a trend by season, and the command must begin with --trend NAME or --battle NAME; it begins with "${args[0]}".`)
+if (!['--trend', '--battle', '--choice'].includes(args[0])) refuse(8, `this template draws a trend by season, and the command must begin with --trend NAME, --battle NAME, or --choice NAME; it begins with "${args[0]}".`)
+if (args.includes('--by')) refuse(8, 'this template draws one row per season; a --by read is a table of groups, not a trend, and gets no chart.')
 if (args.includes('--json')) fail('leave --json out of the command; the renderer adds it')
 if (args.includes('--weeks')) refuse(1, 'a trend covers whole seasons; the command narrows them with --weeks.')
 const si = args.indexOf('--seasons')
@@ -111,7 +114,7 @@ try {
   const msg = (err.stderr || err.message || '').toString().trim().split('\n')[0]
   fail(`the tool refused the command: ${msg}`, 65)
 }
-if (!rowsOut.rows || !rowsOut.dictionary) fail('the tool\'s output has no rows; the renderer draws --trend and --battle output only', 65)
+if (!rowsOut.rows || !rowsOut.dictionary) fail('the tool\'s output has no rows; the renderer draws --trend, --battle, and --choice output only', 65)
 const rows = rowsOut.rows
 const D = rowsOut.dictionary
 const LABELS = { defined: `${D.name}: the defined kick`, rateTitle: 'Made, as a share of attempts', perGameTitle: 'Tried, per game', ...(rowsOut.labels || {}) }
