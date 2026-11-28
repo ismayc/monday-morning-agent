@@ -44,7 +44,7 @@
     "fourth_down_failed",
     "desc"
   ],
-  "plays": 276461,
+  "plays": 276617,
   "source": "https://github.com/nflverse/nflverse-data/releases/tag/pbp",
   "espnGames": []
 }
